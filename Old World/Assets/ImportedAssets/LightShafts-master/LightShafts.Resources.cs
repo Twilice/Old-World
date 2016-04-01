@@ -14,7 +14,8 @@ public partial class LightShafts : MonoBehaviour
 	public LayerMask m_CullingMask = ~0;
 	public LayerMask m_ColorFilterMask = 0;
 	public float m_Brightness = 5;
-	public float m_BrightnessColored = 5;
+    public float m_RandomBrightness = 0;
+    public float m_BrightnessColored = 5;
 	public float m_Extinction = 0.5f;
 	public float m_MinDistFromCamera = 0.0f;
 	

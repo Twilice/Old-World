@@ -24,5 +24,6 @@ public class Movement : MonoBehaviour {
     void Move()
     {
         anim.SetFloat("Forward", Input.GetAxisRaw("Vertical"));
+        anim.SetFloat("Sideways", Input.GetAxisRaw("Horizontal"));
     }
 }

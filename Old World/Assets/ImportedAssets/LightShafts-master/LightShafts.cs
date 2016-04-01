@@ -177,8 +177,10 @@ public partial class LightShafts : MonoBehaviour
 		m_RaymarchMaterial.SetTexture("_Shadowmap", m_Shadowmap);
 		float brightness = m_Colored ? m_BrightnessColored/m_ColorBalance : m_Brightness;
 		brightness *= m_Light.intensity;
-		m_RaymarchMaterial.SetFloat("_Brightness", brightness);
-		m_RaymarchMaterial.SetFloat("_Extinction", -m_Extinction);
+        m_RaymarchMaterial.SetFloat("_Brightness", brightness);
+        m_RaymarchMaterial.SetFloat("_RandomBrightness", m_RandomBrightness);
+
+        m_RaymarchMaterial.SetFloat("_Extinction", -m_Extinction);
 		m_RaymarchMaterial.SetVector("_ShadowmapDim", new Vector4(shadowmapWidth, shadowmapHeight, 1.0f / shadowmapWidth, 1.0f / shadowmapHeight));
 		m_RaymarchMaterial.SetVector("_ScreenTexDim", new Vector4(width, height, 1.0f / width, 1.0f / height));
 		m_RaymarchMaterial.SetVector("_LightColor", m_Light.color.linear);

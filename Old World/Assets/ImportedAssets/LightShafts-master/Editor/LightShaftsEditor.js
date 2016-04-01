@@ -15,6 +15,7 @@ class LightShaftsEditor extends Editor
 	var cullingMask : SerializedProperty;
 	var colorFilterMask : SerializedProperty;
 	var brightness : SerializedProperty;
+    var randombrightness : SerializedProperty;
 	var brightnessColored : SerializedProperty;
 	var extinction : SerializedProperty;
 	var minDistFromCamera : SerializedProperty;
@@ -46,6 +47,7 @@ class LightShaftsEditor extends Editor
 		cullingMask = so.FindProperty("m_CullingMask");
 		colorFilterMask = so.FindProperty("m_ColorFilterMask");
 		brightness = so.FindProperty("m_Brightness");
+		randombrightness = so.FindProperty("m_RandomBrightness");
 		brightnessColored = so.FindProperty("m_BrightnessColored");
 		extinction = so.FindProperty("m_Extinction");
 		minDistFromCamera = so.FindProperty("m_MinDistFromCamera");
@@ -80,6 +82,7 @@ class LightShaftsEditor extends Editor
 	{
 		depthThreshold.floatValue = Mathf.Max(0, depthThreshold.floatValue);
 		brightness.floatValue = Mathf.Max(0, brightness.floatValue);
+		randombrightness.floatValue = Mathf.Max(0, randombrightness.floatValue);
 		brightnessColored.floatValue = Mathf.Max(0, brightnessColored.floatValue);
 		minDistFromCamera.floatValue = Mathf.Max(0, minDistFromCamera.floatValue);
 		var minNear : float = 0.05;
@@ -143,7 +146,8 @@ class LightShaftsEditor extends Editor
 		}
 		else
 		{
-			EditorGUILayout.PropertyField (brightness, new GUIContent("Brightness"));
+		    EditorGUILayout.PropertyField (brightness, new GUIContent("Brightness"));
+		    EditorGUILayout.PropertyField (randombrightness, new GUIContent("Random Brightness"));
 		}
 		// Creates a sphere around the camera, in which the light is not accumulated in. Sometimes useful.
 		// EditorGUILayout.PropertyField (minDistFromCamera, new GUIContent("Min dist from cam"));

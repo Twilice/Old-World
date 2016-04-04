@@ -314,6 +314,7 @@ GameObject:
   - 33: {fileID: 1001910200}
   - 65: {fileID: 1001910199}
   - 23: {fileID: 1001910198}
+  - 114: {fileID: 1001910202}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -378,6 +379,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
+--- !u!114 &1001910202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1001910197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTransform: {x: 0, y: 0, z: 0}
+  Speed: 0
 --- !u!1001 &1004642489
 Prefab:
   m_ObjectHideFlags: 0
@@ -942,7 +956,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405926, guid: b54dc2c866270954fb07305ba9a86f1c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 3.67
       objectReference: {fileID: 0}
     - target: {fileID: 405926, guid: b54dc2c866270954fb07305ba9a86f1c, type: 2}
       propertyPath: m_LocalPosition.z

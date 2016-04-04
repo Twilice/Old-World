@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour {
     Animator anim;
     protected CharacterController controller;
     GameObject playerCam;
+    GameObject cameraAnchor;
 
     // On Script load, runs once after script is loaded (always runs, runs before start)
     void Awake()
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         playerCam = GameObject.FindGameObjectWithTag("MainCamera");
+       // cameraAnchor = gameObject.
     }
 	
     // On Script start, runs once before the first update (not run if disabled)
@@ -29,6 +31,7 @@ public class Movement : MonoBehaviour {
     {
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         Move(DirectionRelativeObject(inputDirection, playerCam));
+        RotateCamera();
     }
 
     // FixedUpdate is called the same ammount of times per second
@@ -66,5 +69,10 @@ public class Movement : MonoBehaviour {
     Vector3 DirectionRelativeObject(Vector3 direction, GameObject relativeObject)
     {
         return relativeObject.transform.TransformDirection(direction);
+    }
+
+    void RotateCamera()
+    {
+
     }
 }

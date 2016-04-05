@@ -54,8 +54,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
-			m_ForwardAmount = move.z;
+
+            // we don't want negative zero
+            if (move.x == 0)
+                move.x = 0;
+            if (move.z == 0)
+                move.z = 0;
+                //move.z = 0f*-1f; // tvinga fram felet varje gång
+
+            m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
+
+            m_ForwardAmount = move.z;
 
 			ApplyExtraTurnRotation();
 
@@ -119,7 +128,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
-			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("Forward", m_ForwardAmount);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);

@@ -54,6 +54,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
+
+            // we don't want negative zero
+            if (move.x == 0)
+                move.x = 0;
+            if (move.z == 0)
+                move.z = 0;
+                //move.z = 0f*-1f; // tvinga fram felet varje gång
 			m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
 			m_ForwardAmount = move.z;
 

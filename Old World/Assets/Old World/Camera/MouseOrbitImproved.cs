@@ -73,10 +73,6 @@ public class MouseOrbitImproved : MonoBehaviour
     {
         //Updating camera distance on every frame
         distance = Raycast3.distance3;
-
-        //Setting maximum distance so the camera doesnt go too far
-        if (distance > 5)
-            distance = 5;
     }
 
     public static float ClampAngle(float angle, float min, float max)

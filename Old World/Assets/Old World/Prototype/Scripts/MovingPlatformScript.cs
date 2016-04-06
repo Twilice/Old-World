@@ -25,9 +25,6 @@ public class MovingPlatformScript : MonoBehaviour
 	
 	void Update ()
     {
-        Debug.Log("Object: " + gameObject.transform.rotation);
-        Debug.Log("Target: " + TargetRotation);
-        Debug.Log("RotateToTarget: " + RotateToTarget);
 
         if (RotateToTarget == true && Rotate == true)
         {

@@ -8,7 +8,7 @@ public class PrismReflect : MonoBehaviour {
     void Start()
     {
         foreach(Transform go in gameObject.GetComponentsInChildren<Transform>(true))
-            if (go.tag.Equals("LightShaft"))
+            if (go.tag.Equals("LightReflected"))
                 spotlight = go.gameObject;
     }
 

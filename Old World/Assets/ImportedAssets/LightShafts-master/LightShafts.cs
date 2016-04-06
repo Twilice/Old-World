@@ -176,7 +176,9 @@ public partial class LightShafts : MonoBehaviour
 		m_RaymarchMaterial.SetTexture("_InterpolationEpi", m_InterpolationEpi);
 		m_RaymarchMaterial.SetTexture("_Shadowmap", m_Shadowmap);
 		float brightness = m_Colored ? m_BrightnessColored/m_ColorBalance : m_Brightness;
-		brightness *= m_Light.intensity;
+        if(directional)
+            brightness *= (m_Light.intensity + 1);// fulfix för att få lightshaft men dolt ljus
+        else brightness *= m_Light.intensity;
         m_RaymarchMaterial.SetFloat("_Brightness", brightness);
         m_RaymarchMaterial.SetFloat("_RandomBrightness", m_RandomBrightness);
 
@@ -191,8 +193,8 @@ public partial class LightShafts : MonoBehaviour
 		m_RaymarchMaterial.SetTexture("_AttenuationCurveTex", m_AttenuationCurveTex);
 		Texture cookie = m_Light.cookie;
 		SetKeyword(cookie != null, "COOKIE_TEX_ON", "COOKIE_TEX_OFF");
-		if (cookie != null)
-			m_RaymarchMaterial.SetTexture("_Cookie", cookie);
+        if (cookie != null)
+        	m_RaymarchMaterial.SetTexture("_Cookie", cookie);
 		m_RaymarchMaterial.SetPass(0);
 
 		RenderQuadSections(lightPos);

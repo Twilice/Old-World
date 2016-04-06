@@ -60,7 +60,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 move.x = 0;
             if (move.z == 0)
                 move.z = 0;
-                //move.z = 0f*-1f; // tvinga fram felet varje gång
+                //move.z =  -0f; // tvinga fram felet varje gång
 			m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
 			m_ForwardAmount = move.z;
 

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -12,10 +11,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+        private Animator anim;
+        private Camera firstPersonCamera;
+        private float lastTime;
         
         private void Start()
         {
+
+            anim = GetComponent<Animator>();
+
             // get the transform of the main camera
             if (Camera.main != null)
             {
@@ -35,7 +39,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (!m_Jump)
+            //If first person camera is toggled, allow first person camera movement
+            //TODO: Fult? kanske använda StringToHash i Animator?
+            if (anim.GetBool("firstPerson"))
+            {
+                //Only allow camera position correction if the button has been released for more than half a second.
+                //This is to prevent the camera from locking the vertical axis.
+                if (Time.time - lastTime > 0.5)
+                {
+                    ThirdPersonCharacter.mouseLook.Init(transform);
+                }
+                lastTime = Time.time;
+
+                //Rotate the camera with first person controlls
+                m_Character.RotateView();
+            }      
+        else if (!m_Jump)
             {
                 m_Jump = Input.GetButtonDown("Jump");
             }

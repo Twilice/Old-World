@@ -1,22 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.Characters.ThirdPerson;
-using UnityStandardAssets.Characters.FirstPerson;
 
-public class FirstPersonViewToggle : MonoBehaviour {
+public class FirstPersonViewToggle : MonoBehaviour
+{
     private MouseOrbitImproved mouseOrbit;
     private ThirdPersonCharacter thirdChar;
     private ThirdPersonUserControl thirdContr;
-    private RigidbodyFirstPersonController rbFirstContr;
     public GameObject player;
+    public Transform firstPersonCameraPosition;
     public Crosshair crosshair;
-    public Camera thirdPersonCamera;
-    public Camera firstPersonCamera;
+    private new Camera camera;
+    private Animator anim;
+    private Transform savedTrans;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        camera = GetComponent<Camera>();
+        player = GameObject.Find("Player");
+        anim = player.GetComponent<Animator>();
 
-        mouseOrbit = thirdPersonCamera.GetComponent<MouseOrbitImproved>();
+        mouseOrbit = camera.GetComponent<MouseOrbitImproved>();
         mouseOrbit.enabled = true;
 
         thirdChar = player.GetComponent<ThirdPersonCharacter>();
@@ -24,44 +29,42 @@ public class FirstPersonViewToggle : MonoBehaviour {
 
         thirdContr = player.GetComponent<ThirdPersonUserControl>();
         thirdContr.enabled = true;
-
-        rbFirstContr = player.GetComponent<RigidbodyFirstPersonController>();
-        rbFirstContr.enabled = false;
         crosshair.enabled = false;
 
-        firstPersonCamera.enabled = false;
-        firstPersonCamera.GetComponent<AudioListener>().enabled = false;
-        thirdPersonCamera.enabled = true;
+        camera.enabled = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	    if(Input.GetMouseButtonDown(1))
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
         {
             mouseOrbit.enabled = false;
-            thirdChar.enabled = false;
-            thirdContr.enabled = false;
-            rbFirstContr.enabled = true;
-            ToggleCamera(firstPersonCamera);
-            ToggleCamera(thirdPersonCamera);
-            crosshair.enabled = true;
 
+            //Change the camera position
+            transform.eulerAngles = player.transform.eulerAngles;
+
+            //Make the camera a child to the parent
+            transform.parent = player.transform;
+            transform.localPosition = new Vector3(0.25f, 1.42f, -0.65f);
             
-        } else if (Input.GetMouseButtonUp(1))
-        {
-            mouseOrbit.enabled = true;
-            thirdChar.enabled = true;
-            thirdContr.enabled = true;
-            rbFirstContr.enabled = false;
-            ToggleCamera(firstPersonCamera);
-            ToggleCamera(thirdPersonCamera);
-            crosshair.enabled = false;
+            crosshair.enabled = true;
+            anim.SetBool("firstPerson", true);
         }
-	}
+        else if (Input.GetMouseButtonUp(1))
+        {
+            //Remove the parent
+            transform.parent = null;
 
-    void ToggleCamera(Camera c)
-    {
-        c.enabled = !c.enabled;
-        c.GetComponent<AudioListener>().enabled = c.enabled;
+            //Enable Mouse Orbit
+            mouseOrbit.enabled = true;
+                   
+            //CHANGE CAMERA POSITION TO SAVED THIRD PERSON VIEW
+
+            crosshair.enabled = false;
+            anim.SetBool("firstPerson", false);
+        }
     }
+
+
 }

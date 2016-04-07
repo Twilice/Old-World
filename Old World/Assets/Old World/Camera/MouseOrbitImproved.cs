@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityStandardAssets.Characters.FirstPerson;
 
 [AddComponentMenu("Camera-Control/Mouse Orbit")]
 [RequireComponent(typeof(FirstPersonViewToggle))]
@@ -85,5 +84,10 @@ public class MouseOrbitImproved : MonoBehaviour
         if (angle > 360F)
             angle -= 360F;
         return Mathf.Clamp(angle, min, max);
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 }

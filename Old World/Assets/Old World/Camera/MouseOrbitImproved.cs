@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
 
-[AddComponentMenu("Camera-Control/Mouse Orbit with zoom")]
+[AddComponentMenu("Camera-Control/Mouse Orbit")]
+[RequireComponent(typeof(FirstPersonViewToggle))]
+
 public class MouseOrbitImproved : MonoBehaviour
 {
-
+    
     public Transform target;
     public float distance = 5.0f;
     public float mouseSensitivity = 1.75f;
@@ -51,7 +54,7 @@ public class MouseOrbitImproved : MonoBehaviour
                 x += joyX * joyStickSensitivityX;
                 y -= joyY;
             }
-            else 
+            else
             {
                 x += mouseX * mouseSensitivity;
                 y -= mouseY * mouseSensitivity;

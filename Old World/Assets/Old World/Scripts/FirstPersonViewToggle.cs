@@ -6,8 +6,8 @@ public class FirstPersonViewToggle : MonoBehaviour
     public float transitionDuration = 0.5f;
 
     private MouseOrbitImproved mouseOrbit;
-    private ThirdPersonCharacter thirdChar;
-    private ThirdPersonUserControl thirdContr;
+    private PlayerController thirdChar;
+    private PlayerInputHandler thirdContr;
     private GameObject player;
     private Crosshair crosshair;
     private new Camera camera;
@@ -42,10 +42,10 @@ public class FirstPersonViewToggle : MonoBehaviour
         mouseOrbit = camera.GetComponent<MouseOrbitImproved>();
         mouseOrbit.enabled = true;
 
-        thirdChar = player.GetComponent<ThirdPersonCharacter>();
+        thirdChar = player.GetComponent<PlayerController>();
         thirdChar.enabled = true;
 
-        thirdContr = player.GetComponent<ThirdPersonUserControl>();
+        thirdContr = player.GetComponent<PlayerInputHandler>();
         thirdContr.enabled = true;
         crosshair.enabled = false;
 

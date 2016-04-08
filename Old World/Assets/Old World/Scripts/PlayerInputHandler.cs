@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(ThirdPersonCharacter))]
-public class ThirdPersonUserControl : MonoBehaviour
+[RequireComponent(typeof(PlayerController))]
+public class PlayerInputHandler : MonoBehaviour
 {
-    private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
+    private PlayerController m_Character; // A reference to the ThirdPersonCharacter on the object
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
@@ -32,7 +32,7 @@ public class ThirdPersonUserControl : MonoBehaviour
         }
 
         // get the third person character ( this should never be null due to require component )
-        m_Character = GetComponent<ThirdPersonCharacter>();
+        m_Character = GetComponent<PlayerController>();
     }
 
 
@@ -47,7 +47,7 @@ public class ThirdPersonUserControl : MonoBehaviour
             //active when last leaving first person view.
             if (Time.time - lastTime > 0.5)
             {
-                ThirdPersonCharacter.mouseLook.Init(transform);
+                PlayerController.mouseLook.Init(transform);
             }
             lastTime = Time.time;
 

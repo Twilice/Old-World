@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
-public class ThirdPersonCharacter : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     float m_MovingTurnSpeed = 360;

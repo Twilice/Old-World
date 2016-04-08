@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Raycast3 : MonoBehaviour
-{
+public class RayCastTarget : MonoBehaviour {
+
     public static float distance3 = 5;
     public float maxDistance = 5;
     void Update()

@@ -1,0 +1,3 @@
+Raycast fungerade inte sedan senaste ändringen med trigger collisions.
+Jag disablade collison med triggers och raycast i Edit > project settings > Physics
+Blir detta ett problem längre fram?

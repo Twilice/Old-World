@@ -15,6 +15,8 @@ public class FirstPersonViewToggle : MonoBehaviour
     public Transform thirdPersonTarget;
     private bool firstTimeTP;
     private bool firstTimeFP;
+    private bool resetOnceFP;
+    private bool resetOnceTP;
     private float startTime;
     public float transitionDuration = 0.5f;
 
@@ -23,6 +25,9 @@ public class FirstPersonViewToggle : MonoBehaviour
     {
         firstTimeFP = true;
         firstTimeTP = true;
+        resetOnceFP = true;
+        resetOnceTP = true;
+
         camera = GetComponent<Camera>();
         player = GameObject.Find("Player");
         anim = player.GetComponent<Animator>();
@@ -52,6 +57,8 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                 //Enable first time enter operation on next mouse release
                 firstTimeTP = true;
+                resetOnceTP = true;
+
                 //If the button was pressed too early set the new transistionDuration to the time since it was released
                 if ((Time.time - startTime) < transitionDuration)
                 {
@@ -62,24 +69,48 @@ public class FirstPersonViewToggle : MonoBehaviour
                     transitionDuration = 0.5f;
                 }
                 startTime = Time.time;
+
+                //Switch to first person view controlls and first person movement
+                anim.SetBool("firstPerson", true);
+
+                //Prevents the camera from rotating during camera transisions. This will remove unwanted camera snapping.
+                thirdContr.setAllowCamera(false);
+
                 mouseOrbit.enabled = false;
             }
 
+            //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
                 StartCoroutine(Transition(firstPersonTarget));
                 StartCoroutine(RotateOverTime(firstPersonTarget));
             }
             else
-            {
-                anim.SetBool("firstPerson", true);
-                crosshair.enabled = true;
-                //Change the camera position
-                transform.eulerAngles = player.transform.eulerAngles;
+            {//Camera transision complete
 
-                //Make the camera a child to the parent
-                transform.parent = player.transform;
-                transform.localPosition = new Vector3(0.25f, 1.42f, -0.65f);
+                //Operations that only need/should be executed once when the transision is complete
+                if (resetOnceFP)
+                {
+                    
+                    //Resets the rotation of the camera to the player rotation
+                    //TODO: Is this needed?
+                    transform.eulerAngles = player.transform.eulerAngles;
+
+                    //Make the camera a child to the parent
+                    transform.parent = player.transform;
+                    transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
+
+                    //Make crosshair visable
+                    crosshair.enabled = true;
+
+                    //Allow the player to rotate the camera again
+                    thirdContr.setAllowCamera(true);
+
+                    //If the coroutines are not stopped manually, jitter will apear 
+                    StopAllCoroutines();
+
+                    resetOnceFP = false;
+                }
             }
         }
         else if (!Input.GetMouseButton(1))
@@ -91,8 +122,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                 //Enable first time enter operations on next right click
                 firstTimeFP = true;
-
-                transform.eulerAngles = player.transform.eulerAngles;
+                resetOnceFP = true;
 
                 //If the button was released too early 
                 if ((Time.time - startTime) < transitionDuration)
@@ -107,22 +137,47 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                 //Remove the parent
                 transform.parent = null;
-                
+
 
                 //Disable crosshair
                 crosshair.enabled = false;
+
+                //Locking the camera movement to prevent unwanted camera snapping
+                //This might be something we should improve further on, there for: TODO
+                thirdContr.setAllowCamera(false);
             }
 
+            //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
                 StartCoroutine(Transition(thirdPersonTarget));
                 StartCoroutine(RotateOverTime(thirdPersonTarget));
             }
             else
-            {
-                //Enable Mouse Orbit
-                mouseOrbit.enabled = true;
-                anim.SetBool("firstPerson", false);
+            {//Camera transision complete
+
+                //Operations that only need/should be executed once when the transision is complete
+                if (resetOnceTP)
+                {
+                    resetOnceTP = false;
+
+                    //Allow the player to rotate the camera again
+                    thirdContr.setAllowCamera(true);
+                    //If the coroutines are not stopped manueally, jitter will apear 
+                    StopAllCoroutines();
+
+                    //Resets the rotation when switching back to thirdperson view
+                    transform.eulerAngles = player.transform.eulerAngles;
+
+                    //Resets the Orbit camera location so that it is positioned where it should be when switching back to third person view.
+                    mouseOrbit.resetPosition();
+
+                    //Switch to first person view controlls and first person movement
+                    anim.SetBool("firstPerson", false);
+
+                    //Keep this line at the end of the if-statement to prevent unwanted camera movement
+                    mouseOrbit.enabled = true;
+                }
             }
         }
     }
@@ -139,17 +194,17 @@ public class FirstPersonViewToggle : MonoBehaviour
             transform.position = Vector3.Lerp(startingPos, target.position, t);
             yield return 0;
         }
-
-
     }
 
     IEnumerator RotateOverTime(Transform trans)
     {
+        float t = 0.0f;
         Quaternion fromAngle = transform.rotation;
-        Quaternion toAngle = Quaternion.Euler(trans.eulerAngles);
-        for (float t = 0f; t < 1f; t += Time.deltaTime / transitionDuration)
+        while (t < 1.0f)
         {
-            transform.rotation = Quaternion.Lerp(fromAngle, toAngle, t);
+            t += Time.deltaTime * (Time.timeScale / transitionDuration);
+
+            transform.rotation = Quaternion.Lerp(fromAngle, Quaternion.Euler(trans.eulerAngles), t);
             yield return null;
         }
     }

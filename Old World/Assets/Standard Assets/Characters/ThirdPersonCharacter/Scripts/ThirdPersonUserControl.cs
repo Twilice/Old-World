@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    [RequireComponent(typeof (ThirdPersonCharacter))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class ThirdPersonUserControl : MonoBehaviour
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
@@ -14,7 +14,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Animator anim;
         private Camera firstPersonCamera;
         private float lastTime;
-        
+        private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
+
         private void Start()
         {
 
@@ -44,7 +45,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (anim.GetBool("firstPerson"))
             {
                 //Only allow camera position correction if the button has been released for more than half a second.
-                //This is to prevent the camera from locking the vertical axis.
+                //This is to prevent the camera from locking the vertical axis and will cause the player to face the rotation that was
+                //active when last leaving first person view.
                 if (Time.time - lastTime > 0.5)
                 {
                     ThirdPersonCharacter.mouseLook.Init(transform);
@@ -52,9 +54,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 lastTime = Time.time;
 
                 //Rotate the camera with first person controlls
-                m_Character.RotateView();
-            }      
-        else if (!m_Jump)
+                //Not allowed if the camera is transitioning
+                if (allowCameraMovement)
+                {
+                    m_Character.RotateView();
+                }
+            }
+            else if (!m_Jump)
             {
                 m_Jump = Input.GetButtonDown("Jump");
             }
@@ -65,7 +71,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void FixedUpdate()
         {
             // read inputs
-            float h = Input.GetAxis("Horizontal");
+            //The if statement is needed to prevent the model from turning with the horizontal keys during a camera transision
+            float h;
+            if (allowCameraMovement)
+            {
+                h = Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                h = 0.0f;
+            }
+            
             float v = Input.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
 
@@ -74,17 +90,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 // calculate camera relative direction to move:
                 m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = v*m_CamForward + h*m_Cam.right;
+                m_Move = v * m_CamForward + h * m_Cam.right;
             }
             else
             {
                 // we use world-relative directions in the case of no main camera
-                m_Move = v*Vector3.forward + h*Vector3.right;
+                m_Move = v * Vector3.forward + h * Vector3.right;
             }
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
+        }
+
+
+        public void setAllowCamera(bool x)
+        {
+            allowCameraMovement = x;
         }
     }
 }

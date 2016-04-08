@@ -1,0 +1,2 @@
+Strafe walk in first person mode
+Smooth camera transisions

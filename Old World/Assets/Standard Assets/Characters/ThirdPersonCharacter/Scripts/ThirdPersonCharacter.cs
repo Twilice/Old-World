@@ -44,7 +44,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         bool m_Crouching;
         public static MouseLook mouseLook = new MouseLook();
 
-
         void Start()
         {
             mouseLook.Init(transform);

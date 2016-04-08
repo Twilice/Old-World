@@ -16,8 +16,6 @@ public class ThridPersonTargetRay : MonoBehaviour {
 
     private Rigidbody rb;
     private GameObject player;
-
-    float x = 0.0f;
     
     // Use this for initialization
     void Start()

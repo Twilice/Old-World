@@ -85,8 +85,10 @@ public class MouseOrbitImproved : MonoBehaviour
         return Mathf.Clamp(angle, min, max);
     }
 
-    public Transform GetTransform()
-    {
-        return transform;
+    //Resets the Orbit camera location so that it is positioned where it should be when switching back to third person view.
+    public void resetPosition()
+    {   
+        x = transform.eulerAngles.y;
+        y = 25;
     }
 }

@@ -11,7 +11,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool clampVerticalRotation = true;
         public float MinimumX = -90F;
         public float MaximumX = 90F;
-        public bool smooth;
+        private bool smooth = false;
         public float smoothTime = 5f;
         public bool lockCursor = true;
 
@@ -48,9 +48,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             else
             {
                 character.localRotation = m_CharacterTargetRot;
-                camera.localRotation = m_CameraTargetRot;
+                camera.transform.localRotation = m_CameraTargetRot;
             }
-
             UpdateCursorLock();
         }
 

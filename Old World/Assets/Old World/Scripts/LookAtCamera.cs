@@ -3,7 +3,13 @@ using System.Collections;
 
 public class LookAtCamera : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
+
+    void Awake()
+    {
+        target = GameObject.Find("MainCamera").transform;
+    }
+
     void Update()
     {
         transform.LookAt(target);

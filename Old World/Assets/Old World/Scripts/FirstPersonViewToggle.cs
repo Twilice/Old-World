@@ -1,25 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 public class FirstPersonViewToggle : MonoBehaviour
 {
+    public float transitionDuration = 0.5f;
+
     private MouseOrbitImproved mouseOrbit;
     private ThirdPersonCharacter thirdChar;
     private ThirdPersonUserControl thirdContr;
-    public GameObject player;
-    public Crosshair crosshair;
+    private GameObject player;
+    private Crosshair crosshair;
     private new Camera camera;
     private Animator anim;
-    public Transform firstPersonTarget;
-    public Transform thirdPersonTarget;
+    private Transform firstPersonTarget;
+    private Transform thirdPersonTarget;
     private bool firstTimeTP;
     private bool firstTimeFP;
     private bool resetOnceFP;
     private bool resetOnceTP;
     private float startTime;
-    public float transitionDuration = 0.5f;
-
+    
+    void Awake()
+    {
+        player = GameObject.Find("Player");
+        crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
+        firstPersonTarget = GameObject.Find("Player/FirstPersonTarget").transform;
+        thirdPersonTarget = GameObject.Find("ThirdPersonTarget").transform;
+    }
     // Use this for initialization
     void Start()
     {

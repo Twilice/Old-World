@@ -5,8 +5,7 @@ using System.Collections;
 
 public class MouseOrbitImproved : MonoBehaviour
 {
-    
-    public Transform target;
+
     public float distance = 5.0f;
     public float mouseSensitivity = 1.75f;
     public float joyStickSensitivityX = 2f;
@@ -18,9 +17,15 @@ public class MouseOrbitImproved : MonoBehaviour
     public float distanceMax = 15f;
 
     private Rigidbody rb;
+    private Transform target;
 
     float x = 0.0f;
     float y = 0.0f;
+
+    void Awake()
+    {
+        target = GameObject.Find("Player/CameraReference").transform;
+    }
 
     // Use this for initialization
     void Start()
@@ -73,7 +78,7 @@ public class MouseOrbitImproved : MonoBehaviour
     void Update()
     {
         //Updating camera distance on every frame
-        distance = Raycast3.distance3;
+        distance = RaycastCamera.distance3;
     }
 
     public static float ClampAngle(float angle, float min, float max)

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ThridPersonTargetRay : MonoBehaviour {
+public class ThridPersonTargetRayCast : MonoBehaviour {
 
-    public Transform target;
     public float distance = 5.0f;
     public float mouseSensitivity = 1.75f;
     public float joyStickSensitivityX = 2f;
@@ -16,7 +15,13 @@ public class ThridPersonTargetRay : MonoBehaviour {
 
     private Rigidbody rb;
     private GameObject player;
-    
+    private Transform target;
+
+    void Awake()
+    {
+        target = GameObject.Find("Player/CameraReference").transform;
+    }
+
     // Use this for initialization
     void Start()
     {

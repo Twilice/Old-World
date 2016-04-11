@@ -553,16 +553,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 281348805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 5.31, z: -6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1001 &311391284
 Prefab:
   m_ObjectHideFlags: 0
@@ -1479,16 +1473,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078530221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 6.81, z: -6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1001 &1097270338
 Prefab:
   m_ObjectHideFlags: 0
@@ -1742,16 +1730,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1233874759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 2.31, z: 6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1 &1261877434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,16 +2154,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1553851196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 2.31, z: -6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1 &1664817919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2521,16 +2497,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799948275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 8.31, z: -6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1 &1820910154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,16 +2588,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903014305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 5.31, z: 6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1001 &1952007298
 Prefab:
   m_ObjectHideFlags: 0
@@ -2884,16 +2848,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2049745688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 6.81, z: 6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1 &2083776234 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 177408, guid: d86cbdf34baf8564297a7d6ae8d2e0de, type: 2}
@@ -2906,21 +2864,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2083776234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 3.81, z: 6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50
 --- !u!1 &2132751414 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 177408, guid: d86cbdf34baf8564297a7d6ae8d2e0de, type: 2}
   m_PrefabInternal: {fileID: 474942115}
---- !u!114 &2132751419
+--- !u!114 &2132751415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2928,16 +2880,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2132751414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 8.31, z: 6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 1
+  MaxRotationSpeed: 50
 --- !u!1001 &2135432631
 Prefab:
   m_ObjectHideFlags: 0
@@ -3008,13 +2954,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2135432632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864dec705a982d9478dc261579940fd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb15faff99e3ef4b824deafdfd9c672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetTransform: {x: -8.5, y: 3.81, z: -6.75}
-  TargetRotation: {x: 0, y: 20, z: 0, w: 0}
-  Speed: 2
-  Move: 0
-  Rotate: 1
-  Elevator: 0
-  Loop: 0
+  MaxRotationSpeed: 50

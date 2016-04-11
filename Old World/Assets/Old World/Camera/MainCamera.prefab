@@ -14,7 +14,7 @@ GameObject:
   - 81: {fileID: 8162674}
   - 114: {fileID: 11427060}
   m_Layer: 0
-  m_Name: SceneCamera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61052fab3c8c5c146827316faba87fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   distance: 5
   mouseSensitivity: 1.75
   joyStickSensitivityX: 2

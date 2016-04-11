@@ -1,0 +1,3 @@
+Strafe walk in first person mode
+Smooth camera transisions
+Controller input for zoom 

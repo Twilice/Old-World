@@ -190,9 +190,9 @@ float4 frag(posuv i) : COLOR
 			sample *= tex2Dlod(_ColorFilter, float4(pos.xy, 0, 0)).xyz;
 		#endif
 
-		#if defined(SPOT_SHAFTS)
+		//#if defined(SPOT_SHAFTS)
 			sample *= cookie(pos.xy);
-		#endif
+		//#endif
 
 		inscatter += sample;
 	}

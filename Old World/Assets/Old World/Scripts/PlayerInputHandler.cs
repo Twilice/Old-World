@@ -40,7 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         //If first person camera is toggled, allow first person camera movement
         //TODO: Fult? kanske använda StringToHash i Animator?
-        if (anim.GetBool("firstPerson"))
+        if (FirstPersonViewToggle.FirstPerson)
         {
             //Only allow camera position correction if the button has been released for more than half a second.
             //This is to prevent the camera from locking the vertical axis and will cause the player to face the rotation that was

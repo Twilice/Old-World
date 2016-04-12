@@ -9,15 +9,12 @@ public class PlayerInputHandler : MonoBehaviour
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-    private Animator anim;
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
 
     private void Start()
     {
-
-        anim = GetComponent<Animator>();
 
         // get the transform of the main camera
         if (Camera.main != null)

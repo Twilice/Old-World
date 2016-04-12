@@ -1,66 +1,99 @@
 ﻿using UnityEngine;
 using System.Collections;
-/*public class TriggeredByLight : MonoBehaviour
-{
- TODO : ska ligga annan stans sen
-	virtual public HitByLightEnter()
-	{
-
-	}
-
-	virtual public HitByLightExit()
-	{
-
-	}
-
-	virtual public HitByLightStay()
-	{
-
-	}
-}*/
 
 public class EmitLightRayCast : MonoBehaviour {
 
-    private GameObject lastHitObject = null;
-    // Use this for initialization
-    void Start () {
-	
-	}
- 
-	
-	// Update is called once per frame
+	Transform lastHitObject = null;
 	void Update () {
-        if (FirstPersonViewToggle.FirstPerson)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 500))
-            {
-				/*      
-				TODO TODO TODO
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 500))
+		{
 				
-						   	   foreacH( getComponents<TriggeredByLight>)
-						   {
-						   HitByLightEnter() etc . etc.
-				   }
+			Transform hitObject = hit.transform;
+			TriggeredByLight[] scripts = hitObject.GetComponents<TriggeredByLight>();
 
-					
-						   GameObject hitObject = hit.transform.gameObject;
-
-						   if(lastHitObject.Equals(hitObject) == false)
-						   {
-							   hitObject.SendMessage("HitByLightEnter"); - byt
-							   lastHitObject.SendMessage("HitByLightExit");
-							   lastHitObject = hitObject;
-						   }
-						   hitObject.SendMessage("HitByLightStay");
-						   //TODO: kan skicka en data, typ struct med vinkel + ljusfärg
-				  */
+			if (scripts.Length == 0)
+			{
+				if(lastHitObject != null)
+				{
+					LightExit(lastHitObject);
+					lastHitObject = null;
+				}
+			}
+			else if(hitObject.Equals(lastHitObject))
+			{
+				LightStay(scripts);
 			}
 			else
-            {
-            //    lastHitObject.SendMessage("HitByLightExit");
-            //    lastHitObject = null;
-            }
-        }
+			{
+				LightEnter(scripts);
+				LightStay(scripts);
+				if (lastHitObject != null)
+				{
+					LightExit(lastHitObject);
+				}
+				lastHitObject = hitObject;
+			}
+		}
+		else
+		{
+			if (lastHitObject != null)
+			{
+				LightExit(lastHitObject);
+				lastHitObject = null;
+			}
+		}
     }
+
+	void OnDisable()
+	{
+		if (lastHitObject != null)
+		{
+			LightExit(lastHitObject);
+			lastHitObject = null;
+		}
+	}
+
+	private void LightEnter(TriggeredByLight[] scripts)
+	{
+		foreach(TriggeredByLight script in scripts)
+		{
+			script.CallHitByLightEnter();
+		}
+	}
+	private void LightExit(TriggeredByLight[] scripts)
+	{
+		foreach (TriggeredByLight script in scripts)
+		{
+			script.CallHitByLightExit();
+		}
+	}
+	private void LightStay(TriggeredByLight[] scripts)
+	{
+		foreach (TriggeredByLight script in scripts)
+		{
+			script.CallHitByLightStay();
+		}
+	}
+	private void LightEnter(Transform obj)
+	{
+		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())
+		{
+			script.CallHitByLightEnter();
+		}
+	}
+	private void LightExit(Transform obj)
+	{
+		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())
+		{
+			script.CallHitByLightExit();
+		}
+	}
+	private void LightStay(Transform obj)
+	{
+		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())
+		{
+			script.CallHitByLightStay();
+		}
+	}
 }

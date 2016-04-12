@@ -4,13 +4,7 @@ using System.Collections;
 public class LensReflect : MonoBehaviour {
 
     GameObject spotlight;
-    private Animator anim;
     private bool inLight;
-
-    void Awake()
-    {
-        anim = GameObject.Find("Player").GetComponent<Animator>();
-    }
 
     void Start()
     {

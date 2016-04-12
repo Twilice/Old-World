@@ -4,14 +4,12 @@ using System.Collections;
 public class MoveLensTarget : MonoBehaviour {
 
     private Transform target;
-    private Animator anim;
     private Transform lens;
     private MeshRenderer lensMesh;
 
     void Awake()
     {
         target = GameObject.Find("LensTarget").transform;
-        anim = GameObject.Find("Player").GetComponent<Animator>();
         lens = GameObject.Find("Player/Lens/ReflectedLensLight").transform;
         lensMesh = GameObject.Find("Player/Lens").GetComponent<MeshRenderer>();
     }

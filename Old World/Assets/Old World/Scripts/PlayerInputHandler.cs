@@ -12,9 +12,11 @@ public class PlayerInputHandler : MonoBehaviour
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
+    private MouseLook mouseLook = MouseLook.GetMouseLook();
 
     private void Start()
     {
+        
 
         // get the transform of the main camera
         if (Camera.main != null)
@@ -44,7 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
             //active when last leaving first person view.
             if (Time.time - lastTime > 0.5)
             {
-                PlayerController.mouseLook.Init(transform);
+                mouseLook.Init(transform);
             }
             lastTime = Time.time;
 
@@ -59,6 +61,8 @@ public class PlayerInputHandler : MonoBehaviour
         {
             m_Jump = Input.GetButtonDown("Jump");
         }
+
+        mouseLook.UpdateCursorLock();
     }
 
 

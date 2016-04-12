@@ -71,6 +71,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //If the button was pressed too early set the new transistionDuration to the time since it was released
                 if ((Time.time - startTime) < transitionDuration)
                 {
+                    StopAllCoroutines();
                     transitionDuration = (Time.time - startTime);
                 }
                 else
@@ -85,6 +86,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 mouseOrbit.enabled = false;
             }
 
+            //TODO: If the right mouse button is spammed, the transision might act really wierd.
             //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
@@ -134,9 +136,11 @@ public class FirstPersonViewToggle : MonoBehaviour
                 firstTimeFP = true;
                 resetOnceFP = true;
 
+                //TODO: If the right mouse button is spammed, the transision might act really wierd.
                 //If the button was released too early 
                 if ((Time.time - startTime) < transitionDuration)
                 {
+                    StopAllCoroutines();
                     transitionDuration = (Time.time - startTime);
                 }
                 else
@@ -167,7 +171,6 @@ public class FirstPersonViewToggle : MonoBehaviour
             }
             else
             {//Camera transision complete
-
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceTP)
                 {

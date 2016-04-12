@@ -4,7 +4,7 @@ using System.Collections;
 public class MovingPlatformScript : MonoBehaviour
 {
     private Vector3 StartTransform;
-    private Quaternion StartRotation;
+    //private Quaternion StartRotation;
     private bool MoveToTarget;
     private bool RotateToTarget;
 
@@ -20,7 +20,7 @@ public class MovingPlatformScript : MonoBehaviour
         MoveToTarget = true;
         RotateToTarget = true;
         StartTransform = gameObject.transform.position;
-        StartRotation = gameObject.transform.rotation;
+        //StartRotation = gameObject.transform.rotation;
 
     }
 	

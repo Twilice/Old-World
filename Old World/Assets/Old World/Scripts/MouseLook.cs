@@ -4,6 +4,15 @@ using UnityEngine;
 [Serializable]
 public class MouseLook
 {
+    //Singleton holder for the mouseLook
+    private MouseLook() { }
+    private static MouseLook instance;
+    public static MouseLook GetMouseLook()
+    {
+        if (instance == null)
+            instance = new MouseLook();
+        return instance;
+    }
     public float XSensitivity = 2f;
     public float YSensitivity = 2f;
     public bool clampVerticalRotation = true;
@@ -47,17 +56,6 @@ public class MouseLook
         {
             character.localRotation = m_CharacterTargetRot;
             camera.transform.localRotation = m_CameraTargetRot;
-        }
-        UpdateCursorLock();
-    }
-
-    public void SetCursorLock(bool value)
-    {
-        lockCursor = value;
-        if (!lockCursor)
-        {//we force unlock the cursor if the user disable the cursor locking helper
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
     }
 

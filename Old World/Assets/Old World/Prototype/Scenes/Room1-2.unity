@@ -116,7 +116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {x: -68.36, y: 14.1, z: 56.44}
+  TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
+  Move: 1
+  Rotate: 0
+  Elevator: 0
+  Loop: 0
 --- !u!23 &30709793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -169,11 +174,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 30709791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -68.36, y: 1.94, z: 56.44}
-  m_LocalScale: {x: 7.615179, y: 1, z: 6.2768397}
+  m_LocalPosition: {x: -0.38836014, y: 0.38000003, z: -0.40791896}
+  m_LocalScale: {x: 0.21650307, y: 0.2, z: 0.18771565}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 401390756}
+  m_RootOrder: 2
 --- !u!1001 &61787298
 Prefab:
   m_ObjectHideFlags: 0
@@ -712,6 +717,7 @@ Transform:
   m_Children:
   - {fileID: 1442067281}
   - {fileID: 1957201665}
+  - {fileID: 30709796}
   m_Father: {fileID: 0}
   m_RootOrder: 10
 --- !u!1 &445860993
@@ -963,7 +969,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {x: -22.05, y: 19.5, z: -13.59}
+  TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
+  Move: 0
+  Rotate: 0
+  Elevator: 0
+  Loop: 0
 --- !u!23 &539053027
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2171,7 +2182,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {x: 3.17, y: 10, z: -13.33}
+  TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
+  Move: 0
+  Rotate: 0
+  Elevator: 0
+  Loop: 0
 --- !u!23 &1612517301
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2520,7 +2536,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetTransform: {x: -103.3473, y: 26, z: 83.3549}
+  TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
+  Move: 1
+  Rotate: 0
+  Elevator: 0
+  Loop: 0
 --- !u!23 &1717617098
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2674,6 +2695,48 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 497772, guid: 092fcdad683526e4fb51ff82ab8f4d1c, type: 2}
   m_PrefabInternal: {fileID: 1759452849}
+--- !u!1 &1764014966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1764014968}
+  - 114: {fileID: 1764014967}
+  m_Layer: 0
+  m_Name: TestingController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1764014967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764014966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ef744ab844f7441bee7dfd45c8d2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Targets:
+  - {fileID: 30709791}
+  - {fileID: 1717617095}
+--- !u!4 &1764014968
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764014966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -62.297806, y: 10.199377, z: 62.243668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
 --- !u!1001 &1854437868
 Prefab:
   m_ObjectHideFlags: 0

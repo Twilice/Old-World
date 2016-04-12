@@ -15,7 +15,6 @@ public class MovingPlatformScript : MonoBehaviour
     public bool Rotate;
     public bool Elevator;
 	public bool Loop;
-	public static bool Active;
     
     void Start ()
     {
@@ -28,35 +27,32 @@ public class MovingPlatformScript : MonoBehaviour
 	
 	void Update ()
     {
-		if (Active == true)
+		if (RotateToTarget == true && Rotate == true)
 		{
-			if (RotateToTarget == true && Rotate == true)
-			{
-				gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, TargetRotation, Speed * Time.deltaTime);
+			gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, TargetRotation, Speed * Time.deltaTime);
 
-				if (gameObject.transform.rotation == TargetRotation && Loop != true)
-				{
-					RotateToTarget = false;
-				}
+			if (gameObject.transform.rotation == TargetRotation && Loop != true)
+			{
+				RotateToTarget = false;
 			}
+		}
 
-			if (MoveToTarget == true && Move == true)
+		if (MoveToTarget == true && Move == true)
+		{
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
+
+			if (gameObject.transform.position == TargetTransform)
 			{
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
-
-				if (gameObject.transform.position == TargetTransform)
-				{
-					MoveToTarget = false;
-				}
+				MoveToTarget = false;
 			}
+		}
 
-			if (MoveToTarget == false && Elevator == true)
+		if (MoveToTarget == false && Elevator == true)
+		{
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
+			if (gameObject.transform.position == StartTransform)
 			{
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
-				if (gameObject.transform.position == StartTransform)
-				{
-					MoveToTarget = true;
-				}
+				MoveToTarget = true;
 			}
 		}
 	}

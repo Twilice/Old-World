@@ -120,8 +120,7 @@ MonoBehaviour:
   Speed: 3
   Move: 1
   Rotate: 0
-  Elevator: 0
-  Loop: 0
+  Elevator: 1
 --- !u!23 &30709793
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -132,7 +131,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cf6cc1b49597e44394fec53c621e2a8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -971,10 +970,9 @@ MonoBehaviour:
   TargetTransform: {x: -22.05, y: 19.5, z: -13.59}
   TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
-  Move: 0
+  Move: 1
   Rotate: 0
-  Elevator: 0
-  Loop: 0
+  Elevator: 1
 --- !u!23 &539053027
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -985,7 +983,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cf6cc1b49597e44394fec53c621e2a8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2184,10 +2182,9 @@ MonoBehaviour:
   TargetTransform: {x: 3.17, y: 10, z: -13.33}
   TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 3
-  Move: 0
+  Move: 1
   Rotate: 0
-  Elevator: 0
-  Loop: 0
+  Elevator: 1
 --- !u!23 &1612517301
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2198,7 +2195,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cf6cc1b49597e44394fec53c621e2a8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2540,8 +2537,7 @@ MonoBehaviour:
   Speed: 3
   Move: 1
   Rotate: 0
-  Elevator: 0
-  Loop: 0
+  Elevator: 1
 --- !u!23 &1717617098
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2552,7 +2548,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cf6cc1b49597e44394fec53c621e2a8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2723,8 +2719,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Targets:
-  - {fileID: 30709791}
+  - {fileID: 1612517299}
+  - {fileID: 539053025}
   - {fileID: 1717617095}
+  - {fileID: 30709791}
 --- !u!4 &1764014968
 Transform:
   m_ObjectHideFlags: 0

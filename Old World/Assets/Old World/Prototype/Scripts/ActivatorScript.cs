@@ -4,14 +4,17 @@ using System.Collections.Generic;
 
 public class ActivatorScript : MonoBehaviour
 {
-	public List<GameObject> Targets;
-	
-	private int NumberOfTargets;
+	private MovingPlatformScript[] Targets;
+    private int NumberOfTargets;
 	private int SelectedTarget;
+	private GameObject holder;
 
 	void Start ()
 	{
-		NumberOfTargets = Targets.Count;
+		Targets = FindObjectsOfType<MovingPlatformScript>();
+
+		NumberOfTargets = Targets.Length;
+		Debug.Log(NumberOfTargets);
 		for (int i = 0; i < NumberOfTargets; i++)
 		{
 			Targets[i].GetComponent<MovingPlatformScript>().enabled = false;
@@ -20,25 +23,40 @@ public class ActivatorScript : MonoBehaviour
 	
 	void Update ()
 	{
+		//Debugger
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			Debug.Log("Activeting debugger");
+			for (int i = 0; i < NumberOfTargets; i++)
+			{
+				Targets[i].Speed = 10;
+				Targets[i].Elevator = true;
+				Targets[i].enabled = true;
+            }
+		}
+
+
+
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			
+			//Cycles targets
 			SelectedTarget++;
 			if (SelectedTarget >= NumberOfTargets)
 			{
 				SelectedTarget = 0;
 			}
 
-			
-
-			if (Targets[SelectedTarget].GetComponent<MovingPlatformScript>().enabled == false)
+			//Active target
+			if (Targets[SelectedTarget].enabled == false)
 			{
-				Targets[SelectedTarget].GetComponent<MovingPlatformScript>().enabled = true;
+				Targets[SelectedTarget].enabled = true;
 				Debug.Log("Activating: " + SelectedTarget);
 			}
-			else if (Targets[SelectedTarget].GetComponent<MovingPlatformScript>().enabled == true)
+
+			//Deactivate target
+			else if (Targets[SelectedTarget].enabled == true)
 			{
-				Targets[SelectedTarget].GetComponent<MovingPlatformScript>().enabled = false;
+				Targets[SelectedTarget].enabled = false;
 				Debug.Log("Deactivating: " + SelectedTarget);
 			}
         }

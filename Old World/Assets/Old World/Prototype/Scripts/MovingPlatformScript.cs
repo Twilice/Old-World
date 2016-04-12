@@ -11,10 +11,8 @@ public class MovingPlatformScript : MonoBehaviour
     public Vector3 TargetTransform;
     public Quaternion TargetRotation;
     public int Speed;
-	public bool Move;
     public bool Rotate;
     public bool Elevator;
-	public bool Loop;
     
     void Start ()
     {
@@ -27,17 +25,20 @@ public class MovingPlatformScript : MonoBehaviour
 	
 	void Update ()
     {
+		//Rotates the gameobject
 		if (RotateToTarget == true && Rotate == true)
 		{
 			gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, TargetRotation, Speed * Time.deltaTime);
 
-			if (gameObject.transform.rotation == TargetRotation && Loop != true)
+			if (gameObject.transform.rotation == TargetRotation != true)
 			{
 				RotateToTarget = false;
 			}
 		}
 
-		if (MoveToTarget == true && Move == true)
+
+		//Moves the gameobject
+		if (MoveToTarget == true)
 		{
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
 
@@ -47,6 +48,8 @@ public class MovingPlatformScript : MonoBehaviour
 			}
 		}
 
+
+		//Moves the gameobject back to its starting location
 		if (MoveToTarget == false && Elevator == true)
 		{
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);

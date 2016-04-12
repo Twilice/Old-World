@@ -77,9 +77,6 @@ public class FirstPersonViewToggle : MonoBehaviour
                 }
                 startTime = Time.time;
 
-                //Switch to first person view controlls and first person movement
-                anim.SetBool("firstPerson", true);
-
                 //Prevents the camera from rotating during camera transisions. This will remove unwanted camera snapping.
                 thirdContr.setAllowCamera(false);
 
@@ -98,7 +95,10 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceFP)
                 {
-                    
+
+                    //Switch to first person view controlls and first person movement and activates lens if player is in light
+                    anim.SetBool("firstPerson", true);
+
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
                     transform.eulerAngles = player.transform.eulerAngles;
@@ -142,9 +142,11 @@ public class FirstPersonViewToggle : MonoBehaviour
                 }
                 startTime = Time.time;
 
+                //Switch to first person view controlls and first person movement and turns lens off if player is in light
+                anim.SetBool("firstPerson", false);
+
                 //Remove the parent
                 transform.parent = null;
-
 
                 //Disable crosshair
                 crosshair.enabled = false;
@@ -178,9 +180,6 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Resets the Orbit camera location so that it is positioned where it should be when switching back to third person view.
                     mouseOrbit.resetPosition();
-
-                    //Switch to first person view controlls and first person movement
-                    anim.SetBool("firstPerson", false);
 
                     //Keep this line at the end of the if-statement to prevent unwanted camera movement
                     mouseOrbit.enabled = true;

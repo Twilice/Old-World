@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ActivatorScript : MonoBehaviour
+public class DebuggerScript : MonoBehaviour
 {
 	private MovingPlatformScript[] Targets;
     private int NumberOfTargets;

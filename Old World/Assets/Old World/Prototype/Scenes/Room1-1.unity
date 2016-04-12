@@ -168,7 +168,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447324, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 131214, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_Name
@@ -644,7 +644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447324, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
@@ -781,10 +781,8 @@ MonoBehaviour:
   TargetTransform: {x: 0, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 0}
   Speed: 0
-  Move: 0
   Rotate: 0
   Elevator: 0
-  Loop: 0
 --- !u!1001 &1004642489
 Prefab:
   m_ObjectHideFlags: 0

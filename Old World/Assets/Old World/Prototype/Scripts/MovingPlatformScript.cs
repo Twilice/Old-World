@@ -13,6 +13,7 @@ public class MovingPlatformScript : MonoBehaviour
     public int Speed;
     public bool Rotate;
     public bool Elevator;
+	public bool Trigger;
     
     void Start ()
     {
@@ -38,7 +39,8 @@ public class MovingPlatformScript : MonoBehaviour
 
 
 		//Moves the gameobject
-		if (MoveToTarget == true)
+		if (MoveToTarget == true
+			)
 		{
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
 

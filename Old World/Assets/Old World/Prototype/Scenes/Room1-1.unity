@@ -168,7 +168,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447324, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 131214, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_Name
@@ -644,7 +644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447324, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9e26e97e1e3713419c09fe8205e61dc, type: 2}
@@ -783,6 +783,7 @@ MonoBehaviour:
   Speed: 0
   Rotate: 0
   Elevator: 0
+  Trigger: 0
 --- !u!1001 &1004642489
 Prefab:
   m_ObjectHideFlags: 0
@@ -870,7 +871,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475818, guid: 422d997229b1fe844a68898135e29b22, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 422d997229b1fe844a68898135e29b22, type: 2}

@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3356844}
   - 65: {fileID: 6531058}
   - 23: {fileID: 2347642}
+  - 114: {fileID: 11419560}
   m_Layer: 0
   m_Name: Solar Panel
   m_TagString: Untagged
@@ -70,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.831927, y: 2.957087, z: 5.1061687}
+  m_LocalPosition: {x: -13.831927, y: 4.1, z: 5.1061687}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 475634}
@@ -167,6 +168,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11419560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e064bc3fd5bfe6b4da6c3f4b7636fb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13655954
 CapsuleCollider:
   m_ObjectHideFlags: 1

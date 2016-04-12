@@ -1,1 +1,1 @@
-Flera ljusstrålar träffar samma objekt samtidigt. Kallas HitByLightEnter flera gånger? Eller om ett ljus disablas kallas exit fastän det andra är kvar.
+Flera ljusstrålar träffar samma objekt samtidigt. Kallas HitByLightEnter flera gånger?

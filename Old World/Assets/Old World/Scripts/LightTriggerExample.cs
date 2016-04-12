@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class generatorLight : TriggeredByLight {
+public class LightTriggerExample : TriggeredByLight {
 
 	protected override void HitByLightStay()
 	{

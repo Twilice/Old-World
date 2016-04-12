@@ -18,7 +18,7 @@ public class MoveLensTarget : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (anim.GetBool("firstPerson"))
+        if (FirstPersonViewToggle.FirstPerson)
         {
             //Show the lens
             lensMesh.enabled = true;

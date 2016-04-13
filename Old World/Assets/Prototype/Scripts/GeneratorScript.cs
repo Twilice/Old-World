@@ -8,11 +8,12 @@ public class GeneratorScript : MonoBehaviour
 	
 	void Start ()
 	{
-		
+		gameObject.
 	}
 	
 	void Update ()
 	{
+		
 		for (int i = 0; i < Targets.Count; i++)
 		{
 			Targets[i].GetComponent<MovingPlatformScript>().enabled = true;

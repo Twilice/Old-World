@@ -8,7 +8,6 @@ public class GeneratorScript : MonoBehaviour
 	
 	void Start ()
 	{
-		gameObject.
 	}
 	
 	void Update ()

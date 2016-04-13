@@ -19,7 +19,7 @@ public class EmitLightRayCast : MonoBehaviour {
 			{
 				if(lastHitObject != null)
 				{
-					LightExit(lastHitObject);
+				//	LightExit(lastHitObject);
 					lastHitObject = null;
 				}
 			}
@@ -33,7 +33,7 @@ public class EmitLightRayCast : MonoBehaviour {
 				LightStay(scripts);
 				if (lastHitObject != null)
 				{
-					LightExit(lastHitObject);
+				//	LightExit(lastHitObject);
 				}
 				lastHitObject = hitObject;
 			}
@@ -42,7 +42,7 @@ public class EmitLightRayCast : MonoBehaviour {
 		{
 			if (lastHitObject != null)
 			{
-				LightExit(lastHitObject);
+				//LightExit(lastHitObject);
 				lastHitObject = null;
 			}
 		}
@@ -52,7 +52,7 @@ public class EmitLightRayCast : MonoBehaviour {
 	{
 		if (lastHitObject != null)
 		{
-			LightExit(lastHitObject);
+		//	LightExit(lastHitObject);
 			lastHitObject = null;
 		}
 	}
@@ -64,13 +64,13 @@ public class EmitLightRayCast : MonoBehaviour {
 			script.CallHitByLightEnter();
 		}
 	}
-	private void LightExit(TriggeredByLight[] scripts)
+	/*private void LightExit(TriggeredByLight[] scripts)
 	{
 		foreach (TriggeredByLight script in scripts)
 		{
 			script.CallHitByLightExit();
 		}
-	}
+	}*/
 	private void LightStay(TriggeredByLight[] scripts)
 	{
 		foreach (TriggeredByLight script in scripts)
@@ -85,13 +85,13 @@ public class EmitLightRayCast : MonoBehaviour {
 			script.CallHitByLightEnter();
 		}
 	}
-	private void LightExit(Transform obj)
+	/*private void LightExit(Transform obj)
 	{
 		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())
 		{
 			script.CallHitByLightExit();
 		}
-	}
+	}*/
 	private void LightStay(Transform obj)
 	{
 		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())

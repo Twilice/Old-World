@@ -42,19 +42,18 @@ public abstract class TriggeredByLight : MonoBehaviour {
 
 	void LateUpdate() // remember to call base.LateUpdate() if it is overriden
 	{
-		if (Enter && isHitByLight == false)
-		{
-			timeIlluminated = 0f;
-			isHitByLight = true;
-			HitByLightEnter();
-		}
-		
-		if (Stay)
-		{
-			timeIlluminated += Time.deltaTime;
-			HitByLightStay();
-		}
-		else if (Exit && !Enter)
+        if (Stay)
+        {
+            if (Enter && isHitByLight == false)
+            {
+                timeIlluminated = 0f;
+                isHitByLight = true;
+                HitByLightEnter();
+            }
+            timeIlluminated += Time.deltaTime;
+            HitByLightStay();
+        }
+		else if (isHitByLight)
 		{
 			timeIlluminated = 0f;
 			isHitByLight = false;

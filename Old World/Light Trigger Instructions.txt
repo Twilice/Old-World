@@ -1,0 +1,23 @@
+För att ett objekt skall kunna träffas av ljus krävs:
+
+Objeket måste ha MINST ett script som ärver från TriggeredByLight istället för Monobehaviour.
+
+Exemepel:
+public class ExempelClass : TriggeredByLight
+{
+}
+
+
+TriggeredByLight har tre funktioner:
+
+protected override void HitByLightEnter() - kallas första framen ett objekt träffas av ljuset
+protected override void HitByLightExit() - kallas den frame då objektet inte längre träffas av ljuset
+protected override void HitByLightStay() - kallas varje frame objektet träffas av ljuset
+(notera att nyckelordet override är vitalt).
+
+Variabler:
+public bool isHitByLight - En alternativ metod till HitByLightStay(). Använd denna variabel i t.ex. Update() istället.
+public float timeIlluminated - Tiden sedan objektet började träffas av ljuset. Blir noll när ljuset börjar och slutar träffa objektet.
+
+
+Skapa egna implementationer av de funktioner som behövs. Vid eventuella frågor, kontakta de fotofobiska programmerarna.

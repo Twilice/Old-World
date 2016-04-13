@@ -4,21 +4,19 @@ using System.Collections;
 public class MoveLensTarget : MonoBehaviour {
 
     private Transform target;
-    private Animator anim;
     private Transform lens;
     private MeshRenderer lensMesh;
 
     void Awake()
     {
         target = GameObject.Find("LensTarget").transform;
-        anim = GameObject.Find("Player").GetComponent<Animator>();
         lens = GameObject.Find("Player/Lens/ReflectedLensLight").transform;
         lensMesh = GameObject.Find("Player/Lens").GetComponent<MeshRenderer>();
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (anim.GetBool("firstPerson"))
+        if (FirstPersonViewToggle.FirstPerson)
         {
             //Show the lens
             lensMesh.enabled = true;

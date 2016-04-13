@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     Vector3 m_CapsuleCenter;
     CapsuleCollider m_Capsule;
     bool m_Crouching;
-    public static MouseLook mouseLook = new MouseLook();
+    private MouseLook mouseLook = MouseLook.GetMouseLook();
 
     void Start()
     {

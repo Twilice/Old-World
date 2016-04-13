@@ -9,15 +9,14 @@ public class PlayerInputHandler : MonoBehaviour
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-    private Animator anim;
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
+    private MouseLook mouseLook = MouseLook.GetMouseLook();
 
     private void Start()
     {
-
-        anim = GetComponent<Animator>();
+        
 
         // get the transform of the main camera
         if (Camera.main != null)
@@ -40,14 +39,14 @@ public class PlayerInputHandler : MonoBehaviour
     {
         //If first person camera is toggled, allow first person camera movement
         //TODO: Fult? kanske använda StringToHash i Animator?
-        if (anim.GetBool("firstPerson"))
+        if (FirstPersonViewToggle.FirstPerson)
         {
             //Only allow camera position correction if the button has been released for more than half a second.
             //This is to prevent the camera from locking the vertical axis and will cause the player to face the rotation that was
             //active when last leaving first person view.
             if (Time.time - lastTime > 0.5)
             {
-                PlayerController.mouseLook.Init(transform);
+                mouseLook.Init(transform);
             }
             lastTime = Time.time;
 
@@ -62,6 +61,8 @@ public class PlayerInputHandler : MonoBehaviour
         {
             m_Jump = Input.GetButtonDown("Jump");
         }
+
+        mouseLook.UpdateCursorLock();
     }
 
 

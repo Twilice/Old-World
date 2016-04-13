@@ -12,6 +12,8 @@ public class FirstPersonViewToggle : MonoBehaviour
     private Crosshair crosshair;
     private new Camera camera;
     private Animator anim;
+    [HideInInspector]
+    public static bool FirstPerson{ get; private set; }
     private Transform firstPersonTarget;
     private Transform thirdPersonTarget;
     private bool firstTimeTP;
@@ -69,6 +71,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //If the button was pressed too early set the new transistionDuration to the time since it was released
                 if ((Time.time - startTime) < transitionDuration)
                 {
+                    StopAllCoroutines();
                     transitionDuration = (Time.time - startTime);
                 }
                 else
@@ -83,6 +86,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 mouseOrbit.enabled = false;
             }
 
+            //TODO: If the right mouse button is spammed, the transision might act really wierd.
             //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
@@ -97,7 +101,8 @@ public class FirstPersonViewToggle : MonoBehaviour
                 {
 
                     //Switch to first person view controlls and first person movement and activates lens if player is in light
-                    anim.SetBool("firstPerson", true);
+                    FirstPerson = true;
+                    anim.SetBool("firstPerson", FirstPerson);
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
@@ -131,9 +136,11 @@ public class FirstPersonViewToggle : MonoBehaviour
                 firstTimeFP = true;
                 resetOnceFP = true;
 
+                //TODO: If the right mouse button is spammed, the transision might act really wierd.
                 //If the button was released too early 
                 if ((Time.time - startTime) < transitionDuration)
                 {
+                    StopAllCoroutines();
                     transitionDuration = (Time.time - startTime);
                 }
                 else
@@ -143,7 +150,8 @@ public class FirstPersonViewToggle : MonoBehaviour
                 startTime = Time.time;
 
                 //Switch to first person view controlls and first person movement and turns lens off if player is in light
-                anim.SetBool("firstPerson", false);
+                FirstPerson = false;
+                anim.SetBool("firstPerson", FirstPerson);
 
                 //Remove the parent
                 transform.parent = null;
@@ -152,7 +160,6 @@ public class FirstPersonViewToggle : MonoBehaviour
                 crosshair.enabled = false;
 
                 //Locking the camera movement to prevent unwanted camera snapping
-                //This might be something we should improve further on, there for: TODO
                 thirdContr.setAllowCamera(false);
             }
 
@@ -164,7 +171,6 @@ public class FirstPersonViewToggle : MonoBehaviour
             }
             else
             {//Camera transision complete
-
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceTP)
                 {

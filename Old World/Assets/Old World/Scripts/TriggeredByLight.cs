@@ -3,13 +3,13 @@ using System.Collections;
 
 public abstract class TriggeredByLight : MonoBehaviour {
 
-	/*
-		TODO : implement multiple light on same target leaving/exiting correctly 
-
-	*/
-
 	public bool isHitByLight{get; private set;}
 	public float timeIlluminated { get; private set; }
+	//TODO public Vector3[] approachAngle { get; private set; }
+
+	private bool Enter = false;
+	private bool Exit = false;
+	private bool Stay = false;
 
     virtual protected void HitByLightEnter(){}
 
@@ -19,21 +19,44 @@ public abstract class TriggeredByLight : MonoBehaviour {
 
 	public void CallHitByLightEnter()
 	{
-		timeIlluminated = 0f; 
-		isHitByLight = true;
-		HitByLightEnter();
+		Enter = true;
 	}
 
 	public void CallHitByLightExit()
 	{
-		timeIlluminated = 0f;
-		isHitByLight = false;
-		HitByLightExit();
+		Exit = true;
 	}
 
 	public void CallHitByLightStay()
 	{
-		timeIlluminated += Time.deltaTime;
-		HitByLightStay();
+		Stay = true;
+		// TODO add vector angles
+	}
+
+	void LateUpdate()
+	{
+		if (Enter && isHitByLight == false)
+		{
+			timeIlluminated = 0f;
+			isHitByLight = true;
+			HitByLightEnter();
+		}
+		
+		if (Stay)
+		{
+			timeIlluminated += Time.deltaTime;
+			HitByLightStay();
+		}
+		else if (Exit && !Enter)
+		{
+			timeIlluminated = 0f;
+			isHitByLight = false;
+			HitByLightExit();
+		}
+
+		Enter = false;
+		Exit = false;
+		Stay = false;
+		// TODO clear vector angles
 	}
 }

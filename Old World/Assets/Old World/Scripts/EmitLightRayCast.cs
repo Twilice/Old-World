@@ -3,12 +3,15 @@ using System.Collections;
 
 public class EmitLightRayCast : MonoBehaviour {
 
-	Transform lastHitObject = null;
+	private Transform lastHitObject = null;
+	private Vector3 dir = Vector3.zero;
+	private Vector3 hitPos = Vector3.zero;
 	void Update () {
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 500))
+		dir = transform.TransformDirection(Vector3.forward);
+		if (Physics.Raycast(transform.position, dir, out hit, 500))
 		{
-				
+			hitPos = hit.point;
 			Transform hitObject = hit.transform;
 			TriggeredByLight[] scripts = hitObject.GetComponents<TriggeredByLight>();
 
@@ -72,7 +75,7 @@ public class EmitLightRayCast : MonoBehaviour {
 	{
 		foreach (TriggeredByLight script in scripts)
 		{
-			script.CallHitByLightStay();
+			script.CallHitByLightStay(dir, hitPos);
 		}
 	}
 	private void LightEnter(Transform obj)
@@ -93,7 +96,7 @@ public class EmitLightRayCast : MonoBehaviour {
 	{
 		foreach (TriggeredByLight script in obj.GetComponents<TriggeredByLight>())
 		{
-			script.CallHitByLightStay();
+			script.CallHitByLightStay(dir, hitPos);
 		}
 	}
 }

@@ -26,7 +26,7 @@ public class LightTriggerExample : TriggeredByLight {
 
 	void Update()
 	{
-		if(timeIlluminated > 10)
+		if(timeIlluminated > 3)
 		{
 			// do stuff if lighted for more than 1 second
 			mat.color = Color.green;

@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChargerScript : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public class ChargerScript : MonoBehaviour
+{
 	
+	void Start ()
+	{
+		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
+		
 	}
 }

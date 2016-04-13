@@ -5,9 +5,14 @@ using System.Collections.Generic;
 public class SolarPanel : TriggeredByLight
 {
 	public List<GameObject> Targets;
+
+	public bool PlatformTarget;
+	public bool GeneratorTarget;
+	public bool ChargerTarget;
+
 	public int ChargeUpTime;
 
-	private bool Active;
+	private bool Active = false;
 
 	protected override void HitByLightStay()
 	{
@@ -19,9 +24,18 @@ public class SolarPanel : TriggeredByLight
 			Active = true;
 			for (int i = 0; i < Targets.Count; i++)
 			{
-				Targets[i].GetComponent<MovingPlatformScript>().enabled = true;
-				Targets[i].GetComponent<GeneratorScript>().enabled = true;
-				Targets[i].GetComponent<ChargerScript>().enabled = true;
+				if (PlatformTarget == true)
+				{
+					Targets[i].GetComponent<MovingPlatformScript>().Activate();
+				}
+				if (GeneratorTarget == true)
+				{
+					Targets[i].GetComponent<GeneratorScript>().Activate();
+				}
+				//if (ChargerTarget == true)
+				//{
+				//	Targets[i].GetComponent<ChargerScript>().Activate();
+				//}
 			}
 		}
 
@@ -37,18 +51,14 @@ public class SolarPanel : TriggeredByLight
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{
-			Targets[i].GetComponent<MovingPlatformScript>().enabled = false;
-			Targets[i].GetComponent<ChargerScript>().enabled = false;
+			if (PlatformTarget == true)
+			{
+				Targets[i].GetComponent<MovingPlatformScript>().enabled = false;
+			}
+			//if (ChargerTarget == true)
+			//{
+			//	Targets[i].GetComponent<ChargerScript>().enabled = false;
+			//}
 		}
-	}
-
-	void Start()
-	{
-		Active = false;
-	}
-
-	void Update()
-	{
-
 	}
 }

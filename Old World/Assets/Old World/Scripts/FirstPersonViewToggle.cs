@@ -86,7 +86,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 mouseOrbit.enabled = false;
             }
 
-            //TODO: If the right mouse button is spammed, the transision might act really wierd.
+            //TODO1: If the right mouse button is spammed, the transision might act really wierd.
             //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
@@ -123,6 +123,12 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     resetOnceFP = false;
                 }
+				/*if( press button) TODO5
+				{ 
+					//lens.parent = null;
+					//lens.component<collider> activate
+				}
+				*/
             }
         }
         else if (!Input.GetMouseButton(1))

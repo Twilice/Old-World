@@ -5,19 +5,45 @@ using System.Collections.Generic;
 public class GeneratorScript : MonoBehaviour
 {
 	public List<GameObject> Targets;
-	
+
+	public bool PlatformTarget;
+	public bool GeneratorTarget;
+	public bool ChargerTarget;
+
+	private bool Active = false;
+
 	void Start ()
 	{
 	}
-	
-	void Update ()
+
+	void Update()
 	{
-		
+		if (Active == true)
+		{
+			for (int i = 0; i < Targets.Count; i++)
+			{
+				if (PlatformTarget == true)
+				{
+					Targets[i].GetComponent<MovingPlatformScript>().Activate();
+				}
+				//if (ChargerTarget == true)
+				//{
+				//	Targets[i].GetComponent<ChargerScript>().Activate();
+				//}
+			}
+		}
+	}
+
+	public void Activate()
+	{
+		GetComponent<Renderer>().material.color = Color.green;
+		Active = true;
 		for (int i = 0; i < Targets.Count; i++)
 		{
-			Targets[i].GetComponent<MovingPlatformScript>().enabled = true;
-			Targets[i].GetComponent<GeneratorScript>().enabled = true;
-			Targets[i].GetComponent<ChargerScript>().enabled = true;
+			if (GeneratorTarget == true)
+			{
+				Targets[i].GetComponent<GeneratorScript>().Activate();
+			}
 		}
 	}
 }

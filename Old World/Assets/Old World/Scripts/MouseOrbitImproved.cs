@@ -13,8 +13,8 @@ public class MouseOrbitImproved : MonoBehaviour
     public float yMinLimit = -20f;
     public float yMaxLimit = 80f;
 
-    public float distanceMin = .5f;
-    public float distanceMax = 15f;
+    public float distanceMin = 1f;
+    public float distanceMax = 5f;
 
     private Rigidbody rb;
     private Transform target;
@@ -49,7 +49,7 @@ public class MouseOrbitImproved : MonoBehaviour
         {
             float mouseX = Input.GetAxisRaw("Mouse X");
             float mouseY = Input.GetAxisRaw("Mouse Y");
-
+			
             float joyX = Input.GetAxisRaw("Joy X");
             float joyY = Input.GetAxisRaw("Joy Y");
             if (joyX != 0 || joyY != 0)
@@ -62,7 +62,12 @@ public class MouseOrbitImproved : MonoBehaviour
                 x += mouseX * mouseSensitivity;
                 y -= mouseY * mouseSensitivity;
             }
-            y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+			RaycastCamera.maxDistance = Mathf.Clamp(RaycastCamera.maxDistance - (Input.GetAxis("Zoom") * 5), distanceMin, distanceMax);
+
+
+
+			y = ClampAngle(y, yMinLimit, yMaxLimit);
 
             Quaternion rotation = Quaternion.Euler(y, x, 0);
 

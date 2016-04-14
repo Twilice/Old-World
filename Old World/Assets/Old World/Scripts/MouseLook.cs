@@ -68,12 +68,12 @@ public class MouseLook
 
 	private void InternalLockUpdate()
 	{
-		if (Input.GetKeyUp(KeyCode.Escape))
+		if (Input.GetKeyUp(KeyCode.F5))
 		{
 			GameObject.Find("/MainCamera").GetComponent<MouseOrbitImproved>().enabled = false;
 			m_cursorIsLocked = false;
 		}
-		else if (Input.GetMouseButtonUp(0))
+		else if (Input.GetKeyUp(KeyCode.F6))
 		{
 			GameObject.Find("/MainCamera").GetComponent<MouseOrbitImproved>().enabled = true;
 			m_cursorIsLocked = true;

@@ -14,7 +14,6 @@ public abstract class TriggeredByLight : MonoBehaviour {
 		lightRaysPos = new List<Vector3>();
 	}
 	private bool Enter = false;
-	private bool Exit = false;
 	private bool Stay = false;
 
     virtual protected void HitByLightEnter(){}
@@ -26,11 +25,6 @@ public abstract class TriggeredByLight : MonoBehaviour {
 	public void CallHitByLightEnter()
 	{
 		Enter = true;
-	}
-
-	public void CallHitByLightExit()
-	{
-		Exit = true;
 	}
 
 	public void CallHitByLightStay(Vector3 lightAngle, Vector3 lightHitPos)
@@ -61,7 +55,6 @@ public abstract class TriggeredByLight : MonoBehaviour {
 		}
 
 		Enter = false;
-		Exit = false;
 		Stay = false;
 		lightRaysDir.Clear();
 		lightRaysPos.Clear();

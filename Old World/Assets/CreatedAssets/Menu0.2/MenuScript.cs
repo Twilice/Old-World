@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour 
 {
-    private GameObject book;
+    private GameObject journal;
     [Header("DisablesInMenu")] // only put always active scripts here
     public GameObject[] objects;
     private bool[] wasActive;
@@ -26,9 +26,9 @@ public class MenuScript : MonoBehaviour
     void Awake()
     {
         wasActive = new bool[objects.Length];
-        book = gameObject.FindChildObject("Journal");
+        journal = gameObject.FindChildObject("Journal");
 
-        book.SetActive(true);
+        journal.SetActive(true);
     }
 	void Start() 
     {
@@ -36,7 +36,7 @@ public class MenuScript : MonoBehaviour
         cameraOrbit = camera.GetComponent<MouseOrbitImproved>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
 
-        book.SetActive(false);
+        journal.SetActive(false);
 	}
 	
 	void Update() 
@@ -58,37 +58,47 @@ public class MenuScript : MonoBehaviour
         {
             if (Time.timeScale == 0)
             {
-                openJournal = false;
-                cameraOrbit.enabled = true;
-                cameraViewToggle.enabled = true;
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    objects[i].SetActive(wasActive[i]);
-                }
                 Time.timeScale = 1.0f;
+                EnableJournal();
             }
             else
             {
-                openJournal = true;
-                cameraOrbit.enabled = false;
-                cameraViewToggle.enabled = false;
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    wasActive[i] = objects[i].activeSelf;
-                    Debug.Log(wasActive[i]);
-                    objects[i].SetActive(false);
-                }
                 Time.timeScale = 0.0f;
+                DisableJournal();
             }
         }
 
         if (openJournal && !oldOpenJournal)
         {
-            if (book.activeSelf)
-                book.SetActive(false);
+            if (journal.activeSelf)
+                journal.SetActive(false);
             else
-                book.SetActive(true);
+                journal.SetActive(true);
         }
 	}
+
+    private void DisableJournal()
+    {
+        openJournal = true;
+        cameraOrbit.enabled = false;
+        cameraViewToggle.enabled = false;
+        for (int i = 0; i < objects.Length; i++)
+        {
+            wasActive[i] = objects[i].activeSelf;
+            Debug.Log(wasActive[i]);
+            objects[i].SetActive(false);
+        }
+    }
+
+    private void EnableJournal()
+    {
+        openJournal = false;
+        cameraOrbit.enabled = true;
+        cameraViewToggle.enabled = true;
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].SetActive(wasActive[i]);
+        }
+    }
 
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class JournalManager : MonoBehaviour
 {
-    public GameObject bookPage;
+    public GameObject journalPage;
     public List<TextAsset> textFiles = new List<TextAsset>();
 
     private List<ButtonData> buttonDatas = new List<ButtonData>();
@@ -26,7 +26,7 @@ public class JournalManager : MonoBehaviour
 
     void Awake()
     {
-        bookPage.SetActive(false);
+        journalPage.SetActive(false);
         GameObject pageButton = gameObject.FindChildObject("PageButton");
 
         for (int i = 0; i < textFiles.Count; i++)
@@ -50,7 +50,7 @@ public class JournalManager : MonoBehaviour
         }
 
         activateButton(0);
-        bookPage.SetActive(false);
+        journalPage.SetActive(false);
 
         pageButton.SetActive(false);
     }
@@ -61,8 +61,8 @@ public class JournalManager : MonoBehaviour
         {
             if (buttonDatas[i].button == button)
             {
-                bookPage.SetActive(true);
-                bookPage.GetComponentInChildren<Text>().text = textFiles[buttonDatas[i].index].text;
+                journalPage.SetActive(true);
+                journalPage.GetComponentInChildren<Text>().text = textFiles[buttonDatas[i].index].text;
             }
         }
     }
@@ -76,8 +76,8 @@ public class JournalManager : MonoBehaviour
             {
                 buttonD.button.gameObject.SetActive(true);
                 buttonDatas.Add(buttonD);
-                bookPage.SetActive(true);
-                bookPage.GetComponentInChildren<Text>().text = textFiles[i].text;
+                journalPage.SetActive(true);
+                journalPage.GetComponentInChildren<Text>().text = textFiles[i].text;
             }
         }
     }

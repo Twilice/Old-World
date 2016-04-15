@@ -24,20 +24,20 @@ public class DebuggerScript : MonoBehaviour
 	void Update ()
 	{
 		//Debugger
-		if (Input.GetKeyDown(KeyCode.G))
+		if (Input.GetKey(KeyCode.G))
 		{
 			Debug.Log("Activeting debugger");
 			for (int i = 0; i < NumberOfTargets; i++)
 			{
 				Targets[i].Speed = 10;
 				Targets[i].Elevator = true;
-				Targets[i].enabled = true;
+				Targets[i].Activate();
             }
 		}
 
 
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKey(KeyCode.Space))
 		{
 			//Cycles targets
 			SelectedTarget++;
@@ -49,7 +49,7 @@ public class DebuggerScript : MonoBehaviour
 			//Active target
 			if (Targets[SelectedTarget].enabled == false)
 			{
-				Targets[SelectedTarget].enabled = true;
+				Targets[SelectedTarget].Activate();
 				Debug.Log("Activating: " + SelectedTarget);
 			}
 

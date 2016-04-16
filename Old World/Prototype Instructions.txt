@@ -1,0 +1,20 @@
+Step 1: Placera ut en Solar Panel prefab (Prototype/prefabs/Solar_panel)
+
+Step 2.1: Placera ut en hiss (Prototype/prefabs/Elevator) eller en dörr (Prototype/prefabs/Dorr)
+	
+	2.1.1: Gå in på sol panelen och ändra värdet Targets på scriptet SolarPanel till hur många 
+	gameobjects som ska sättas igång när solpanelen får solljus på sig, tryck på enter för att spara.
+	Nu ska det komma fram flera rutor under siffran som säger "None (gameobject)".
+	2.1.2: Dra de gameobjects som ska aktiveras från INSPECTORN till varsin "None (gameobject)" ruta.
+	2.1.2: Kryssa sedan i rutan "Moving Platform" under SolarPanel scriptet. Variablen "Charge Up Time" 
+	bestämmer hur länge spelaren behöver rikta ljus på panelen för att den ska sätta igång (i sekunder)
+
+Step 2.2: Placera ut en generator (Prototype/prefabs/generator)
+
+	2.2.1: Samma som för förflyttande platformar
+	2.2.2: Samma som för förflyttande platformar
+	2.2.3: Kryssa istället i "Generator" rutan under SolarPanel scriptet.
+	2.2.4: Du kan nu göra steg 2.1.1-2 fast för generatorn under dess script GeneratorScript. Dra alla
+	gameobjects som ska aktiveras när generatorn sätts igång till varsin ruta och kryssa i vilken typ
+	av objekt som finns med bland de gameobjects som ska aktiveras. T.ex. om du har en hiss och en annan
+	generator länkad till en generator, så kryssar du i BÅDE Moving Platform och Generator.

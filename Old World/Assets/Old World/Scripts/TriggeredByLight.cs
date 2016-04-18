@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public abstract class TriggeredByLight : MonoBehaviour {
 
 	public bool isHitByLight{get; private set;}
 	public float timeIlluminated { get; private set; }
-	//TODO public Vector3[] approachAngle { get; private set; }
-
+	public List<Vector3> lightRaysDir { get; private set; }
+	public List<Vector3> lightRaysPos { get; private set; }
+	public TriggeredByLight()
+	{
+		lightRaysDir  = new List<Vector3>();
+		lightRaysPos = new List<Vector3>();
+	}
 	private bool Enter = false;
-	private bool Exit = false;
 	private bool Stay = false;
 
     virtual protected void HitByLightEnter(){}
@@ -22,32 +27,27 @@ public abstract class TriggeredByLight : MonoBehaviour {
 		Enter = true;
 	}
 
-	public void CallHitByLightExit()
-	{
-		Exit = true;
-	}
-
-	public void CallHitByLightStay()
+	public void CallHitByLightStay(Vector3 lightAngle, Vector3 lightHitPos)
 	{
 		Stay = true;
-		// TODO add vector angles
+		lightRaysDir.Add(lightAngle);
+		lightRaysPos.Add(lightHitPos);
 	}
 
-	void LateUpdate()
+	void LateUpdate() // remember to call base.LateUpdate() if it is overriden
 	{
-		if (Enter && isHitByLight == false)
-		{
-			timeIlluminated = 0f;
-			isHitByLight = true;
-			HitByLightEnter();
-		}
-		
-		if (Stay)
-		{
-			timeIlluminated += Time.deltaTime;
-			HitByLightStay();
-		}
-		else if (Exit && !Enter)
+        if (Stay)
+        {
+            if (Enter && isHitByLight == false)
+            {
+                timeIlluminated = 0f;
+                isHitByLight = true;
+                HitByLightEnter();
+            }
+            timeIlluminated += Time.deltaTime;
+            HitByLightStay();
+        }
+		else if (isHitByLight)
 		{
 			timeIlluminated = 0f;
 			isHitByLight = false;
@@ -55,8 +55,8 @@ public abstract class TriggeredByLight : MonoBehaviour {
 		}
 
 		Enter = false;
-		Exit = false;
 		Stay = false;
-		// TODO clear vector angles
+		lightRaysDir.Clear();
+		lightRaysPos.Clear();
 	}
 }

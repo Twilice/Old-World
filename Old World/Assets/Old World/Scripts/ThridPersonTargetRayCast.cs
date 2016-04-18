@@ -10,8 +10,8 @@ public class ThridPersonTargetRayCast : MonoBehaviour {
     public float yMinLimit = -20f;
     public float yMaxLimit = 80f;
 
-    public float distanceMin = 1f;
-    public float distanceMax = 5f;
+    public float distanceMin = .5f;
+    public float distanceMax = 15f;
 
     private Rigidbody rb;
     private GameObject player;

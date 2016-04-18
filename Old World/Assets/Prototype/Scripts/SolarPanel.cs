@@ -51,9 +51,9 @@ public class SolarPanel : TriggeredByLight
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{
-			if (PlatformTarget == true)
+			if (PlatformTarget == true && Targets[i].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)
 			{
-				Targets[i].GetComponent<MovingPlatformScript>().enabled = false;
+				Targets[i].GetComponent<MovingPlatformScript>().Deactivate();
 			}
 			//if (ChargerTarget == true)
 			//{

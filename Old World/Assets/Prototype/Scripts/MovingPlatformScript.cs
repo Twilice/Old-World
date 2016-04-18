@@ -13,18 +13,23 @@ public class MovingPlatformScript : MonoBehaviour
     public int Speed;
     public bool Rotate;
     public bool Elevator;
+	public bool ReturnToOriginalPosition;
+
+	private bool Activated;
     
     void Start ()
     {
-        MoveToTarget = true;
+		Activated = false;
+		MoveToTarget = true;
         RotateToTarget = true;
         StartTransform = gameObject.transform.position;
-        //StartRotation = gameObject.transform.rotation;
-
-    }
+		//StartRotation = gameObject.transform.rotation;
+	}
 	
 	public void Activate ()
     {
+		Debug.Log("Activated");
+		Activated = true;
 		//Rotates the gameobject
 		if (RotateToTarget == true && Rotate == true)
 		{
@@ -42,10 +47,10 @@ public class MovingPlatformScript : MonoBehaviour
 		{
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
 
-			if (gameObject.transform.position == TargetTransform)
-			{
-				MoveToTarget = false;
-			}
+			//if (gameObject.transform.position == TargetTransform)
+			//{
+			//	MoveToTarget = false;
+			//}
 		}
 
 
@@ -57,6 +62,21 @@ public class MovingPlatformScript : MonoBehaviour
 			{
 				MoveToTarget = true;
 			}
+		}
+	}
+
+	public void Deactivate()
+	{
+		Debug.Log("Deactivated");
+		Activated = false;
+		MovingBack();
+	}
+
+	public void MovingBack()
+	{
+		while (gameObject.transform.position != StartTransform)
+		{
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
 		}
 	}
 }

@@ -20,4 +20,9 @@ public bool isHitByLight - En alternativ metod till HitByLightStay(). Använd den
 public float timeIlluminated - Tiden sedan objektet började träffas av ljuset. Blir noll när ljuset börjar och slutar träffa objektet.
 
 
+<<<<<<< HEAD
+=======
+Om LateUpdate används i scripted, skriv base.LateUpdate(); överst i den functionen. 
+
+>>>>>>> refs/remotes/origin/master
 Skapa egna implementationer av de funktioner som behövs. Vid eventuella frågor, kontakta de fotofobiska programmerarna.

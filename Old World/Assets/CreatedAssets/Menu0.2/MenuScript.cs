@@ -60,11 +60,13 @@ public class MenuScript : MonoBehaviour
         {
             if (Time.timeScale == 0)
             {
+                //mouseToggle.DeactivateMouse();
                 Time.timeScale = 1.0f;
                 EnableJournal();
             }
             else
             {
+                //mouseToggle.ActiveateMouse();
                 Time.timeScale = 0.0f;
                 DisableJournal();
             }

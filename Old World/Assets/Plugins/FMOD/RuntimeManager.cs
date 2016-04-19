@@ -150,7 +150,7 @@ namespace FMODUnity
 
         void Initialiase(bool forceNoNetwork)
         {
-            UnityEngine.Debug.Log("FMOD Studio: Creating runtime system instance");
+            //UnityEngine.Debug.Log("FMOD Studio: Creating runtime system instance");
 
             FMOD.RESULT result;
             result = FMOD.Studio.System.create(out studioSystem);
@@ -426,7 +426,7 @@ namespace FMODUnity
         {
             if (studioSystem != null)
             {
-                UnityEngine.Debug.Log("FMOD Studio: Destroying runtime system instance");
+                //UnityEngine.Debug.Log("FMOD Studio: Destroying runtime system instance");
                 studioSystem.release();
                 studioSystem = null;
             }

@@ -21,15 +21,17 @@ public class MouseLook
 	private bool smooth = false;
 	public float smoothTime = 5f;
 	public bool lockCursor = true;
+    private MouseOrbitImproved mouseScript;
 
-
-	private Quaternion m_CharacterTargetRot;
+    private Quaternion m_CharacterTargetRot;
 	private Quaternion m_CameraTargetRot;
 	private bool m_cursorIsLocked = true;
 
 	public void Init(Transform character)
 	{
-		m_CharacterTargetRot = character.localRotation;
+        mouseScript = GameObject.Find("MainCamera").GetComponent<MouseOrbitImproved>();
+
+        m_CharacterTargetRot = character.localRotation;
 
 		//We don't need the camera rotation, since it should always be straight
 		m_CameraTargetRot = Quaternion.identity;
@@ -70,12 +72,12 @@ public class MouseLook
 	{
 		if (Input.GetKeyUp(KeyCode.F5))
 		{
-			GameObject.Find("/MainCamera").GetComponent<MouseOrbitImproved>().enabled = false;
+            mouseScript.enabled = false;
 			m_cursorIsLocked = false;
 		}
 		else if (Input.GetKeyUp(KeyCode.F6))
 		{
-			GameObject.Find("/MainCamera").GetComponent<MouseOrbitImproved>().enabled = true;
+            mouseScript.enabled = true;
 			m_cursorIsLocked = true;
 		}
 

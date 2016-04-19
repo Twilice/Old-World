@@ -28,7 +28,7 @@ public class MovingPlatformScript : MonoBehaviour
 	
 	public void Activate ()
     {
-		Debug.Log("Activated");
+		//Debug.Log("Activated");
 		Activated = true;
 		//Rotates the gameobject
 		if (RotateToTarget == true && Rotate == true)

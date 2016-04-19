@@ -3,13 +3,14 @@ using System.Collections;
 
 public class LensReflect : MonoBehaviour {
 
-    GameObject spotlight;
+    GameObject lens;
+    private MoveLensTarget moveLensScript;
     private bool inLight;
 
     void Start()
     {
-        spotlight = transform.Find("ReflectedLensLight").gameObject;
-        
+        lens = transform.Find("ReflectedLensLight").gameObject;
+        moveLensScript = GameObject.Find("MainCamera").GetComponent<MoveLensTarget>();
         inLight = false;
     }
 
@@ -26,10 +27,10 @@ public class LensReflect : MonoBehaviour {
 
     void Update()
     {
-        if (inLight && FirstPersonViewToggle.FirstPerson)
-            spotlight.SetActive(true);
+        if (inLight && moveLensScript.LensActivated)
+            lens.SetActive(true);
         else
-            spotlight.SetActive(false);
+            lens.SetActive(false);
     }
 
 }

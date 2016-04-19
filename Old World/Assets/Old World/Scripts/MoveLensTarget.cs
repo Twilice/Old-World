@@ -6,6 +6,10 @@ public class MoveLensTarget : MonoBehaviour {
     private Transform target;
     private Transform lens;
     private MeshRenderer lensMesh;
+    [HideInInspector]
+    public bool LensActivated = false;
+    [HideInInspector]
+    public bool LensDropped = false;
 
     void Awake()
     {
@@ -16,9 +20,10 @@ public class MoveLensTarget : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (FirstPersonViewToggle.FirstPerson)
+        if (LensDropped || FirstPersonViewToggle.FirstPerson)
         {
             //Show the lens
+            LensActivated = true;
             lensMesh.enabled = true;
 
             RaycastHit hit;
@@ -36,6 +41,7 @@ public class MoveLensTarget : MonoBehaviour {
         {
             //Hide the lens
             lensMesh.enabled = false;
+            LensActivated = false;
         }
     }
 }

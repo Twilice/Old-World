@@ -28,7 +28,11 @@ public class MovingPlatformScript : MonoBehaviour
 	
 	public void Activate ()
     {
+<<<<<<< HEAD:Old World/Assets/Old World/Scripts/MovingPlatformScript.cs
 		Debug.Log("Activated");
+=======
+		//Debug.Log("Activated");
+>>>>>>> refs/remotes/origin/master:Old World/Assets/Old World/Scripts/MovingPlatformScript.cs
 		Activated = true;
 		//Rotates the gameobject
 		if (RotateToTarget == true && Rotate == true)

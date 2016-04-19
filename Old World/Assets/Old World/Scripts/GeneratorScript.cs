@@ -10,7 +10,7 @@ public class GeneratorScript : MonoBehaviour
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
 
-	private bool Active = false;
+	public bool Active = false;
 
 	void Start ()
 	{

@@ -26,7 +26,7 @@ public class FirstPersonViewToggle : MonoBehaviour
     {
         player = GameObject.Find("Player");
         crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
-        firstPersonTarget = GameObject.Find("Player/FirstPersonTarget").transform;
+        firstPersonTarget = GameObject.Find("Player/CameraReferences/FirstPersonTarget").transform;
         thirdPersonTarget = GameObject.Find("ThirdPersonTarget").transform;
     }
     // Use this for initialization
@@ -110,7 +110,8 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
-                    transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
+                    //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
+                    transform.localPosition = player.FindChildObject("FirstPersonTarget").transform.localPosition;
 
                     //Make crosshair visable
                     crosshair.enabled = true;

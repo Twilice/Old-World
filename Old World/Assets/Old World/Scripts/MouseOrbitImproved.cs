@@ -24,7 +24,7 @@ public class MouseOrbitImproved : MonoBehaviour
 
     void Awake()
     {
-        target = GameObject.Find("Player/CameraReference").transform;
+        target = GameObject.Find("Player/CameraReferences/CameraRotationReference").transform;
     }
 
     // Use this for initialization

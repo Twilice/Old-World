@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RayCastTarget : MonoBehaviour {
+public class RayCastThirdPersonTarget : MonoBehaviour {
 
     public static float distance3 = 5;
     void Update()

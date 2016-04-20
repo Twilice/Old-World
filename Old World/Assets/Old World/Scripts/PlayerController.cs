@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     const float k_Half = 0.5f;
     float m_TurnAmount;
     float m_ForwardAmount;
+	float velocity;
     Vector3 m_GroundNormal;
     float m_CapsuleHeight;
     Vector3 m_CapsuleCenter;
@@ -75,7 +76,8 @@ public class PlayerController : MonoBehaviour
         m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
         m_ForwardAmount = move.z;
 
-        ApplyExtraTurnRotation();
+
+		ApplyExtraTurnRotation();
 
         // control and velocity handling is different when grounded and airborne:
         if (m_IsGrounded)
@@ -178,7 +180,9 @@ public class PlayerController : MonoBehaviour
         Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
         m_Rigidbody.AddForce(extraGravityForce);
 
-        m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
+		m_Rigidbody.velocity = new Vector3(-velocity * Mathf.Cos((m_Rigidbody.transform.forward.x + 1) * (0.5f * Mathf.PI)), m_Rigidbody.velocity.y, -velocity * Mathf.Cos((m_Rigidbody.transform.forward.z + 1) * (0.5f * Mathf.PI)));
+
+		m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
     }
 
 
@@ -187,8 +191,9 @@ public class PlayerController : MonoBehaviour
         // check whether conditions are right to allow a jump:
         if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
-            // jump!
-            m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
+			// jump!
+			velocity = Mathf.Sqrt(m_Rigidbody.velocity.x * m_Rigidbody.velocity.x + m_Rigidbody.velocity.z * m_Rigidbody.velocity.z);
+			m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
             m_IsGrounded = false;
             m_Animator.applyRootMotion = false;
             m_GroundCheckDistance = 0.1f;

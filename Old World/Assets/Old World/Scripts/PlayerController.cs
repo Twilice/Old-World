@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     Camera mainCamera;
     Rigidbody m_Rigidbody;
     Animator m_Animator;
-    bool m_IsGrounded;
+    public bool m_IsGrounded;
     float m_OrigGroundCheckDistance;
     const float k_Half = 0.5f;
     float m_TurnAmount;
@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
     }
 
+	public bool get_grounded()
+	{
+		return m_IsGrounded;
+	}
+
 
     public void Move(Vector3 move, bool crouch, bool jump)
     {
@@ -75,7 +80,6 @@ public class PlayerController : MonoBehaviour
         //move.z =  -0f; // Force the error each time
         m_TurnAmount = Mathf.Atan2(move.x, move.z) * m_turningRadius;
         m_ForwardAmount = move.z;
-
 
 		ApplyExtraTurnRotation();
 

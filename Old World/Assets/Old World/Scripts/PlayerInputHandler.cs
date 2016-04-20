@@ -13,6 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
     private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
+	private PlayerController pController;
     private bool OpenMenuButton;
     private CameraOrbit CameraScript;
     private MenuScript Menu;
@@ -21,7 +22,8 @@ public class PlayerInputHandler : MonoBehaviour
         GameObject tmp = GameObject.Find("Menu");
         if (tmp == null) Debug.LogWarning("No Menu found");
         else Menu = tmp.GetComponent<MenuScript>();
-        CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
+		pController = GameObject.Find("Player").GetComponent<PlayerController>();
+		CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
         // get the transform of the main camera
         if (Camera.main != null)
         {
@@ -79,13 +81,23 @@ public class PlayerInputHandler : MonoBehaviour
         float v;
         if (allowCameraMovement)
         {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
-        }
+			v = Input.GetAxis("Vertical");
+
+			if (pController.m_IsGrounded)
+			{
+				h = Input.GetAxis("Horizontal");
+			}
+			else
+			{
+				h = Input.GetAxis("Horizontal") * 0.1f;
+			}
+
+		}
         else
         {
-            //Prevents the character from turning backwards during camera transisions
-            h = 0.0f;
+			Debug.Log(m_Jump);
+			//Prevents the character from turning backwards during camera transisions
+			h = 0.0f;
             if (Input.GetAxis("Vertical") < 0)
                 v = 0.0f;
             else

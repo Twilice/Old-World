@@ -61,7 +61,7 @@ public class GeneratorScript : MonoBehaviour
             //If the Gameobject has the same tag as the generator
             if (e[i].transform.CompareTag(transform.tag))
             {
-                //LerpLight(e[i]);
+                e[i].LerpLight(5f);
             }
         }
     }

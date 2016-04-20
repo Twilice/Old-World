@@ -1,17 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ThridPersonTargetRayCast : MonoBehaviour {
+public class ThirdPersonZoomOutTarget : MonoBehaviour {
 
-    public float distance = 5.0f;
-    public float mouseSensitivity = 1.75f;
-    public float joyStickSensitivityX = 2f;
-
-    public float yMinLimit = -20f;
-    public float yMaxLimit = 80f;
-
-    public float distanceMin = 1f;
-    public float distanceMax = 5f;
+    [HideInInspector]
+    public float ThirdPersonZoomOutDistance = 5.0f;
 
     private Rigidbody rb;
     private GameObject player;
@@ -19,21 +12,13 @@ public class ThridPersonTargetRayCast : MonoBehaviour {
 
     void Awake()
     {
-        target = GameObject.Find("Player/CameraReference").transform;
+        target = GameObject.Find("Player/CameraReferences/CameraRotationReference").transform;
     }
 
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player");
-
-        rb = GetComponent<Rigidbody>();
-
-        // Make the rigid body not change rotation
-        if (rb != null)
-        {
-            rb.freezeRotation = true;
-        }
     }
 
     void LateUpdate()
@@ -43,7 +28,7 @@ public class ThridPersonTargetRayCast : MonoBehaviour {
             Quaternion rotation = Quaternion.Euler(25, player.transform.rotation.eulerAngles.y, 0);
 
             //distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distanceMax);
-            Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+            Vector3 negDistance = new Vector3(0.0f, 0.0f, -ThirdPersonZoomOutDistance);
             Vector3 position = rotation * negDistance + target.position;
 
             transform.rotation = rotation;
@@ -54,11 +39,6 @@ public class ThridPersonTargetRayCast : MonoBehaviour {
     void Update()
     {
         //Updating camera distance on every frame
-        distance = RayCastTarget.distance3;
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
+        ThirdPersonZoomOutDistance = RayCastThirdPersonTarget.distance3;
     }
 }

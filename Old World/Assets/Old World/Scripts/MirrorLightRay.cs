@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[DisallowMultipleComponent]
 public class MirrorLightRay : TriggeredByLight {
 
 	[Header("LightRayReflection")]

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Rendering;
 
+[DisallowMultipleComponent]
 public class DualSidedShadows : MonoBehaviour {
     
 	void Awake () {

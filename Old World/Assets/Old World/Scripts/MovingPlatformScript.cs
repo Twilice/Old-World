@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[DisallowMultipleComponent]
 public class MovingPlatformScript : MonoBehaviour
 {
     private Vector3 StartTransform;
@@ -15,11 +16,11 @@ public class MovingPlatformScript : MonoBehaviour
     public bool Elevator;
 	public bool ReturnToOriginalPosition;
 
-	private bool Activated;
+	//private bool Activated;
     
     void Start ()
     {
-		Activated = false;
+		//Activated = false;
 		MoveToTarget = true;
         RotateToTarget = true;
         StartTransform = gameObject.transform.position;
@@ -29,7 +30,7 @@ public class MovingPlatformScript : MonoBehaviour
 	public void Activate ()
     {
 		//Debug.Log("Activated");
-		Activated = true;
+		//Activated = true;
 		//Rotates the gameobject
 		if (RotateToTarget == true && Rotate == true)
 		{
@@ -67,8 +68,8 @@ public class MovingPlatformScript : MonoBehaviour
 
 	public void Deactivate()
 	{
-		Debug.Log("Deactivated");
-		Activated = false;
+		//Debug.Log("Deactivated");
+		//Activated = false;
 		MovingBack();
 	}
 

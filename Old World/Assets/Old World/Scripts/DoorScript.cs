@@ -2,65 +2,49 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[DisallowMultipleComponent]
 public class DoorScript : MonoBehaviour
 {
-	public List<GeneratorScript> Generators;
-    private EmissiveTest[] e;
-
-	private bool IsPowerered = false;
+    private EmissionIntensityController[] e;
     private float t = 0.0f;
-    void Start ()
-	{
+    void Awake()
+    {
+        e = FindObjectsOfType<EmissionIntensityController>();
+        for (int i = 0; i < e.Length; i++)
+        {
+            Debug.Log(e[i]);
+        }
+    }
+
+    void Update()
+    {
+        if (RoomState.roomFullyPowered)
+        {
+            Activate();
+
+            //Increase the light of every interactive light to max
+            for (int i = 0; i < e.Length; i++)
+            {
+                e[i].LerpLight(5.0f);
+            }
+
+            //Quaternion fromAngle = transform.rotation;
+        }
+
 
     }
 
-    void Update ()
-	{
-		IsPowerered = true;
-		for (int i = 0; i < Generators.Count; i++)
-		{
-			if (Generators[i].Active == false)
-			{
-				IsPowerered = false;
-			}
-		}
-
-		if (IsPowerered == true)
-		{
-			Activate();
-           
-            Quaternion fromAngle = transform.rotation;
-            if (t < 1.0f)
-            {
-                t += Time.deltaTime * 0.2f;
-
-                EmissiveTest.colorIntesity = Mathf.Lerp(0f, 2.8f, t);
-                
-            }
-        }
-
-
-	}
-
-	void Activate()
-	{
-		gameObject.GetComponent<MovingPlatformScript>().Activate();
-        //EmissiveTest.colorIntesity = 3f;
-        //StartCoroutine(LightLight());
-        //GameObject.Find("L1").active = false;
-	}
-
-   /* IEnumerator LightLight()
+    void Activate()
     {
-        float t = 0.0f;
-        Quaternion fromAngle = transform.rotation;
-        while (t < 1.0f)
+        gameObject.GetComponent<MovingPlatformScript>().Activate();
+    }
+
+    void LerpLight(EmissionIntensityController e)
+    {
+        if (t < 1.0f)
         {
-            t += Time.deltaTime * (Time.timeScale * 0.2f);
-
-            EmissiveTest.colorIntesity = Mathf.Lerp(0f, 3f, t);
-
-            yield return null;
+            t += Time.deltaTime * 0.06f; // TODO5 timescale or something is wrong
+            e.SetEmissionIntesity(Mathf.Lerp(0f, 2.8f, t));;
         }
-    }*/
+    }
 }

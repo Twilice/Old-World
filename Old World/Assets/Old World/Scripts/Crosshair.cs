@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[DisallowMultipleComponent]
 public class Crosshair : MonoBehaviour
 {
     public Texture2D crosshairTexture;

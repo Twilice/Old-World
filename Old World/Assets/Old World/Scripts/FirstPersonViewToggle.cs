@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[DisallowMultipleComponent]
 public class FirstPersonViewToggle : MonoBehaviour
 {
     public float transitionDuration = 0.5f;

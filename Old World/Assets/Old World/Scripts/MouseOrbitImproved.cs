@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[DisallowMultipleComponent]
 [AddComponentMenu("Camera-Control/Mouse Orbit")]
 
 public class MouseOrbitImproved : MonoBehaviour

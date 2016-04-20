@@ -1,3 +1,5 @@
 Strafe walk in first person mode
 Smooth camera transisions
 Controller input for zoom 
+
+Try to make the emissive materials that will change intensity in a scene to Baked instead of Realtime. It is possible to amplify the light, but not to turn it off fully.

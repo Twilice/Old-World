@@ -18,8 +18,9 @@ public class PlayerInputHandler : MonoBehaviour
     private MenuScript Menu;
     private void Start()
     {
-        Menu = GameObject.Find("Menu").GetComponent<MenuScript>();
-        if (Menu == null) Debug.LogWarning("No Menu found");
+        GameObject tmp = GameObject.Find("Menu");
+        if (tmp == null) Debug.LogWarning("No Menu found");
+        else Menu = tmp.GetComponent<MenuScript>();
         CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
         // get the transform of the main camera
         if (Camera.main != null)
@@ -122,12 +123,14 @@ public class PlayerInputHandler : MonoBehaviour
         if (Input.GetButtonDown("Menu") && StateController.MenuOpen)
         {
             if(Menu != null) Menu.CloseMenu();
+            else StateController.MenuOpen = false;
             StateController.CursorLocked = false;
             CameraScript.enabled = false;
         }
         else if (Input.GetButtonDown("Menu") && StateController.MenuOpen == false)
         {
             if (Menu != null) Menu.OpenMenu();
+            else StateController.MenuOpen = true;
             StateController.CursorLocked = true;
             CameraScript.enabled = true;
         }

@@ -10,7 +10,7 @@ public class MenuScript01 : MonoBehaviour
     private bool[] wasActive;
 
     // hardcoded script to disable in menu
-    private MouseOrbitImproved cameraOrbit; 
+    private CameraOrbit cameraOrbit; 
     private FirstPersonViewToggle cameraViewToggle;
 
     private bool pause;
@@ -33,7 +33,7 @@ public class MenuScript01 : MonoBehaviour
 	void Start() 
     {
         GameObject camera = GameObject.Find("MainCamera");
-        cameraOrbit = camera.GetComponent<MouseOrbitImproved>();
+        cameraOrbit = camera.GetComponent<CameraOrbit>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
 
         book.SetActive(false);

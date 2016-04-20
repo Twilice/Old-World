@@ -12,12 +12,15 @@ public class PlayerInputHandler : MonoBehaviour
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
-    private MouseLook mouseLook = MouseLook.GetMouseLook();
-
+    private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
+    private bool OpenMenuButton;
+    private CameraOrbit CameraScript;
+    private MenuScript Menu;
     private void Start()
     {
-        
-
+        Menu = GameObject.Find("Menu").GetComponent<MenuScript>();
+        if (Menu == null) Debug.LogWarning("No Menu found");
+        CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
         // get the transform of the main camera
         if (Camera.main != null)
         {
@@ -25,8 +28,8 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning(
-                "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
+            Debug.LogError(
+                "No MainCamera found.");
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
 
@@ -62,7 +65,7 @@ public class PlayerInputHandler : MonoBehaviour
             m_Jump = Input.GetButtonDown("Jump");
         }
 
-        mouseLook.UpdateCursorLock();
+        UpdateCursorLock();
     }
 
 
@@ -113,5 +116,41 @@ public class PlayerInputHandler : MonoBehaviour
     public void setAllowCamera(bool x)
     {
         allowCameraMovement = x;
+    }
+    public void UpdateCursorLock()
+    {
+        if (Input.GetButtonDown("Menu") && StateController.MenuOpen)
+        {
+            if(Menu != null) Menu.CloseMenu();
+            StateController.CursorLocked = false;
+            CameraScript.enabled = false;
+        }
+        else if (Input.GetButtonDown("Menu") && StateController.MenuOpen == false)
+        {
+            if (Menu != null) Menu.OpenMenu();
+            StateController.CursorLocked = true;
+            CameraScript.enabled = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.F5))
+        {
+            CameraScript.enabled = false;
+            StateController.CursorLocked = false;
+        }
+        else if (Input.GetKeyUp(KeyCode.F6))
+        {
+            CameraScript.enabled = true;
+            StateController.CursorLocked = true;
+        }
+
+        if (StateController.CursorLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (!StateController.CursorLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

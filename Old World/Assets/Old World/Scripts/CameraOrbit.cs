@@ -3,7 +3,7 @@ using System.Collections;
 
 [AddComponentMenu("Camera-Control/Mouse Orbit")]
 
-public class MouseOrbitImproved : MonoBehaviour
+public class CameraOrbit : MonoBehaviour
 {
 
     public float distance = 5.0f;
@@ -25,6 +25,8 @@ public class MouseOrbitImproved : MonoBehaviour
     void Awake()
     {
         target = GameObject.Find("Player/CameraReferences/CameraRotationReference").transform;
+        if (target == null)
+            Debug.LogError("MouseOrbit (" + transform.name + ") can not find Player/CameraReferences/CameraRotationReference.");
     }
 
     // Use this for initialization

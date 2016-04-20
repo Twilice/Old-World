@@ -2,15 +2,15 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class MouseLook
+public class CameraLookAt
 {
 	//Singleton holder for the mouseLook
-	private MouseLook() { }
-	private static MouseLook instance;
-	public static MouseLook GetMouseLook()
+	private CameraLookAt() { }
+	private static CameraLookAt instance;
+	public static CameraLookAt GetMouseLook()
 	{
 		if (instance == null)
-			instance = new MouseLook();
+			instance = new CameraLookAt();
 		return instance;
 	}
 	public float XSensitivity = 2f;
@@ -20,17 +20,12 @@ public class MouseLook
 	public float MaximumX = 90F;
 	private bool smooth = false;
 	public float smoothTime = 5f;
-	public bool lockCursor = true;
-    private MouseOrbitImproved mouseScript;
 
     private Quaternion m_CharacterTargetRot;
 	private Quaternion m_CameraTargetRot;
-	private bool m_cursorIsLocked = true;
 
 	public void Init(Transform character)
 	{
-        mouseScript = GameObject.Find("MainCamera").GetComponent<MouseOrbitImproved>();
-
         m_CharacterTargetRot = character.localRotation;
 
 		//We don't need the camera rotation, since it should always be straight
@@ -58,38 +53,6 @@ public class MouseLook
 		{
 			character.localRotation = m_CharacterTargetRot;
 			camera.transform.localRotation = m_CameraTargetRot;
-		}
-	}
-
-	public void UpdateCursorLock()
-	{
-		//if the user set "lockCursor" we check & properly lock the cursos
-		if (lockCursor)
-			InternalLockUpdate();
-	}
-
-	private void InternalLockUpdate()
-	{
-		if (Input.GetKeyUp(KeyCode.F5))
-		{
-            mouseScript.enabled = false;
-			m_cursorIsLocked = false;
-		}
-		else if (Input.GetKeyUp(KeyCode.F6))
-		{
-            mouseScript.enabled = true;
-			m_cursorIsLocked = true;
-		}
-
-		if (m_cursorIsLocked)
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
-		else if (!m_cursorIsLocked)
-		{
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
 		}
 	}
 

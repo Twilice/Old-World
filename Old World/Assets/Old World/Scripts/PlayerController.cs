@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     Vector3 m_CapsuleCenter;
     CapsuleCollider m_Capsule;
     bool m_Crouching;
-    private MouseLook mouseLook = MouseLook.GetMouseLook();
+    private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
 
     void Start()
     {
@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
     {
         //avoids the mouse looking if the game is effectively paused
         if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
-        mouseLook.LookRotation(transform, mainCamera.transform);
+            mouseLook.LookRotation(transform, mainCamera.transform);
     }
 }
 

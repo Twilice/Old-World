@@ -5,17 +5,19 @@ using System.Collections.Generic;
 public class SolarPanel : TriggeredByLight
 {
 	public List<GameObject> Targets;
+	public GameObject Power_bar;
 
 	public bool PlatformTarget;
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
 
-	public int ChargeUpTime;
+	public float ChargeUpTime;
 
 	private bool Active = false;
 
 	protected override void HitByLightStay()
 	{
+		Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
 		if (timeIlluminated >= ChargeUpTime)
 		{
 			//Play sound once
@@ -48,6 +50,7 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightExit()
 	{
+		Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{

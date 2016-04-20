@@ -2,27 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[DisallowMultipleComponent]
 public class SolarPanel : TriggeredByLight
 {
 	public List<GameObject> Targets;
+	public GameObject Power_bar;
 
 	public bool PlatformTarget;
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
 
-	public int ChargeUpTime;
+	public float ChargeUpTime;
 
-	//private bool Active = false;
+	private bool Active = false;
 
 	protected override void HitByLightStay()
 	{
+		Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
 		if (timeIlluminated >= ChargeUpTime)
 		{
 			//Play sound once
 			//Light on panel turned on
 
-			//Active = true;
+			Active = true;
 			for (int i = 0; i < Targets.Count; i++)
 			{
 				if (PlatformTarget == true)
@@ -49,7 +50,8 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightExit()
 	{
-		//Active = false;
+		Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
+		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{
 			if (PlatformTarget == true && Targets[i].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)

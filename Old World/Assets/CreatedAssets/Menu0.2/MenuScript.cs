@@ -10,9 +10,9 @@ public class MenuScript : MonoBehaviour
     private bool[] wasActive;
 
     // hardcoded script to disable in menu
-    private MouseOrbitImproved cameraOrbit; 
+    private CameraOrbit cameraOrbit; 
     private FirstPersonViewToggle cameraViewToggle;
-    public MouseLook mouseToggle;
+    public CameraLookAt mouseToggle;
 
     private bool pause;
     private bool oldPause;
@@ -34,16 +34,18 @@ public class MenuScript : MonoBehaviour
 	void Start() 
     {
         GameObject camera = GameObject.Find("MainCamera");
-        cameraOrbit = camera.GetComponent<MouseOrbitImproved>();
+        cameraOrbit = camera.GetComponent<CameraOrbit>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
-        mouseToggle = MouseLook.GetMouseLook();
+        mouseToggle = CameraLookAt.GetMouseLook();
 
         journal.SetActive(false);
 	}
 	
+
+    // TODO3 Journal not starting correctly
 	void Update() 
     {
-        oldRestart = restart;
+    /*    oldRestart = restart;
         restart = Input.GetButton("Restart");
 
         oldOpenJournal = openJournal;
@@ -78,8 +80,34 @@ public class MenuScript : MonoBehaviour
                 journal.SetActive(false);
             else
                 journal.SetActive(true);
-        }
+        }*/
 	}
+
+    public void OpenMenu()
+    {
+        Time.timeScale = 1.0f;
+        EnableJournal();
+        journal.SetActive(true);
+        StateController.MenuOpen = true;
+
+
+    }
+
+    public void CloseMenu()
+    {
+        Time.timeScale = 0.0f;
+        DisableJournal();
+        journal.SetActive(false);
+        StateController.MenuOpen = false;
+    }
+
+    public void ToggleMenu()
+    {
+        if (StateController.MenuOpen)
+            CloseMenu();
+        else
+            OpenMenu();
+    }
 
     private void DisableJournal()
     {

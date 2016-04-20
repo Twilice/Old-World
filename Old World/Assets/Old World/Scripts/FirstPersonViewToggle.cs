@@ -6,7 +6,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 {
     public float transitionDuration = 0.5f;
 
-    private MouseOrbitImproved mouseOrbit;
+    private CameraOrbit mouseOrbit;
     private PlayerController thirdChar;
     private PlayerInputHandler thirdContr;
     private GameObject player;
@@ -26,9 +26,17 @@ public class FirstPersonViewToggle : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player");
+        if (player == null)
+            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Player.");
         crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
-        firstPersonTarget = GameObject.Find("Player/FirstPersonTarget").transform;
+        if (crosshair == null)
+            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Crosshair.");
+        firstPersonTarget = GameObject.Find("Player/CameraReferences/FirstPersonTarget").transform;
+        if (firstPersonTarget == null)
+            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Player/CameraReferences/FirstPersonTarget.");
         thirdPersonTarget = GameObject.Find("ThirdPersonTarget").transform;
+        if (thirdPersonTarget == null)
+            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find ThirdPersonTarget.");
     }
     // Use this for initialization
     void Start()
@@ -39,10 +47,10 @@ public class FirstPersonViewToggle : MonoBehaviour
         resetOnceTP = true;
 
         camera = GetComponent<Camera>();
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
         anim = player.GetComponent<Animator>();
 
-        mouseOrbit = camera.GetComponent<MouseOrbitImproved>();
+        mouseOrbit = camera.GetComponent<CameraOrbit>();
         mouseOrbit.enabled = true;
 
         thirdChar = player.GetComponent<PlayerController>();
@@ -111,7 +119,8 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
-                    transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
+                    //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
+                    transform.localPosition = player.FindChildObject("FirstPersonTarget").transform.localPosition;
 
                     //Make crosshair visable
                     crosshair.enabled = true;

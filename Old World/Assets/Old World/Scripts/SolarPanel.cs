@@ -17,7 +17,6 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightStay()
 	{
-		Debug.Log("Hit by light");
 		Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
 		if (timeIlluminated >= ChargeUpTime)
 		{

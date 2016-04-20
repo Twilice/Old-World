@@ -14,11 +14,7 @@ public class DebuggerScript : MonoBehaviour
 		Targets = FindObjectsOfType<MovingPlatformScript>();
 
 		NumberOfTargets = Targets.Length;
-		Debug.Log(NumberOfTargets);
-		for (int i = 0; i < NumberOfTargets; i++)
-		{
-			Targets[i].GetComponent<MovingPlatformScript>().enabled = false;
-		}
+		//Debug.Log(NumberOfTargets);
 	}
 	
 	void Update ()
@@ -46,19 +42,18 @@ public class DebuggerScript : MonoBehaviour
 				SelectedTarget = 0;
 			}
 
-			//Active target
+			//Activate target
 			if (Targets[SelectedTarget].enabled == false)
 			{
-				Targets[SelectedTarget].Activate();
-				Debug.Log("Activating: " + SelectedTarget);
+				Targets[SelectedTarget].enabled = true;
 			}
 
-			//Deactivate target
+				//Deactivate target
 			else if (Targets[SelectedTarget].enabled == true)
 			{
 				Targets[SelectedTarget].enabled = false;
-				Debug.Log("Deactivating: " + SelectedTarget);
+				//Debug.Log("Deactivating: " + SelectedTarget);
 			}
-        }
+		}
 	}
 }

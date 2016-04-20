@@ -21,13 +21,6 @@ public class DoorScript : MonoBehaviour
         if (RoomState.roomFullyPowered)
         {
             Activate();
-
-            //Increase the light of every interactive light to max
-            for (int i = 0; i < e.Length; i++)
-            {
-                e[i].LerpLight(5.0f);
-            }
-
             //Quaternion fromAngle = transform.rotation;
         }
 

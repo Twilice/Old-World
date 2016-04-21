@@ -44,7 +44,6 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         //If first person camera is toggled, allow first person camera movement
-        //TODO: Fult? kanske använda StringToHash i Animator?
         if (FirstPersonViewToggle.FirstPerson)
         {
             //Only allow camera position correction if the button has been released for more than half a second.
@@ -120,7 +119,10 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         // pass all parameters to the character control script
-        m_Character.Move(m_Move, crouch, m_Jump);
+        // TODO crouch should not exist?
+        if (StateController.currentView != CameraStatus.InspectView)
+            m_Character.Move(m_Move, crouch, m_Jump);
+        else m_Character.Move(Vector3.zero, false, false);
         m_Jump = false;
     }
 

@@ -127,9 +127,6 @@ public class InspectViewToggle : MonoBehaviour
                     //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
                     transform.localPosition = inspectTarget.transform.localPosition;
 
-                    //Allow the player to rotate the camera again
-                    thirdContr.setAllowCamera(true);
-
                     //If the coroutines are not stopped manually, jitter will apear 
                     StopAllCoroutines();
 

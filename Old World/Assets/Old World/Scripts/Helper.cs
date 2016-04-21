@@ -34,12 +34,17 @@ public static class Helper
     /// <returns>Returns the GameObject with the specified name (including child objects)</returns>
     public static GameObject FindChildObject(this GameObject gameObject, string name)
     {
-        Transform[] children = gameObject.GetComponentsInChildren<Transform>(true);
-        for (int i = 0; i < children.Length; i++)
+        if (gameObject != null)
         {
-            if (children[i].name == name)
-                return children[i].gameObject;
+            Transform[] children = gameObject.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < children.Length; i++)
+            {
+                if (children[i].name == name)
+                    return children[i].gameObject;
+            }
         }
+        else
+            Debug.LogWarning("Tried to find child in NULL parent");
         return null;
     }
 }

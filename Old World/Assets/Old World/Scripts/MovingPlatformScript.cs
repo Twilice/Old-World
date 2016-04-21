@@ -48,10 +48,10 @@ public class MovingPlatformScript : MonoBehaviour
 		{
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
 
-			//if (gameObject.transform.position == TargetTransform)
-			//{
-			//	MoveToTarget = false;
-			//}
+			if (gameObject.transform.position == TargetTransform)
+			{
+				MoveToTarget = false;
+			}
 		}
 
 

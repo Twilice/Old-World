@@ -14,9 +14,12 @@ public class SolarPanel : TriggeredByLight
 	public float ChargeUpTime;
 
 	private bool Active = false;
+    private float energy = 0.0f;
 
 	protected override void HitByLightStay()
 	{
+        energy += Time.deltaTime;
+
 		Debug.Log("Hit by light");
 		Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
 		if (timeIlluminated >= ChargeUpTime)
@@ -59,10 +62,12 @@ public class SolarPanel : TriggeredByLight
 			{
 				Targets[i].GetComponent<MovingPlatformScript>().Deactivate();
 			}
-			//if (ChargerTarget == true)
-			//{
-			//	Targets[i].GetComponent<ChargerScript>().enabled = false;
-			//}
+            //if (ChargerTarget == true)
+            //{
+            //	Targets[i].GetComponent<ChargerScript>().enabled = false;
+            //}
+
+            Debug.Log(energy);
 		}
 	}
 }

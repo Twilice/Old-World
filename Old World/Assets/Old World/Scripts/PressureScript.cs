@@ -10,14 +10,6 @@ public class PressureScript : MonoBehaviour
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
 
-	void Start ()
-	{
-	}
-	
-	void Update ()
-	{
-	}
-
 	void OnTriggerStay(Collider coll)
 	{
 		if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Lens"))

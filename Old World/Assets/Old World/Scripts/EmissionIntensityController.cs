@@ -53,7 +53,7 @@ public class EmissionIntensityController : MonoBehaviour
 
     public void LerpLight(float lerpTime)
     {
-        float factor = 1 / lerpTime;
+        float factor = 1 / (lerpTime * 3);
         if (t < 1.0f)
         {
             t += Time.deltaTime * factor; // TODO5 timescale or something is wrong

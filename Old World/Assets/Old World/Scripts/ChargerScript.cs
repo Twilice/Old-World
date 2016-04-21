@@ -3,14 +3,22 @@ using System.Collections;
 
 public class ChargerScript : MonoBehaviour
 {
-	
-	void Start ()
+	[HideInInspector]
+	public bool hasBattery = false;
+
+	void OnCollisionExit(Collision coll)
 	{
-		
+		if (coll.gameObject.CompareTag("Battery"))
+		{
+			hasBattery = false;
+		}
 	}
-	
-	void Update ()
+
+	public void Activate()
 	{
-		
+		if (hasBattery == true)
+		{
+			gameObject.GetComponentInChildren<Battery>().amountOfCharge++;
+		}
 	}
 }

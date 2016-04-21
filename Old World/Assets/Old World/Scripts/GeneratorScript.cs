@@ -20,13 +20,13 @@ public class GeneratorScript : MonoBehaviour
                 if (PlatformTarget == true)
                 {
                     Targets[i].GetComponent<MovingPlatformScript>().Activate();
-                }
-                //if (ChargerTarget == true)
-                //{
-                //	Targets[i].GetComponent<ChargerScript>().Activate();
-                //}
-            }
-        }
+				}
+				if (ChargerTarget == true)
+				{
+					Targets[i].GetComponent<ChargerScript>().Activate();
+				}
+			}
+		}
     }
 
     public void Activate()

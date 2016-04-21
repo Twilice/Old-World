@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
     // hardcoded script to disable in menu
     private CameraOrbit cameraOrbit; 
     private FirstPersonViewToggle cameraViewToggle;
-    public CameraLookAt mouseToggle;
+    private CameraLookAt mouseToggle;
 
     private bool pause;
     private bool oldPause;
@@ -88,7 +88,7 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 1.0f;
         EnableJournal();
         journal.SetActive(true);
-        StateController.MenuOpen = true;
+        StateController.menuOpen = true;
 
 
     }
@@ -98,12 +98,12 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 0.0f;
         DisableJournal();
         journal.SetActive(false);
-        StateController.MenuOpen = false;
+        StateController.menuOpen = false;
     }
 
     public void ToggleMenu()
     {
-        if (StateController.MenuOpen)
+        if (StateController.menuOpen)
             CloseMenu();
         else
             OpenMenu();

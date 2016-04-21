@@ -2,7 +2,7 @@
 using System.Collections;
 
 [DisallowMultipleComponent]
-public class FirstPersonViewToggle : MonoBehaviour
+public class InspectViewToggle : MonoBehaviour
 {
     public float transitionDuration = 0.5f;
 
@@ -10,33 +10,30 @@ public class FirstPersonViewToggle : MonoBehaviour
     private PlayerController thirdChar;
     private PlayerInputHandler thirdContr;
     private GameObject player;
-    private Crosshair crosshair;
     private new Camera camera;
     private Animator anim;
     [HideInInspector]
-    public static bool FirstPerson{ get; private set; }
-    private Transform firstPersonTarget;
+    public static bool FirstPerson { get; private set; }
+    private Transform inspectTarget;
     private Transform thirdPersonTarget;
     private bool firstTimeTP;
     private bool firstTimeFP;
     private bool resetOnceFP;
     private bool resetOnceTP;
     private float startTime;
-    
+
+    private bool isInspecting = false;
     void Awake()
     {
         player = GameObject.Find("Player");
         if (player == null)
-            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Player.");
-        crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
-        if (crosshair == null)
-            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Crosshair.");
-        firstPersonTarget = GameObject.Find("Player/CameraReferences/FirstPersonTarget").transform;
-        if (firstPersonTarget == null)
-            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Player/CameraReferences/FirstPersonTarget.");
+            Debug.LogError("InspectViewToggle (" + transform.name + ") can not find Player.");
+        inspectTarget = GameObject.Find("Player/CameraReferences/InspectTarget").transform;
+        if (inspectTarget == null)
+            Debug.LogError("InspectViewToggle (" + transform.name + ") can not find Player/CameraReferences/InspectTarget.");
         thirdPersonTarget = GameObject.Find("ThirdPersonTarget").transform;
         if (thirdPersonTarget == null)
-            Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find ThirdPersonTarget.");
+            Debug.LogError("InspectViewToggle (" + transform.name + ") can not find ThirdPersonTarget.");
     }
     // Use this for initialization
     void Start()
@@ -58,20 +55,27 @@ public class FirstPersonViewToggle : MonoBehaviour
 
         thirdContr = player.GetComponent<PlayerInputHandler>();
         thirdContr.enabled = true;
-        crosshair.enabled = false;
 
         camera.enabled = true;
     }
-
+    public void StartInspectView()
+    {
+        isInspecting = true;
+    }
+    public void ExitInspectView()
+    {
+        isInspecting = false;
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        if (isInspecting && StateController.currentView != CameraStatus.FirstPersonView)
         {
             //Operations that only need/should be executed once every new right click
             if (firstTimeFP)
             {
-                StateController.currentView = CameraStatus.FirstPersonView;
+                StateController.currentView = CameraStatus.InspectView;
+
                 firstTimeFP = false;
 
                 //Enable first time enter operation on next mouse release
@@ -100,8 +104,8 @@ public class FirstPersonViewToggle : MonoBehaviour
             //Still time left on the transision?
             if ((Time.time - startTime) < transitionDuration)
             {
-                StartCoroutine(Transition(firstPersonTarget));
-                StartCoroutine(RotateOverTime(firstPersonTarget));
+                StartCoroutine(Transition(inspectTarget));
+                StartCoroutine(RotateOverTime(inspectTarget));
             }
             else
             {//Camera transision complete
@@ -116,15 +120,12 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
-                    transform.eulerAngles = player.transform.eulerAngles;
+                    transform.eulerAngles = inspectTarget.transform.eulerAngles;
 
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
                     //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
-                    transform.localPosition = firstPersonTarget.transform.localPosition;
-
-                    //Make crosshair visable
-                    crosshair.enabled = true;
+                    transform.localPosition = inspectTarget.transform.localPosition;
 
                     //Allow the player to rotate the camera again
                     thirdContr.setAllowCamera(true);
@@ -134,7 +135,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     resetOnceFP = false;
                 }
-				/*if( press button) TODO5
+                /*if( press button) TODO5
 				{ 
 					//lens.parent = null;
 					//lens.component<collider> activate
@@ -142,7 +143,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 				*/
             }
         }
-        else if (!Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        else if (!isInspecting && StateController.currentView != CameraStatus.FirstPersonView)
         {
             //Operations that only need/should be executed once every right click release
             if (firstTimeTP)
@@ -172,9 +173,6 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                 //Remove the parent
                 transform.parent = null;
-
-                //Disable crosshair
-                crosshair.enabled = false;
 
                 //Locking the camera movement to prevent unwanted camera snapping
                 thirdContr.setAllowCamera(false);

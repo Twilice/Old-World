@@ -46,9 +46,9 @@ public class MovingPlatformScript : MonoBehaviour
 		//Moves the gameobject
 		if (MoveToTarget == true)
 		{
-			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
 
-			if (gameObject.transform.position == TargetTransform)
+			if (gameObject.transform.localPosition == TargetTransform)
 			{
 				MoveToTarget = false;
 			}
@@ -58,8 +58,8 @@ public class MovingPlatformScript : MonoBehaviour
 		//Moves the gameobject back to its starting location
 		if (MoveToTarget == false && Elevator == true)
 		{
-			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
-			if (gameObject.transform.position == StartTransform)
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
+			if (gameObject.transform.localPosition == StartTransform)
 			{
 				MoveToTarget = true;
 			}
@@ -75,9 +75,9 @@ public class MovingPlatformScript : MonoBehaviour
 
 	public void MovingBack()
 	{
-		while (gameObject.transform.position != StartTransform)
+		while (gameObject.transform.localPosition != StartTransform)
 		{
-			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
 		}
 	}
 }

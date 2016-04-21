@@ -48,10 +48,10 @@ public class SolarPanel : TriggeredByLight
 				{
 					Targets[i].GetComponent<GeneratorScript>().Activate();
 				}
-				//if (ChargerTarget == true)
-				//{
-				//	Targets[i].GetComponent<ChargerScript>().Activate();
-				//}
+				if (ChargerTarget == true)
+				{
+					Targets[i].GetComponent<ChargerScript>().Activate();
+				}
 			}
 		}
 
@@ -82,10 +82,6 @@ public class SolarPanel : TriggeredByLight
 			{
 				Targets[i].GetComponent<MovingPlatformScript>().Deactivate();
 			}
-            //if (ChargerTarget == true)
-            //{
-            //	Targets[i].GetComponent<ChargerScript>().enabled = false;
-            //}
 		}
 	}
 }

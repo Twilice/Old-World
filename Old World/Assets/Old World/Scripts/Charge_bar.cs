@@ -18,7 +18,12 @@ public class Charge_bar : MonoBehaviour
 
 	public void PowerTurnedOn(float chargeUpTime)
 	{
-		float Time = chargeUpTime / 50;
-        ChangingColor.g += Time;
+		float time = chargeUpTime * Time.deltaTime;
+        ChangingColor.g += time;
 	}
+
+    public void setColor(Color c)
+    {
+        ChangingColor = c;
+    }
 }

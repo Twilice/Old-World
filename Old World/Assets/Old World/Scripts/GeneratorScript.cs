@@ -11,15 +11,6 @@ public class GeneratorScript : MonoBehaviour
     public bool ChargerTarget;
     public bool Active = false;
 
-    private EmissionIntensityController[] e;
-    private float t = 0.0f;
-
-    void Awake()
-    {
-        //Find every instance of the EmissionIntensityController script on every GameObject
-        e = FindObjectsOfType<EmissionIntensityController>();
-    }
-
     void Update()
     {
         if (Active == true)
@@ -53,26 +44,6 @@ public class GeneratorScript : MonoBehaviour
             {
                 Targets[i].GetComponent<GeneratorScript>().Activate();
             }
-        }
-
-        //Turn on all lights with the same tag as this generator
-        for (int i = 0; i < e.Length; i++)
-        {
-            //If the Gameobject has the same tag as the generator
-            if (e[i].transform.CompareTag(transform.tag))
-            {
-                e[i].LerpLight(5f);
-            }
-        }
-    }
-
-    void LerpLight(EmissionIntensityController ec)
-    {
-        if (t < 1.0f)
-        {
-            //Time 5 sec
-            t += Time.deltaTime * 0.1f;
-            ec.SetEmissionIntesity(Mathf.Lerp(0f, 3f, t));
         }
     }
 }

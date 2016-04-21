@@ -66,11 +66,12 @@ public class FirstPersonViewToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
         {
             //Operations that only need/should be executed once every new right click
             if (firstTimeFP)
             {
+                StateController.currentView = CameraStatus.FirstPersonView;
                 firstTimeFP = false;
 
                 //Enable first time enter operation on next mouse release
@@ -120,7 +121,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
                     //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
-                    transform.localPosition = player.FindChildObject("FirstPersonTarget").transform.localPosition;
+                    transform.localPosition = firstPersonTarget.transform.localPosition;
 
                     //Make crosshair visable
                     crosshair.enabled = true;
@@ -141,7 +142,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 				*/
             }
         }
-        else if (!Input.GetMouseButton(1))
+        else if (!Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
         {
             //Operations that only need/should be executed once every right click release
             if (firstTimeTP)
@@ -190,6 +191,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceTP)
                 {
+                    StateController.currentView = CameraStatus.ThirdPersonView;
                     resetOnceTP = false;
 
                     //Allow the player to rotate the camera again

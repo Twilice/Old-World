@@ -7,6 +7,6 @@ public enum CameraStatus
 };
 public class StateController {
     public static CameraStatus currentView = CameraStatus.ThirdPersonView;
-    public static bool CursorLocked = true;
-    public static bool MenuOpen = true;
+    public static bool cursorLocked = true;
+    public static bool menuOpen = true;
 }

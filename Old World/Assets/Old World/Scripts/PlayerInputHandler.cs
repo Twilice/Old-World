@@ -89,13 +89,12 @@ public class PlayerInputHandler : MonoBehaviour
 			}
 			else
 			{
-				h = Input.GetAxis("Horizontal") * 0.1f;
+				h = Input.GetAxis("Horizontal") * 0.5f;
 			}
 
 		}
         else
         {
-			Debug.Log(m_Jump);
 			//Prevents the character from turning backwards during camera transisions
 			h = 0.0f;
             if (Input.GetAxis("Vertical") < 0)
@@ -132,37 +131,37 @@ public class PlayerInputHandler : MonoBehaviour
     }
     public void UpdateCursorLock()
     {
-        if (Input.GetButtonDown("Menu") && StateController.MenuOpen)
+        if (Input.GetButtonDown("Menu") && StateController.menuOpen)
         {
             if(Menu != null) Menu.CloseMenu();
-            else StateController.MenuOpen = false;
-            StateController.CursorLocked = false;
+            else StateController.menuOpen = false;
+            StateController.cursorLocked = false;
             CameraScript.enabled = false;
         }
-        else if (Input.GetButtonDown("Menu") && StateController.MenuOpen == false)
+        else if (Input.GetButtonDown("Menu") && StateController.menuOpen == false)
         {
             if (Menu != null) Menu.OpenMenu();
-            else StateController.MenuOpen = true;
-            StateController.CursorLocked = true;
+            else StateController.menuOpen = true;
+            StateController.cursorLocked = true;
             CameraScript.enabled = true;
         }
         else if (Input.GetKeyUp(KeyCode.F5))
         {
             CameraScript.enabled = false;
-            StateController.CursorLocked = false;
+            StateController.cursorLocked = false;
         }
         else if (Input.GetKeyUp(KeyCode.F6))
         {
             CameraScript.enabled = true;
-            StateController.CursorLocked = true;
+            StateController.cursorLocked = true;
         }
 
-        if (StateController.CursorLocked)
+        if (StateController.cursorLocked)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else if (!StateController.CursorLocked)
+        else if (!StateController.cursorLocked)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

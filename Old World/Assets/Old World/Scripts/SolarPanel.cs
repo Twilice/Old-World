@@ -61,7 +61,7 @@ public class SolarPanel : TriggeredByLight
             //If the Gameobject has the same tag as the generator
             if (e[i].transform.CompareTag(transform.tag))
             {
-                e[i].LerpLight(ChargeUpTime);
+                e[i].LerpEnergy(ChargeUpTime);
             }
         }
 
@@ -74,7 +74,6 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightExit()
 	{
-		//Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{

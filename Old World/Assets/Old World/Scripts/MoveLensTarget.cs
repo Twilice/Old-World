@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class MoveLensTarget : MonoBehaviour {
-
-    private Transform player;
+    
     private Transform target;
     private Transform lens;
     private Transform lensLight;
@@ -21,7 +20,6 @@ public class MoveLensTarget : MonoBehaviour {
 
     void Awake()
     {
-        player = GameObject.Find("Player").transform;
         target = GameObject.Find("LensTarget").transform;
         lens = GameObject.Find("Player/Lens").transform;
         lensLight = GameObject.Find("Player/Lens/ReflectedLensLight").transform;

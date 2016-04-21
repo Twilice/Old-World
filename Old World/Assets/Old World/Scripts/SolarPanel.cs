@@ -12,9 +12,9 @@ public class SolarPanel : TriggeredByLight
 
 	public float ChargeUpTime;
 
-	private bool Active = false;
-    private float energy = 0.0f;
-    private float t = 0.0f;
+	//private bool Active = false;
+    //private float energy = 0.0f;
+    //private float t = 0.0f;
 
     private EmissionIntensityController[] e;
 
@@ -31,7 +31,7 @@ public class SolarPanel : TriggeredByLight
             //Play sound once
             //Light on panel turned on
 
-            Active = true;
+            //Active = true;
 			for (int i = 0; i < Targets.Count; i++)
 			{
 				if (PlatformTarget == true)
@@ -68,7 +68,7 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightExit()
 	{
-		Active = false;
+		//Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{
 			if (PlatformTarget == true && Targets[i].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)

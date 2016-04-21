@@ -21,6 +21,7 @@ public class InspectViewToggle : MonoBehaviour
     private bool resetOnceFP;
     private bool resetOnceTP;
     private float startTime;
+    private Vector3 inspectPos;
 
     private bool isInspecting = false;
     void Awake()
@@ -58,8 +59,9 @@ public class InspectViewToggle : MonoBehaviour
 
         camera.enabled = true;
     }
-    public void StartInspectView()
+    public void StartInspectView(Vector3 inspectPosition)
     {
+        inspectPos = inspectPosition;
         isInspecting = true;
     }
     public void ExitInspectView()
@@ -75,7 +77,8 @@ public class InspectViewToggle : MonoBehaviour
             if (firstTimeFP)
             {
                 StateController.currentView = CameraStatus.InspectView;
-
+                inspectPos.y = player.transform.position.y;
+                player.transform.LookAt(inspectPos);
                 firstTimeFP = false;
 
                 //Enable first time enter operation on next mouse release

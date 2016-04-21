@@ -26,7 +26,7 @@ public class DebuggerScript : MonoBehaviour
 			for (int i = 0; i < NumberOfTargets; i++)
 			{
 				Targets[i].Speed = 10;
-				Targets[i].Elevator = true;
+				//Targets[i].Elevator = true;
 				Targets[i].Activate();
             }
 		}

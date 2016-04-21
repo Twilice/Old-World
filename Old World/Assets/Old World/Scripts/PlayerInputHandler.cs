@@ -95,7 +95,6 @@ public class PlayerInputHandler : MonoBehaviour
 		}
         else
         {
-			Debug.Log(m_Jump);
 			//Prevents the character from turning backwards during camera transisions
 			h = 0.0f;
             if (Input.GetAxis("Vertical") < 0)

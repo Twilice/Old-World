@@ -5,14 +5,10 @@ using System.Collections;
 public class MovingPlatformScript : MonoBehaviour
 {
     private Vector3 StartTransform;
-    //private Quaternion StartRotation;
     private bool MoveToTarget;
-    private bool RotateToTarget;
 
     public Vector3 TargetTransform;
-    public Quaternion TargetRotation;
     public int Speed;
-    public bool Rotate;
     public bool Elevator;
 	public bool ReturnToOriginalPosition;
 
@@ -22,26 +18,13 @@ public class MovingPlatformScript : MonoBehaviour
     {
 		//Activated = false;
 		MoveToTarget = true;
-        RotateToTarget = true;
         StartTransform = gameObject.transform.position;
-		//StartRotation = gameObject.transform.rotation;
 	}
 	
 	public void Activate ()
     {
 		//Debug.Log("Activated");
 		//Activated = true;
-		//Rotates the gameobject
-		if (RotateToTarget == true && Rotate == true)
-		{
-			gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, TargetRotation, Speed * Time.deltaTime);
-
-			if (gameObject.transform.rotation == TargetRotation != true)
-			{
-				RotateToTarget = false;
-			}
-		}
-
 
 		//Moves the gameobject
 		if (MoveToTarget == true)

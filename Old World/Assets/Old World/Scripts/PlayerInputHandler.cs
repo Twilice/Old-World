@@ -89,7 +89,7 @@ public class PlayerInputHandler : MonoBehaviour
 			}
 			else
 			{
-				h = Input.GetAxis("Horizontal") * 0.1f;
+				h = Input.GetAxis("Horizontal") * 0.5f;
 			}
 
 		}

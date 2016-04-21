@@ -15,19 +15,29 @@ public class SolarPanel : TriggeredByLight
 
 	private bool Active = false;
     private float energy = 0.0f;
+    private float t = 0.0f;
 
-	protected override void HitByLightStay()
+    private EmissionIntensityController[] e;
+
+    void Awake()
+    {
+        //Find every instance of the EmissionIntensityController script on every GameObject
+        e = FindObjectsOfType<EmissionIntensityController>();
+    }
+
+    protected override void HitByLightStay()
 	{
-        energy += Time.deltaTime;
+        //energy += Time.deltaTime;
 
-		Debug.Log("Hit by light");
-		Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
+        if(timeIlluminated < ChargeUpTime) Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
+
 		if (timeIlluminated >= ChargeUpTime)
 		{
-			//Play sound once
-			//Light on panel turned on
+            Power_bar.GetComponent<Charge_bar>().setColor(Color.white);
+            //Play sound once
+            //Light on panel turned on
 
-			Active = true;
+            Active = true;
 			for (int i = 0; i < Targets.Count; i++)
 			{
 				if (PlatformTarget == true)
@@ -45,16 +55,26 @@ public class SolarPanel : TriggeredByLight
 			}
 		}
 
-		//else
-		//{
-		//	//Play powering up sound
-		//	//Fade lights on?
-		//}
-	}
+        //Turn on all lights with the same tag as this generator
+        for (int i = 0; i < e.Length; i++)
+        {
+            //If the Gameobject has the same tag as the generator
+            if (e[i].transform.CompareTag(transform.tag))
+            {
+                e[i].LerpLight(ChargeUpTime);
+            }
+        }
+
+        //else
+        //{
+        //	//Play powering up sound
+        //	//Fade lights on?
+        //}
+    }
 
 	protected override void HitByLightExit()
 	{
-		Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
+		//Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{
@@ -66,8 +86,6 @@ public class SolarPanel : TriggeredByLight
             //{
             //	Targets[i].GetComponent<ChargerScript>().enabled = false;
             //}
-
-            Debug.Log(energy);
 		}
 	}
 }

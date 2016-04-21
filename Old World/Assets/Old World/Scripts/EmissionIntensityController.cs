@@ -8,11 +8,12 @@ public class EmissionIntensityController : MonoBehaviour
     [Range(0, 3)]
     public float roomActiveIntensity = 2.7f;
     [Range(0, 3)]
-    public float generatorActiveIntensity = 2.0f;
+    public float generatorActiveIntensity = 1.0f;
     [Range(0,20)]
     public float lerpLightTime = 4.0f;
 
     private float t = 0.0f;
+    private float t1 = 0.0f;
     private Renderer r;
     private float emissionIntensity = 0f;
     private Color c;
@@ -44,20 +45,20 @@ public class EmissionIntensityController : MonoBehaviour
 
     void LerpLight()
     {
-        if (t < 1.0f)
+        if (t1 < 1.0f)
         {
-            t += Time.deltaTime * 0.06f; // TODO5 timescale or something is wrong
-            emissionIntensity = Mathf.Lerp(generatorActiveIntensity, roomActiveIntensity, t);
+            t1 += Time.deltaTime * 0.2f;
+            emissionIntensity = Mathf.Lerp(generatorActiveIntensity, roomActiveIntensity, t1);
         }
     }
 
     public void LerpLight(float lerpTime)
     {
-        float factor = 1 / (lerpTime * 3);
+        float factor = 1 / (lerpTime);
         if (t < 1.0f)
         {
-            t += Time.deltaTime * factor; // TODO5 timescale or something is wrong
-            emissionIntensity = Mathf.Lerp(generatorActiveIntensity, roomActiveIntensity, t);
+            t += Time.deltaTime * factor;
+            emissionIntensity = Mathf.Lerp(0, generatorActiveIntensity, t);
         }
     }
 }

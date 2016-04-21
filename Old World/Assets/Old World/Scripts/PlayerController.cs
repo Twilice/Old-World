@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float m_StationaryTurnSpeed = 180;
     [SerializeField]
-    float m_JumpPower = 12f;
+    float m_JumpPower = 6.1f;
     [Range(1f, 4f)]
     [SerializeField]
     float m_GravityMultiplier = 2f;
@@ -192,8 +192,11 @@ public class PlayerController : MonoBehaviour
 
     void HandleGroundedMovement(bool crouch, bool jump)
     {
-        // check whether conditions are right to allow a jump:
-        if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+		//added gravity to groundmovement too so you dont fly over every small incline
+		m_Rigidbody.AddForce(new Vector3(0,-20,0));
+
+		// check whether conditions are right to allow a jump:
+		if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
 			// jump!
 			velocity = Mathf.Sqrt(m_Rigidbody.velocity.x * m_Rigidbody.velocity.x + m_Rigidbody.velocity.z * m_Rigidbody.velocity.z);

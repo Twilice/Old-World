@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class SolarPanel : TriggeredByLight
 {
 	public List<GameObject> Targets;
-	public GameObject Power_bar;
 
 	public bool PlatformTarget;
 	public bool GeneratorTarget;
@@ -27,13 +26,8 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightStay()
 	{
-        //energy += Time.deltaTime;
-
-        if(timeIlluminated < ChargeUpTime) Power_bar.GetComponent<Charge_bar>().PowerTurnedOn(ChargeUpTime);
-
 		if (timeIlluminated >= ChargeUpTime)
 		{
-            Power_bar.GetComponent<Charge_bar>().setColor(Color.white);
             //Play sound once
             //Light on panel turned on
 
@@ -61,7 +55,7 @@ public class SolarPanel : TriggeredByLight
             //If the Gameobject has the same tag as the generator
             if (e[i].transform.CompareTag(transform.tag))
             {
-                e[i].LerpLight(ChargeUpTime);
+                e[i].LerpEnergy(ChargeUpTime);
             }
         }
 
@@ -74,7 +68,6 @@ public class SolarPanel : TriggeredByLight
 
 	protected override void HitByLightExit()
 	{
-		//Power_bar.GetComponent<Charge_bar>().ChangingColor.g = 0;
 		Active = false;
 		for (int i = 0; i < Targets.Count; i++)
 		{

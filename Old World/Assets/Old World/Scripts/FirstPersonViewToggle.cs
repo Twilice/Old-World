@@ -165,7 +165,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 }
                 startTime = Time.time;
 
-                //Switch to first person view controlls and first person movement and turns lens off if player is in light
+                //Switch to first person view controls and first person movement and turns lens off if player is in light
                 FirstPerson = false;
                 anim.SetBool("firstPerson", FirstPerson);
 

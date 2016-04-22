@@ -7,10 +7,16 @@ public class EmitLightRayCast : MonoBehaviour {
 	private Transform lastHitObject = null;
 	private Vector3 dir = Vector3.zero;
 	private Vector3 hitPos = Vector3.zero;
+    private LayerMask layerMask;
+    void Start()
+    {
+        layerMask = 1 << LayerMask.NameToLayer("LightShaft");
+        layerMask = ~layerMask;
+    }
 	void Update () {
 		RaycastHit hit;
 		dir = transform.TransformDirection(Vector3.forward);
-		if (Physics.Raycast(transform.position, dir, out hit, 500))
+		if (Physics.Raycast(transform.position, dir, out hit, 500, layerMask))
 		{
 			hitPos = hit.point;
 			Transform hitObject = hit.transform;

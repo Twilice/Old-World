@@ -7,12 +7,17 @@ public class Inspectable : MonoBehaviour
     private static GameObject inspectBox;
     private static Text boxHeadline;
     private static Text boxText;
-
+    private static float characterPerSeconds = 50f;
     public string inspectHeadline = "";
     public List<TextAsset> inspectText = new List<TextAsset>();
     private int currentTextID = 0;
     private InspectViewToggle inspectViewToggle;
     private bool canBeInspected = false;
+
+    private int charIndex = -1;
+    private float charIndexFloat = 0;
+    private int stringLength = 0;
+
     void Start()
     {
         if (inspectHeadline.Equals(""))
@@ -45,27 +50,50 @@ public class Inspectable : MonoBehaviour
             if (Input.GetButtonDown("Inspect"))
             {
                 currentTextID = 0;
+                charIndex = 0;
+                charIndexFloat = 0;
+                stringLength = inspectText[currentTextID].text.Length;
                 inspectBox.SetActive(true);
                 inspectViewToggle.StartInspectView(transform.position);
                 boxHeadline.text = inspectHeadline;
-                boxText.text = inspectText[currentTextID].text;
+                //boxText.text = inspectText[currentTextID].text;
             }
             else if (Input.GetButtonDown("InspectSkip"))
             {
-
-                //todo if more text, print all text directly
-                // else
-                currentTextID++;
-                if (currentTextID < inspectText.Count)
+                //characters left
+                if (charIndex < stringLength)
                 {
-                    boxText.text = inspectText[currentTextID].text;
+                    charIndex = stringLength;
+                    boxText.text = inspectText[currentTextID].text.Substring(0, charIndex);
                 }
+                //new page
                 else
                 {
-                    inspectViewToggle.ExitInspectView();
-                    inspectBox.SetActive(false);
+                    currentTextID++;
+                    // pages left
+                    if (currentTextID < inspectText.Count)
+                    {
+                        charIndex = 0;
+                        charIndexFloat = 0;
+                        stringLength = inspectText[currentTextID].text.Length;
+                    }
+                    // no pages left 
+                    else
+                    {
+                        inspectViewToggle.ExitInspectView();
+                        inspectBox.SetActive(false);
+                    }
                 }
             }
+        }
+
+        if(charIndex != -1 && charIndex < stringLength)
+        {
+            charIndexFloat += Time.deltaTime * characterPerSeconds;
+            charIndex = (int)charIndexFloat;
+            if (stringLength < charIndex)
+                charIndex = stringLength;
+            boxText.text = inspectText[currentTextID].text.Substring(0, charIndex);
         }
     }
 

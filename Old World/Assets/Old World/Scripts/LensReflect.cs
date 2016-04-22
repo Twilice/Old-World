@@ -20,7 +20,6 @@ public class LensReflect : MonoBehaviour {
         if (other.CompareTag("LightShaft"))
         {
             inLight = true;
-            Debug.Log("Enter");
         }
     }
     void OnTriggerExit(Collider other)
@@ -28,7 +27,6 @@ public class LensReflect : MonoBehaviour {
         if (other.CompareTag("LightShaft"))
         {
             inLight = false;
-            Debug.Log("Exit");
         }
     }
 

@@ -31,9 +31,6 @@ public class GeneratorScript : MonoBehaviour
 
     public void Activate()
     {
-        //Change color
-        GetComponent<Renderer>().material.color = Color.green;
-
         //Change bool to true
         Active = true;
 

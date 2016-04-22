@@ -71,6 +71,7 @@ public class FirstPersonViewToggle : MonoBehaviour
             //Operations that only need/should be executed once every new right click
             if (firstTimeFP)
             {
+                StateController.currentZoom = ZoomStatus.zoomingIn;
                 StateController.currentView = CameraStatus.FirstPersonView;
                 firstTimeFP = false;
 
@@ -147,6 +148,7 @@ public class FirstPersonViewToggle : MonoBehaviour
             //Operations that only need/should be executed once every right click release
             if (firstTimeTP)
             {
+                StateController.currentZoom = ZoomStatus.zoomingOut;
                 firstTimeTP = false;
 
                 //Enable first time enter operations on next right click

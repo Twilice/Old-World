@@ -103,7 +103,7 @@ public class EmissionIntensityController : MonoBehaviour
 
         if (Time.time - lastTime > 0.1f)
         {
-            t = 0.0f;
+            t = energy / roomActiveEnergy;
         }
 
         float factor = 1 / (lerpTime);

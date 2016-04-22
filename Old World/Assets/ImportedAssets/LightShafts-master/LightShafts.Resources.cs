@@ -251,7 +251,7 @@ public partial class LightShafts : MonoBehaviour
 	{
 		if (!shader.isSupported)
 		{
-			Debug.LogError("LightShafts' " + shader.name + " didn't compile on this platform.");
+			Debug.LogError("LightShafts' " + shader.name + " didn't compile on this platform. (try restart)");
 			return false;
 		}
 

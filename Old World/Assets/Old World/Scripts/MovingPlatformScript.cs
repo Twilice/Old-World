@@ -67,6 +67,7 @@ public class MovingPlatformScript : MonoBehaviour
 		}
         else
         {
+			MoveToTarget = true;
             returning = false;
         }
 	}

@@ -11,11 +11,11 @@ public class CameraOrbit : MonoBehaviour
     public float mouseSensitivity = 1.75f;
     public float joyStickSensitivityX = 2f;
 
-    public float yMinLimit = -20f;
+    public float yMinLimit = -60f;
     public float yMaxLimit = 80f;
 
-    public float distanceMin = 1f;
-    public float distanceMax = 5f;
+    public float distanceMin = 0.5f;
+    public float distanceMax = 15f;
 
     private Rigidbody rb;
     private Transform target;

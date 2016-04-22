@@ -199,7 +199,7 @@ float4 frag(posuv i) : COLOR
 
 	// Normalize inscattered light depending on how many steps we took and what part
 	// of the entire depth did we raymarch.
-	float randomBrightness = -abs(snoise(float2(uv.x*5  + _Time.y*0.3, uv.y*5 + _Time.y*0.3))) * _RandomBrightness; // TOBIAS, randomBrightness är väldigt test... tror uv inte är helt rätt kordinater i detta fallet
+	float randomBrightness = -abs(snoise(float2(uv.x*6  + _Time.y*0.2, uv.y*6 + _Time.y*0.2))) * _RandomBrightness; // randomBrightness är väldigt test... tror uv inte är helt rätt kordinater i detta fallet
 	inscatter *= _LightColor.rgb * (_Brightness + randomBrightness) * oneOverSteps * depthAlongView;
 	return saturate(inscatter).xyzz;
 }

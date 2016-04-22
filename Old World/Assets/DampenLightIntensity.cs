@@ -8,13 +8,13 @@ public class DampenLightIntensity : MonoBehaviour
 
     private float drainOrGainRate = 1.1f;
     private float originalIntensity;
-    private Light light;
+    private Light dampedLight;
 
     // Use this for initialization
     void Awake()
     {
-        light = GetComponent<Light>();
-        originalIntensity = light.intensity;
+        dampedLight = GetComponent<Light>();
+        originalIntensity = dampedLight.intensity;
     }
 
     // Update is called once per frame
@@ -33,25 +33,25 @@ public class DampenLightIntensity : MonoBehaviour
     //Drain or Gain light instensity when in first person view
     public void drainIntensity()
     {
-        if (light.intensity - Time.deltaTime * drainOrGainRate < firstPersonViewIntensity)
+        if (dampedLight.intensity - Time.deltaTime * drainOrGainRate < firstPersonViewIntensity)
         {
-            light.intensity = firstPersonViewIntensity;
+            dampedLight.intensity = firstPersonViewIntensity;
         }
         else
         {
-            light.intensity -= Time.deltaTime * drainOrGainRate;
+            dampedLight.intensity -= Time.deltaTime * drainOrGainRate;
         }
     }
 
     public void gainIntensity()
     {
-        if (light.intensity + Time.deltaTime * drainOrGainRate > originalIntensity)
+        if (dampedLight.intensity + Time.deltaTime * drainOrGainRate > originalIntensity)
         {
-            light.intensity = originalIntensity;
+            dampedLight.intensity = originalIntensity;
         }
         else
         {
-            light.intensity += Time.deltaTime * drainOrGainRate;
+            dampedLight.intensity += Time.deltaTime * drainOrGainRate;
         }
 
     }

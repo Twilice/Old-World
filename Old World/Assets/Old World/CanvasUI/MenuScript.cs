@@ -85,28 +85,18 @@ public class MenuScript : MonoBehaviour
 
     public void OpenMenu()
     {
-        Time.timeScale = 1.0f;
+        Time.timeScale = 0.0f;
         EnableJournal();
         journal.SetActive(true);
         StateController.menuOpen = true;
-
-
     }
 
     public void CloseMenu()
     {
-        Time.timeScale = 0.0f;
+        Time.timeScale = 1.0f;
         DisableJournal();
         journal.SetActive(false);
         StateController.menuOpen = false;
-    }
-
-    public void ToggleMenu()
-    {
-        if (StateController.menuOpen)
-            CloseMenu();
-        else
-            OpenMenu();
     }
 
     private void DisableJournal()

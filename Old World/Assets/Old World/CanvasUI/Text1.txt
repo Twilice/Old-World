@@ -1,5 +1,4 @@
-ExempelRubrik
+Exempel
 
 Exempeltext
-
 textigare-.?! text

@@ -20,7 +20,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Start()
     {
         GameObject tmp = GameObject.Find("Menu");
-        if (tmp == null) Debug.LogWarning("No Menu found");
+        if (tmp == null) Debug.LogWarning("No Menu found, is _CanvasUI in the scene?");
         else Menu = tmp.GetComponent<MenuScript>();
 		pController = GameObject.Find("Player").GetComponent<PlayerController>();
 		CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
@@ -137,15 +137,15 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if(Menu != null) Menu.CloseMenu();
             else StateController.menuOpen = false;
-            StateController.cursorLocked = false;
-            CameraScript.enabled = false;
+            StateController.cursorLocked = true;
+            CameraScript.enabled = true;
         }
         else if (Input.GetButtonDown("Menu") && StateController.menuOpen == false)
         {
             if (Menu != null) Menu.OpenMenu();
             else StateController.menuOpen = true;
-            StateController.cursorLocked = true;
-            CameraScript.enabled = true;
+            StateController.cursorLocked = false;
+            CameraScript.enabled = false;
         }
         else if (Input.GetKeyUp(KeyCode.F5))
         {

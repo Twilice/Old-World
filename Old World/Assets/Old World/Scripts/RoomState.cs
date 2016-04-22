@@ -5,6 +5,8 @@ using System.Collections;
 public class RoomState : MonoBehaviour {
 
     public static bool roomFullyPowered = false;
+    public static float drainAmount = 0.1f;
+    public static float gainAmount = 0.3f;
 
     private GeneratorScript[] generators;
 

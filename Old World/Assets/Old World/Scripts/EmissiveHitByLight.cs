@@ -10,7 +10,6 @@ public class EmissiveHitByLight : TriggeredByLight
         ec = GetComponent<EmissionIntensityController>();
     }
 
-
     protected override void HitByLightStay()
     {
         ec.gainEnergy();

@@ -14,28 +14,21 @@ public class EmissionIntensityController : MonoBehaviour
     public float generatorActiveEnergyPercentage = 30;
     [Range(0, 20)]
     public float lerpTimeWhenRoomFullyPowered = 4.0f;
-    [Range(0, 100)]
-    public float drainPercentagePerSecond = 10.0f;
-    [Range(0, 100)]
-    public float gainPercentagePerSecond = 20.0f;
 
     private EmissiveHitByLight ehbl;
-    private float t = 0.0f;
     private float t1 = 0.0f;
     private Renderer r;
     private float emissionIntensity = 0f;
     private Color c;
     private MeshRenderer mr;
-    private bool firstTime = true;
     private bool firstTime1 = true;
     private float fromEnergy;
     private float energy = 0.0f;
     private float generatorActiveEnergy;
     private float roomActiveEnergy;
-    private float gainAmount;
-    private float drainAmount;
+
     private bool generatorActivated = false;
-    private float lastTime = 0.0f;
+    private bool roomActivated = false;
 
     void Awake()
     {
@@ -46,8 +39,6 @@ public class EmissionIntensityController : MonoBehaviour
 
         generatorActiveEnergy = generatorActiveEnergyPercentage / 100f;
         roomActiveEnergy = roomActiveEnergyPercentage / 100f;
-        gainAmount = gainPercentagePerSecond / 100f;
-        drainAmount = drainPercentagePerSecond / 100f;
     }
 
     // Update is called once per frame
@@ -69,11 +60,7 @@ public class EmissionIntensityController : MonoBehaviour
 
         mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2f);
         DynamicGI.SetEmissive(r, c * emissionIntensity);
-    }
-
-    public void SetEmissionIntesity(float f)
-    {
-        emissionIntensity = f;
+        //Debug.Log(emissionIntensity + ", " + energy);
     }
 
     //When the room is fully powered
@@ -87,85 +74,72 @@ public class EmissionIntensityController : MonoBehaviour
 
         if (t1 < 1.0f)
         {
-            t1 += Time.deltaTime * (1 / lerpTimeWhenRoomFullyPowered);
+            t1 += Time.deltaTime / lerpTimeWhenRoomFullyPowered;
             energy = Mathf.Lerp(fromEnergy, roomActiveEnergy, t1);
         }
+        else
+            roomActivated = true;
     }
 
-    //When generator is activated
-    public void LerpEnergy(float lerpTime)
+    //When the solarpanel is hit
+    public void LerpEnergy(float solarPanelEnergy)
     {
-        if (firstTime)
+        if (solarPanelEnergy < 1.0f)
         {
-            fromEnergy = energy;
-            firstTime = false;
-        }
-
-        if (Time.time - lastTime > 0.1f)
-        {
-            t = energy / roomActiveEnergy;
-        }
-
-        float factor = 1 / (lerpTime);
-        if (t < 1.0f)
-        {
-            t += Time.deltaTime * factor;
-            energy = Mathf.Lerp(fromEnergy, generatorActiveEnergy, t);
+            energy = Mathf.Lerp(0, generatorActiveEnergy, solarPanelEnergy); //Is fromEnergy really right here?
         }
         else
         {
             generatorActivated = true;
         }
-
-        lastTime = Time.time;
     }
 
     public void gainEnergy()
     {
-        if(energy + Time.deltaTime * gainAmount > 1)
+        if(energy + Time.deltaTime * RoomState.gainAmount > 1)
         {
             energy = 1.0f;
         }
         else
         {
-            energy += Time.deltaTime * gainAmount;
+            energy += Time.deltaTime * RoomState.gainAmount;
         }
         
     }
 
     public void drainEnergy()
     {
-        if (RoomState.roomFullyPowered)
+        if (roomActivated)
         {
-            if(energy - Time.deltaTime * drainAmount < roomActiveEnergy)
+            if(energy - Time.deltaTime * RoomState.drainAmount < roomActiveEnergy)
             {
                 energy = roomActiveEnergy;
             }
             else
             {
-                energy -= Time.deltaTime * drainAmount;
+                energy -= Time.deltaTime * RoomState.drainAmount;
             }
         }
         else if(generatorActivated)
         {
-            if (energy - Time.deltaTime * drainAmount < generatorActiveEnergy)
+            if (energy - Time.deltaTime * RoomState.drainAmount < generatorActiveEnergy)
             {
                 energy = generatorActiveEnergy;
             }
             else
             {
-                energy -= Time.deltaTime * drainAmount;
+                energy -= Time.deltaTime * RoomState.drainAmount;
             }
         }
         else
         {
-            if (energy - Time.deltaTime * drainAmount < 0.0f)
+            if (energy - Time.deltaTime * RoomState.drainAmount < 0.0f)
             {
                 energy = 0.0f;
             }
             else
             {
-                energy -= Time.deltaTime * drainAmount;
+                energy -= Time.deltaTime * RoomState.drainAmount;
             }
         }
     }

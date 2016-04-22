@@ -31,7 +31,7 @@ public class LensReflect : MonoBehaviour {
     }
 
     void Update()
-    {  
+    {
         if (inLight && moveLensScript.LensActivated)
             lensLight.SetActive(true);
         else

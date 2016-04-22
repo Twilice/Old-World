@@ -8,7 +8,7 @@ public class RaycastCamera : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, RaycastCamera.maxDistance, ~0, QueryTriggerInteraction.Ignore))
         {
             if (hit.distance > maxDistance)
                 distance3 = maxDistance;

@@ -19,7 +19,10 @@ public class GeneratorScript : MonoBehaviour
             {
                 if (PlatformTarget == true)
                 {
-                    Targets[i].GetComponent<MovingPlatformScript>().Activate();
+					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+					{
+						movingScript.Activate();
+					}
 				}
 				if (ChargerTarget == true)
 				{

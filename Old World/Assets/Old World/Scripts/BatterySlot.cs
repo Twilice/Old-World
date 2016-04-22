@@ -24,16 +24,22 @@ public class BatterySlot : MonoBehaviour
 					hasBattery = false;
 					for (int p = 0; p < Targets.Count; p++)
 					{
-						if (Targets[p].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)
+						foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 						{
-                            Targets[p].GetComponent<MovingPlatformScript>().returning = true;
+							if (movingScript.ReturnToOriginalPosition == true)
+							{
+								movingScript.returning = true;
+							}
 						}
 					}
 					break;
 				}
 				if (PlatformTarget == true)
 				{
-					Targets[i].GetComponent<MovingPlatformScript>().Activate();
+					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+					{
+						movingScript.Activate();
+					}
 				}
 				if (GeneratorTarget == true)
 				{

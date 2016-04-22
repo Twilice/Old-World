@@ -3,16 +3,16 @@ using System.Collections;
 
 public class Battery : MonoBehaviour 
 {
-    private bool charged = false;
+   // private bool charged = false;
 	[HideInInspector]
 	public int amountOfCharge;
 	[Range(1, 10)]
 	public int maxChargeInSeconds;
 
-    public void setBatteryCharged(bool b)
+/*    public void setBatteryCharged(bool b)
     {
         charged = b;
-    }
+    }*/
 
 	void Update ()
 	{

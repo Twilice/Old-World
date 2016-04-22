@@ -20,8 +20,8 @@ public class ObjExporterScript
 
 	public static string MeshToString(MeshFilter mf, Transform t)
 	{
-		Vector3 s = t.localScale;
-		Vector3 p = t.localPosition;
+		//Vector3 s = t.localScale;
+		//Vector3 p = t.localPosition;
 		Quaternion r = t.localRotation;
 
 

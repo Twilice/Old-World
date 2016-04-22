@@ -12,13 +12,13 @@ public class MenuScript : MonoBehaviour
     // hardcoded script to disable in menu
     private CameraOrbit cameraOrbit; 
     private FirstPersonViewToggle cameraViewToggle;
-    private CameraLookAt mouseToggle;
+    //private CameraLookAt mouseToggle;
 
     private bool pause;
     private bool oldPause;
     private bool restart;
     private bool oldRestart;
-    private bool openJournal;
+    //private bool openJournal;
     private bool oldOpenJournal;
     private bool openPlayerInfo;
     private bool oldOpenPlayerInfo;
@@ -36,7 +36,7 @@ public class MenuScript : MonoBehaviour
         GameObject camera = GameObject.Find("MainCamera");
         cameraOrbit = camera.GetComponent<CameraOrbit>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
-        mouseToggle = CameraLookAt.GetMouseLook();
+        //mouseToggle = CameraLookAt.GetMouseLook();
 
         journal.SetActive(false);
 	}
@@ -111,7 +111,7 @@ public class MenuScript : MonoBehaviour
 
     private void DisableJournal()
     {
-        openJournal = true;
+        //openJournal = true;
         cameraOrbit.enabled = false;
         cameraViewToggle.enabled = false;
         for (int i = 0; i < objects.Length; i++)
@@ -124,7 +124,7 @@ public class MenuScript : MonoBehaviour
 
     private void EnableJournal()
     {
-        openJournal = false;
+        //openJournal = false;
         cameraOrbit.enabled = true;
         cameraViewToggle.enabled = true;
         for (int i = 0; i < objects.Length; i++)

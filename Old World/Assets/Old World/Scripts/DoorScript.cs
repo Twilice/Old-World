@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [DisallowMultipleComponent]
 public class DoorScript : MonoBehaviour
 {
-    private float t = 0.0f;
+    //private float t = 0.0f;
     private MovingPlatformScript[] mps;
 
     void Awake()

@@ -6,10 +6,7 @@ public class Inspectable : MonoBehaviour
 
     public string[] InspectText;
     private InspectViewToggle inspectViewToggle;
-    private bool buttonDown = false;
-    private bool buttonUsed = false;
     private bool canBeInspected = false;
-    //private GameObject player; //not used yet
     private static GameObject inspectBox;
     void Start()
     {
@@ -30,7 +27,7 @@ public class Inspectable : MonoBehaviour
         {
             if (Input.GetButtonDown("Inspect"))
             {
-                inspectViewToggle.StartInspectView();
+                inspectViewToggle.StartInspectView(transform.position);
                 // start inspectbox with text
             }
             else if (Input.GetButtonDown("InspectSkip"))

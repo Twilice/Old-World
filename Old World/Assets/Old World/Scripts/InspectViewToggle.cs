@@ -77,8 +77,11 @@ public class InspectViewToggle : MonoBehaviour
             if (firstTimeFP)
             {
                 StateController.currentView = CameraStatus.InspectView;
+                float y = inspectPos.y;
                 inspectPos.y = player.transform.position.y;
                 player.transform.LookAt(inspectPos);
+                inspectPos.y = y-1.0f;
+                inspectTarget.LookAt(inspectPos);
                 firstTimeFP = false;
 
                 //Enable first time enter operation on next mouse release

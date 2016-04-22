@@ -6,7 +6,8 @@ public class LensReflect : MonoBehaviour {
 
     GameObject lensLight;
     private MoveLensTarget moveLensScript;
-    private bool inLight;
+    [HideInInspector]
+    public bool inLight;
 
     void Start()
     {

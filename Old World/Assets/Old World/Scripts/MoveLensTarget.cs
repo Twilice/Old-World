@@ -9,6 +9,7 @@ public class MoveLensTarget : MonoBehaviour {
     private Transform targetLens;
     private MeshRenderer lensMesh;
     private Collider collision;
+    private LensReflect lensScript;
     private Vector3 originalLocalLensPos;
     private Quaternion originalLocalLensRot;
     private Vector3 originalLocalLightPos;
@@ -29,8 +30,9 @@ public class MoveLensTarget : MonoBehaviour {
         target = GameObject.Find("LensTarget").transform;
         lens = GameObject.Find("Player/Lens").transform;
         lensLight = GameObject.Find("Player/Lens/ReflectedLensLight").transform;
-        lensMesh = GameObject.Find("Player/Lens").GetComponent<MeshRenderer>();
-        collision = GameObject.Find("Player/Lens").GetComponent<Collider>();
+        lensMesh = lens.GetComponent<MeshRenderer>();
+        collision = lens.GetComponent<Collider>();
+        lensScript = lens.GetComponent<LensReflect>();
         targetLens = GameObject.Find("Player/TargetLens").transform;
     }
 	
@@ -87,8 +89,6 @@ public class MoveLensTarget : MonoBehaviour {
 
                 if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500,layerMask, QueryTriggerInteraction.Collide))
                 {
-                    Debug.Log("hit something");
-                    Debug.Log(hit.collider.transform.name);
                     if(hit.collider.transform.CompareTag("Prism"))
                     {
                         //Not dropped anymore
@@ -98,7 +98,7 @@ public class MoveLensTarget : MonoBehaviour {
                         lensMesh.enabled = false;
                         collision.enabled = false;
                         LensActivated = false;
-
+                        lensScript.inLight = false;
                         //Give back the light's parent, the lens
                         lensLight.transform.parent = lens;
 
@@ -119,6 +119,7 @@ public class MoveLensTarget : MonoBehaviour {
             lensMesh.enabled = false;
             collision.enabled = false;
             LensActivated = false;
+            lensScript.inLight = false;
         }
         if (LensDropped)
         {

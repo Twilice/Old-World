@@ -11,6 +11,8 @@ public class MovingPlatformScript : MonoBehaviour
     public int Speed;
     public bool Elevator;
 	public bool ReturnToOriginalPosition;
+    [HideInInspector]
+    public bool returning = false;
 
 	//private bool Activated;
     
@@ -21,6 +23,14 @@ public class MovingPlatformScript : MonoBehaviour
         StartTransform = gameObject.transform.position;
 	}
 	
+    void Update()
+    {
+        if(returning)
+        {
+            MovingBack();
+        }
+    }
+
 	public void Activate ()
     {
 		//Debug.Log("Activated");
@@ -49,18 +59,15 @@ public class MovingPlatformScript : MonoBehaviour
 		}
 	}
 
-	public void Deactivate()
-	{
-		//Debug.Log("Deactivated");
-		//Activated = false;
-		MovingBack();
-	}
-
 	public void MovingBack()
 	{
-		while (gameObject.transform.localPosition != StartTransform)
+		if (gameObject.transform.localPosition != StartTransform)
 		{
 			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
 		}
+        else
+        {
+            returning = false;
+        }
 	}
 }

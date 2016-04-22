@@ -73,7 +73,7 @@ public class SolarPanel : TriggeredByLight
 		{
 			if (PlatformTarget == true && Targets[i].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)
 			{
-				Targets[i].GetComponent<MovingPlatformScript>().Deactivate();
+                Targets[i].GetComponent<MovingPlatformScript>().returning = true;
 			}
 		}
 	}

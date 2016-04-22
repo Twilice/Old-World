@@ -26,7 +26,7 @@ public class BatterySlot : MonoBehaviour
 					{
 						if (Targets[p].GetComponent<MovingPlatformScript>().ReturnToOriginalPosition == true)
 						{
-							Targets[p].GetComponent<MovingPlatformScript>().Deactivate();
+                            Targets[p].GetComponent<MovingPlatformScript>().returning = true;
 						}
 					}
 					break;

@@ -40,7 +40,7 @@ public class PressureScript : MonoBehaviour
 			{
 				if (PlatformTarget == true)
 				{
-					Targets[i].GetComponent<MovingPlatformScript>().Deactivate();
+                    Targets[i].GetComponent<MovingPlatformScript>().returning = true;
 				}
 				//if (ChargerTarget == true)
 				//{

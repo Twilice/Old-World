@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour 
 {
     private GameObject journal;
-    private GameObject menuBackground;
+    private Image menuBackground;
+    private GameObject buttons;
     [Header("DisablesInMenu")] // only put always active scripts here
     public GameObject[] objects;
     private bool[] wasActive;
@@ -29,9 +31,13 @@ public class MenuScript : MonoBehaviour
     {
         wasActive = new bool[objects.Length];
         journal = gameObject.FindChildObject("Journal");
-        menuBackground = gameObject.FindChildObject("MenuBackground");
+        if (journal == null) Debug.LogError("The journal is missing!");
+        buttons = gameObject.FindChildObject("MenuButtons");
+        if (buttons == null) Debug.LogError("The buttons are missing!");
+        buttons.SetActive(true);
+        menuBackground = GetComponent<Image>();
         journal.SetActive(true); //minns inte exakt varför jag sätter dem till active här, tror det var någon initieringsbug
-        menuBackground.SetActive(true);
+        menuBackground.enabled = true;
     }
 	void Start() 
     {
@@ -39,26 +45,71 @@ public class MenuScript : MonoBehaviour
         cameraOrbit = camera.GetComponent<CameraOrbit>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
 
-        menuBackground.SetActive(false);
+        menuBackground.enabled = false;
         journal.SetActive(false);
+        buttons.SetActive(false);
 	}
 
-    public void OpenMenu()
+    public void Update()
     {
-        Time.timeScale = 0.0f;
-        EnableJournal();
-        journal.SetActive(true);
-        menuBackground.SetActive(true);
-        StateController.menuOpen = true;
+        if (Input.GetButtonDown("Menu") && StateController.menuOpen)
+        {
+            ResumeGame();
+        }
+        else if (Input.GetButtonDown("Menu") && StateController.menuOpen == false)
+        {
+            PauseGame();
+        }
+        else if (Input.GetKeyUp(KeyCode.F5))
+        {
+            cameraOrbit.enabled = false;
+            StateController.cursorLocked = false;
+        }
+        else if (Input.GetKeyUp(KeyCode.F6))
+        {
+            cameraOrbit.enabled = true;
+            StateController.cursorLocked = true;
+        }
+        if (StateController.cursorLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (!StateController.cursorLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
-    public void CloseMenu()
+    public void ResumeGame()
     {
         Time.timeScale = 1.0f;
-        DisableJournal();
-        journal.SetActive(false);
-        menuBackground.SetActive(false);
+        //DisableJournal();
+        //journal.SetActive(false);
+        menuBackground.enabled = false;
         StateController.menuOpen = false;
+        buttons.SetActive(false);
+        StateController.cursorLocked = true;
+        cameraOrbit.enabled = true;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        //EnableJournal();
+        //journal.SetActive(true);
+        menuBackground.enabled = true;
+        StateController.menuOpen = true;
+        buttons.SetActive(true);
+        StateController.cursorLocked = false;
+        cameraOrbit.enabled = false;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     private void DisableJournal()

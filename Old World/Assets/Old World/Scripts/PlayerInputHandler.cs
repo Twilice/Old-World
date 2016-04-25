@@ -16,12 +16,8 @@ public class PlayerInputHandler : MonoBehaviour
 	private PlayerController pController;
     private bool OpenMenuButton;
     private CameraOrbit CameraScript;
-    private MenuScript Menu;
     private void Start()
     {
-        GameObject tmp = GameObject.Find("Menu");
-        if (tmp == null) Debug.LogWarning("No Menu found, is _CanvasUI in the scene?");
-        else Menu = tmp.GetComponent<MenuScript>();
 		pController = GameObject.Find("Player").GetComponent<PlayerController>();
 		CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
         // get the transform of the main camera
@@ -31,8 +27,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else
         {
-            Debug.LogError(
-                "No MainCamera found.");
+            Debug.LogError("No MainCamera found.");
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
 
@@ -66,8 +61,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             m_Jump = Input.GetButtonDown("Jump");
         }
-
-        UpdateCursorLock();
     }
 
 
@@ -130,43 +123,5 @@ public class PlayerInputHandler : MonoBehaviour
     public void setAllowCamera(bool x)
     {
         allowCameraMovement = x;
-    }
-    public void UpdateCursorLock()
-    {
-        if (Input.GetButtonDown("Menu") && StateController.menuOpen)
-        {
-            if(Menu != null) Menu.CloseMenu();
-            else StateController.menuOpen = false;
-            StateController.cursorLocked = true;
-            CameraScript.enabled = true;
-        }
-        else if (Input.GetButtonDown("Menu") && StateController.menuOpen == false)
-        {
-            if (Menu != null) Menu.OpenMenu();
-            else StateController.menuOpen = true;
-            StateController.cursorLocked = false;
-            CameraScript.enabled = false;
-        }
-        else if (Input.GetKeyUp(KeyCode.F5))
-        {
-            CameraScript.enabled = false;
-            StateController.cursorLocked = false;
-        }
-        else if (Input.GetKeyUp(KeyCode.F6))
-        {
-            CameraScript.enabled = true;
-            StateController.cursorLocked = true;
-        }
-
-        if (StateController.cursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else if (!StateController.cursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
     }
 }

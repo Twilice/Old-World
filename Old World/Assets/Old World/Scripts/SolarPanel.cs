@@ -9,13 +9,11 @@ public class SolarPanel : TriggeredByLight
     public bool platformTarget = false;
     public bool generatorTarget = false;
     public bool chargerTarget = false;
-    public bool drainFlicker = false;
 
     public float ChargeUpTime;
 
     //private bool Active = false;
     private float energy = 0.0f;
-
     private EmissionIntensityController[] e;
     private EmissionIntensityControllerGenerator[] eg;
 
@@ -35,7 +33,7 @@ public class SolarPanel : TriggeredByLight
         }
         UpdateGeneratorLight();
     }
-    
+
     protected override void HitByLightStay()
     {
         //Gain energy when hit by light
@@ -91,6 +89,7 @@ public class SolarPanel : TriggeredByLight
 
     public void drainEnergy()
     {
+        //Drain energy
         if (energy - Time.deltaTime * RoomState.drainAmount * (1f / 0.3f) < 0.0f)
         {
             energy = 0.0f;
@@ -104,7 +103,6 @@ public class SolarPanel : TriggeredByLight
     void Activate()
     {
         //Play sound once
-
         //Activate all targets
         for (int i = 0; i < Targets.Count; i++)
         {
@@ -128,7 +126,7 @@ public class SolarPanel : TriggeredByLight
 
     void UpdateGeneratorLight()
     {
-        //Increase intensity on all lights with the same tag as this generator
+        //Update all lights with the same tag as this generator
         for (int i = 0; i < eg.Length; i++)
         {
             //If the Gameobject has the same tag as the generator

@@ -18,7 +18,10 @@ public class PressureScript : MonoBehaviour
 			{
 				if (PlatformTarget == true)
 				{
-					Targets[i].GetComponent<MovingPlatformScript>().Activate();
+					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+					{
+						movingScript.Activate();
+					}
 				}
 				if (GeneratorTarget == true)
 				{
@@ -38,9 +41,12 @@ public class PressureScript : MonoBehaviour
         {
 			for (int i = 0; i < Targets.Count; i++)
 			{
-				if (PlatformTarget == true)
+				foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 				{
-                    Targets[i].GetComponent<MovingPlatformScript>().returning = true;
+					if (movingScript.ReturnToOriginalPosition == true)
+					{
+						movingScript.returning = true;
+					}
 				}
 				//if (ChargerTarget == true)
 				//{

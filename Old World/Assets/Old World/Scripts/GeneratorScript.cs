@@ -15,10 +15,11 @@ public class GeneratorScript : MonoBehaviour
     {
         if (Active == true)
         {
-            for (int i = 0; i < Targets.Count; i++)
+			//Debug.Log(gameObject.name + " online");
+			for (int i = 0; i < Targets.Count; i++)
             {
-                if (PlatformTarget == true)
-                {
+				if (PlatformTarget == true)
+				{
 					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 					{
 						movingScript.Activate();

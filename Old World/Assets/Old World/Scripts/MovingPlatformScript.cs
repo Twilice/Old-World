@@ -20,7 +20,7 @@ public class MovingPlatformScript : MonoBehaviour
     {
 		//Activated = false;
 		MoveToTarget = true;
-        StartTransform = gameObject.transform.position;
+        StartTransform = gameObject.transform.localPosition;
 	}
 	
     void Update()
@@ -33,13 +33,13 @@ public class MovingPlatformScript : MonoBehaviour
 
 	public void Activate ()
     {
-		//Debug.Log("Activated");
+		//Debug.Log("Going places");
 		//Activated = true;
 
 		//Moves the gameobject
 		if (MoveToTarget == true)
 		{
-			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, TargetTransform, Speed * Time.deltaTime);
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, TargetTransform, Speed * Time.deltaTime);
 
 			if (gameObject.transform.localPosition == TargetTransform)
 			{
@@ -51,7 +51,8 @@ public class MovingPlatformScript : MonoBehaviour
 		//Moves the gameobject back to its starting location
 		if (MoveToTarget == false && Elevator == true)
 		{
-			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
+
 			if (gameObject.transform.localPosition == StartTransform)
 			{
 				MoveToTarget = true;
@@ -61,9 +62,10 @@ public class MovingPlatformScript : MonoBehaviour
 
 	public void MovingBack()
 	{
+		//Debug.Log("Going back");
 		if (gameObject.transform.localPosition != StartTransform)
 		{
-			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, StartTransform, Speed * Time.deltaTime);
+			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
 		}
         else
         {

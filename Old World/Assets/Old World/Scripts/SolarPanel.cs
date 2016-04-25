@@ -116,7 +116,7 @@ public class SolarPanel : TriggeredByLight
             }
             if (ChargerTarget == true)
 			{
-                Targets[i].GetComponent<MovingPlatformScript>().returning = true;
+				Targets[i].GetComponent<ChargerScript>().Activate();
 			}
 		}
 	}

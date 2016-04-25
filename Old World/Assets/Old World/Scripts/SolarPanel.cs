@@ -6,9 +6,10 @@ public class SolarPanel : TriggeredByLight
 {
     public List<GameObject> Targets;
 
-    public bool PlatformTarget;
-    public bool GeneratorTarget;
-    public bool ChargerTarget;
+    public bool platformTarget = false;
+    public bool generatorTarget = false;
+    public bool chargerTarget = false;
+    public bool drainFlicker = false;
 
     public float ChargeUpTime;
 
@@ -32,7 +33,6 @@ public class SolarPanel : TriggeredByLight
         {
             drainEnergy();
         }
-
         UpdateGeneratorLight();
     }
     
@@ -108,18 +108,18 @@ public class SolarPanel : TriggeredByLight
         //Activate all targets
         for (int i = 0; i < Targets.Count; i++)
         {
-            if (PlatformTarget == true)
+            if (platformTarget == true)
             {
                 foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
                 {
                     movingScript.Activate();
                 }
             }
-            if (GeneratorTarget == true)
+            if (generatorTarget == true)
             {
                 Targets[i].GetComponent<GeneratorScript>().Activate();
             }
-            if (ChargerTarget == true)
+            if (chargerTarget == true)
             {
                 Targets[i].GetComponent<ChargerScript>().Activate();
             }

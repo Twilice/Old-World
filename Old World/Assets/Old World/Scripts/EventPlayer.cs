@@ -22,7 +22,7 @@ public class EventPlayer : MonoBehaviour
     FMOD.Studio.ParameterInstance paramInstance;
     //FMOD.Studio.CueInstance cueInstance; //TODO what is CueInstance? Is it important?
 
-    void Start()
+    void Awake()
     {
         cachedRigidBody = GetComponent<Rigidbody>();
         eventToPlay = FMODUnity.RuntimeManager.CreateInstance(eventName);
@@ -43,13 +43,13 @@ public class EventPlayer : MonoBehaviour
 
         //Testa funktioner enkelt genom att kommentera bort någon av funktionerna nedan och använd
         //knappen O som i Olof för att testa saker.
-        if (Input.GetKeyDown(KeyCode.O))
+       /* if (Input.GetKeyDown(KeyCode.O))
         {
-            //PlayEvent();
-            //StopEvent(true);
-            //ChangeParameter("ExampleName", 1.0f);
-            //CueTrigger();
-        }
+            PlayEvent();
+            StopEvent(true);
+            ChangeParameter("ExampleName", 1.0f);
+            CueTrigger();
+        }*/
     }
 
     //Genom att skapa en referens till det här scriptet i ett annat script på följande sätt:
@@ -64,6 +64,7 @@ public class EventPlayer : MonoBehaviour
     //exampleName.PlayEvent();
     public void PlayEvent()
     {
+        Debug.Log(eventToPlay);
         eventToPlay.start();
     }
 

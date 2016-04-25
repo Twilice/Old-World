@@ -2,7 +2,6 @@
 using System.Collections;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(EmissiveHitByLight))]
 public class EmissionIntensityController : MonoBehaviour
 {
 
@@ -58,7 +57,11 @@ public class EmissionIntensityController : MonoBehaviour
             LerpEnergy();
         }
 
-        mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2f);
+        if(emissionIntensity < 0.8f)
+        {
+            mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2f);
+        }
+        
         DynamicGI.SetEmissive(r, c * emissionIntensity);
         //Debug.Log(emissionIntensity + ", " + energy);
     }
@@ -86,7 +89,9 @@ public class EmissionIntensityController : MonoBehaviour
     {
         if (solarPanelEnergy < 1.0f)
         {
-            energy = Mathf.Lerp(0, generatorActiveEnergy, solarPanelEnergy); //Is fromEnergy really right here?
+            float tmpenergy = Mathf.Lerp(0, generatorActiveEnergy, solarPanelEnergy); //Is fromEnergy really right here?
+            if (energy < tmpenergy)
+                energy = tmpenergy;
         }
         else
         {

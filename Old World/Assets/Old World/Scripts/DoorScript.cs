@@ -30,7 +30,7 @@ public class DoorScript : MonoBehaviour
 		//{
 		//    mps[i].Activate();
 		//}
-		Debug.Log("Activating door");
+		//Debug.Log("Activating door");
 		foreach (MovingPlatformScript movingScript in mps)
 		{
 			movingScript.Activate();

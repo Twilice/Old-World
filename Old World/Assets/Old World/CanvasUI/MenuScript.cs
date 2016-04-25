@@ -103,11 +103,10 @@ public class MenuScript : MonoBehaviour
     {
         //openJournal = true;
         cameraOrbit.enabled = false;
-        cameraViewToggle.enabled = false;
+        cameraViewToggle.enabled = true;
         for (int i = 0; i < objects.Length; i++)
         {
             wasActive[i] = objects[i].activeSelf;
-            Debug.Log(wasActive[i]);
             objects[i].SetActive(false);
         }
     }
@@ -116,7 +115,7 @@ public class MenuScript : MonoBehaviour
     {
         //openJournal = false;
         cameraOrbit.enabled = true;
-        cameraViewToggle.enabled = true;
+        cameraViewToggle.enabled = false;
         for (int i = 0; i < objects.Length; i++)
         {
             objects[i].SetActive(wasActive[i]);

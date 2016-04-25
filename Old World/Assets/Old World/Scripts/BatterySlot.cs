@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class BatterySlot : MonoBehaviour
 {
-	[HideInInspector]
-	public bool hasBattery = false;
+	public bool hasBattery;
 
 	public List<GameObject> Targets;
 	public bool PlatformTarget;
@@ -14,7 +13,7 @@ public class BatterySlot : MonoBehaviour
 	
 	void Update ()
 	{
-		if (hasBattery == true)
+		if (hasBattery == true && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
 		{
 			for (int i = 0; i < Targets.Count; i++)
 			{

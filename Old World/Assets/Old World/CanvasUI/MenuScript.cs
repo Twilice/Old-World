@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour 
 {
     private GameObject journal;
+    private GameObject menuBackground;
     [Header("DisablesInMenu")] // only put always active scripts here
     public GameObject[] objects;
     private bool[] wasActive;
@@ -28,59 +29,18 @@ public class MenuScript : MonoBehaviour
     {
         wasActive = new bool[objects.Length];
         journal = gameObject.FindChildObject("Journal");
-
-        journal.SetActive(true);
+        menuBackground = gameObject.FindChildObject("MenuBackground");
+        journal.SetActive(true); //minns inte exakt varför jag sätter dem till active här, tror det var någon initieringsbug
+        menuBackground.SetActive(true);
     }
 	void Start() 
     {
         GameObject camera = GameObject.Find("MainCamera");
         cameraOrbit = camera.GetComponent<CameraOrbit>();
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
-        //mouseToggle = CameraLookAt.GetMouseLook();
 
+        menuBackground.SetActive(false);
         journal.SetActive(false);
-	}
-	
-
-    // TODO3 Journal not starting correctly
-	void Update() 
-    {
-    /*    oldRestart = restart;
-        restart = Input.GetButton("Restart");
-
-        oldOpenJournal = openJournal;
-        //openJournal = TODO5 "menu button" //= Input.GetButton("Journal");
-       
-        if (restart && !oldRestart)
-            SceneManager.LoadScene("TestingScene");
-
-        oldPause = pause;
-        pause = Input.GetButton("Menu");
-
-        //Pause game
-        if (pause && !oldPause)
-        {
-            if (Time.timeScale == 0)
-            {
-                //mouseToggle.DeactivateMouse();
-                Time.timeScale = 1.0f;
-                EnableJournal();
-            }
-            else
-            {
-                //mouseToggle.ActiveateMouse();
-                Time.timeScale = 0.0f;
-                DisableJournal();
-            }
-        }
-
-        if (openJournal && !oldOpenJournal)
-        {
-            if (journal.activeSelf)
-                journal.SetActive(false);
-            else
-                journal.SetActive(true);
-        }*/
 	}
 
     public void OpenMenu()
@@ -88,6 +48,7 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 0.0f;
         EnableJournal();
         journal.SetActive(true);
+        menuBackground.SetActive(true);
         StateController.menuOpen = true;
     }
 
@@ -96,6 +57,7 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 1.0f;
         DisableJournal();
         journal.SetActive(false);
+        menuBackground.SetActive(false);
         StateController.menuOpen = false;
     }
 

@@ -8,19 +8,21 @@ public class DampenLightIntensity : MonoBehaviour
 
     private float drainOrGainRate = 1.1f;
     private float originalIntensity;
-    private Light dampedLight;
+    private LightShafts dampedLight;
+    private LensReflect lr;
 
     // Use this for initialization
     void Awake()
     {
-        dampedLight = GetComponent<Light>();
-        originalIntensity = dampedLight.intensity;
+        dampedLight = GetComponent<LightShafts>();
+        lr = FindObjectOfType<LensReflect>();
+        originalIntensity = dampedLight.m_Brightness;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(StateController.currentZoom == ZoomStatus.zoomingIn)
+        if(StateController.currentZoom == ZoomStatus.zoomingIn && lr.inLight)
         {
             drainIntensity();
         }
@@ -33,25 +35,25 @@ public class DampenLightIntensity : MonoBehaviour
     //Drain or Gain light instensity when in first person view
     public void drainIntensity()
     {
-        if (dampedLight.intensity - Time.deltaTime * drainOrGainRate < firstPersonViewIntensity)
+        if (dampedLight.m_Brightness - Time.deltaTime * drainOrGainRate < firstPersonViewIntensity)
         {
-            dampedLight.intensity = firstPersonViewIntensity;
+            dampedLight.m_Brightness = firstPersonViewIntensity;
         }
         else
         {
-            dampedLight.intensity -= Time.deltaTime * drainOrGainRate;
+            dampedLight.m_Brightness -= Time.deltaTime * drainOrGainRate;
         }
     }
 
     public void gainIntensity()
     {
-        if (dampedLight.intensity + Time.deltaTime * drainOrGainRate > originalIntensity)
+        if (dampedLight.m_Brightness + Time.deltaTime * drainOrGainRate > originalIntensity)
         {
-            dampedLight.intensity = originalIntensity;
+            dampedLight.m_Brightness = originalIntensity;
         }
         else
         {
-            dampedLight.intensity += Time.deltaTime * drainOrGainRate;
+            dampedLight.m_Brightness += Time.deltaTime * drainOrGainRate;
         }
 
     }

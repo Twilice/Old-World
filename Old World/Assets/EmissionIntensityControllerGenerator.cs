@@ -39,12 +39,12 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
     void Update()
     {
         emissionIntensity = maxIntensity * energy;
-        if (RoomState.roomFullyPowered && lightNumber == 9)
-        {
+        //if (RoomState.roomFullyPowered && lightNumber == 9)
+        //{
             mr.material.SetColor("_EmissionColor", Color.green * emissionIntensity / 2f);
-        }
-
-        mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2.0f);
+        //}
+        if(!RoomState.roomFullyPowered)
+            mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2.0f);
         DynamicGI.SetEmissive(r, c * emissionIntensity);
     }
 

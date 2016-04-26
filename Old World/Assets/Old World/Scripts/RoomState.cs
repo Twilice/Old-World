@@ -14,10 +14,11 @@ public class RoomState : MonoBehaviour {
     void Awake()
     {
         generators = FindObjectsOfType<GeneratorScript>();
+        InvokeRepeating("UpdateGenerators", 0, 0.33f);
     }
 
 	// Update is called once per frame
-	void Update () {
+	void UpdateGenerators() {
 
         //Set roomFullyPowered to correct value
         bool isPowerered = true;

@@ -64,7 +64,6 @@ public class EventPlayer : MonoBehaviour
     //exampleName.PlayEvent();
     public void PlayEvent()
     {
-        Debug.Log(eventToPlay);
         eventToPlay.start();
     }
 

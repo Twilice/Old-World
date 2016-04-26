@@ -39,12 +39,11 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
     void Update()
     {
         emissionIntensity = maxIntensity * energy;
-        //if (RoomState.roomFullyPowered && lightNumber == 9)
-        //{
+        if (RoomState.roomFullyPowered && lightNumber == 9)
+        {
             mr.material.SetColor("_EmissionColor", Color.green * emissionIntensity / 2f);
-        //}
-        if(!RoomState.roomFullyPowered)
-            mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2.0f);
+        }
+        mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2.0f);
         DynamicGI.SetEmissive(r, c * emissionIntensity);
     }
 
@@ -54,11 +53,7 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
         if (solarPanelEnergy == 1.0f)
         {
             activated = true;
-
-            if (lightNumber == 9.0f)
-            {
-                c = Color.green;
-            }
+            c = Color.green;
         }
         if (!activated)
         {

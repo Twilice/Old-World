@@ -24,13 +24,14 @@ public class CameraLookAt
     private Quaternion m_CharacterTargetRot;
 	private Quaternion m_CameraTargetRot;
 
-	public void Init(Transform character)
+	public void Init(Transform character, Transform camera)
 	{
         m_CharacterTargetRot = character.localRotation;
 
-		//We don't need the camera rotation, since it should always be straight
-		m_CameraTargetRot = Quaternion.identity;
-	}
+        //We don't need the camera rotation, since it should always be straight
+        //m_CameraTargetRot = Quaternion.identity;
+        m_CameraTargetRot = camera.localRotation;
+    }
 
 
 	public void LookRotation(Transform character, Transform camera)

@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-        mouseLook.Init(transform);
+        mouseLook.Init(transform, mainCamera.transform);
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();

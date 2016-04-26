@@ -44,7 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
             //active when last leaving first person view.
             if (Time.time - lastTime > 0.5)
             {
-                mouseLook.Init(transform);
+                mouseLook.Init(transform, m_Cam);
             }
             lastTime = Time.time;
 

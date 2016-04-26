@@ -68,6 +68,10 @@ public class FirstPersonViewToggle : MonoBehaviour
     {
         if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
         {
+            //Rotate the player towards the cameras viewpoint
+            player.transform.forward = camera.transform.forward;
+            player.transform.eulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
+
             //Operations that only need/should be executed once every new right click
             if (firstTimeFP)
             {
@@ -97,15 +101,17 @@ public class FirstPersonViewToggle : MonoBehaviour
                 mouseOrbit.enabled = false;
             }
 
+            firstPersonTarget.transform.forward = camera.transform.forward;
+
             //TODO1: If the right mouse button is spammed, the transision might act really wierd.
-            //Still time left on the transision?
+            //Still time left on the transition?
             if ((Time.time - startTime) < transitionDuration)
             {
                 StartCoroutine(Transition(firstPersonTarget));
                 StartCoroutine(RotateOverTime(firstPersonTarget));
             }
             else
-            {//Camera transision complete
+            {//Camera transition complete
 
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceFP)
@@ -117,10 +123,11 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
-                    transform.eulerAngles = player.transform.eulerAngles;
+                    //transform.eulerAngles = player.transform.eulerAngles;
 
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
+
                     //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
                     transform.localPosition = firstPersonTarget.transform.localPosition;
 
@@ -135,12 +142,6 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     resetOnceFP = false;
                 }
-				/*if( press button) TODO5
-				{ 
-					//lens.parent = null;
-					//lens.component<collider> activate
-				}
-				*/
             }
         }
         else if (!Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
@@ -235,7 +236,7 @@ public class FirstPersonViewToggle : MonoBehaviour
         while (t < 1.0f)
         {
             t += Time.deltaTime * (Time.timeScale / transitionDuration);
-
+            
             transform.rotation = Quaternion.Lerp(fromAngle, Quaternion.Euler(trans.eulerAngles), t);
             yield return null;
         }

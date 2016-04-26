@@ -6,14 +6,20 @@ public class DampenLightIntensity : MonoBehaviour
     [Range(0, 1)]
     public float firstPersonViewIntensity = 0.2f;
 
-    private float drainOrGainRate = 1.1f;
+    private float drainOrGainRate = 1.5f;
     private float originalIntensity;
     private LightShafts dampedLight;
     private LensReflect lr;
+    private bool overriddenWhenFullyPowered = false;
 
     // Use this for initialization
     void Awake()
     {
+        DampenLightWhenRoomFullyPowered d = GetComponent<DampenLightWhenRoomFullyPowered>();
+        if (d != null)
+        {
+            overriddenWhenFullyPowered = true;
+        }
         dampedLight = GetComponent<LightShafts>();
         lr = FindObjectOfType<LensReflect>();
         originalIntensity = dampedLight.m_Brightness;
@@ -22,13 +28,30 @@ public class DampenLightIntensity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(StateController.currentZoom == ZoomStatus.zoomingIn && lr.inLight)
+        if (!overriddenWhenFullyPowered)
         {
-            drainIntensity();
+            if (StateController.currentZoom == ZoomStatus.zoomingIn && lr.inLight)
+            {
+                drainIntensity();
+            }
+            else
+            {
+                gainIntensity();
+            }
         }
         else
         {
-            gainIntensity();
+            if (!RoomState.roomFullyPowered)
+            {
+                if (StateController.currentZoom == ZoomStatus.zoomingIn && lr.inLight)
+                {
+                    drainIntensity();
+                }
+                else
+                {
+                    gainIntensity();
+                }
+            }
         }
     }
 

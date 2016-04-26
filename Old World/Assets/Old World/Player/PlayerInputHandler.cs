@@ -15,11 +15,9 @@ public class PlayerInputHandler : MonoBehaviour
     private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
 	private PlayerController pController;
     private bool OpenMenuButton;
-    private CameraOrbit CameraScript;
     private void Start()
     {
 		pController = GameObject.Find("Player").GetComponent<PlayerController>();
-		CameraScript = GameObject.Find("MainCamera").GetComponent<CameraOrbit>();
         // get the transform of the main camera
         if (Camera.main != null)
         {

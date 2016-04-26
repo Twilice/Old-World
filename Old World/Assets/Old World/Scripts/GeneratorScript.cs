@@ -11,6 +11,21 @@ public class GeneratorScript : MonoBehaviour
     public bool ChargerTarget;
     public bool Active = false;
 
+    private DoorLight doorLight;
+    private DoorLight[] allDoorLights;
+
+    void Awake()
+    {
+        allDoorLights = FindObjectsOfType<DoorLight>();
+        for (int i = 0; i < allDoorLights.Length; i++)
+        {
+            if(allDoorLights[i].transform.CompareTag(transform.tag))
+            {
+                doorLight = allDoorLights[i];
+            }
+        }
+    }
+
     void Update()
     {
         if (Active == true)
@@ -46,5 +61,8 @@ public class GeneratorScript : MonoBehaviour
                 Targets[i].GetComponent<GeneratorScript>().Activate();
             }
         }
+
+        //Change the light
+        doorLight.Activate();
     }
 }

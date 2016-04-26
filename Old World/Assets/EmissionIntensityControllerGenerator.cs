@@ -10,8 +10,6 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
     [Range(1, 9)]
     public int lightNumber;
 
-    private EmissiveHitByLightGenerator ehblg;
-    private float t1 = 0.0f;
     private Renderer r;
     private float emissionIntensity = 0f;
     private Color c;
@@ -32,7 +30,6 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
         {
             c = Color.white;
         }
-        ehblg = GetComponent<EmissiveHitByLightGenerator>();
     }
 
     // Update is called once per frame

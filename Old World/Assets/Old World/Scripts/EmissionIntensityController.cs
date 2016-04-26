@@ -29,7 +29,6 @@ public class EmissionIntensityController : MonoBehaviour
     private float roomActiveEnergy;
     private bool generatorActivated = false;
     private bool roomActivated = false;
-    private bool isFlickering = false;
     private bool energyThreshold = true;
     private bool isConnectedToSolarPanel = false;
     private float offset = 0.0f;
@@ -44,10 +43,10 @@ public class EmissionIntensityController : MonoBehaviour
         ehbl = GetComponent<EmissiveHitByLight>();
         solarPanels = FindObjectsOfType<SolarPanel>();
 
-        for(int i = 0; i < solarPanels.Length; i++)
-        { 
+        for (int i = 0; i < solarPanels.Length; i++)
+        {
             //If this is this light's solar panel
-            if(solarPanels[i].transform.CompareTag(transform.tag))
+            if (solarPanels[i].transform.CompareTag(transform.tag))
             {
                 solarEhbl = solarPanels[i];
                 isConnectedToSolarPanel = true;
@@ -134,17 +133,20 @@ public class EmissionIntensityController : MonoBehaviour
     public void drainEnergy()
     {
         //Flicker lights if they are currently draining
-        if(isConnectedToSolarPanel)
+        if (!RoomState.roomFullyPowered)
         {
-            if (!energyThreshold && !solarEhbl.isHitByLight)
-                FlickerLight();
+            if (isConnectedToSolarPanel)
+            {
+                if (!energyThreshold && !solarEhbl.isHitByLight)
+                    FlickerLight();
+            }
+            else
+            {
+                if (!energyThreshold)
+                    FlickerLight();
+            }
         }
-        else
-        {
-            if (!energyThreshold)
-                FlickerLight();
-        }
-        
+
 
         //Drain Energy
         if (roomActivated)

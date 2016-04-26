@@ -80,7 +80,7 @@ public class InspectViewToggle : MonoBehaviour
                 float y = inspectPos.y;
                 inspectPos.y = player.transform.position.y;
                 player.transform.LookAt(inspectPos);
-                inspectPos.y = y-1.0f;
+                inspectPos.y = y;
                 inspectTarget.LookAt(inspectPos);
                 firstTimeFP = false;
 

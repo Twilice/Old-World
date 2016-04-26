@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class Inspectable : MonoBehaviour
 {
+    public bool needsPower = false;
+    private string powerOffText = "It doesn't seem to be powered.";
     private static GameObject inspectBox;
     private static Text boxHeadline;
     private static Text boxText;
     private static float characterPerSeconds = 50f;
     public string inspectHeadline = "";
     public List<TextAsset> inspectText = new List<TextAsset>();
+    private string inspectString = "";
     private int currentTextID = 0;
     private InspectViewToggle inspectViewToggle;
     private bool canBeInspected = false;
@@ -44,40 +47,77 @@ public class Inspectable : MonoBehaviour
 
     void Update()
     {
-        //todo add character by character instead of string.
-        if (canBeInspected)
+        if (needsPower == false || needsPower && RoomState.roomFullyPowered)
         {
-            if (Input.GetButtonDown("Inspect"))
+            if (canBeInspected)
             {
-                currentTextID = 0;
-                charIndex = 0;
-                charIndexFloat = 0;
-                stringLength = inspectText[currentTextID].text.Length;
-                inspectBox.SetActive(true);
-                inspectViewToggle.StartInspectView(transform.position);
-                boxHeadline.text = inspectHeadline;
-                //boxText.text = inspectText[currentTextID].text;
-            }
-            else if (Input.GetButtonDown("InspectSkip"))
-            {
-                //characters left
-                if (charIndex < stringLength)
+                if (Input.GetButtonDown("Inspect"))
                 {
-                    charIndex = stringLength;
-                    boxText.text = inspectText[currentTextID].text.Substring(0, charIndex);
+                    currentTextID = 0;
+                    charIndex = 0;
+                    charIndexFloat = 0;
+                    inspectString = inspectText[currentTextID].text;
+                    stringLength = inspectString.Length;
+                    inspectBox.SetActive(true);
+                    inspectViewToggle.StartInspectView(transform.position);
+                    boxHeadline.text = inspectHeadline;
+                    //boxText.text = inspectText[currentTextID].text;
                 }
-                //new page
-                else
+                else if (Input.GetButtonDown("InspectSkip"))
                 {
-                    currentTextID++;
-                    // pages left
-                    if (currentTextID < inspectText.Count)
+                    //characters left
+                    if (charIndex < stringLength)
                     {
-                        charIndex = 0;
-                        charIndexFloat = 0;
-                        stringLength = inspectText[currentTextID].text.Length;
+                        charIndex = stringLength;
+                        boxText.text = inspectString.Substring(0, charIndex);
                     }
-                    // no pages left 
+                    //new page
+                    else
+                    {
+                        currentTextID++;
+                        // pages left
+                        if (currentTextID < inspectText.Count)
+                        {
+                            charIndex = 0;
+                            charIndexFloat = 0;
+                            inspectString = inspectText[currentTextID].text;
+                            stringLength = inspectString.Length;
+                        }
+                        // no pages left 
+                        else
+                        {
+                            inspectViewToggle.ExitInspectView();
+                            inspectBox.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (canBeInspected)
+            {
+                if (Input.GetButtonDown("Inspect"))
+                {
+                    currentTextID = 0;
+                    charIndex = 0;
+                    charIndexFloat = 0;
+                    inspectString = powerOffText;
+                    stringLength = inspectString.Length;
+                    inspectBox.SetActive(true);
+                    inspectViewToggle.StartInspectView(transform.position);
+                    boxHeadline.text = inspectHeadline;
+                    //boxText.text = inspectText[currentTextID].text;
+                }
+                else if (Input.GetButtonDown("InspectSkip"))
+                {
+                    //characters left
+                    if (charIndex < stringLength)
+                    {
+                        charIndex = stringLength;
+                        boxText.text = inspectString.Substring(0, charIndex);
+                    }
+                    //new page
                     else
                     {
                         inspectViewToggle.ExitInspectView();
@@ -93,13 +133,8 @@ public class Inspectable : MonoBehaviour
             charIndex = (int)charIndexFloat;
             if (stringLength < charIndex)
                 charIndex = stringLength;
-            boxText.text = inspectText[currentTextID].text.Substring(0, charIndex);
+            boxText.text = inspectString.Substring(0, charIndex);
         }
-    }
-
-    void SetTextBoxText(string page)
-    {
-
     }
 
     void OnTriggerStay()

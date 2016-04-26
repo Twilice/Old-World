@@ -14,7 +14,7 @@ public class RoomState : MonoBehaviour {
     void Awake()
     {
         generators = FindObjectsOfType<GeneratorScript>();
-        InvokeRepeating("UpdateGenerators", 0, 0.33f);
+        InvokeRepeating("UpdateGenerators", 0, 0.1f);
     }
 
 	// Update is called once per frame

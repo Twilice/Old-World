@@ -1,7 +1,6 @@
 Strafe walk in first person mode
 
-Smooth camera transisions++
-Make character face camera rotation when zooming in. (Tvärt om från nu)
+Smooth camera transisions++ (accelererande rörelse)
 
 Strange transition between instant inspect->firstperson
 
@@ -9,4 +8,6 @@ Try to make the emissive materials that will change intensity in a scene to Bake
 
 Change collision boxes from mesh to box if possible
 
-Moke it impossible to activate the orb when in menu
+
+Rotera kristallen mot ljuskällan.
+Rotera kristallen upp och ner när man siktar upp och ner

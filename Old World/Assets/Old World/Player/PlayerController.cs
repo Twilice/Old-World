@@ -35,7 +35,9 @@ public class PlayerController : MonoBehaviour
     float m_TurnAmount;
     float m_ForwardAmount;
 	float velocity;
-    Vector3 m_GroundNormal;
+	public float air_accelerate = 3;
+	public float max_speed = 0.1f;
+	Vector3 m_GroundNormal;
     float m_CapsuleHeight;
     Vector3 m_CapsuleCenter;
     CapsuleCollider m_Capsule;
@@ -90,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            HandleAirborneMovement();
+            HandleAirborneMovement(move);
         }
 
         ScaleCapsuleForCrouching(crouch);
@@ -178,14 +180,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void HandleAirborneMovement()
+    void HandleAirborneMovement(Vector3 move)
     {
         // apply extra gravity from multiplier:
         Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
         m_Rigidbody.AddForce(extraGravityForce);
-
 		m_Rigidbody.velocity = new Vector3(-velocity * Mathf.Cos((m_Rigidbody.transform.forward.x + 1) * (0.5f * Mathf.PI)), m_Rigidbody.velocity.y, -velocity * Mathf.Cos((m_Rigidbody.transform.forward.z + 1) * (0.5f * Mathf.PI)));
-
+		m_Rigidbody.velocity += new Vector3((-1 * Mathf.Cos((m_Rigidbody.transform.forward.x + 1) * (0.5f * Mathf.PI)) * move.z * air_accelerate), 0 , (-1 * Mathf.Cos((m_Rigidbody.transform.forward.z + 1) * (0.5f * Mathf.PI)) * move.z * air_accelerate));
+		m_Rigidbody.velocity = new Vector3(Mathf.Clamp(m_Rigidbody.velocity.x, -max_speed, max_speed), m_Rigidbody.velocity.y, Mathf.Clamp(m_Rigidbody.velocity.z, -max_speed, max_speed));
 		m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
     }
 

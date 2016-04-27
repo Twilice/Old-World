@@ -61,6 +61,7 @@ public class MoveLensTarget : MonoBehaviour
                         target.position = transform.position + transform.TransformDirection(Vector3.forward) * 10;
                     }
                     lensLight.LookAt(target);
+                    lens.LookAt(target);
                 }
 
                 //Check if lens is dropped

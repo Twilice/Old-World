@@ -42,8 +42,12 @@ public class PlayerController : MonoBehaviour
     Vector3 m_CapsuleCenter;
     CapsuleCollider m_Capsule;
     bool m_Crouching;
-    private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
+    private CameraLookAt mouseLook;
 
+    void Awake()
+    {
+        mouseLook = CameraLookAt.GetMouseLook();
+    }
     void Start()
     {
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();

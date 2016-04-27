@@ -9,17 +9,19 @@ public class CameraLookAt
 	private static CameraLookAt instance;
 	public static CameraLookAt GetMouseLook()
 	{
-		if (instance == null)
-			instance = new CameraLookAt();
-		return instance;
+        if (instance == null)
+        {
+            instance = new CameraLookAt();
+        }
+        return instance;
 	}
-	public float XSensitivity = 2f;
-	public float YSensitivity = 2f;
-	public bool clampVerticalRotation = true;
-	public float MinimumX = -90F;
-	public float MaximumX = 90F;
+    private float XSensitivity = 2f;
+    private float YSensitivity = 2f;
+    private bool clampVerticalRotation = true;
+	private float MinimumX = -80F;
+	private float MaximumX = 80F;
 	private bool smooth = false;
-	public float smoothTime = 5f;
+	private float smoothTime = 5f;
 
     private Quaternion m_CharacterTargetRot;
 	private Quaternion m_CameraTargetRot;
@@ -67,8 +69,8 @@ public class CameraLookAt
 		float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
 
 		angleX = Mathf.Clamp(angleX, MinimumX, MaximumX);
-
-		q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
+        
+        q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
 		return q;
 	}

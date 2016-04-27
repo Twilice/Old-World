@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveLensTarget : MonoBehaviour {
-    
+public class MoveLensTarget : MonoBehaviour
+{
+
     private Transform target;
     private Transform lens;
     private Transform lensLight;
@@ -35,9 +36,10 @@ public class MoveLensTarget : MonoBehaviour {
         lensScript = lens.GetComponent<LensReflect>();
         targetLens = GameObject.Find("Player/TargetLens").transform;
     }
-	
-	//Update is called once per frame
-	void LateUpdate () {
+
+    //Update is called once per frame
+    void LateUpdate()
+    {
         if (StateController.menuOpen == false)
         {
             if (LensDropped || FirstPersonViewToggle.FirstPerson)
@@ -59,6 +61,7 @@ public class MoveLensTarget : MonoBehaviour {
                         target.position = transform.position + transform.TransformDirection(Vector3.forward) * 10;
                     }
                     lensLight.LookAt(target);
+                    lens.LookAt(target);
                 }
 
                 //Check if lens is dropped

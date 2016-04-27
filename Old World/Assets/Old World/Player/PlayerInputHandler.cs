@@ -12,12 +12,18 @@ public class PlayerInputHandler : MonoBehaviour
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
-    private CameraLookAt mouseLook = CameraLookAt.GetMouseLook();
+    private CameraLookAt mouseLook;
 	private PlayerController pController;
     private bool OpenMenuButton;
+    private void Awake()
+    {
+        mouseLook = CameraLookAt.GetMouseLook();
+    }
     private void Start()
     {
-		pController = GameObject.Find("Player").GetComponent<PlayerController>();
+        
+
+        pController = GameObject.Find("Player").GetComponent<PlayerController>();
         // get the transform of the main camera
         if (Camera.main != null)
         {

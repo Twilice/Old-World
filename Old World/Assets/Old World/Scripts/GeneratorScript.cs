@@ -19,7 +19,7 @@ public class GeneratorScript : MonoBehaviour
         allDoorLights = FindObjectsOfType<DoorLight>();
         for (int i = 0; i < allDoorLights.Length; i++)
         {
-            if(allDoorLights[i].transform.CompareTag(transform.tag))
+			if (allDoorLights[i].transform.CompareTag(transform.tag))
             {
                 doorLight = allDoorLights[i];
             }
@@ -28,7 +28,7 @@ public class GeneratorScript : MonoBehaviour
 
     void Update()
     {
-        if (Active == true)
+		if (Active == true)
         {
 			//Debug.Log(gameObject.name + " online");
 			for (int i = 0; i < Targets.Count; i++)
@@ -62,7 +62,7 @@ public class GeneratorScript : MonoBehaviour
             }
         }
 
-        //Change the light
-        doorLight.Activate();
+		//Change the light
+		doorLight.Activate();
     }
 }

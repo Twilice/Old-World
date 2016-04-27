@@ -60,16 +60,19 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightExit()
     {
-        for (int i = 0; i < Targets.Count; i++)
-        {
-            foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
-            {
-                if (movingScript.ReturnToOriginalPosition == true)
-                {
-                    movingScript.returning = true;
-                }
-            }
-        }
+		if (platformTarget == true)
+		{
+			for (int i = 0; i < Targets.Count; i++)
+			{
+				foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+				{
+					if (movingScript.ReturnToOriginalPosition == true)
+					{
+						movingScript.returning = true;
+					}
+				}
+			}
+		}
     }
 
     public void gainEnergy()

@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 public class BatterySlot : MonoBehaviour
 {
+	[HideInInspector]
+	public bool online = false;
+
 	public bool hasBattery;
 
 	public List<GameObject> Targets;
+	public BatterySlot partner;
 	public bool PlatformTarget;
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
@@ -15,38 +19,42 @@ public class BatterySlot : MonoBehaviour
 	{
 		if (hasBattery == true && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
 		{
-			for (int i = 0; i < Targets.Count; i++)
+			online = true;
+			if (partner.online == true)
 			{
-				gameObject.GetComponentInChildren<Battery>().amountOfCharge--;
-				if (gameObject.GetComponentInChildren<Battery>().amountOfCharge <= 0)
+				for (int i = 0; i < Targets.Count; i++)
 				{
-					hasBattery = false;
-					for (int p = 0; p < Targets.Count; p++)
+					gameObject.GetComponentInChildren<Battery>().amountOfCharge--;
+					if (gameObject.GetComponentInChildren<Battery>().amountOfCharge <= 0)
+					{
+						hasBattery = false;
+						for (int p = 0; p < Targets.Count; p++)
+						{
+							foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+							{
+								if (movingScript.ReturnToOriginalPosition == true)
+								{
+									movingScript.returning = true;
+								}
+							}
+						}
+						break;
+					}
+					if (PlatformTarget == true)
 					{
 						foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 						{
-							if (movingScript.ReturnToOriginalPosition == true)
-							{
-								movingScript.returning = true;
-							}
+							movingScript.Activate();
 						}
 					}
-					break;
-				}
-				if (PlatformTarget == true)
-				{
-					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+					if (GeneratorTarget == true)
 					{
-						movingScript.Activate();
+						Targets[i].GetComponent<GeneratorScript>().Activate();
 					}
-				}
-				if (GeneratorTarget == true)
-				{
-					Targets[i].GetComponent<GeneratorScript>().Activate();
-				}
-				if (ChargerTarget == true)
-				{
-					Targets[i].GetComponent<ChargerScript>().Activate();
+					if (ChargerTarget == true)
+					{
+						Targets[i].GetComponent<ChargerScript>().Activate();
+					}
 				}
 			}
 		}
@@ -57,6 +65,7 @@ public class BatterySlot : MonoBehaviour
 		if (coll.gameObject.CompareTag("Battery"))
 		{
 			hasBattery = false;
+			online = false;
 		}
 	}
 }

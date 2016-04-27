@@ -16,6 +16,8 @@ public class Battery : MonoBehaviour
 
 	void Update ()
 	{
+		Debug.Log("Current charge: " + amountOfCharge);
+		Debug.Log("Max charge: " + (maxChargeInSeconds * 60));
 		if (amountOfCharge >= (maxChargeInSeconds * 60))
 		{
 			GetComponent<Renderer>().material.color = Color.green;
@@ -41,20 +43,18 @@ public class Battery : MonoBehaviour
 				gameObject.transform.localPosition = new Vector3(0, 1, 1);
 			}
 
-			else if (coll.gameObject.CompareTag("Battery Slot"))
+			else if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
 			{
 				coll.GetComponent<BatterySlot>().hasBattery = true;
 				gameObject.transform.SetParent(coll.gameObject.transform);
 				gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
 			}
 			
-			else if (coll.gameObject.CompareTag("Charger"))
+			else if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
 			{
 				coll.GetComponent<ChargerScript>().hasBattery = true;
 				gameObject.transform.SetParent(coll.gameObject.transform);
 				gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
-				gameObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
-				gameObject.transform.localScale = new Vector3(0.8F, 0.8F, 1.5F);
 			}
 
 			

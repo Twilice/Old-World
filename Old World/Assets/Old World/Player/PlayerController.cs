@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody.AddForce(extraGravityForce);
 		m_Rigidbody.velocity = new Vector3(-velocity * Mathf.Cos((m_Rigidbody.transform.forward.x + 1) * (0.5f * Mathf.PI)), m_Rigidbody.velocity.y, -velocity * Mathf.Cos((m_Rigidbody.transform.forward.z + 1) * (0.5f * Mathf.PI)));
 		m_Rigidbody.velocity += new Vector3((-1 * Mathf.Cos((m_Rigidbody.transform.forward.x + 1) * (0.5f * Mathf.PI)) * move.z * air_accelerate), 0 , (-1 * Mathf.Cos((m_Rigidbody.transform.forward.z + 1) * (0.5f * Mathf.PI)) * move.z * air_accelerate));
-		m_Rigidbody.velocity = new Vector3(Mathf.Clamp(m_Rigidbody.velocity.x, -max_speed, max_speed), m_Rigidbody.velocity.y, Mathf.Clamp(m_Rigidbody.velocity.z, -max_speed, max_speed));
+		//m_Rigidbody.velocity = new Vector3(Mathf.Clamp(m_Rigidbody.velocity.x, -max_speed, max_speed), m_Rigidbody.velocity.y, Mathf.Clamp(m_Rigidbody.velocity.z, -max_speed, max_speed));
 		m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
     }
 

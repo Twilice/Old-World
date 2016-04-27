@@ -17,7 +17,7 @@ public class DoorScript : MonoBehaviour
     {
         if (RoomState.roomFullyPowered)
         {
-            Activate();
+            Invoke("Activate", 5);
         }
     }
 

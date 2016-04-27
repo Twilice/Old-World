@@ -1,9 +1,9 @@
 ﻿Shader "Hidden/ColorFilter" {
 SubShader {
     Pass {
-        Fog { Mode Off }
-		Cull Off
-		Blend Off
+        Tags { "Queue"="Transparent" }
+		ZTest Always
+		Blend SrcAlpha OneMinusSrcAlpha
 CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
@@ -26,7 +26,9 @@ v2f vert (appdata_base v) {
 }
 
 float4 frag(v2f i) : COLOR {
-    return _Color * tex2D(_MainTex, i.uv);
+	float4 temp = tex2D(_MainTex, i.uv).xyzw;
+	temp.xyz = 0.5;
+    return _Color * temp;
 }
 ENDCG
     }

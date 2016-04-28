@@ -16,12 +16,26 @@ public class SolarPanel : TriggeredByLight
     private float energy = 0.0f;
     private EmissionIntensityController[] e;
     private EmissionIntensityControllerGenerator[] eg;
+    private ParticleRandomizer[] pr;
+    private List<ParticleRandomizer> particleTargets = new List<ParticleRandomizer>();
 
     void Awake()
     {
         //Find every instance of the EmissionIntensityController and EmissionIntensityControllerGenerator script on every GameObject
         e = FindObjectsOfType<EmissionIntensityController>();
         eg = FindObjectsOfType<EmissionIntensityControllerGenerator>();
+        pr = FindObjectsOfType<ParticleRandomizer>();
+
+        if (pr.Length != 0)
+        {
+            for (int k = 0; k < pr.Length; k++)
+            {
+                if (pr[k].CompareTag(tag))
+                {
+                    particleTargets.Add(pr[k]);
+                }
+            }
+        }
     }
 
     void Update()
@@ -34,6 +48,13 @@ public class SolarPanel : TriggeredByLight
         UpdateGeneratorLight();
     }
 
+    protected override void HitByLightEnter()
+    {
+        foreach (ParticleRandomizer p in particleTargets)
+        {
+            p.currentlyCharging = true;
+        }
+    }
     protected override void HitByLightStay()
     {
         //Gain energy when hit by light
@@ -52,6 +73,8 @@ public class SolarPanel : TriggeredByLight
                 }
             }
         }
+
+        
 
         //Play powering up sound
         //Fade lights on?
@@ -73,6 +96,11 @@ public class SolarPanel : TriggeredByLight
 				}
 			}
 		}
+
+        foreach (ParticleRandomizer p in particleTargets)
+        {
+            p.currentlyCharging = false;
+        }
     }
 
     public void gainEnergy()
@@ -96,10 +124,20 @@ public class SolarPanel : TriggeredByLight
         if (energy - Time.deltaTime * RoomState.drainAmount * (1f / 0.3f) < 0.0f)
         {
             energy = 0.0f;
+
+            foreach (ParticleRandomizer p in particleTargets)
+            {
+                p.currentlyDraining = false;
+            }
         }
         else
         {
             energy -= Time.deltaTime * RoomState.drainAmount * (1f / 0.3f);
+
+            foreach (ParticleRandomizer p in particleTargets)
+            {
+                p.currentlyDraining = true;
+            }
         }
     }
 

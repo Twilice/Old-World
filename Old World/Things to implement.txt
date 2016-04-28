@@ -8,6 +8,25 @@ Try to make the emissive materials that will change intensity in a scene to Bake
 
 Change collision boxes from mesh to box if possible
 
-
 Rotera kristallen mot ljuskällan.
-Rotera kristallen upp och ner när man siktar upp och ner
+
+Hårfysik
+
+
+
+(((((((((((Smoke at light point))))))))))))
+
+
+
+
+
+
+IMPORTANTE
+Byta ut placeholderkaraktär
+
+Byta ut kristallen
+Partikeleffekter/unityversion
+LightShaft genom löv
+
+
+SSAO

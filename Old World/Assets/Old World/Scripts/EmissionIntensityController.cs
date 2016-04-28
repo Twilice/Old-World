@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [DisallowMultipleComponent]
 public class EmissionIntensityController : MonoBehaviour
@@ -33,8 +34,7 @@ public class EmissionIntensityController : MonoBehaviour
     private bool isConnectedToSolarPanel = false;
     private float offset = 0.0f;
     private float flickerDuration = 0.0f;
-
-
+    
     void Awake()
     {
         r = GetComponent<Renderer>();

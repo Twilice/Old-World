@@ -46,6 +46,15 @@ public class SolarPanel : TriggeredByLight
             drainEnergy();
         }
         UpdateGeneratorLight();
+
+        if(energy == 1.0f)
+        {
+            foreach (ParticleRandomizer p in particleTargets)
+            {
+                p.currentlyCharging = false;
+            }
+        }
+
     }
 
     protected override void HitByLightEnter()

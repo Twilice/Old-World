@@ -5,11 +5,13 @@ public class ParticleRandomizer : MonoBehaviour
 {
 
     public bool whenever = true;
-    public bool GeneratorCharging = false;
-    public bool GeneratorDraining = false;
-    public bool RoomActive = false;
+    public bool whenCharging = false;
+    public bool whenDraining = false;
+    public bool whenRoomActive = false;
     public bool randomBurstTime = true;
     public float randomBurstTimeOffset = 0.2f;
+
+    //RANDOM START TIME OFFSET
 
     public float burstTime = 0.5f;
     public float approximateIntervals = 6.0f;
@@ -45,8 +47,6 @@ public class ParticleRandomizer : MonoBehaviour
             newRand = false;
         }
 
-        //MAKE THE GENERATOR CHARGING THINGY STAHP!
-
         if (whenever)
         {
 
@@ -66,7 +66,7 @@ public class ParticleRandomizer : MonoBehaviour
                 }
             }
         }
-        else if (GeneratorCharging)
+        else if (whenCharging)
         {
             if (timer >= approximateIntervals + offset + burstTime + burstOffset) //If the burst should end
             {
@@ -84,7 +84,7 @@ public class ParticleRandomizer : MonoBehaviour
                 }
             }
         }
-        else if(GeneratorDraining)
+        else if(whenDraining)
         {
             if (timer >= approximateIntervals + offset + burstTime + burstOffset) //If the burst should end
             {

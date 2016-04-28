@@ -14,8 +14,8 @@ Hårfysik
 
 
 
-(((((((((((Smoke at light point))))))))))))
-
+Smoke at light point
+Kristallöppning emission map dynamisk
 
 
 

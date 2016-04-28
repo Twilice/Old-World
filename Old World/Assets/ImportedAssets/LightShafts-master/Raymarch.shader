@@ -183,23 +183,27 @@ float4 frag(posuv i) : COLOR
 		// Important to use tex2Dlod to save on calculating derivatives, and we're
 		// sampling once every texel anyway. tex2D is 6x slower.
 		float3 sample = tex2Dlod(_Shadowmap, float4(pos.xy, 0, 0)).x > pos.z;
-
+		
+	
 		sample *= attenuation(pos.z);
+		// i step ska en "collisions"variabel jämföras med pos.z, sample verkar inte följa höjden :(, plan B är att hårdkåda till ungefär där löven är
+		float3 temp = tex2Dlod(_ColorFilter, float4(pos.xy, 0, 0)).xyz * step(sample.z, pos.z) + 1 * step(pos.z, sample.z);
 
-		#if defined(COLORED_ON)
-			sample *= tex2Dlod(_ColorFilter, float4(pos.xy, 0, 0)).xyz;
-		#endif
+	
+#if defined(COLORED_ON)
+		sample *= temp;
+#endif
 
 		//#if defined(SPOT_SHAFTS)
 			sample *= cookie(pos.xy);
 		//#endif
-
 		inscatter += sample;
 	}
 
 	// Normalize inscattered light depending on how many steps we took and what part
 	// of the entire depth did we raymarch.
 	float randomBrightness = -abs(snoise(float2(uv.x*6  + _Time.y*0.2, uv.y*6 + _Time.y*0.2))) * _RandomBrightness; // randomBrightness är väldigt test... tror uv inte är helt rätt kordinater i detta fallet
+
 	inscatter *= _LightColor.rgb * (_Brightness + randomBrightness) * oneOverSteps * depthAlongView;
 	return saturate(inscatter).xyzz;
 }

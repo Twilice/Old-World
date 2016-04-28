@@ -10,7 +10,7 @@ public class ChargerScript : MonoBehaviour
 	{
 		if (hasBattery == true)
 		{
-			gameObject.GetComponentInChildren<Battery>().amountOfCharge++;
+			gameObject.GetComponentInChildren<Battery>().amountOfCharge += 3;
 		}
 	}
 }

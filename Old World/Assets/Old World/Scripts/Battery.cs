@@ -18,9 +18,6 @@ public class Battery : MonoBehaviour
 
 	void Update ()
 	{
-		Debug.Log("Current charge: " + amountOfCharge);
-		Debug.Log("Max charge: " + (maxChargeInSeconds * 60));
-
 		if (amountOfCharge >= (maxChargeInSeconds * 60))
 		{
 			GetComponent<Renderer>().material.color = Color.green;
@@ -70,34 +67,36 @@ public class Battery : MonoBehaviour
 					gameObject.transform.localPosition = new Vector3(0, 1, 1);
 				}
 			}
-
-			if (pickedUp == true)
-			{
-				if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
-				{
-					pickedUp = false;
-					coll.GetComponent<BatterySlot>().hasBattery = true;
-					gameObject.transform.SetParent(coll.gameObject.transform);
-					gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-				}
-
-				if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
-				{
-					Debug.Log("Battery is in");
-					pickedUp = false;
-					coll.GetComponent<ChargerScript>().hasBattery = true;
-					gameObject.transform.SetParent(coll.gameObject.transform);
-					gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
-				}
-
-				if (coll.gameObject.CompareTag("Battery Slot Linked") && coll.GetComponent<BatterySlotLinked>().hasBattery == false)
-				{
-					pickedUp = false;
-					coll.GetComponent<BatterySlotLinked>().hasBattery = true;
-					gameObject.transform.SetParent(coll.gameObject.transform);
-					gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-				}
-			}
 		}
     }
+
+	void OnTriggerEnter(Collider coll)
+	{
+		if (pickedUp == true)
+		{
+			if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
+			{
+				pickedUp = false;
+				coll.GetComponent<BatterySlot>().hasBattery = true;
+				gameObject.transform.SetParent(coll.gameObject.transform);
+				gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
+			}
+
+			if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
+			{
+				pickedUp = false;
+				coll.GetComponent<ChargerScript>().hasBattery = true;
+				gameObject.transform.SetParent(coll.gameObject.transform);
+				gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
+			}
+
+			if (coll.gameObject.CompareTag("Battery Slot Linked") && coll.GetComponent<BatterySlotLinked>().hasBattery == false)
+			{
+				pickedUp = false;
+				coll.GetComponent<BatterySlotLinked>().hasBattery = true;
+				gameObject.transform.SetParent(coll.gameObject.transform);
+				gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
+			}
+		}
+	}
 }

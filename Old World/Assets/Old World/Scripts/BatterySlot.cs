@@ -7,12 +7,12 @@ public class BatterySlot : MonoBehaviour
 	public bool hasBattery;
 
 	public List<GameObject> Targets;
-	
+
 	public bool PlatformTarget;
 	public bool GeneratorTarget;
 	public bool ChargerTarget;
 
-	void Update ()
+	void Update()
 	{
 		if (hasBattery == true)
 		{
@@ -20,22 +20,12 @@ public class BatterySlot : MonoBehaviour
 			{
 				if (gameObject.GetComponentInChildren<Battery>().amountOfCharge <= 0)
 				{
-					for (int p = 0; p < Targets.Count; p++)
-					{
-						foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
-						{
-							if (movingScript.ReturnToOriginalPosition == true)
-							{
-								movingScript.returning = true;
-							}
-						}
-					}
 					hasBattery = false;
 					break;
 				}
 
 				gameObject.GetComponentInChildren<Battery>().amountOfCharge--;
-				
+
 				if (PlatformTarget == true)
 				{
 					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
@@ -50,6 +40,19 @@ public class BatterySlot : MonoBehaviour
 				if (ChargerTarget == true)
 				{
 					Targets[i].GetComponent<ChargerScript>().Activate();
+				}
+			}
+		}
+		else if (hasBattery == false)
+		{
+			for (int p = 0; p < Targets.Count; p++)
+			{
+				foreach (MovingPlatformScript movingScript in Targets[p].GetComponentsInChildren<MovingPlatformScript>())
+				{
+					if (movingScript.ReturnToOriginalPosition == true)
+					{
+						movingScript.returning = true;
+					}
 				}
 			}
 		}

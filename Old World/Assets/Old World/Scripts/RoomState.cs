@@ -25,7 +25,7 @@ public class RoomState : MonoBehaviour {
         musicEvent.getParameter(parameterName, out musicParameter);
         InvokeRepeating("UpdateGenerators", 0, 0.1f);
         musicParameter.setValue(musicParamValue);
-        musicEvent.start();
+       // musicEvent.start();
     }
 
 	// Update is called once per frame
@@ -44,10 +44,5 @@ public class RoomState : MonoBehaviour {
         }
         musicParameter.setValue(musicParamValue);
         roomFullyPowered = isPowerered;
-
-        if(roomFullyPowered)
-        {
-            GameObject.Find("TestObject").GetComponent<EventPlayer>().PlayEvent();
-        }
     }
 }

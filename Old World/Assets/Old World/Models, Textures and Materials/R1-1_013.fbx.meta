@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: 1541f625838211d41b56e8de06701bd0
+timeCreated: 1461940630
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: R1_1_Floor_LMS
+    100004: R1_1_Pillar_LMS_001
+    100006: R1_1_Pillar_LMS_0010
+    100008: R1_1_Pillar_LMS_0011
+    100010: R1_1_Pillar_LMS_0012
+    100012: R1_1_Pillar_LMS_0013
+    100014: R1_1_Pillar_LMS_0014
+    100016: R1_1_Pillar_LMS_0015
+    100018: R1_1_Pillar_LMS_0016
+    100020: R1_1_Pillar_LMS_002
+    100022: R1_1_Pillar_LMS_003
+    100024: R1_1_Pillar_LMS_004
+    100026: R1_1_Pillar_LMS_005
+    100028: R1_1_Pillar_LMS_006
+    100030: R1_1_Pillar_LMS_007
+    100032: R1_1_Pillar_LMS_008
+    100034: R1_1_Pillar_LMS_009
+    100036: R1_1_Pillars_LMS
+    100038: R1_1_Platforms_LMS
+    100040: R1_1_Second_Level
+    100042: R1_1_Stairs
+    100044: R1_1_Wall_LMS
+    400000: //RootNode
+    400002: R1_1_Floor_LMS
+    400004: R1_1_Pillar_LMS_001
+    400006: R1_1_Pillar_LMS_0010
+    400008: R1_1_Pillar_LMS_0011
+    400010: R1_1_Pillar_LMS_0012
+    400012: R1_1_Pillar_LMS_0013
+    400014: R1_1_Pillar_LMS_0014
+    400016: R1_1_Pillar_LMS_0015
+    400018: R1_1_Pillar_LMS_0016
+    400020: R1_1_Pillar_LMS_002
+    400022: R1_1_Pillar_LMS_003
+    400024: R1_1_Pillar_LMS_004
+    400026: R1_1_Pillar_LMS_005
+    400028: R1_1_Pillar_LMS_006
+    400030: R1_1_Pillar_LMS_007
+    400032: R1_1_Pillar_LMS_008
+    400034: R1_1_Pillar_LMS_009
+    400036: R1_1_Pillars_LMS
+    400038: R1_1_Platforms_LMS
+    400040: R1_1_Second_Level
+    400042: R1_1_Stairs
+    400044: R1_1_Wall_LMS
+    2300000: R1_1_Floor_LMS
+    2300002: R1_1_Pillar_LMS_001
+    2300004: R1_1_Pillar_LMS_0010
+    2300006: R1_1_Pillar_LMS_0011
+    2300008: R1_1_Pillar_LMS_0012
+    2300010: R1_1_Pillar_LMS_0013
+    2300012: R1_1_Pillar_LMS_0014
+    2300014: R1_1_Pillar_LMS_0015
+    2300016: R1_1_Pillar_LMS_0016
+    2300018: R1_1_Pillar_LMS_002
+    2300020: R1_1_Pillar_LMS_003
+    2300022: R1_1_Pillar_LMS_004
+    2300024: R1_1_Pillar_LMS_005
+    2300026: R1_1_Pillar_LMS_006
+    2300028: R1_1_Pillar_LMS_007
+    2300030: R1_1_Pillar_LMS_008
+    2300032: R1_1_Pillar_LMS_009
+    2300034: R1_1_Platforms_LMS
+    2300036: R1_1_Second_Level
+    2300038: R1_1_Stairs
+    2300040: R1_1_Wall_LMS
+    3300000: R1_1_Floor_LMS
+    3300002: R1_1_Pillar_LMS_001
+    3300004: R1_1_Pillar_LMS_0010
+    3300006: R1_1_Pillar_LMS_0011
+    3300008: R1_1_Pillar_LMS_0012
+    3300010: R1_1_Pillar_LMS_0013
+    3300012: R1_1_Pillar_LMS_0014
+    3300014: R1_1_Pillar_LMS_0015
+    3300016: R1_1_Pillar_LMS_0016
+    3300018: R1_1_Pillar_LMS_002
+    3300020: R1_1_Pillar_LMS_003
+    3300022: R1_1_Pillar_LMS_004
+    3300024: R1_1_Pillar_LMS_005
+    3300026: R1_1_Pillar_LMS_006
+    3300028: R1_1_Pillar_LMS_007
+    3300030: R1_1_Pillar_LMS_008
+    3300032: R1_1_Pillar_LMS_009
+    3300034: R1_1_Platforms_LMS
+    3300036: R1_1_Second_Level
+    3300038: R1_1_Stairs
+    3300040: R1_1_Wall_LMS
+    4300000: R1_1_Floor_LMS
+    4300002: R1_1_Platforms_LMS
+    4300004: R1_1_Second_Level
+    4300006: R1_1_Stairs
+    4300008: R1_1_Wall_LMS
+    4300010: R1_1_Pillar_LMS_0016
+    4300012: R1_1_Pillar_LMS_0015
+    4300014: R1_1_Pillar_LMS_0014
+    4300016: R1_1_Pillar_LMS_0013
+    4300018: R1_1_Pillar_LMS_0012
+    4300020: R1_1_Pillar_LMS_0011
+    4300022: R1_1_Pillar_LMS_0010
+    4300024: R1_1_Pillar_LMS_009
+    4300026: R1_1_Pillar_LMS_008
+    4300028: R1_1_Pillar_LMS_007
+    4300030: R1_1_Pillar_LMS_006
+    4300032: R1_1_Pillar_LMS_005
+    4300034: R1_1_Pillar_LMS_004
+    4300036: R1_1_Pillar_LMS_003
+    4300038: R1_1_Pillar_LMS_002
+    4300040: R1_1_Pillar_LMS_001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

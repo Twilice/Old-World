@@ -44,5 +44,10 @@ public class RoomState : MonoBehaviour {
         }
         musicParameter.setValue(musicParamValue);
         roomFullyPowered = isPowerered;
+
+        if(roomFullyPowered)
+        {
+            GameObject.Find("TestObject").GetComponent<EventPlayer>().PlayEvent();
+        }
     }
 }

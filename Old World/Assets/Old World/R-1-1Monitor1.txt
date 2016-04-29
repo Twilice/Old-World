@@ -1,1 +1,0 @@
-The UA9 project revolves around uniquely designed silicon crystals with the ability to redirect particle beams within the LHC at CERN. UA10 is our new project with focus on greater angular redirections and collimation.

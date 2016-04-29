@@ -1,1 +1,0 @@
-The latest crystal design to allow for a much sharper redirecting angle, up to an astonishing 107o. This upgrade also allows for a more collimated ray, reducing the divergence significantly even at great distances.

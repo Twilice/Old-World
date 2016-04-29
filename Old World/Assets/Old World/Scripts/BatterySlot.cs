@@ -14,17 +14,14 @@ public class BatterySlot : MonoBehaviour
 
 	void Update()
 	{
-		if (hasBattery == true)
+		if (hasBattery == true && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
 		{
 			for (int i = 0; i < Targets.Count; i++)
 			{
-				if (gameObject.GetComponentInChildren<Battery>().amountOfCharge <= 0)
+				if (hasBattery == false)
 				{
-					hasBattery = false;
 					break;
 				}
-
-				gameObject.GetComponentInChildren<Battery>().amountOfCharge--;
 
 				if (PlatformTarget == true)
 				{

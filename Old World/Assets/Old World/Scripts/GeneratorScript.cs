@@ -30,7 +30,6 @@ public class GeneratorScript : MonoBehaviour
     {
 		if (Active == true)
         {
-			//Debug.Log(gameObject.name + " online");
 			for (int i = 0; i < Targets.Count; i++)
             {
 				if (PlatformTarget == true)
@@ -38,11 +37,15 @@ public class GeneratorScript : MonoBehaviour
 					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 					{
 						movingScript.Activate();
+						movingScript.returning = false;
 					}
 				}
 				if (ChargerTarget == true)
 				{
-					Targets[i].GetComponent<ChargerScript>().Activate();
+					foreach (ChargerScript chargeScript in Targets[i].GetComponentsInChildren<ChargerScript>())
+					{
+						chargeScript.Activate();
+					}
 				}
 			}
 		}

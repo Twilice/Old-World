@@ -77,7 +77,7 @@ public class EmissionIntensityController : MonoBehaviour
         //To prevent the color from being too bright
         if (emissionIntensity < 0.8f)
         {
-            mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2f);
+            mr.material.SetColor("_EmissionColor", c * emissionIntensity);
         }
 
         DynamicGI.SetEmissive(r, c * emissionIntensity);

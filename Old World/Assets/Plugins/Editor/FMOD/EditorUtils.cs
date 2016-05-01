@@ -369,7 +369,7 @@ namespace FMODUnity
             EditorUtility.DisplayDialog("FMOD Studio Unity Integration", "Version: " + VerionNumberToString(version), "OK");
         }
 
-        static FMOD.Studio.Bank masterBank;
+        //static FMOD.Studio.Bank masterBank;
         static FMOD.Studio.Bank previewBank;
         static FMOD.Studio.EventDescription previewEventDesc;
         static FMOD.Studio.EventInstance previewEventInstance;
@@ -399,7 +399,7 @@ namespace FMODUnity
 
             if (load)
             {
-                CheckResult(System.loadBankFile(EventManager.MasterBank.Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out masterBank));
+               // CheckResult(System.loadBankFile(EventManager.MasterBank.Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out masterBank)); //uncomment in case of fire
                 CheckResult(System.loadBankFile(eventRef.Banks[0].Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out previewBank));
 
                 CheckResult(System.getEventByID(eventRef.Guid, out previewEventDesc));
@@ -451,8 +451,8 @@ namespace FMODUnity
                 previewEventInstance.release();
                 previewEventInstance = null;
                 previewEventDesc = null;
-                previewBank.unload();
-                masterBank.unload();
+                if(previewBank != null) previewBank.unload();
+                //if(masterBank != null) masterBank.unload();
                 previewState = PreviewState.Stopped;
             }
         }

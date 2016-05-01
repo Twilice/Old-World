@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     float m_turningRadius = 2.5f;
 
 
-    Camera mainCamera;
     Rigidbody m_Rigidbody;
     Animator m_Animator;
     public bool m_IsGrounded;
@@ -42,16 +41,9 @@ public class PlayerController : MonoBehaviour
     Vector3 m_CapsuleCenter;
     CapsuleCollider m_Capsule;
     bool m_Crouching;
-    private CameraLookAt mouseLook;
-
-    void Awake()
-    {
-        mouseLook = CameraLookAt.GetMouseLook();
-    }
+    
     void Start()
     {
-        mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
-        mouseLook.Init(transform, mainCamera.transform);
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
@@ -258,13 +250,6 @@ public class PlayerController : MonoBehaviour
             m_GroundNormal = Vector3.up;
             m_Animator.applyRootMotion = false;
         }
-    }
-
-    public void RotateView()
-    {
-        //avoids the mouse looking if the game is effectively paused
-        if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
-            mouseLook.LookRotation(transform, mainCamera.transform);
     }
 }
 

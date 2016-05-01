@@ -8,7 +8,7 @@ public class MoveLensTarget : MonoBehaviour
     private Transform lens;
     private Transform lensLight;
     private Transform targetLens;
-    private SkinnedMeshRenderer lensMesh;
+    private Renderer lensMesh;
     private Collider collision;
     private LensReflect lensScript;
     private Vector3 originalLocalLensPos;
@@ -31,7 +31,7 @@ public class MoveLensTarget : MonoBehaviour
         target = GameObject.Find("LensTarget").transform;
         lens = GameObject.Find("Player/Lens").transform;
         lensLight = GameObject.Find("Player/Lens/ReflectedLensLight").transform;
-        lensMesh = lens.GetComponent<SkinnedMeshRenderer>();
+        lensMesh = lens.GetComponent<Renderer>();
         collision = lens.GetComponent<Collider>();
         lensScript = lens.GetComponent<LensReflect>();
         targetLens = GameObject.Find("Player/TargetLens").transform;

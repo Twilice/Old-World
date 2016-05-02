@@ -7,7 +7,7 @@ public class RoomState : MonoBehaviour {
     public static bool roomFullyPowered = false;
     public static float drainAmount = 0.1f;
     public static float gainAmount = 0.3f;
-
+	public bool playMusic = true;
     private GeneratorScript[] generators;
     [Header("Music")]
     public string eventName = "event:/Wing 1.1 (Test 2)";
@@ -25,6 +25,7 @@ public class RoomState : MonoBehaviour {
         musicEvent.getParameter(parameterName, out musicParameter);
         InvokeRepeating("UpdateGenerators", 0, 0.1f);
         musicParameter.setValue(musicParamValue);
+		if (playMusic)
         musicEvent.start();
     }
 

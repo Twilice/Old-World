@@ -67,36 +67,33 @@ public class Battery : MonoBehaviour
 					gameObject.transform.localPosition = new Vector3(0, 1, 1);
 				}
 			}
+
+			if (pickedUp == true)
+			{
+				if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
+				{
+					pickedUp = false;
+					coll.GetComponent<BatterySlot>().hasBattery = true;
+					gameObject.transform.SetParent(coll.gameObject.transform);
+					gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
+				}
+
+				else if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
+				{
+					pickedUp = false;
+					coll.GetComponent<ChargerScript>().hasBattery = true;
+					gameObject.transform.SetParent(coll.gameObject.transform);
+					gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
+				}
+
+				else if (coll.gameObject.CompareTag("Battery Slot Linked") && coll.GetComponent<BatterySlotLinked>().hasBattery == false)
+				{
+					pickedUp = false;
+					coll.GetComponent<BatterySlotLinked>().hasBattery = true;
+					gameObject.transform.SetParent(coll.gameObject.transform);
+					gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
+				}
+			}
 		}
     }
-
-	void OnTriggerEnter(Collider coll)
-	{
-		if (pickedUp == true)
-		{
-			if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
-			{
-				pickedUp = false;
-				coll.GetComponent<BatterySlot>().hasBattery = true;
-				gameObject.transform.SetParent(coll.gameObject.transform);
-				gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-			}
-
-			if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
-			{
-				pickedUp = false;
-				coll.GetComponent<ChargerScript>().hasBattery = true;
-				gameObject.transform.SetParent(coll.gameObject.transform);
-				gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
-			}
-
-			if (coll.gameObject.CompareTag("Battery Slot Linked") && coll.GetComponent<BatterySlotLinked>().hasBattery == false)
-			{
-				pickedUp = false;
-				coll.GetComponent<BatterySlotLinked>().hasBattery = true;
-				gameObject.transform.SetParent(coll.gameObject.transform);
-				gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-			}
-		}
-	}
 }

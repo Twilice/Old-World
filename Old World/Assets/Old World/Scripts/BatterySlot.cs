@@ -14,29 +14,32 @@ public class BatterySlot : MonoBehaviour
 
 	void Update()
 	{
-		if (hasBattery == true && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
+		if (hasBattery == true)
 		{
-			for (int i = 0; i < Targets.Count; i++)
+			if (gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
 			{
-				if (hasBattery == false)
+				for (int i = 0; i < Targets.Count; i++)
 				{
-					break;
-				}
-
-				if (PlatformTarget == true)
-				{
-					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+					if (hasBattery == false)
 					{
-						movingScript.Activate();
+						break;
 					}
-				}
-				if (GeneratorTarget == true)
-				{
-					Targets[i].GetComponent<GeneratorScript>().Activate();
-				}
-				if (ChargerTarget == true)
-				{
-					Targets[i].GetComponent<ChargerScript>().Activate();
+
+					if (PlatformTarget == true)
+					{
+						foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+						{
+							movingScript.Activate();
+						}
+					}
+					if (GeneratorTarget == true)
+					{
+						Targets[i].GetComponent<GeneratorScript>().Activate();
+					}
+					if (ChargerTarget == true)
+					{
+						Targets[i].GetComponent<ChargerScript>().Activate();
+					}
 				}
 			}
 		}

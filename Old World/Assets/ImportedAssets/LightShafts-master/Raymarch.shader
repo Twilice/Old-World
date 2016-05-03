@@ -181,7 +181,10 @@ Shader "Hidden/Raymarch" {
 #endif
 
 			//plan B för fake rörelse i lightshaft
-			//pos.x += sin(_Time.y*0.3 + snoise(float2(pos.x *10+ _Time.y*0.2, pos.y*10+ _Time.y*0.2))) *0.1;
+			pos.x += sin(snoise(float2(pos.x * 10 + _Time.x, pos.y * 7 + _Time.x))) *0.05;
+			pos.y += sin(snoise(float2(pos.x * 5 + _Time.x, pos.y * 8 + _Time.x))) *0.05;
+			pos.x = clamp(pos.x, 0, 1);
+			pos.y = clamp(pos.y, 0, 1);
 
 			// Important to use tex2Dlod to save on calculating derivatives, and we're
 			// sampling once every texel anyway. tex2D is 6x slower.
@@ -190,7 +193,7 @@ Shader "Hidden/Raymarch" {
 
 			sample *= attenuation(pos.z);
 			// i step ska en "collisions"variabel jämföras med pos.z, sample verkar inte följa höjden :(, plan B är att hårdkåda till ungefär där löven är
-			float3 temp = tex2Dlod(_ColorFilter, float4(pos.xy, 0, 0)).xyz * step(sample.z, pos.z) + 1 * step(pos.z, sample.z);
+			float3 temp = tex2Dlod(_ColorFilter, float4(pos.xy, 0, 0)).xyz * step(0.5, pos.z) + 1 * step(pos.z, 0.5);
 
 
 #if defined(COLORED_ON)

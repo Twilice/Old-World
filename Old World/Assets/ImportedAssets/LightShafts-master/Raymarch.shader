@@ -181,10 +181,10 @@ Shader "Hidden/Raymarch" {
 #endif
 
 			//plan B för fake rörelse i lightshaft
-			pos.x += sin(snoise(float2(pos.x * 10 + _Time.x, pos.y * 7 + _Time.x))) *0.01;
+			/*pos.x += sin(snoise(float2(pos.x * 10 + _Time.x, pos.y * 7 + _Time.x))) *0.01;
 			pos.y += sin(snoise(float2(pos.x * 5 + _Time.x, pos.y * 8 + _Time.x))) *0.01;
 			pos.x = clamp(pos.x, 0, 1);
-			pos.y = clamp(pos.y, 0, 1);
+			pos.y = clamp(pos.y, 0, 1);*/
 
 			// Important to use tex2Dlod to save on calculating derivatives, and we're
 			// sampling once every texel anyway. tex2D is 6x slower.

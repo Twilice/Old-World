@@ -27,7 +27,7 @@ public partial class LightShafts : MonoBehaviour
 			GameObject go = new GameObject("Depth Camera");
 			go.AddComponent(typeof(Camera));
 			m_ShadowmapCamera = go.GetComponent<Camera>();
-			go.hideFlags = HideFlags.HideAndDontSave;
+			//go.hideFlags = HideFlags.HideAndDontSave;
 			m_ShadowmapCamera.enabled = false;
 			m_ShadowmapCamera.clearFlags = CameraClearFlags.SolidColor;
 		}
@@ -37,8 +37,9 @@ public partial class LightShafts : MonoBehaviour
 
 		if (directional)
 		{
-			m_ShadowmapCamera.orthographic = true;
-			m_ShadowmapCamera.nearClipPlane = 0;
+			m_ShadowmapCamera.orthographic = true; //om false, löv rör sig. men buggar ur totalt
+            m_ShadowmapCamera.renderingPath = RenderingPath.Forward;
+            m_ShadowmapCamera.nearClipPlane = 0;
 			m_ShadowmapCamera.farClipPlane = m_Size.z;
 			m_ShadowmapCamera.orthographicSize = m_Size.y * 0.5f;
 			m_ShadowmapCamera.aspect = m_Size.x / m_Size.y;

@@ -181,8 +181,8 @@ Shader "Hidden/Raymarch" {
 #endif
 
 			//plan B för fake rörelse i lightshaft
-			pos.x += sin(snoise(float2(pos.x * 10 + _Time.x, pos.y * 7 + _Time.x))) *0.05;
-			pos.y += sin(snoise(float2(pos.x * 5 + _Time.x, pos.y * 8 + _Time.x))) *0.05;
+			pos.x += sin(snoise(float2(pos.x * 10 + _Time.x, pos.y * 7 + _Time.x))) *0.01;
+			pos.y += sin(snoise(float2(pos.x * 5 + _Time.x, pos.y * 8 + _Time.x))) *0.01;
 			pos.x = clamp(pos.x, 0, 1);
 			pos.y = clamp(pos.y, 0, 1);
 
@@ -208,7 +208,7 @@ Shader "Hidden/Raymarch" {
 
 		// Normalize inscattered light depending on how many steps we took and what part
 		// of the entire depth did we raymarch.
-		float randomBrightness = -abs(snoise(float2(uv.x * 6 + _Time.y*0.2, uv.y * 6 + _Time.y*0.2))) * _RandomBrightness; // randomBrightness är väldigt test... tror uv inte är helt rätt kordinater i detta fallet
+		float randomBrightness = -abs(snoise(float2(uv.x * 10 + _Time.x*10, uv.y * 10 + _Time.x*10))) * 0.05; // randomBrightness är väldigt test... tror uv inte är helt rätt kordinater i detta fallet
 
 		inscatter *= _LightColor.rgb * (_Brightness + randomBrightness) * oneOverSteps * depthAlongView;
 		return saturate(inscatter).xyzz;

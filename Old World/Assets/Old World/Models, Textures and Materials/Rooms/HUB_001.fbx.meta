@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: f96fe4cd99b99cc40aeaab8c58592a42
+timeCreated: 1462264579
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Elevator_Railing
+    100002: //RootNode
+    100004: HUB_Elevator_Platform
+    100006: HUB_Floor
+    100008: HUB_Pillar_LMS_001
+    100010: HUB_Pillar_LMS_0010
+    100012: HUB_Pillar_LMS_0011
+    100014: HUB_Pillar_LMS_0012
+    100016: HUB_Pillar_LMS_0013
+    100018: HUB_Pillar_LMS_0014
+    100020: HUB_Pillar_LMS_002
+    100022: HUB_Pillar_LMS_003
+    100024: HUB_Pillar_LMS_004
+    100026: HUB_Pillar_LMS_005
+    100028: HUB_Pillar_LMS_006
+    100030: HUB_Pillar_LMS_007
+    100032: HUB_Pillar_LMS_008
+    100034: HUB_Pillar_LMS_009
+    100036: HUB_Walls_And_Platforms_LMS
+    400000: Elevator_Railing
+    400002: //RootNode
+    400004: HUB_Elevator_Platform
+    400006: HUB_Floor
+    400008: HUB_Pillar_LMS_001
+    400010: HUB_Pillar_LMS_0010
+    400012: HUB_Pillar_LMS_0011
+    400014: HUB_Pillar_LMS_0012
+    400016: HUB_Pillar_LMS_0013
+    400018: HUB_Pillar_LMS_0014
+    400020: HUB_Pillar_LMS_002
+    400022: HUB_Pillar_LMS_003
+    400024: HUB_Pillar_LMS_004
+    400026: HUB_Pillar_LMS_005
+    400028: HUB_Pillar_LMS_006
+    400030: HUB_Pillar_LMS_007
+    400032: HUB_Pillar_LMS_008
+    400034: HUB_Pillar_LMS_009
+    400036: HUB_Walls_And_Platforms_LMS
+    2300000: Elevator_Railing
+    2300002: HUB_Elevator_Platform
+    2300004: HUB_Floor
+    2300006: HUB_Pillar_LMS_001
+    2300008: HUB_Pillar_LMS_0010
+    2300010: HUB_Pillar_LMS_0011
+    2300012: HUB_Pillar_LMS_0012
+    2300014: HUB_Pillar_LMS_0013
+    2300016: HUB_Pillar_LMS_0014
+    2300018: HUB_Pillar_LMS_002
+    2300020: HUB_Pillar_LMS_003
+    2300022: HUB_Pillar_LMS_004
+    2300024: HUB_Pillar_LMS_005
+    2300026: HUB_Pillar_LMS_006
+    2300028: HUB_Pillar_LMS_007
+    2300030: HUB_Pillar_LMS_008
+    2300032: HUB_Pillar_LMS_009
+    2300034: HUB_Walls_And_Platforms_LMS
+    3300000: Elevator_Railing
+    3300002: HUB_Elevator_Platform
+    3300004: HUB_Floor
+    3300006: HUB_Pillar_LMS_001
+    3300008: HUB_Pillar_LMS_0010
+    3300010: HUB_Pillar_LMS_0011
+    3300012: HUB_Pillar_LMS_0012
+    3300014: HUB_Pillar_LMS_0013
+    3300016: HUB_Pillar_LMS_0014
+    3300018: HUB_Pillar_LMS_002
+    3300020: HUB_Pillar_LMS_003
+    3300022: HUB_Pillar_LMS_004
+    3300024: HUB_Pillar_LMS_005
+    3300026: HUB_Pillar_LMS_006
+    3300028: HUB_Pillar_LMS_007
+    3300030: HUB_Pillar_LMS_008
+    3300032: HUB_Pillar_LMS_009
+    3300034: HUB_Walls_And_Platforms_LMS
+    4300000: HUB_Walls_And_Platforms_LMS
+    4300002: HUB_Pillar_LMS_001
+    4300004: HUB_Pillar_LMS_002
+    4300006: HUB_Pillar_LMS_003
+    4300008: HUB_Pillar_LMS_004
+    4300010: HUB_Pillar_LMS_005
+    4300012: HUB_Pillar_LMS_006
+    4300014: HUB_Pillar_LMS_007
+    4300016: HUB_Pillar_LMS_008
+    4300018: HUB_Pillar_LMS_009
+    4300020: HUB_Pillar_LMS_0010
+    4300022: HUB_Pillar_LMS_0011
+    4300024: HUB_Pillar_LMS_0012
+    4300026: HUB_Pillar_LMS_0013
+    4300028: HUB_Pillar_LMS_0014
+    4300030: Elevator_Railing
+    4300032: HUB_Floor
+    4300034: HUB_Elevator_Platform
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -49,6 +49,7 @@ public class MoveLensTarget : MonoBehaviour
                 lensMesh.enabled = true;
                 collision.enabled = true;
 
+                lensScript.UpdateLens();
                 if (LensDropped == false)
                 {
                     RaycastHit hit;
@@ -98,7 +99,7 @@ public class MoveLensTarget : MonoBehaviour
                         if (hit.collider.transform.CompareTag("Prism"))
                         {                            
                             //Not dropped anymore
-                            LensDropped = false;
+                            LensDropped = false;                            
 
                             //Hide the lens
                             lensMesh.enabled = false;
@@ -106,16 +107,17 @@ public class MoveLensTarget : MonoBehaviour
                             LensActivated = false;
                             lensScript.inLight = false;
 
+                            lensScript.UpdateLens();
+                            //Give back the light's parent, the lens
+                            lensLight.transform.parent = lens;
+
                             //Move back the light to the lens
                             lensLight.transform.localPosition = originalLocalLightPos;
                             lensLight.transform.localRotation = originalLocalLightRos;
 
-                            //Give back the light's parent, the lens
-                            lensLight.transform.parent = lens;
-
                             //Move the lens back to the player
                             lens.transform.localPosition = originalLocalLensPos;
-                            lens.transform.localRotation = originalLocalLensRot;                                                                                  
+                            lens.transform.localRotation = originalLocalLensRot;
                         }
                     }
                 }
@@ -127,6 +129,7 @@ public class MoveLensTarget : MonoBehaviour
                 collision.enabled = false;
                 LensActivated = false;
                 lensScript.inLight = false;
+                lensScript.UpdateLens();
             }
             if (LensDropped)
             {

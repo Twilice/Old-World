@@ -10,7 +10,7 @@ public class EventPlayer : MonoBehaviour
 {
     //I denna string som exponeras i Inspector skriver ni in sökvägen för det event eller snapshot ni vill använda t.ex.
     //event:/Ambiance/MittEvent
-    public string eventName = "event:/Light/Turn on light";
+    public string eventName;
 
     //Denna bool som är exponerad i Inspector avgör om eventet eller snapshotet ska starta automatiskt när scriptet startas.
     public bool startOnAwake = true;

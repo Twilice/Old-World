@@ -85,6 +85,7 @@ public class MoveLensTarget : MonoBehaviour
                     //De-parent light from lens
                     lensLight.transform.parent = null;
                 }
+                
                 //Check if lens is getting returned
                 else if (Input.GetButtonDown("LensDrop") && LensDropped)
                 {
@@ -95,7 +96,7 @@ public class MoveLensTarget : MonoBehaviour
                     if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500, layerMask, QueryTriggerInteraction.Collide))
                     {
                         if (hit.collider.transform.CompareTag("Prism"))
-                        {
+                        {                            
                             //Not dropped anymore
                             LensDropped = false;
 
@@ -104,16 +105,17 @@ public class MoveLensTarget : MonoBehaviour
                             collision.enabled = false;
                             LensActivated = false;
                             lensScript.inLight = false;
-                            //Give back the light's parent, the lens
-                            lensLight.transform.parent = lens;
 
                             //Move back the light to the lens
                             lensLight.transform.localPosition = originalLocalLightPos;
                             lensLight.transform.localRotation = originalLocalLightRos;
 
+                            //Give back the light's parent, the lens
+                            lensLight.transform.parent = lens;
+
                             //Move the lens back to the player
                             lens.transform.localPosition = originalLocalLensPos;
-                            lens.transform.localRotation = originalLocalLensRot;
+                            lens.transform.localRotation = originalLocalLensRot;                                                                                  
                         }
                     }
                 }

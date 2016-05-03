@@ -18,6 +18,7 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 	private MeshRenderer mr;
 	private float energy = 0.0f;
 	private bool activated = false;
+	private bool played = false;
 
 	void Awake()
 	{
@@ -53,8 +54,11 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 		if (solarPanelEnergy == 1.0f)
 		{
 			activated = true;
-			if (sfx != null)
+			if (sfx != null & !played)
+			{
 				sfx.PlayEvent();
+				played = true;
+			}
 			c = Color.green;
 		}
 		if (!activated)

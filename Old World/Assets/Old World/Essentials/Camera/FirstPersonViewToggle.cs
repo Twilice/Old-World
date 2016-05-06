@@ -119,7 +119,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Switch to first person view controlls and first person movement and activates lens if player is in light
                     FirstPerson = true;
-                    anim.SetBool("firstPerson", FirstPerson);
+                    anim.SetBool("FirstPerson", FirstPerson);
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?

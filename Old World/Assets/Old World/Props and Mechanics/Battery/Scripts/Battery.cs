@@ -10,15 +10,57 @@ public class Battery : MonoBehaviour
     public int maxChargeInSeconds;
 
     private bool pickedUp = false;
-    private bool hasEntered = false;
-
+    private bool canBePickedUp = false;
+    private Transform player;
+    private Collider attachedTo;
     /*    public void setBatteryCharged(bool b)
         {
             charged = b;
         }*/
 
+    void Start()
+    {
+        player = GameObject.Find("Player").transform;
+    }
     void Update()
     {
+        if (Input.GetButtonDown("Action"))
+        {
+            // drop to ground
+            if(pickedUp)
+            {
+                RaycastHit hit;
+				float heightDifference;
+                if (Physics.Raycast(transform.position, -transform.up, out hit, 5, ~0, QueryTriggerInteraction.Ignore))
+                {
+                    heightDifference = hit.distance-0.35f;
+                }
+                else heightDifference = 4.65f;
+
+                transform.position = new Vector3(transform.position.x, transform.position.y-heightDifference, transform.position.z);
+                pickedUp = false;
+            }
+            // pickup from ground or detach from slot
+            else if (canBePickedUp)
+            {
+                if (pickedUp == false)
+                {
+                    if (attachedTo != null && attachedTo.GetComponent<BatteryUser>() != null)
+                    {
+                        attachedTo.GetComponent<BatteryUser>().battery = null;
+                    }
+                    pickedUp = true;
+                }
+            }
+        }
+
+        // follow player position without parenting
+        if(pickedUp)
+        {
+            transform.
+            transform.rotation = player.rotation;
+            transform.position = player.position + player.forward*1 + player.up*1;
+        }
         if (amountOfCharge >= (maxChargeInSeconds * 60))
         {
             GetComponent<Renderer>().material.color = Color.green;
@@ -42,71 +84,28 @@ public class Battery : MonoBehaviour
 
     public void OnTriggerEnter(Collider coll)
     {
-        if (pickedUp == true)
+        if (coll.gameObject.CompareTag("Player"))
+            canBePickedUp = true;
+
+        // if colliding with something that uses battery
+        else if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatteryUser>().battery == null)
         {
-            if (hasEntered == false)
-            {
-                if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatterySlot>().hasBattery == false)
-                {
-                    pickedUp = false;
-                    coll.GetComponent<BatterySlot>().hasBattery = true;
-                    gameObject.transform.SetParent(coll.gameObject.transform);
-                    gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-                }
-
-                else if (coll.gameObject.CompareTag("Charger") && coll.GetComponent<ChargerScript>().hasBattery == false)
-                {
-                    pickedUp = false;
-                    coll.GetComponent<ChargerScript>().hasBattery = true;
-                    gameObject.transform.SetParent(coll.gameObject.transform);
-                    gameObject.transform.localPosition = new Vector3(0, 0, 0.5F);
-                }
-
-                else if (coll.gameObject.CompareTag("Battery Slot Linked") && coll.GetComponent<BatterySlotLinked>().hasBattery == false)
-                {
-                    pickedUp = false;
-                    coll.GetComponent<BatterySlotLinked>().hasBattery = true;
-                    gameObject.transform.SetParent(coll.gameObject.transform);
-                    gameObject.transform.localPosition = new Vector3(0.5F, 0, 0);
-                }
-                hasEntered = true;
-            }
-        }
-    }
-
-    void OnTriggerStay(Collider coll)
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (pickedUp == false)
-            {
-                if (coll.gameObject.CompareTag("Player"))
-                {
-                    if (gameObject.GetComponentInParent<ChargerScript>() == true)
-                    {
-                        gameObject.GetComponentInParent<ChargerScript>().hasBattery = false;
-                    }
-
-                    if (gameObject.GetComponentInParent<BatterySlot>() == true)
-                    {
-                        gameObject.GetComponentInParent<BatterySlot>().hasBattery = false;
-                    }
-
-                    if (gameObject.GetComponentInParent<BatterySlotLinked>() == true)
-                    {
-                        gameObject.GetComponentInParent<BatterySlotLinked>().hasBattery = false;
-                    }
-
-                    pickedUp = true;
-                    gameObject.transform.SetParent(coll.gameObject.transform);
-                    gameObject.transform.localPosition = new Vector3(0, 1, 1);
-                }
-            }
-        }
+            attachedTo = coll;
+            pickedUp = false;
+            coll.GetComponent<BatteryUser>().battery = this;
+            transform.position = coll.transform.position + coll.transform.right * 0.5f;
+        } 
     }
 
     void OnTriggerExit(Collider coll)
     {
-        hasEntered = false;
+        if (coll.gameObject.CompareTag("Player"))
+            canBePickedUp = false;
+
+        // prevent it from detaching wrong slot
+        else if (coll == attachedTo)
+        {
+            attachedTo = null;
+        }
     }
 }

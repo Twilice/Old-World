@@ -51,7 +51,7 @@ public class Inspectable : MonoBehaviour
         {
             if (canBeInspected)
             {
-                if (Input.GetButtonDown("Inspect"))
+                if (Input.GetButtonDown("Action"))
                 {
                     currentTextID = 0;
                     charIndex = 0;
@@ -97,7 +97,7 @@ public class Inspectable : MonoBehaviour
         {
             if (canBeInspected)
             {
-                if (Input.GetButtonDown("Inspect"))
+                if (Input.GetButtonDown("Action"))
                 {
                     currentTextID = 0;
                     charIndex = 0;

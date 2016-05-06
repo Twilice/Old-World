@@ -2,12 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BatterySlotLinked : MonoBehaviour
+public class BatterySlotLinked : BatteryUser
 {
 	[HideInInspector]
 	public bool online = false;
-
-	public bool hasBattery;
 
 	public List<GameObject> Targets;
 
@@ -18,14 +16,14 @@ public class BatterySlotLinked : MonoBehaviour
 
 	void Update()
 	{
-		if (hasBattery == true && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
+		if (battery != null && gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
 		{
 			online = true;
 			if (partner.online == true)
 			{
 				for (int i = 0; i < Targets.Count; i++)
 				{
-					if (hasBattery == false)
+					if (battery == null)
 					{
 						break;
 					}
@@ -51,8 +49,9 @@ public class BatterySlotLinked : MonoBehaviour
 			}
 		}
 
-		if (hasBattery == false)
+		if (battery == null)
 		{
+            online = false;
 			for (int p = 0; p < Targets.Count; p++)
 			{
 				foreach (MovingPlatformScript movingScript in Targets[p].GetComponentsInChildren<MovingPlatformScript>())
@@ -66,12 +65,12 @@ public class BatterySlotLinked : MonoBehaviour
 		}
 	}
 
-	void OnCollisionExit(Collision coll)
+	/*void OnCollisionExit(Collision coll)
 	{
 		if (coll.gameObject.CompareTag("Battery"))
 		{
-			hasBattery = false;
+			hasBattery = null;
 			online = false;
 		}
-	}
+	}*/
 }

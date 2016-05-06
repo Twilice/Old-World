@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BatterySlot : MonoBehaviour
+public class BatterySlot : BatteryUser
 {
-	public bool hasBattery;
-
 	public List<GameObject> Targets;
 
 	public bool PlatformTarget;
@@ -14,13 +12,13 @@ public class BatterySlot : MonoBehaviour
 
 	void Update()
 	{
-		if (hasBattery == true)
+		if (battery != null)
 		{
-			if (gameObject.GetComponentInChildren<Battery>().amountOfCharge > 0)
+			if (battery.amountOfCharge > 0)
 			{
 				for (int i = 0; i < Targets.Count; i++)
 				{
-					if (hasBattery == false)
+					if (battery == null)
 					{
 						break;
 					}
@@ -43,7 +41,7 @@ public class BatterySlot : MonoBehaviour
 				}
 			}
 		}
-		else if (hasBattery == false)
+		else if (battery == false)
 		{
 			for (int p = 0; p < Targets.Count; p++)
 			{

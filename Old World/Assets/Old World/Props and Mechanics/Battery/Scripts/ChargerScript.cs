@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChargerScript : MonoBehaviour
+public class ChargerScript : BatteryUser
 {
-	[HideInInspector]
-	public bool hasBattery = false;
 
 	public void Activate()
 	{
-		if (hasBattery == true)
+		if (battery != null)
 		{
-			gameObject.GetComponentInChildren<Battery>().amountOfCharge += 3;
+			battery.amountOfCharge += 3;
 		}
 	}
 }

@@ -5,10 +5,15 @@ public class RaycastCamera : MonoBehaviour
 {
     public static float distance3 = 5;
     public static float maxDistance = 8;
+    int layerMask;
+    void Start()
+    {
+        layerMask = 1 << LayerMask.NameToLayer("Player");
+        layerMask = ~layerMask;
+    }
     void Update()
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Player");
-        layerMask = ~layerMask;
+        
         RaycastHit hit;
         Vector3 topRightCorner = transform.position + transform.up *0.3f + transform.right * 0.3f;
         Vector3 bottomLeftCorner = transform.position - transform.up * 0.3f - transform.right * 0.3f;

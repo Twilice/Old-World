@@ -210,6 +210,7 @@ ModelImporter:
     4300004: Flavia_v5:eye_left
     4300006: Flavia_v5:eye_right
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Flavia_v5:body
     13700002: Flavia_v5:eye_left
     13700004: Flavia_v5:eye_right
@@ -217,7 +218,7 @@ ModelImporter:
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -256,7 +257,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

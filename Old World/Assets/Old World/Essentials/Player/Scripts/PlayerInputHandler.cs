@@ -97,9 +97,6 @@ public class PlayerInputHandler : MonoBehaviour
                 v = Input.GetAxis("Vertical");
         }
 
-
-        bool crouch = Input.GetKey(KeyCode.C);
-
         // calculate move direction to pass to character
         if (m_Cam != null)
         {
@@ -116,8 +113,8 @@ public class PlayerInputHandler : MonoBehaviour
         // pass all parameters to the character control script
         // TODO crouch should not exist?
         if (StateController.currentView != CameraStatus.InspectView)
-            m_Character.Move(m_Move, crouch, m_Jump);
-        else m_Character.Move(Vector3.zero, false, false);
+            m_Character.Move(m_Move, m_Jump);
+        else m_Character.Move(Vector3.zero, false);
         m_Jump = false;
     }
 

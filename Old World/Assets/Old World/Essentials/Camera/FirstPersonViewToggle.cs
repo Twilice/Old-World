@@ -75,6 +75,7 @@ public class FirstPersonViewToggle : MonoBehaviour
             //Operations that only need/should be executed once every new right click
             if (firstTimeFP)
             {
+                anim.SetBool("FirstPerson", true);
                 StateController.currentZoom = ZoomStatus.zoomingIn;
                 StateController.currentView = CameraStatus.FirstPersonView;
                 firstTimeFP = false;
@@ -119,7 +120,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                     //Switch to first person view controlls and first person movement and activates lens if player is in light
                     FirstPerson = true;
-                    anim.SetBool("FirstPerson", FirstPerson);
+                   
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
@@ -171,7 +172,7 @@ public class FirstPersonViewToggle : MonoBehaviour
 
                 //Switch to first person view controls and first person movement and turns lens off if player is in light
                 FirstPerson = false;
-                anim.SetBool("FirstPerson", FirstPerson);
+                anim.SetBool("FirstPerson", false);
 
                 //Remove the parent
                 transform.parent = null;

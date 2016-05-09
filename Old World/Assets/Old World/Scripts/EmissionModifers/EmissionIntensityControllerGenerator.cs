@@ -35,7 +35,6 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 			c = Color.white;
 		}
 	}
-
 	// Update is called once per frame
 	void Update()
 	{
@@ -51,14 +50,14 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 	//When the solarpanel is hit
 	public void LerpEnergy(float solarPanelEnergy)
 	{
+		if (solarPanelEnergy % 0.1 > 0.09f && sfx != null)
+		{
+			sfx.ChangeParameter("Tones", solarPanelEnergy + 0.01f);
+			sfx.PlayEvent();
+		}
+
 		if (solarPanelEnergy == 1.0f)
 		{
-			activated = true;
-			if (sfx != null & !played)
-			{
-				sfx.PlayEvent();
-				played = true;
-			}
 			c = Color.green;
 		}
 		if (!activated)

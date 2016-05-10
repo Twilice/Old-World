@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour
     float m_turningRadius = 2.5f;
     [SerializeField]
     float m_SlideAngle = 45f;
-    [SerializeField]
-    float m_GroundAngle = 45f;
 
     CharacterController m_CharCtrl;
     Animator m_Animator;
@@ -85,11 +83,13 @@ public class PlayerController : MonoBehaviour
             {
                 move = Vector3.ProjectOnPlane(m_GroundNormal, transform.up);
             }
-            else if (m_IsGrounded && m_GroundNormal == Vector3.up && Vector3.Angle(m_CollisionNormal, Vector3.up) > m_GroundAngle)
+            //prevent getting stuck on "walls"
+            else if (m_IsGrounded && m_GroundNormal == Vector3.up && m_CollisionNormal.x > 0.90 || m_CollisionNormal.z > 0.90)
             {
                 move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up);
                 m_IsGrounded = false;
             }
+
             else if (jump)
                 ySpeed = m_JumpPower;
             else
@@ -142,7 +142,6 @@ public class PlayerController : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log(hit.normal);
         m_CollisionNormal = hit.normal;
     }
 

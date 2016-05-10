@@ -15,6 +15,13 @@ public class RoomChangeScript : MonoBehaviour
 	
 	void Update ()
 	{
+
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SceneManager.LoadScene(counter, LoadSceneMode.Single);
+			Debug.Log("Loaded room: " + counter);
+		}
+
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			counter++;
@@ -23,12 +30,6 @@ public class RoomChangeScript : MonoBehaviour
 				counter = 0;
 			}
 			Debug.Log(counter);
-		}
-
-		if (Input.GetKeyDown(KeyCode.Return))
-		{
-			SceneManager.LoadScene(counter, LoadSceneMode.Single);
-			Debug.Log("Loaded room: " + counter);
 		}
 	}
 }

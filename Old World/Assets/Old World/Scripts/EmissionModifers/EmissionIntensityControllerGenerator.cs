@@ -46,19 +46,29 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 		mr.material.SetColor("_EmissionColor", c * emissionIntensity / 2.0f);
 		DynamicGI.SetEmissive(r, c * emissionIntensity);
 	}
-
+	bool sfx_active = false;
 	//When the solarpanel is hit
 	public void LerpEnergy(float solarPanelEnergy)
 	{
-		if (solarPanelEnergy % 0.1 > 0.09f && sfx != null)
+		if (solarPanelEnergy == 1)
 		{
-			sfx.ChangeParameter("Tones", solarPanelEnergy + 0.01f);
-			sfx.PlayEvent();
+			energy = 1;
+			activated = true;
+			c = Color.green;
 		}
 
-		if (solarPanelEnergy == 1.0f)
+		if (solarPanelEnergy > 0.1f && sfx != null && !activated && !sfx_active)
 		{
-			c = Color.green;
+			sfx.PlayEvent();
+			sfx_active = true;
+		}
+		if (solarPanelEnergy < 0.1f && sfx != null && !activated && sfx_active)
+		{
+			sfx_active = false;
+		}
+		if (sfx != null && !activated)
+		{
+			sfx.ChangeParameter("Tones", solarPanelEnergy + 0.01f);
 		}
 		if (!activated)
 		{

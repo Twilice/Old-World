@@ -12,7 +12,6 @@ public class PlayerInputHandler : MonoBehaviour
     private Camera firstPersonCamera;
     private float lastTime;
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
-	private PlayerController pController;
     private bool OpenMenuButton;
 
     private Camera mainCamera;
@@ -21,7 +20,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         LookInit(transform, mainCamera.transform);
-        pController = GameObject.Find("Player").GetComponent<PlayerController>();
         // get the transform of the main camera
         if (Camera.main != null)
         {
@@ -63,34 +61,21 @@ public class PlayerInputHandler : MonoBehaviour
         {
             m_Jump = Input.GetButtonDown("Jump");
         }
-    }
 
 
-    // Fixed update is called in sync with physics
-    private void FixedUpdate()
-    {
         // read inputs
         //The if statement is needed to prevent the model from turning with the horizontal keys during a camera transision
         float h;
         float v;
         if (allowCameraMovement)
         {
-			v = Input.GetAxis("Vertical");
-
-			if (pController.m_IsGrounded)
-			{
-				h = Input.GetAxis("Horizontal");
-			}
-			else
-			{
-				h = Input.GetAxis("Horizontal") * 0.5f;
-			}
-
-		}
+            v = Input.GetAxis("Vertical");
+            h = Input.GetAxis("Horizontal");
+        }
         else
         {
-			//Prevents the character from turning backwards during camera transisions
-			h = 0.0f;
+            //Prevents the character from turning backwards during camera transisions
+            h = 0.0f;
             if (Input.GetAxis("Vertical") < 0)
                 v = 0.0f;
             else
@@ -116,6 +101,13 @@ public class PlayerInputHandler : MonoBehaviour
             m_Character.Move(m_Move, m_Jump);
         else m_Character.Move(Vector3.zero, false);
         m_Jump = false;
+    }
+
+
+    // Fixed update is called in sync with physics
+    private void FixedUpdate()
+    {
+
     }
 
 

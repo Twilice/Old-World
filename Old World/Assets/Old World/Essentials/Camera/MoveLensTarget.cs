@@ -53,9 +53,7 @@ public class MoveLensTarget : MonoBehaviour
                 if (LensDropped && FirstPersonViewToggle.FirstPerson)
                 {
                     newRot = playerRot - lastPlayerRot;
-                    Debug.Log("Before " + lens.transform.rotation);
                     originalLensRot.eulerAngles = newRot;
-                    Debug.Log("After " + lens.transform.rotation);
                 }
                 else
                 {

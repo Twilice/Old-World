@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
     float m_turningRadius = 2.5f;
     [SerializeField]
     float m_SlideAngle = 45f;
-    
+    [SerializeField]
+    float m_GroundAngle = 45f;
+
     CharacterController m_CharCtrl;
     Animator m_Animator;
     public bool m_IsGrounded;
@@ -33,8 +35,9 @@ public class PlayerController : MonoBehaviour
     public float air_accelerate = 3;
     public float max_speed = 0.1f;
     Vector3 m_GroundNormal;
+    Vector3 m_CollisionNormal;
     int layerMask;
-    private float ySpeed = 0f;
+    private float ySpeed = -5f;
     void Start()
     {
         layerMask = 1 << LayerMask.NameToLayer("Player");
@@ -74,19 +77,38 @@ public class PlayerController : MonoBehaviour
 
         m_IsGrounded = m_CharCtrl.isGrounded;
 
-        
-        if (m_IsGrounded && jump)
-            ySpeed = m_JumpPower;
-        // to step, slide down
-        if (m_IsGrounded && Vector3.Angle(m_GroundNormal, Vector3.up) > m_SlideAngle)
+        if (m_IsGrounded)
         {
-            move = Vector3.ProjectOnPlane(m_GroundNormal, transform.up);
+            ySpeed = -5;
+            // to step, slide down
+            if (m_IsGrounded && Vector3.Angle(m_GroundNormal, Vector3.up) > m_SlideAngle)
+            {
+                move = Vector3.ProjectOnPlane(m_GroundNormal, transform.up);
+            }
+            else if (m_IsGrounded && m_GroundNormal == Vector3.up && Vector3.Angle(m_CollisionNormal, Vector3.up) > m_GroundAngle)
+            {
+                move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up);
+                m_IsGrounded = false;
+            }
+            else if (jump)
+                ySpeed = m_JumpPower;
+            else
+                move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;
+
+            if (ySpeed > -5)
+                ySpeed -= m_Gravity * Time.deltaTime;
+            else ySpeed = -5;
         }
         else
+        {
             move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;
-        if (ySpeed > -5)
-            ySpeed -= m_Gravity*Time.deltaTime;
-        else ySpeed = -5;
+            if (ySpeed > -10)
+                ySpeed -= m_Gravity * Time.deltaTime;
+            else ySpeed = -10;
+        }
+
+      
+       // Debug.Log(ySpeed);
         move.y = ySpeed;
         m_CharCtrl.Move(move * Time.deltaTime);
 
@@ -98,7 +120,6 @@ public class PlayerController : MonoBehaviour
     void UpdateAnimator()
     {
         // update the animator parameters
-        Debug.Log(m_ForwardAmount);
         m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
         m_Animator.SetBool("OnGround", m_IsGrounded);
         if (!m_IsGrounded)
@@ -119,7 +140,12 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
-   
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log(hit.normal);
+        m_CollisionNormal = hit.normal;
+    }
+
 
 
     void CheckGroundStatus()

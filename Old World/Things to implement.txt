@@ -23,7 +23,7 @@ Kristallöppning emission map dynamisk
 
 IMPORTANTE
 Byta ut placeholderkaraktär
-
+Styr Reflection Probes med Script
 Byta ut kristallen
 Partikeleffekter/unityversion
 LightShaft genom löv

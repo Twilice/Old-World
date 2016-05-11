@@ -18,7 +18,6 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 	private MeshRenderer mr;
 	private float energy = 0.0f;
 	private bool activated = false;
-	private bool played = false;
 
 	void Awake()
 	{

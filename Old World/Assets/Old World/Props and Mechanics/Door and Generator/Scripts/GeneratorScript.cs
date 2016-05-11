@@ -27,14 +27,14 @@ public class GeneratorScript : MonoBehaviour
         //The doorLight with the same tag
         for (int i = 0; i < allDoorLights.Length; i++)
         {
-			if (allDoorLights[i].transform.CompareTag(transform.tag))
+            if (allDoorLights[i].transform.CompareTag(transform.tag))
             {
                 doorLight = allDoorLights[i];
             }
         }
 
         //The movingPlatforms with the same tag
-        for(int i = 0; i < mps.Length; i++)
+        for (int i = 0; i < mps.Length; i++)
         {
             if (mps[i].transform.CompareTag(transform.tag))
             {
@@ -54,21 +54,27 @@ public class GeneratorScript : MonoBehaviour
 
     void Update()
     {
-		if (Active == true)
+        if (Active == true)
         {
-            //Activate the platforms
-            for(int i = 0; i < targetPlatforms.Count; i++)
+            if (PlatformTarget)
             {
-                targetPlatforms[i].Activate();
-                targetPlatforms[i].returning = false;
+                //Activate the platforms
+                for (int i = 0; i < targetPlatforms.Count; i++)
+                {
+                    targetPlatforms[i].Activate();
+                    targetPlatforms[i].returning = false;
+                }
             }
 
-            //Activate the chargers
-            for(int i = 0; i < targetChargers.Count; i++)
+            if (ChargerTarget)
             {
-                targetChargers[i].Activate();
+                //Activate the chargers
+                for (int i = 0; i < targetChargers.Count; i++)
+                {
+                    targetChargers[i].Activate();
+                }
             }
-		}
+        }
     }
 
     public void Activate()
@@ -76,7 +82,7 @@ public class GeneratorScript : MonoBehaviour
         //Change bool to true
         Active = true;
 
-		//Change the light
-		doorLight.Activate();
+        //Change the light
+        doorLight.Activate();
     }
 }

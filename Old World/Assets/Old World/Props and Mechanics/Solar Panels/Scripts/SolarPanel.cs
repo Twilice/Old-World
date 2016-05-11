@@ -36,6 +36,19 @@ public class SolarPanel : TriggeredByLight
                 }
             }
         }
+
+        if (generatorTarget)
+        {
+            GeneratorScript[] gs = FindObjectsOfType<GeneratorScript>();
+
+            foreach (GeneratorScript g in gs)
+            {
+                if (g.transform.CompareTag(tag))
+                {
+                    Targets.Add(g.gameObject);
+                }
+            }
+        }
     }
 
     void Update()
@@ -47,7 +60,7 @@ public class SolarPanel : TriggeredByLight
         }
         UpdateGeneratorLight();
 
-        if(energy == 1.0f)
+        if (energy == 1.0f)
         {
             foreach (ParticleRandomizer p in particleTargets)
             {
@@ -83,7 +96,7 @@ public class SolarPanel : TriggeredByLight
             }
         }
 
-        
+
 
         //Play powering up sound
         //Fade lights on?
@@ -92,19 +105,19 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightExit()
     {
-		if (platformTarget == true)
-		{
-			for (int i = 0; i < Targets.Count; i++)
-			{
-				foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
-				{
-					if (movingScript.ReturnToOriginalPosition == true)
-					{
-						movingScript.returning = true;
-					}
-				}
-			}
-		}
+        if (platformTarget == true)
+        {
+            for (int i = 0; i < Targets.Count; i++)
+            {
+                foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+                {
+                    if (movingScript.ReturnToOriginalPosition == true)
+                    {
+                        movingScript.returning = true;
+                    }
+                }
+            }
+        }
 
         foreach (ParticleRandomizer p in particleTargets)
         {

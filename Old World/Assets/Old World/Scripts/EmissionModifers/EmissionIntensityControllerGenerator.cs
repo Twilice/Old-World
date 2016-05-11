@@ -11,7 +11,7 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 	public int lightNumber;
 
 
-	private EventPlayer sfx;
+	private sfx s_player;
 	private Renderer r;
 	private float emissionIntensity = 0f;
 	private Color c;
@@ -21,7 +21,7 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 
 	void Awake()
 	{
-		sfx = GetComponent<EventPlayer>();
+		s_player = GetComponent<sfx>();
 		r = GetComponent<Renderer>();
 		mr = GetComponent<MeshRenderer>();
 		if (lightNumber == 9)
@@ -52,22 +52,26 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 		if (solarPanelEnergy == 1)
 		{
 			energy = 1;
+			if (s_player != null && !activated)
+			{
+				s_player.Play(1);
+			}
 			activated = true;
 			c = Color.green;
 		}
 
-		if (solarPanelEnergy > 0.1f && sfx != null && !activated && !sfx_active)
+		if (solarPanelEnergy > 0.1f && s_player != null && !activated && !sfx_active)
 		{
-			sfx.PlayEvent();
+			s_player.Play(0);
 			sfx_active = true;
 		}
-		if (solarPanelEnergy < 0.1f && sfx != null && !activated && sfx_active)
+		if (solarPanelEnergy < 0.1f && s_player != null && !activated && sfx_active)
 		{
 			sfx_active = false;
 		}
-		if (sfx != null && !activated)
+		if (s_player != null && !activated)
 		{
-			sfx.ChangeParameter("Tones", solarPanelEnergy + 0.01f);
+			s_player.ChangeParameter(0 ,"Tones", solarPanelEnergy + 0.01f);
 		}
 		if (!activated)
 		{

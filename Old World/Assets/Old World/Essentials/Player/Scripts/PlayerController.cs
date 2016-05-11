@@ -79,22 +79,30 @@ public class PlayerController : MonoBehaviour
         {
             ySpeed = -5;
             // to step, slide down
-            if (m_IsGrounded && Vector3.Angle(m_GroundNormal, Vector3.up) > m_SlideAngle)
-            {
-                move = Vector3.ProjectOnPlane(m_GroundNormal, transform.up);
-            }
+            float groundAngle = Vector3.Angle(m_GroundNormal, Vector3.up);
+          
             //prevent getting stuck on "walls"
-            else if (m_IsGrounded && m_GroundNormal == Vector3.up && m_CollisionNormal.x > 0.90 || m_CollisionNormal.z > 0.90)
+            if (m_IsGrounded && m_GroundNormal == Vector3.up && Mathf.Abs(m_CollisionNormal.y) < 0.5f && (Mathf.Abs(m_CollisionNormal.x) > 0.8f || Mathf.Abs(m_CollisionNormal.z) > 0.8f))
             {
-                move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up);
+                move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up)*5;
                 m_IsGrounded = false;
             }
-
-            else if (jump)
-                ySpeed = m_JumpPower;
+            else if (m_IsGrounded && groundAngle > m_SlideAngle)
+            {
+                //slide more if higher angle
+                move = Vector3.Lerp(transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier, Vector3.ProjectOnPlane(m_GroundNormal, transform.up) * 2, (groundAngle - m_SlideAngle) / m_SlideAngle);
+                if (jump)
+                    ySpeed = m_JumpPower;
+            }
+            //ordinary move
             else
+            {
+                if (jump)
+                {
+                    ySpeed = m_JumpPower;
+                }
                 move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;
-
+            }
             if (ySpeed > -5)
                 ySpeed -= m_Gravity * Time.deltaTime;
             else ySpeed = -5;

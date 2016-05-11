@@ -137,7 +137,6 @@ public class PlayerInputHandler : MonoBehaviour
         rotatedAmmount = transform.rotation.eulerAngles;
         LookRotation(transform, mainCamera.transform);
         rotatedAmmount = transform.rotation.eulerAngles - rotatedAmmount;
-        Debug.Log(rotatedAmmount);
     }
 
     public void LookRotation(Transform character, Transform camera)

@@ -88,7 +88,7 @@ public class Battery : MonoBehaviour
             canBePickedUp = true;
 
         // if colliding with something that uses battery
-        else if (coll.gameObject.CompareTag("Battery Slot") && coll.GetComponent<BatteryUser>().battery == null)
+        else if (coll.GetComponent<BatteryUser>() != null && coll.GetComponent<BatteryUser>().battery == null)
         {
             attachedTo = coll;
             pickedUp = false;

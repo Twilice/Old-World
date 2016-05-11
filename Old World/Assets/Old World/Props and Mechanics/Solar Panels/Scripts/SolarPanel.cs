@@ -18,6 +18,7 @@ public class SolarPanel : TriggeredByLight
     private EmissionIntensityControllerGenerator[] eg;
     private ParticleRandomizer[] pr;
     private List<ParticleRandomizer> particleTargets = new List<ParticleRandomizer>();
+    private bool activated = false;
 
     void Awake()
     {
@@ -30,9 +31,19 @@ public class SolarPanel : TriggeredByLight
         {
             for (int k = 0; k < pr.Length; k++)
             {
-                if (pr[k].CompareTag(tag))
+                if (pr[k].transform.parent != null)
                 {
-                    particleTargets.Add(pr[k]);
+                    if (pr[k].transform.parent.CompareTag(tag))
+                    {
+                        particleTargets.Add(pr[k]);
+                    }
+                }
+                else
+                {
+                    if (pr[k].CompareTag(tag))
+                    {
+                        particleTargets.Add(pr[k]);
+                    }
                 }
             }
         }
@@ -72,10 +83,7 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightEnter()
     {
-        foreach (ParticleRandomizer p in particleTargets)
-        {
-            p.currentlyCharging = true;
-        }
+
     }
     protected override void HitByLightStay()
     {
@@ -135,6 +143,13 @@ public class SolarPanel : TriggeredByLight
         }//Keep charging
         else
         {
+            if (!activated)
+            {
+                foreach (ParticleRandomizer p in particleTargets)
+                {
+                    p.currentlyCharging = true;
+                }
+            }
             energy += Time.deltaTime / ChargeUpTime;
         }
 
@@ -185,6 +200,8 @@ public class SolarPanel : TriggeredByLight
                 Targets[i].GetComponent<ChargerScript>().Activate();
             }
         }
+
+        activated = true;
     }
 
     void UpdateGeneratorLight()

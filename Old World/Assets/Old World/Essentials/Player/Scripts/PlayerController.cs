@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         layerMask = ~layerMask;
         m_Animator = GetComponent<Animator>();
         m_CharCtrl = GetComponent<CharacterController>();
-        
+
     }
 
     public bool get_grounded()
@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour
 
         //lower movespeed in ramps
         CheckGroundStatus();
-        move = move * (1f - Vector3.Angle(m_GroundNormal, Vector3.up)/90f);
-    
+        move = move * (1f - Vector3.Angle(m_GroundNormal, Vector3.up) / 90f);
+
         // we don't want negative zero
         if (move.x == 0)
             move.x = 0;
@@ -107,8 +107,8 @@ public class PlayerController : MonoBehaviour
             else ySpeed = -10;
         }
 
-      
-       // Debug.Log(ySpeed);
+
+        // Debug.Log(ySpeed);
         move.y = ySpeed;
         m_CharCtrl.Move(move * Time.deltaTime);
 
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
     void CheckGroundStatus()
     {
         RaycastHit hitInfo;
-        
+
         // 0.1f is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance, layerMask))

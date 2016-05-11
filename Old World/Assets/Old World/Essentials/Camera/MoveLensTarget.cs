@@ -9,6 +9,7 @@ public class MoveLensTarget : MonoBehaviour
     private Transform lensLight;
     private Transform targetLens;
     private Transform player;
+    private PlayerInputHandler playerHandler;
     private Renderer lensMesh;
     private Collider collision;
     private LensReflect lensScript;
@@ -16,8 +17,6 @@ public class MoveLensTarget : MonoBehaviour
     private Quaternion originalLocalLensRot;
     private Vector3 originalLocalLightPos;
     private Quaternion originalLocalLightRos;
-    private Vector3 originalLensPos;
-    private Quaternion originalLensRot;
     private Vector3 lastPlayerRot;
     private Vector3 newRot;
     private Vector3 playerRot;
@@ -40,102 +39,56 @@ public class MoveLensTarget : MonoBehaviour
         lensScript = lens.GetComponent<LensReflect>();
         targetLens = GameObject.Find("Player/TargetLens").transform;
         player = GameObject.Find("Player").transform;
+        playerHandler = player.GetComponent<PlayerInputHandler>();
     }
 
     //Update is called once per frame
     void LateUpdate()
     {
-        playerRot = player.eulerAngles;
         if (StateController.menuOpen == false)
         {
             if (LensDropped || FirstPersonViewToggle.FirstPerson)
             {
-                if (LensDropped && FirstPersonViewToggle.FirstPerson)
+                //Show the lens
+                LensActivated = true;
+                lensMesh.enabled = true;
+                collision.enabled = true;
+
+                lensScript.UpdateLens();
+                if (LensDropped == false)
                 {
-                    newRot = playerRot - lastPlayerRot;
-                    originalLensRot.eulerAngles = newRot;
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 500))
+                    {
+                        target.position = hit.point;
+                    }
+                    else
+                    {
+                        target.position = transform.position + transform.TransformDirection(Vector3.forward) * 10;
+                    }
+                    lensLight.LookAt(target);
+                    lens.LookAt(target);
                 }
-                else
+                //Check if lens is dropped
+                if (Input.GetButtonDown("LensDrop") && !LensDropped)
                 {
-                    //Show the lens
-                    LensActivated = true;
-                    lensMesh.enabled = true;
-                    collision.enabled = true;
+                    DropLens();
+                }
 
-                    lensScript.UpdateLens();
-                    if (LensDropped == false)
+                //Check if lens is getting returned
+                else if (Input.GetButtonDown("LensDrop") && LensDropped)
+                {
+                    targetLens.LookAt(lens);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500, layerMask, QueryTriggerInteraction.Collide))
                     {
-                        RaycastHit hit;
-                        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 500))
+                        if (hit.collider.transform.CompareTag("Prism"))
                         {
-                            target.position = hit.point;
-                        }
-                        else
-                        {
-                            target.position = transform.position + transform.TransformDirection(Vector3.forward) * 10;
-                        }
-                        lensLight.LookAt(target);
-                        lens.LookAt(target);
-                    }
-
-                    //Check if lens is dropped
-                    if (Input.GetButtonDown("LensDrop") && !LensDropped)
-                    {
-                        //The lens is dropped
-                        LensDropped = true;
-
-                        //Save lens original local position
-                        originalLocalLensPos = lens.transform.localPosition;
-                        originalLocalLensRot = lens.transform.localRotation;
-
-                        //Save lens original world position
-                        originalLensPos = lens.transform.position;
-                        originalLensRot = lens.transform.rotation;
-
-                        //Save light original local position
-                        originalLocalLightPos = lensLight.transform.localPosition;
-                        originalLocalLightRos = lensLight.transform.localRotation;
-
-                        //De-parent light from lens
-                        lensLight.transform.parent = null;
-                    }
-
-                    //Check if lens is getting returned
-                    else if (Input.GetButtonDown("LensDrop") && LensDropped)
-                    {
-                        targetLens.LookAt(lens);
-                        RaycastHit hit;
-
-
-                        if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500, layerMask, QueryTriggerInteraction.Collide))
-                        {
-                            if (hit.collider.transform.CompareTag("Prism"))
-                            {
-                                //Not dropped anymore
-                                LensDropped = false;
-
-                                //Hide the lens
-                                lensMesh.enabled = false;
-                                collision.enabled = false;
-                                LensActivated = false;
-                                lensScript.inLight = false;
-
-                                lensScript.UpdateLens();
-                                //Give back the light's parent, the lens
-                                lensLight.transform.parent = lens;
-
-                                //Move back the light to the lens
-                                lensLight.transform.localPosition = originalLocalLightPos;
-                                lensLight.transform.localRotation = originalLocalLightRos;
-
-                                //Move the lens back to the player
-                                lens.transform.localPosition = originalLocalLensPos;
-                                lens.transform.localRotation = originalLocalLensRot;
-                            }
+                            PickupLens();
                         }
                     }
                 }
-                lastPlayerRot = player.eulerAngles;
             }
             else
             {
@@ -146,11 +99,55 @@ public class MoveLensTarget : MonoBehaviour
                 lensScript.inLight = false;
                 lensScript.UpdateLens();
             }
-            if (LensDropped)
+            if (LensDropped && FirstPersonViewToggle.FirstPerson)
             {
-                lens.transform.position = originalLensPos;
-                lens.transform.rotation = originalLensRot;
+                Debug.Log("Rotatelens");
+                lens.transform.Rotate(playerHandler.rotatedAmmount);
             }
         }
+    }
+
+    private void DropLens()
+    {   
+        //The lens is dropped
+        LensDropped = true;
+
+        //Save lens original local position
+        originalLocalLensPos = lens.transform.localPosition;
+        originalLocalLensRot = lens.transform.localRotation;
+
+        //Save light original local position
+        originalLocalLightPos = lensLight.transform.localPosition;
+        originalLocalLightRos = lensLight.transform.localRotation;
+
+        lens.parent = null;
+        //De-parent light from lens
+      //  lensLight.transform.parent = null;
+
+    }
+
+    private void PickupLens()
+    {
+        //Not dropped anymore
+        LensDropped = false;
+
+        //Hide the lens
+        lensMesh.enabled = false;
+        collision.enabled = false;
+        LensActivated = false;
+        lensScript.inLight = false;
+
+        lensScript.UpdateLens();
+        //Give back the light's parent, the lens
+        //lensLight.transform.parent = lens;
+        lens.parent = player;
+
+        //Move back the light to the lens
+        lensLight.transform.localPosition = originalLocalLightPos;
+        lensLight.transform.localRotation = originalLocalLightRos;
+
+        //Move the lens back to the player
+        lens.transform.localPosition = originalLocalLensPos;
+        lens.transform.localRotation = originalLocalLensRot;
     }
 }

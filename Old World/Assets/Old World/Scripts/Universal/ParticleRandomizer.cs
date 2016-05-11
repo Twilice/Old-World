@@ -3,13 +3,14 @@ using System.Collections;
 
 public class ParticleRandomizer : MonoBehaviour
 {
-
     public bool whenever = true;
     public bool whenCharging = false;
     public bool whenDraining = false;
     public bool whenRoomActive = false;
+    public bool beforeRoomActive = false;
     public bool randomBurstTime = true;
     public float randomBurstTimeOffset = 0.2f;
+    public float randomInitialTime = 4.0f;
 
     //RANDOM START TIME OFFSET
 
@@ -23,8 +24,10 @@ public class ParticleRandomizer : MonoBehaviour
     public bool currentlyDraining = false;
     private bool oneTime = true;
     private bool newRand = true;
+    private bool firstTimeNewRand = true;
     private float offset;
     private float burstOffset;
+    private float firstTimeOffset;
     private float timer = 0.0f;
 
     private ParticleSystem particle;
@@ -32,6 +35,7 @@ public class ParticleRandomizer : MonoBehaviour
     void Awake()
     {
         particle = GetComponent<ParticleSystem>();
+        firstTimeOffset = Random.Range(0, randomInitialTime);
     }
 
     void Update()
@@ -45,19 +49,46 @@ public class ParticleRandomizer : MonoBehaviour
             offset = Random.Range(-randomOffsetMax, randomOffsetMax);
             burstOffset = Random.Range(-randomBurstTimeOffset, randomBurstTimeOffset);
             newRand = false;
+
+            if(firstTimeNewRand)
+            {
+                firstTimeNewRand = false;
+            }
+            else
+            {
+                firstTimeOffset = 0;
+            }
         }
 
         if (whenever)
         {
 
-            if (timer >= approximateIntervals + offset + burstTime + burstOffset) //If the burst should end
+            if (timer >= approximateIntervals + offset + burstTime + burstOffset + firstTimeOffset) //If the burst should end
             {
                 timer = 0.0f;
                 newRand = true;
                 oneTime = true;
                 particle.Stop(true);
             }
-            else if (timer >= approximateIntervals + offset) //When the burst should start
+            else if (timer >= approximateIntervals + offset + firstTimeOffset) //When the burst should start
+            {
+                if (oneTime)
+                {
+                    oneTime = false;
+                    particle.Play(true);
+                }
+            }
+        }
+        else if(beforeRoomActive && !RoomState.roomFullyPowered)
+        {
+            if (timer >= approximateIntervals + offset + burstTime + burstOffset + firstTimeOffset) //If the burst should end
+            {
+                timer = 0.0f;
+                newRand = true;
+                oneTime = true;
+                particle.Stop(true);
+            }
+            else if (timer >= approximateIntervals + offset + firstTimeOffset) //When the burst should start
             {
                 if (oneTime)
                 {
@@ -68,14 +99,14 @@ public class ParticleRandomizer : MonoBehaviour
         }
         else if (whenCharging)
         {
-            if (timer >= approximateIntervals + offset + burstTime + burstOffset) //If the burst should end
+            if (timer >= approximateIntervals + offset + burstTime + burstOffset + firstTimeOffset) //If the burst should end
             {
                 timer = 0.0f;
                 newRand = true;
                 oneTime = true;
                 particle.Stop(true);
             }
-            else if (timer >= approximateIntervals + offset && currentlyCharging) //When the burst should start
+            else if (timer >= approximateIntervals + offset + firstTimeOffset && currentlyCharging) //When the burst should start
             {
                 if (oneTime)
                 {
@@ -86,14 +117,14 @@ public class ParticleRandomizer : MonoBehaviour
         }
         else if(whenDraining)
         {
-            if (timer >= approximateIntervals + offset + burstTime + burstOffset) //If the burst should end
+            if (timer >= approximateIntervals + offset + burstTime + burstOffset + firstTimeOffset) //If the burst should end
             {
                 timer = 0.0f;
                 newRand = true;
                 oneTime = true;
                 particle.Stop(true);
             }
-            else if (timer >= approximateIntervals + offset && currentlyDraining) //When the burst should start
+            else if (timer >= approximateIntervals + offset + firstTimeOffset && currentlyDraining) //When the burst should start
             {
                 if (oneTime)
                 {

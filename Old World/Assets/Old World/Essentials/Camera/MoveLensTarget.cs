@@ -17,8 +17,6 @@ public class MoveLensTarget : MonoBehaviour
     private Quaternion originalLocalLensRot;
     private Vector3 originalLocalLightPos;
     private Quaternion originalLocalLightRos;
-    private Vector3 originalLensPos;
-    private Quaternion originalLensRot;
     private Vector3 lastPlayerRot;
     private Vector3 newRot;
     private Vector3 playerRot;
@@ -117,10 +115,6 @@ public class MoveLensTarget : MonoBehaviour
         //Save lens original local position
         originalLocalLensPos = lens.transform.localPosition;
         originalLocalLensRot = lens.transform.localRotation;
-
-        //Save lens original world position
-        originalLensPos = lens.transform.position;
-        originalLensRot = lens.transform.rotation;
 
         //Save light original local position
         originalLocalLightPos = lensLight.transform.localPosition;

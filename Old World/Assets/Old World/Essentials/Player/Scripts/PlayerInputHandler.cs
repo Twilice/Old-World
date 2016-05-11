@@ -14,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
     private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
     private bool OpenMenuButton;
 
+    public Vector3 rotatedAmmount { get; private set; }
     private Camera mainCamera;
     private void Start()
     {
@@ -96,20 +97,11 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         // pass all parameters to the character control script
-        // TODO crouch should not exist?
-        if (StateController.currentView != CameraStatus.InspectView)
+        if (StateController.currentView == CameraStatus.ThirdPersonView)
             m_Character.Move(m_Move, m_Jump);
         else m_Character.Move(Vector3.zero, false);
         m_Jump = false;
     }
-
-
-    // Fixed update is called in sync with physics
-    private void FixedUpdate()
-    {
-
-    }
-
 
     public void setAllowCamera(bool x)
     {
@@ -141,7 +133,11 @@ public class PlayerInputHandler : MonoBehaviour
     {
         //avoids the mouse looking if the game is effectively paused
         if (Mathf.Abs(Time.timeScale) < float.Epsilon) return;
+
+        rotatedAmmount = transform.rotation.eulerAngles;
         LookRotation(transform, mainCamera.transform);
+        rotatedAmmount = transform.rotation.eulerAngles - rotatedAmmount;
+        Debug.Log(rotatedAmmount);
     }
 
     public void LookRotation(Transform character, Transform camera)

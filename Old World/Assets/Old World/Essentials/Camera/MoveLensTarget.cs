@@ -101,7 +101,6 @@ public class MoveLensTarget : MonoBehaviour
             }
             if (LensDropped && FirstPersonViewToggle.FirstPerson)
             {
-                Debug.Log("Rotatelens");
                 lens.transform.Rotate(playerHandler.rotatedAmmount);
             }
         }

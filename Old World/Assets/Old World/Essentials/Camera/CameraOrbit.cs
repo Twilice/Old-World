@@ -19,12 +19,13 @@ public class CameraOrbit : MonoBehaviour
 
     private Rigidbody rb;
     private Transform target;
-
+    private float oldDistance;
     float x = 0.0f;
     float y = 0.0f;
 
     void Awake()
     {
+        oldDistance = distance;
         target = GameObject.Find("Player/CameraReferences/CameraRotationReference").transform;
         if (target == null)
             Debug.LogError("MouseOrbit (" + transform.name + ") can not find Player/CameraReferences/CameraRotationReference.");
@@ -85,8 +86,21 @@ public class CameraOrbit : MonoBehaviour
 
     void Update()
     {
+        oldDistance = distance;
         //Updating camera distance on every frame
         distance = RaycastCamera.distance3;
+
+        float difference = distance- oldDistance;
+        if(difference > 0.01)
+        {
+            distance = Mathf.Lerp(oldDistance, distance, Time.deltaTime*5);
+        }
+        else if(difference < -0.01)
+        {
+            distance = Mathf.Lerp(oldDistance, distance, Time.deltaTime * 20);
+        }
+        else
+            distance = oldDistance;
     }
 
     public static float ClampAngle(float angle, float min, float max)

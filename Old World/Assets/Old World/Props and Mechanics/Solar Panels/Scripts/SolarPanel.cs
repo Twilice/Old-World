@@ -97,7 +97,7 @@ public class SolarPanel : TriggeredByLight
             if (e[i].transform.CompareTag(transform.tag))
             {
                 //Only allow lerp if room is not at max
-                if (!RoomState.roomFullyPowered)
+                if (!StateController.roomFullyPowered)
                 {
                     e[i].LerpEnergy(energy);
                 }
@@ -213,7 +213,7 @@ public class SolarPanel : TriggeredByLight
             if (eg[i].transform.CompareTag(transform.tag))
             {
                 //Only allow lerp if room is not at max
-                if (!RoomState.roomFullyPowered)
+                if (!StateController.roomFullyPowered)
                 {
                     eg[i].LerpEnergy(energy);
                 }

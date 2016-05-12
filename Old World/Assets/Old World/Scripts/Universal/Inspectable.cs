@@ -47,7 +47,7 @@ public class Inspectable : MonoBehaviour
 
     void Update()
     {
-        if (needsPower == false || needsPower && RoomState.roomFullyPowered)
+        if (needsPower == false || needsPower && StateController.roomFullyPowered)
         {
             if (canBeInspected)
             {

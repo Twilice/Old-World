@@ -52,6 +52,16 @@ public class GeneratorScript : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if(StateController.isSegmentActive(tag))
+        {
+            Active = true;
+            if (doorLight != null)
+                doorLight.Activate();
+        }
+    }
+
     void Update()
     {
         if (Active == true)
@@ -79,10 +89,13 @@ public class GeneratorScript : MonoBehaviour
 
     public void Activate()
     {
+        StateController.ActivateSegment(tag);
+
         //Change bool to true
         Active = true;
 
         //Change the light
-        doorLight.Activate();
+        if(doorLight != null)
+            doorLight.Activate();
     }
 }

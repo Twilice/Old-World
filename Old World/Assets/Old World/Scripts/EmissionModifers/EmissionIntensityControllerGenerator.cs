@@ -34,11 +34,27 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
 			c = Color.white;
 		}
 	}
+
+    void Start()
+    {
+        if (StateController.roomFullyPowered)
+        {
+            energy = 1f;
+            activated = true;
+            c = Color.green;
+        }
+        else if (StateController.isSegmentActive(tag))
+        {
+            energy = 1f;
+            activated = true;
+            c = Color.green;
+        }
+    }
 	// Update is called once per frame
 	void Update()
 	{
 		emissionIntensity = maxIntensity * energy;
-		if (RoomState.roomFullyPowered && lightNumber == 9)
+		if (StateController.roomFullyPowered && lightNumber == 9)
 		{
 			mr.material.SetColor("_EmissionColor", Color.green * emissionIntensity / 2f);
 		}

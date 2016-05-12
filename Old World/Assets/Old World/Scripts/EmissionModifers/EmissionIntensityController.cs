@@ -34,7 +34,7 @@ public class EmissionIntensityController : MonoBehaviour
     private bool isConnectedToSolarPanel = false;
     private float offset = 0.0f;
     private float flickerDuration = 0.0f;
-    
+
     void Awake()
     {
         r = GetComponent<Renderer>();
@@ -57,6 +57,19 @@ public class EmissionIntensityController : MonoBehaviour
         roomActiveEnergy = roomActiveEnergyPercentage / 100f;
     }
 
+    void Start()
+    {
+        if(StateController.roomFullyPowered)
+        {
+            energy = roomActiveEnergy;
+            generatorActivated = true;
+        }
+        else if(StateController.isSegmentActive(tag))
+        {
+            generatorActivated = true;
+            energy = generatorActiveEnergy;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -69,9 +82,10 @@ public class EmissionIntensityController : MonoBehaviour
         emissionIntensity = maxIntensity * energy;
 
         //Lerp the energy to roomActiveEnergy when the room is fully powered
-        if (RoomState.roomFullyPowered)
+        if (StateController.roomFullyPowered)
         {
-            LerpEnergy();
+            if (energy < roomActiveEnergy)
+                LerpEnergy();
         }
 
         //To prevent the color from being too bright
@@ -133,7 +147,7 @@ public class EmissionIntensityController : MonoBehaviour
     public void drainEnergy()
     {
         //Flicker lights if they are currently draining
-        if (!RoomState.roomFullyPowered)
+        if (!StateController.roomFullyPowered)
         {
             if (isConnectedToSolarPanel)
             {

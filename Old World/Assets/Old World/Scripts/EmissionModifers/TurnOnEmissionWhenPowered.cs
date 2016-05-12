@@ -13,7 +13,7 @@ public class TurnOnEmissionWhenPowered : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // todo make an actionlistener instead of if spin
-        if (RoomState.roomFullyPowered)
+        if (StateController.roomFullyPowered)
         {
             rend.material.SetColor("_EmissionColor", Color.white);
         }

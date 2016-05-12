@@ -79,7 +79,7 @@ public class ParticleRandomizer : MonoBehaviour
                 }
             }
         }
-        else if(beforeRoomActive && !RoomState.roomFullyPowered)
+        else if(beforeRoomActive && !StateController.roomFullyPowered)
         {
             if (timer >= approximateIntervals + offset + burstTime + burstOffset + firstTimeOffset) //If the burst should end
             {

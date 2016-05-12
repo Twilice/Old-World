@@ -41,7 +41,7 @@ public class DampenLightIntensity : MonoBehaviour
         }
         else
         {
-            if (!RoomState.roomFullyPowered)
+            if (!StateController.roomFullyPowered)
             {
                 if (StateController.currentZoom == ZoomStatus.zoomingIn && lr.inLight)
                 {

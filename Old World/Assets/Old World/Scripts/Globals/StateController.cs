@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum CameraStatus
 {
@@ -31,6 +32,7 @@ public class StateController
     public static string parameterName = "progress";
     public static float parameterIncrement = 0.25f;
     public static float musicParamValue = 0;
+    public static MoveLensTarget lensScript;
 
     private static List<string> activeTagsHub;
     private static List<string> activeTagsRoom1_1;
@@ -38,6 +40,7 @@ public class StateController
     private static List<string> activeTagsRoom1_3;
     private static List<string> activeTagsRoom1_4;
     private static List<string> activeTagsRoom1_5;
+
 
     static StateController()
     {
@@ -54,6 +57,39 @@ public class StateController
         musicParameter.setValue(musicParamValue);
 
         musicEvent.start();
+    }
+    public static IEnumerator LoadScene(Rooms newScene)
+    {
+        if (newScene.Equals(currentRoom) == false)
+        {
+            Debug.Log("loading");
+            lensScript.PickupLens();
+            AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
+            yield return async;
+            Debug.Log("Loading complete");
+        }
+    }
+
+    private static string RoomToString(Rooms room)
+    {
+        switch (room)
+        {
+            case Rooms.Hub:
+                return "Hub";
+            case Rooms.Room1_1:
+                return "Room1-1";
+            case Rooms.Room1_2:
+                return "Room1-2";
+            case Rooms.Room1_3:
+                return "Room1-3";
+            case Rooms.Room1_4:
+                return "Room1-4";
+            case Rooms.Room1_5:
+                return "Room1-5";
+            default:
+                return "Room1-1";
+        }
+        
     }
 
     public static bool roomFullyPowered
@@ -129,7 +165,7 @@ public class StateController
             activeTagsRoom1_5.Add(tag);
     }
 
-    public static bool isSegmentActive(string tag)
+    public static bool SegmentActive(string tag)
     {
         if(currentRoom == Rooms.Hub)
             return activeTagsHub.Contains(tag);

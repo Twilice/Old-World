@@ -21,7 +21,7 @@ public class MovingPlatformScript : MonoBehaviour
         //Activated = false;
         MoveToTarget = true;
         StartTransform = gameObject.transform.localPosition;
-        if (Elevator == false && (StateController.roomFullyPowered || StateController.isSegmentActive(tag)))
+        if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
         {
             returning = false;
             gameObject.transform.localPosition = TargetTransform;

@@ -64,7 +64,7 @@ public class EmissionIntensityController : MonoBehaviour
             energy = roomActiveEnergy;
             generatorActivated = true;
         }
-        else if(StateController.isSegmentActive(tag))
+        else if(StateController.SegmentActive(tag))
         {
             generatorActivated = true;
             energy = generatorActiveEnergy;

@@ -22,9 +22,11 @@ public class FirstPersonViewToggle : MonoBehaviour
     private bool resetOnceFP;
     private bool resetOnceTP;
     private float startTime;
-    
+    private Transform orgParent;
+
     void Awake()
     {
+        orgParent = transform.parent;
         player = GameObject.Find("Player");
         if (player == null)
             Debug.LogError("FirstPersonToggle (" + transform.name + ") can not find Player.");
@@ -175,7 +177,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 anim.SetBool("FirstPerson", false);
 
                 //Remove the parent
-                transform.parent = null;
+                transform.parent = orgParent;
 
                 //Disable crosshair
                 crosshair.enabled = false;

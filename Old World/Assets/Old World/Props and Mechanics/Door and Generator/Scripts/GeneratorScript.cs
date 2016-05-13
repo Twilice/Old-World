@@ -54,7 +54,7 @@ public class GeneratorScript : MonoBehaviour
 
     void Start()
     {
-        if(StateController.isSegmentActive(tag))
+        if(StateController.SegmentActive(tag))
         {
             Active = true;
             if (doorLight != null)

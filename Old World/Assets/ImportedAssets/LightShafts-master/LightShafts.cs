@@ -9,7 +9,7 @@ public partial class LightShafts : MonoBehaviour
 	{
 		CheckMinRequirements();
 
-		if (m_Cameras == null || m_Cameras.Length == 0)
+		if (m_Cameras == null || m_Cameras.Length == 0 || (m_Cameras != null && m_Cameras[0] == null))
 			m_Cameras = new Camera[]{Camera.main};
 
 		UpdateCameraDepthMode();
@@ -27,7 +27,7 @@ public partial class LightShafts : MonoBehaviour
 			GameObject go = new GameObject("Depth Camera");
 			go.AddComponent(typeof(Camera));
 			m_ShadowmapCamera = go.GetComponent<Camera>();
-			//go.hideFlags = HideFlags.HideAndDontSave;
+			go.hideFlags = HideFlags.HideAndDontSave;
 			m_ShadowmapCamera.enabled = false;
 			m_ShadowmapCamera.clearFlags = CameraClearFlags.SolidColor;
 		}

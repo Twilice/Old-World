@@ -43,7 +43,7 @@ public class EmissionIntensityControllerGenerator : MonoBehaviour
             activated = true;
             c = Color.green;
         }
-        else if (StateController.isSegmentActive(tag))
+        else if (StateController.SegmentActive(tag))
         {
             energy = 1f;
             activated = true;

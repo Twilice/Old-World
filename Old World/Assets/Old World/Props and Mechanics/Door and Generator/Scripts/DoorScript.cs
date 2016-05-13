@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour
 {
     //private float t = 0.0f;
     private MovingPlatformScript[] mps;
+    private bool active = false;
 
     void Awake()
     {
@@ -17,7 +18,7 @@ public class DoorScript : MonoBehaviour
     {
         if (StateController.roomFullyPowered)
         {
-            Invoke("Activate", 5);
+            active = true;
         }
     }
 
@@ -36,4 +37,23 @@ public class DoorScript : MonoBehaviour
 			movingScript.Activate();
 		}
 	}
+
+    void OnTriggerStay()
+    {
+        if(active)
+            foreach (MovingPlatformScript movingScript in mps)
+            {
+                movingScript.returning = false;
+                Activate();
+            }
+    }
+
+    void OnTriggerExit()
+    {
+        if(active)
+            foreach (MovingPlatformScript movingScript in mps)
+            {
+                movingScript.returning = true;
+            }
+    }
 }

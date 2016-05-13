@@ -44,9 +44,9 @@ public class FirstPersonViewToggle : MonoBehaviour
     void Start()
     {
         firstTimeFP = true;
-        firstTimeTP = true;
+        firstTimeTP = false;
         resetOnceFP = true;
-        resetOnceTP = true;
+        resetOnceTP = false;
 
         camera = GetComponent<Camera>();
         //player = GameObject.Find("Player");
@@ -68,6 +68,7 @@ public class FirstPersonViewToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //todo make controllerbutton
         if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
         {
             //Rotate the player towards the cameras viewpoint

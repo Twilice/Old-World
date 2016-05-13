@@ -25,6 +25,12 @@ public class CameraOrbit : MonoBehaviour
 
     void Awake()
     {
+        if(StateController.savedPosition)
+        {
+            transform.rotation = StateController.cameraRot;
+            transform.position = StateController.cameraPos;
+            distance = StateController.cameraDist;
+        }
         oldDistance = distance;
         target = GameObject.Find("Player/CameraReferences/CameraRotationReference").transform;
         if (target == null)

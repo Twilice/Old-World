@@ -11,7 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
     private Camera firstPersonCamera;
     private float lastTime;
-    private bool allowCameraMovement = false; //Used to lock first person camera and player rotation during camera transisions
+    private bool allowCameraMovement = true; //Used to lock first person camera and player rotation during camera transisions
     private bool OpenMenuButton;
 
     public Vector3 rotatedAmmount { get; private set; }
@@ -72,6 +72,8 @@ public class PlayerInputHandler : MonoBehaviour
         {
             v = Input.GetAxis("Vertical");
             h = Input.GetAxis("Horizontal");
+            //Debug.Log("h" + h); //input manager gets 50% nuked on sceneswitch, hoppas controller funkar bättre än keyboard
+            //Debug.Log("v" + v);
         }
         else
         {

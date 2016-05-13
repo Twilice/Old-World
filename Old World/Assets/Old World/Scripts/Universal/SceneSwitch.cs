@@ -6,11 +6,10 @@ public class SceneSwitch : MonoBehaviour {
 
     public Rooms newScene = Rooms.Room1_2;
 
-    public void OnTriggerEnter(Collider col)
+    public void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            Debug.Log("startload");
             StartCoroutine(StateController.LoadScene(newScene));
             //SceneManager.LoadScene(newScene);
         }

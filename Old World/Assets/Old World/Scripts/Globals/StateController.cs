@@ -91,7 +91,7 @@ public class StateController
 
                 // Loading completed
                 if (async.progress == 0.9f)
-                {
+        {
                     //save old stuff
                     Transform player = GameObject.Find("Player").transform;
                     Transform camera = GameObject.Find("MainCamera").transform;
@@ -102,7 +102,7 @@ public class StateController
                     cameraDist = camera.GetComponent<CameraOrbit>().distance;
                     savedPosition = true;
 
-                    lensScript.PickupLens();
+            lensScript.PickupLens();
 
                     loading = false;
                     async.allowSceneActivation = true;
@@ -115,7 +115,7 @@ public class StateController
             async.allowSceneActivation = true;
             yield return null;
        
-            }
+        }
     //    }
     }
 

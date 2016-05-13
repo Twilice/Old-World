@@ -43,7 +43,6 @@ public class sfx : MonoBehaviour {
 
 	public void Play(int i)
 	{
-		Debug.Log(eventToPlay.Count);
 		eventToPlay[i].start();
 	}
 }

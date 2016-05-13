@@ -17,7 +17,7 @@ public class DoorBug : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(RoomState.roomFullyPowered)
+	    if(StateController.roomFullyPowered)
         {
             l.intensity = i;
         }

@@ -18,10 +18,15 @@ public class MovingPlatformScript : MonoBehaviour
     
     void Start ()
     {
-		//Activated = false;
-		MoveToTarget = true;
+        //Activated = false;
+        MoveToTarget = true;
         StartTransform = gameObject.transform.localPosition;
-	}
+        if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
+        {
+            returning = false;
+            gameObject.transform.localPosition = TargetTransform;
+        }
+    }
 	
     void Update()
     {

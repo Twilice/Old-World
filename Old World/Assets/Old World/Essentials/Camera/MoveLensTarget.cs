@@ -28,6 +28,7 @@ public class MoveLensTarget : MonoBehaviour
     private int layerMask;
     void Awake()
     {
+        StateController.lensScript = this;
         layerMask = 1 << LayerMask.NameToLayer("LightShaft");
         layerMask += 1 << LayerMask.NameToLayer("Player");
         layerMask = ~layerMask;
@@ -106,7 +107,7 @@ public class MoveLensTarget : MonoBehaviour
         }
     }
 
-    private void DropLens()
+    public void DropLens()
     {   
         //The lens is dropped
         LensDropped = true;
@@ -125,7 +126,7 @@ public class MoveLensTarget : MonoBehaviour
 
     }
 
-    private void PickupLens()
+    public void PickupLens()
     {
         //Not dropped anymore
         LensDropped = false;

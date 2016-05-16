@@ -70,53 +70,52 @@ public class StateController
     public static IEnumerator LoadScene(Rooms newScene)
     {
         //todo uncomment soon
-        //if (newScene.Equals(currentRoom) == false)
-        //{
-        if (loading == false)
+        if (newScene.Equals(currentRoom) == false)
         {
-            LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
-            fade.sceneEnding = true;
-            loading = true;
-         
-            AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
-            async.allowSceneActivation = false;
-
-            while(!async.isDone)
+            if (loading == false)
             {
-                // [0, 0.9] > [0, 1]
-                float progress = Mathf.Clamp01(async.progress / 0.9f);
-                Debug.Log("Loading progress: " + (progress * 100) + "%");
+            
+                LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
+                fade.sceneEnding = true;
+                loading = true;
+         
+                AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
+                async.allowSceneActivation = false;
 
+                while(!async.isDone)
+                {
+                    // [0, 0.9] > [0, 1]
+                    float progress = Mathf.Clamp01(async.progress / 0.9f);
+                    Debug.Log("Loading progress: " + (progress * 100) + "%");
                 
 
-                // Loading completed
-                if (async.progress == 0.9f)
-        {
-                    //save old stuff
-                    Transform player = GameObject.Find("Player").transform;
-                    Transform camera = GameObject.Find("MainCamera").transform;
-                    playerPos = player.position;
-                    playerRot = player.rotation;
-                    cameraPos = camera.position;
-                    cameraRot = camera.rotation;
-                    cameraDist = camera.GetComponent<CameraOrbit>().distance;
-                    savedPosition = true;
+                    // Loading completed
+                    if (async.progress == 0.9f)
+                    //if(async.isDone)
+                    {           //save old stuff
+                        Debug.Log("asd");
+                        Transform player = GameObject.Find("Player").transform;
+                        Transform camera = GameObject.Find("MainCamera").transform;
+                        playerPos = player.position;
+                        playerRot = player.rotation;
+                        cameraPos = camera.position;
+                        cameraRot = camera.rotation;
+                        cameraDist = camera.GetComponent<CameraOrbit>().distance;
+                        savedPosition = true;
 
-            lensScript.PickupLens();
+                        lensScript.PickupLens();
 
-                    loading = false;
-                    async.allowSceneActivation = true;
+                  
+                        break;
+                    }
+
+                    yield return null;
+
                 }
-
-                yield return null;
-
+                loading = false;
+                async.allowSceneActivation = true;
             }
-            Debug.Log("kan det här hända?");
-            async.allowSceneActivation = true;
-            yield return null;
-       
         }
-    //    }
     }
 
     private static string RoomToString(Rooms room)

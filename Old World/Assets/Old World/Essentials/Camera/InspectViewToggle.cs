@@ -40,9 +40,9 @@ public class InspectViewToggle : MonoBehaviour
     void Start()
     {
         firstTimeFP = true;
-        firstTimeTP = true;
+        firstTimeTP = false;
         resetOnceFP = true;
-        resetOnceTP = true;
+        resetOnceTP = false;
 
         camera = GetComponent<Camera>();
         //player = GameObject.Find("Player");

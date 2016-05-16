@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
     Vector3 m_CollisionNormal;
     int layerMask;
     private float ySpeed = -5f;
+    void Awake()
+    {
+        if (StateController.savedPosition)
+        {
+            transform.rotation = StateController.playerRot;
+            transform.position = StateController.playerPos;
+        }
+    }
     void Start()
     {
         layerMask = 1 << LayerMask.NameToLayer("Player");

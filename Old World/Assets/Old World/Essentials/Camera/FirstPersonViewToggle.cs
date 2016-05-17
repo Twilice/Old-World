@@ -67,9 +67,9 @@ public class FirstPersonViewToggle : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         //todo make controllerbutton
-        if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        if (Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 1f && StateController.currentView != CameraStatus.InspectView)
         {
             //Rotate the player towards the cameras viewpoint
             player.transform.forward = camera.transform.forward;
@@ -147,8 +147,8 @@ public class FirstPersonViewToggle : MonoBehaviour
                     resetOnceFP = false;
                 }
             }
-        }
-        else if (!Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        } 
+        else if (!Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 0 && StateController.currentView != CameraStatus.InspectView)
         {
             //Operations that only need/should be executed once every right click release
             if (firstTimeTP)

@@ -9,7 +9,7 @@ public class CameraOrbit : MonoBehaviour
 
     public float distance = 5.0f;
     public float mouseSensitivity = 1.75f;
-    public float joyStickSensitivityX = 2f;
+    public float joyStickSensitivityX = 1.5f;
 
     public float yMinLimit = -60f;
     public float yMaxLimit = 80f;

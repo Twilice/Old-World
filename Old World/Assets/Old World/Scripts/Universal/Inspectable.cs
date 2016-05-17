@@ -13,6 +13,7 @@ public class Inspectable : MonoBehaviour
     public string inspectHeadline = "";
     public List<TextAsset> inspectText = new List<TextAsset>();
     private string inspectString = "";
+    private char[] charArr;
     private int currentTextID = 0;
     private InspectViewToggle inspectViewToggle;
     private bool canBeInspected = false;
@@ -57,6 +58,7 @@ public class Inspectable : MonoBehaviour
                     charIndex = 0;
                     charIndexFloat = 0;
                     inspectString = inspectText[currentTextID].text;
+                    charArr = inspectString.ToCharArray();
                     stringLength = inspectString.Length;
                     inspectBox.SetActive(true);
                     inspectViewToggle.StartInspectView(transform.position);
@@ -81,6 +83,7 @@ public class Inspectable : MonoBehaviour
                             charIndex = 0;
                             charIndexFloat = 0;
                             inspectString = inspectText[currentTextID].text;
+                            charArr = inspectString.ToCharArray();
                             stringLength = inspectString.Length;
                         }
                         // no pages left 
@@ -103,6 +106,7 @@ public class Inspectable : MonoBehaviour
                     charIndex = 0;
                     charIndexFloat = 0;
                     inspectString = powerOffText;
+                    charArr = inspectString.ToCharArray();
                     stringLength = inspectString.Length;
                     inspectBox.SetActive(true);
                     inspectViewToggle.StartInspectView(transform.position);
@@ -127,22 +131,37 @@ public class Inspectable : MonoBehaviour
             }
         }
 
+        //update text
         if(charIndex != -1 && charIndex < stringLength)
         {
             charIndexFloat += Time.deltaTime * characterPerSeconds;
             charIndex = (int)charIndexFloat;
             if (stringLength < charIndex)
                 charIndex = stringLength;
+
+       /*     if(inspectString.)
+            // kolla efter style <*>
+            /*
+            if(style)
+            {   
+                öka charIndex 3 steg första gången
+              
+                kolla efter </*>
+                if(endstyle)
+                {
+                    öka charindex 3 steg
+                }
+                else
+                  adda +</*> i slutet
+            }
+            */
             boxText.text = inspectString.Substring(0, charIndex);
         }
     }
 
     void OnTriggerStay()
     {
-        /*if(todo2 isInVisionOfPlayer) // vision of player can also check if player is close enough in case it was something else that triggered
-        {*/
         canBeInspected = true;
-        //}
     }
 
     void OnTriggerExit()

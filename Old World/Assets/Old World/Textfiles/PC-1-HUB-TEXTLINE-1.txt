@@ -1,0 +1,3 @@
+Warning. The reserve generator has reached critical values. Warning. All systems shut down, manual startup is required. 
+
+//Gör "Warning" texten fetstilt.

@@ -164,9 +164,6 @@ public class PlayerInputHandler : MonoBehaviour
             yRot = mouseY * YSensitivity;
         }
 
-        Debug.Log(xRot);
-        Debug.Log(yRot);
-
         m_CharacterTargetRot *= Quaternion.Euler(0f, xRot, 0f);
         m_CameraTargetRot *= Quaternion.Euler(-yRot, 0f, 0f);
 

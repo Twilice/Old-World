@@ -124,7 +124,7 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceFP)
                 {
-					Sfx.Play(0);
+					if(Sfx != null)Sfx.Play(0);
 					//Switch to first person view controlls and first person movement and activates lens if player is in light
 					FirstPerson = true;
                    

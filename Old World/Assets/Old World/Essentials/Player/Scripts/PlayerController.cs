@@ -88,11 +88,11 @@ public class PlayerController : MonoBehaviour
             ySpeed = -5;
             // to step, slide down
             float groundAngle = Vector3.Angle(m_GroundNormal, Vector3.up);
-          
+
             //prevent getting stuck on "walls"
             if (m_IsGrounded && m_GroundNormal == Vector3.up && Mathf.Abs(m_CollisionNormal.y) < 0.5f && (Mathf.Abs(m_CollisionNormal.x) > 0.8f || Mathf.Abs(m_CollisionNormal.z) > 0.8f))
             {
-                move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up)*5;
+                move = Vector3.ProjectOnPlane(m_CollisionNormal, transform.up) * 5;
                 m_IsGrounded = false;
             }
             else if (m_IsGrounded && groundAngle > m_SlideAngle)
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(ySpeed);
         move.y = ySpeed;
         m_CharCtrl.Move(move * Time.deltaTime);
-
+           
         // send input and other state parameters to the animator
         UpdateAnimator();
     }

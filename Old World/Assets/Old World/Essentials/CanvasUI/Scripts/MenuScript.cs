@@ -84,7 +84,7 @@ public class MenuScript : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1.0f;
+
         //DisableJournal();
         //journal.SetActive(false);
         menuBackground.enabled = false;
@@ -92,18 +92,19 @@ public class MenuScript : MonoBehaviour
         buttons.SetActive(false);
         StateController.cursorLocked = true;
         cameraOrbit.enabled = true;
+        Time.timeScale = 1.0f;
     }
 
     public void PauseGame()
     {
-        Time.timeScale = 0.0f;
+        StateController.menuOpen = true;
         //EnableJournal();
         //journal.SetActive(true);
         menuBackground.enabled = true;
-        StateController.menuOpen = true;
         buttons.SetActive(true);
         StateController.cursorLocked = false;
         cameraOrbit.enabled = false;
+        Time.timeScale = 0.0f;
     }
 
     public void ExitGame()

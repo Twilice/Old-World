@@ -41,6 +41,11 @@ public class sfx : MonoBehaviour {
 		paramInstance.setValue(value);
 	}
 
+	public void setVolume(int i, float value)
+	{
+		eventToPlay[i].setVolume(value);
+	}
+
 	public void Play(int i)
 	{
 		eventToPlay[i].start();

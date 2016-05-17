@@ -6,6 +6,8 @@ public class FirstPersonViewToggle : MonoBehaviour
 {
     public float transitionDuration = 0.5f;
 
+	private sfx Sfx;
+
     private CameraOrbit mouseOrbit;
     private PlayerController thirdChar;
     private PlayerInputHandler thirdContr;
@@ -43,7 +45,9 @@ public class FirstPersonViewToggle : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        firstTimeFP = true;
+		Sfx = GetComponent<sfx>();
+
+		firstTimeFP = true;
         firstTimeTP = false;
         resetOnceFP = true;
         resetOnceTP = false;
@@ -67,9 +71,9 @@ public class FirstPersonViewToggle : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         //todo make controllerbutton
-        if (Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        if (Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 1f && StateController.currentView != CameraStatus.InspectView)
         {
             //Rotate the player towards the cameras viewpoint
             player.transform.forward = camera.transform.forward;
@@ -120,9 +124,9 @@ public class FirstPersonViewToggle : MonoBehaviour
                 //Operations that only need/should be executed once when the transision is complete
                 if (resetOnceFP)
                 {
-
-                    //Switch to first person view controlls and first person movement and activates lens if player is in light
-                    FirstPerson = true;
+					Sfx.Play(0);
+					//Switch to first person view controlls and first person movement and activates lens if player is in light
+					FirstPerson = true;
                    
 
                     //Resets the rotation of the camera to the player rotation
@@ -147,8 +151,8 @@ public class FirstPersonViewToggle : MonoBehaviour
                     resetOnceFP = false;
                 }
             }
-        }
-        else if (!Input.GetMouseButton(1) && StateController.currentView != CameraStatus.InspectView)
+        } 
+        else if (!Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 0 && StateController.currentView != CameraStatus.InspectView)
         {
             //Operations that only need/should be executed once every right click release
             if (firstTimeTP)

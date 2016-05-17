@@ -113,6 +113,8 @@ public class PlayerInputHandler : MonoBehaviour
     // below is emigrated mouseLook/cameraLookAt
     private float XSensitivity = 2f;
     private float YSensitivity = 2f;
+    private float XJoySensitivty = 0.8f;
+    private float YJoySensitivty = 0.7f;
     private bool clampVerticalRotation = true;
     private float MinimumX = -80F;
     private float MaximumX = 80F;
@@ -143,11 +145,30 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void LookRotation(Transform character, Transform camera)
     {
-        float yRot = Input.GetAxis("Mouse X") * XSensitivity;
-        float xRot = Input.GetAxis("Mouse Y") * YSensitivity;
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
 
-        m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
-        m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
+        float joyX = Input.GetAxis("Joy X");
+        float joyY = Input.GetAxis("Joy Y");
+
+        float xRot;
+        float yRot;
+        if (joyX != 0 || joyY != 0)
+        {
+            xRot = joyX * XJoySensitivty;
+            yRot = joyY * YJoySensitivty;
+        }
+        else
+        {
+            xRot = mouseX * XSensitivity;
+            yRot = mouseY * YSensitivity;
+        }
+
+        Debug.Log(xRot);
+        Debug.Log(yRot);
+
+        m_CharacterTargetRot *= Quaternion.Euler(0f, xRot, 0f);
+        m_CameraTargetRot *= Quaternion.Euler(-yRot, 0f, 0f);
 
         if (clampVerticalRotation)
             m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);

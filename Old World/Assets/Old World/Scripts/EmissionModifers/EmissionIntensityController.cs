@@ -15,6 +15,8 @@ public class EmissionIntensityController : MonoBehaviour
     [Range(0, 20)]
     public float lerpTimeWhenRoomFullyPowered = 4.0f;
 
+
+	sfx Sfx;
     private EmissiveHitByLight ehbl;
     private SolarPanel solarEhbl;
     private SolarPanel[] solarPanels;
@@ -59,6 +61,7 @@ public class EmissionIntensityController : MonoBehaviour
 
     void Start()
     {
+		Sfx = GetComponent<sfx>();
         if(StateController.roomFullyPowered)
         {
             energy = roomActiveEnergy;
@@ -214,9 +217,14 @@ public class EmissionIntensityController : MonoBehaviour
             {
                 float rand = Random.value;
 
-                //Maybe start new flicker
-                if (rand < 0.015f)
-                {
+				//Maybe start new flicker
+				if (rand < 0.015f)
+				{
+					if (Sfx)
+					{
+						Sfx.setVolume(0, (Mathf.Clamp(energy * 2, 0, 1) / 4));
+						Sfx.Play(0);
+					}
                     FlickerOn();
                     flickerDuration = Random.value / 2f;
                 }

@@ -10,8 +10,12 @@ public class SceneSwitch : MonoBehaviour {
     {
         if (col.CompareTag("Player"))
         {
-            StartCoroutine(StateController.LoadScene(newScene));
-            //SceneManager.LoadScene(newScene);
+            if (StateController.currentRoom.Equals(newScene) == false && StateController.loading == false)
+            {
+                LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
+                fade.FadeToBlack();
+                StartCoroutine(StateController.LoadScene(newScene));
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class StateController
     public static ZoomStatus currentZoom = ZoomStatus.zoomingOut;
     public static bool cursorLocked = true;
     public static bool menuOpen = false;
-    public static Rooms currentRoom = Rooms.Room1_1;
+    public static Rooms currentRoom = Rooms.Hub;
 
     [FMODUnity.EventRef]
     public static FMOD.Studio.EventInstance musicEvent;
@@ -74,11 +74,10 @@ public class StateController
         {
             if (loading == false)
             {
-            
                 LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
-                fade.sceneEnding = true;
                 loading = true;
-         
+                currentRoom = newScene;
+
                 AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
                 async.allowSceneActivation = false;
 
@@ -93,7 +92,6 @@ public class StateController
                     if (async.progress == 0.9f)
                     //if(async.isDone)
                     {           //save old stuff
-                        Debug.Log("asd");
                         Transform player = GameObject.Find("Player").transform;
                         Transform camera = GameObject.Find("MainCamera").transform;
                         playerPos = player.position;
@@ -111,6 +109,14 @@ public class StateController
 
                     yield return null;
 
+                }
+                while (true)
+                {
+                    if(fade.FadedToBlack)
+                    {
+                        break;
+                    }
+                    yield return null;
                 }
                 loading = false;
                 async.allowSceneActivation = true;

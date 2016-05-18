@@ -7,7 +7,8 @@ public class DoorScript : MonoBehaviour
 {
     //private float t = 0.0f;
     private MovingPlatformScript[] mps;
-    private bool active = false;
+    [Header("If active without power")]
+    public bool active = false;
 
     void Awake()
     {
@@ -24,14 +25,6 @@ public class DoorScript : MonoBehaviour
 
     void Activate()
     {
-		//TODO: FIX DIS SHIT
-
-		//gameObject.GetComponent<MovingPlatformScript>().Activate();
-		//for (int i = 0; i < mps.Length; i++)
-		//{
-		//    mps[i].Activate();
-		//}
-		//Debug.Log("Activating door");
 		foreach (MovingPlatformScript movingScript in mps)
 		{
 			movingScript.Activate();

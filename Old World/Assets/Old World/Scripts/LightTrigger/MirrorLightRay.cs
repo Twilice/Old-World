@@ -16,6 +16,7 @@ public class MirrorLightRay : TriggeredByLight {
 	}
 	protected override void HitByLightStay()
 	{
+		Debug.Log ("hitbylight");
 		for(int i = 0; i < lightRaysDir.Count; i++)
 		{
 			if(rays.Count <= i)

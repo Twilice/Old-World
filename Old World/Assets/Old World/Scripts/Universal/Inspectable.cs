@@ -13,7 +13,7 @@ public class Inspectable : MonoBehaviour
     public string inspectHeadline = "";
     public List<TextAsset> inspectText = new List<TextAsset>();
     private string inspectString = "";
-    private char[] charArr;
+    //private char[] charArr;
     private int currentTextID = 0;
     private InspectViewToggle inspectViewToggle;
     private bool canBeInspected = false;
@@ -58,7 +58,7 @@ public class Inspectable : MonoBehaviour
                     charIndex = 0;
                     charIndexFloat = 0;
                     inspectString = inspectText[currentTextID].text;
-                    charArr = inspectString.ToCharArray();
+                    //charArr = inspectString.ToCharArray();
                     stringLength = inspectString.Length;
                     inspectBox.SetActive(true);
                     inspectViewToggle.StartInspectView(transform.position);
@@ -83,7 +83,7 @@ public class Inspectable : MonoBehaviour
                             charIndex = 0;
                             charIndexFloat = 0;
                             inspectString = inspectText[currentTextID].text;
-                            charArr = inspectString.ToCharArray();
+                            //charArr = inspectString.ToCharArray();
                             stringLength = inspectString.Length;
                         }
                         // no pages left 
@@ -106,7 +106,7 @@ public class Inspectable : MonoBehaviour
                     charIndex = 0;
                     charIndexFloat = 0;
                     inspectString = powerOffText;
-                    charArr = inspectString.ToCharArray();
+                    //charArr = inspectString.ToCharArray();
                     stringLength = inspectString.Length;
                     inspectBox.SetActive(true);
                     inspectViewToggle.StartInspectView(transform.position);

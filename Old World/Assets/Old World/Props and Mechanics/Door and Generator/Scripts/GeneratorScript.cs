@@ -64,7 +64,7 @@ public class GeneratorScript : MonoBehaviour
 
     void Update()
     {
-        if (Active == true)
+        if (Active)
         {
             if (PlatformTarget)
             {

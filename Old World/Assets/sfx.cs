@@ -22,7 +22,8 @@ public class sfx : MonoBehaviour {
 		{
 			for (int i = 0; i < eventName.Count; i++)
 			{
-				eventToPlay[i].set3DAttributes(RuntimeUtils.To3DAttributes(gameObject, cachedRigidBody));
+				if(cachedRigidBody != null)
+                    eventToPlay[i].set3DAttributes(RuntimeUtils.To3DAttributes(gameObject, cachedRigidBody));
 			}
 		}
 	}

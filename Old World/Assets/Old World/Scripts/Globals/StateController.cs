@@ -146,6 +146,8 @@ public class StateController
         
     }
 
+    //TODO MEGA IMPORTANT
+    // returnerar true ifall rum 1.1 blir aktiverat och byter till 1.2, kolla vilka variabler som settas och gettas
     public static bool roomFullyPowered
     {
         get
@@ -217,25 +219,34 @@ public class StateController
 
         else if (currentRoom == Rooms.Room1_5)
             activeTagsRoom1_5.Add(tag);
+
+        Debug.Log(currentRoom);
     }
 
     public static bool SegmentActive(string tag)
     {
-        if(currentRoom == Rooms.Hub)
+        Debug.Log(currentRoom);
+        if (currentRoom == Rooms.Hub)
             return activeTagsHub.Contains(tag);
 
         else if (currentRoom == Rooms.Room1_1)
             return activeTagsRoom1_1.Contains(tag);
-        
-        else if (currentRoom == Rooms.Room1_2)       
+
+        else if (currentRoom == Rooms.Room1_2)
+        {
+            foreach(string s in activeTagsRoom1_2)
+            {
+                Debug.Log(s);
+            }
+            Debug.Log("list contains " + tag +" " + activeTagsRoom1_2.Contains(tag));
             return activeTagsRoom1_2.Contains(tag);
-        
-        else if (currentRoom == Rooms.Room1_3)       
+        }
+        else if (currentRoom == Rooms.Room1_3)
             return activeTagsRoom1_3.Contains(tag);
-        
+
         else if (currentRoom == Rooms.Room1_4)
             return activeTagsRoom1_4.Contains(tag);
-        
+
         else if (currentRoom == Rooms.Room1_5)
             return activeTagsRoom1_5.Contains(tag);
         

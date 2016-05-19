@@ -15,6 +15,8 @@ public class IntroScript : MonoBehaviour {
     //public List<Texture> pictures = new List<Texture>();
     //public Texture dark;
 
+    private bool textDelay = false;
+
     private int picIndex;
     public int currentTextFileID;
     public int finalImageSteps = 0;
@@ -83,14 +85,18 @@ public class IntroScript : MonoBehaviour {
 
     void printer()
     {
-        if (textIndex < text.Length)
+        if (textDelay == false)
         {
-            textDone = false;
-            printedText = printedText + text[textIndex];
-            textIndex++;
-            
-        } else {
-            textDone = true;
+            if (textIndex < text.Length)
+            {
+                textDone = false;
+                printedText = printedText + text[textIndex];
+                textIndex++;
+
+            }
+            else {
+                textDone = true;
+            }
         }
     }
 	
@@ -99,7 +105,10 @@ public class IntroScript : MonoBehaviour {
         //GUITEXTURE.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
         if (Input.GetButtonDown("Action")) 
         {
-            writer();
+            if (textDelay == false)
+            {
+                writer();
+            }
         }
     }
     void writer()
@@ -147,6 +156,7 @@ public class IntroScript : MonoBehaviour {
         if (currentTextFileID == 2)
         {
             //Line 3
+            firstFade.setValue(1);
             Camera.main.GetComponent<movement>().cameraMovement();
             Camera.main.GetComponent<movement>().speed = 0.8f;
             voice.setValue(4);
@@ -155,7 +165,7 @@ public class IntroScript : MonoBehaviour {
         if (currentTextFileID == 3)
         {
 
-            firstFade.setValue(1);
+            
             Camera.main.GetComponent<movement>().cameraMovement();
             Camera.main.transform.position = Camera.main.GetComponent<movement>().positions[Camera.main.GetComponent<movement>().posIndex];
             voice.setValue(5);
@@ -166,8 +176,9 @@ public class IntroScript : MonoBehaviour {
             progress.setValue(1);
             Camera.main.GetComponent<movement>().speed = 0.1f;
             Camera.main.GetComponent<movement>().cameraMovement();
-            voice.setValue(6);
-            voiceEvent.start();
+            //This code for delaying voice! first value is time waiting, second is just currentTextFileID, and third is which voice line
+            StartCoroutine(voiceDelay(1.0f, currentTextFileID, 6));
+            StartCoroutine(textDelayTimer(1.0f));
 
         }
         if (currentTextFileID == 5)
@@ -201,8 +212,8 @@ public class IntroScript : MonoBehaviour {
             Camera.main.GetComponent<movement>().cameraMovement();
             //Camera.main.transform.position = Camera.main.GetComponent<movement>().positions[Camera.main.GetComponent<movement>().posIndex];
             //Camera.main.GetComponent<movement>().cameraMovement();
-            voice.setValue(11);
-            voiceEvent.start();
+            StartCoroutine(voiceDelay(3.0f, currentTextFileID, 11));
+            StartCoroutine(textDelayTimer(3.0f));
         }
         if (currentTextFileID == 9)
         {
@@ -257,8 +268,8 @@ public class IntroScript : MonoBehaviour {
             Camera.main.GetComponent<movement>().speed = 0.15f;
             Camera.main.GetComponent<movement>().cameraMovement();
             //Camera.main.GetComponent<movement>().cameraMovement();
-            voice.setValue(16);
-            voiceEvent.start();
+            StartCoroutine(voiceDelay(3.0f, currentTextFileID, 16));
+            StartCoroutine(textDelayTimer(3.0f));
         }
         if (currentTextFileID == 14)
         {
@@ -271,8 +282,8 @@ public class IntroScript : MonoBehaviour {
             progress.setValue(5);
             Camera.main.GetComponent<movement>().speed = 0.5f;
             Camera.main.GetComponent<movement>().cameraMovement();
-            voice.setValue(18);
-            voiceEvent.start();
+            StartCoroutine(voiceDelay(3.0f, currentTextFileID, 18));
+            StartCoroutine(textDelayTimer(3.0f));
         }
         if (currentTextFileID == 16)
         {
@@ -280,11 +291,11 @@ public class IntroScript : MonoBehaviour {
             Camera.main.GetComponent<movement>().cameraMovement();
             voice.setValue(19);
             voiceEvent.start();
-            progress.setValue(6);
             finalImage(3.0f);
         }
         if (currentTextFileID == 17)
         {
+            progress.setValue(6);
             voice.setValue(20);
             voiceEvent.start();
         }
@@ -311,6 +322,7 @@ public class IntroScript : MonoBehaviour {
             finalImage(1.5f);
         }
     }
+    
 
     void OnGUI()
     {
@@ -339,5 +351,20 @@ public class IntroScript : MonoBehaviour {
             GUILayout.EndArea();
         }
 
+    }
+    IEnumerator voiceDelay(float time, int currentFile, int voiceValue)
+    {
+        yield return new WaitForSeconds(time);
+        if (currentTextFileID == currentFile)
+        {
+            voice.setValue(voiceValue);
+            voiceEvent.start();
+        }
+    }
+    IEnumerator textDelayTimer(float time)
+    {
+        textDelay = true;
+        yield return new WaitForSeconds(time);
+        textDelay = false;
     }
 }

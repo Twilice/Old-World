@@ -11,7 +11,6 @@ public class InspectViewToggle : MonoBehaviour
     private PlayerInputHandler thirdContr;
     private GameObject player;
     private new Camera camera;
-    private Animator anim;
     [HideInInspector]
     public static bool FirstPerson { get; private set; }
     private Transform inspectTarget;
@@ -45,8 +44,6 @@ public class InspectViewToggle : MonoBehaviour
         resetOnceTP = false;
 
         camera = GetComponent<Camera>();
-        //player = GameObject.Find("Player");
-        anim = player.GetComponent<Animator>();
 
         mouseOrbit = camera.GetComponent<CameraOrbit>();
         mouseOrbit.enabled = true;
@@ -122,7 +119,6 @@ public class InspectViewToggle : MonoBehaviour
 
                     //Switch to first person view controlls and first person movement and activates lens if player is in light
                     FirstPerson = true;
-                    anim.SetBool("FirstPerson", FirstPerson);
 
                     //Resets the rotation of the camera to the player rotation
                     //TODO: Is this needed?
@@ -172,7 +168,6 @@ public class InspectViewToggle : MonoBehaviour
 
                 //Switch to first person view controlls and first person movement and turns lens off if player is in light
                 FirstPerson = false;
-                anim.SetBool("FirstPerson", FirstPerson);
 
                 //Remove the parent
                 transform.parent = null;

@@ -110,10 +110,15 @@ public class IntroScript : MonoBehaviour {
                 writer();
             }
         }
+        if (Input.GetButton("Jump"))
+        {
+            textBoxShown = false;
+            return;
+        }
     }
     void writer()
     {
-
+       
         if (currentTextFileID == 17 && textDone == true)
         {
 
@@ -147,13 +152,13 @@ public class IntroScript : MonoBehaviour {
             //Line 1
             //denna körs inte - Tobias
         }
-        if (currentTextFileID == 1)
+        else if (currentTextFileID == 1)
         {
             //Line 2
             voice.setValue(2);
             voiceEvent.start();
         }
-        if (currentTextFileID == 2)
+        else if (currentTextFileID == 2)
         {
             //Line 3
             firstFade.setValue(1);
@@ -162,7 +167,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(4);
             voiceEvent.start();
         }
-        if (currentTextFileID == 3)
+        else if (currentTextFileID == 3)
         {
 
             
@@ -171,7 +176,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(5);
             voiceEvent.start();
         }
-        if (currentTextFileID == 4)
+        else if (currentTextFileID == 4)
         {
             progress.setValue(1);
             Camera.main.GetComponent<movement>().speed = 0.1f;
@@ -181,7 +186,7 @@ public class IntroScript : MonoBehaviour {
             StartCoroutine(textDelayTimer(1.0f));
 
         }
-        if (currentTextFileID == 5)
+        else if (currentTextFileID == 5)
         {
 
             //Camera.main.GetComponent<movement>().cameraMovement();
@@ -190,7 +195,7 @@ public class IntroScript : MonoBehaviour {
             voiceEvent.start();
 
         }
-        if (currentTextFileID == 6)
+        else if (currentTextFileID == 6)
         {
 
             Camera.main.GetComponent<movement>().speed = 0.3f;
@@ -199,12 +204,12 @@ public class IntroScript : MonoBehaviour {
             voiceEvent.start();
 
         }
-        if(currentTextFileID == 7)
+        else if(currentTextFileID == 7)
         {
             voice.setValue(9);
             voiceEvent.start();
         }
-        if (currentTextFileID == 8)
+        else if (currentTextFileID == 8)
         {
             
             progress.setValue(2);
@@ -215,7 +220,7 @@ public class IntroScript : MonoBehaviour {
             StartCoroutine(voiceDelay(3.0f, currentTextFileID, 11));
             StartCoroutine(textDelayTimer(3.0f));
         }
-        if (currentTextFileID == 9)
+        else if (currentTextFileID == 9)
         {
 
             Camera.main.GetComponent<movement>().speed = 0.3f;
@@ -225,7 +230,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(12);
             voiceEvent.start();
         }
-        if (currentTextFileID == 10)
+        else if (currentTextFileID == 10)
         {
             progress.setValue(3);
 
@@ -236,7 +241,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(13);
             voiceEvent.start();
         }
-        if (currentTextFileID == 11)
+        else if (currentTextFileID == 11)
         {
             
             Camera.main.GetComponent<movement>().speed = 0.3f;
@@ -247,7 +252,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(14);
             voiceEvent.start();
         }
-        if (currentTextFileID == 12)
+        else if (currentTextFileID == 12)
         {
 
             Camera.main.GetComponent<movement>().speed = 0.3f;
@@ -258,7 +263,7 @@ public class IntroScript : MonoBehaviour {
             voice.setValue(15);
             voiceEvent.start();
         }
-        if (currentTextFileID == 13)
+        else if (currentTextFileID == 13)
         {
             
             progress.setValue(4);
@@ -271,12 +276,12 @@ public class IntroScript : MonoBehaviour {
             StartCoroutine(voiceDelay(3.0f, currentTextFileID, 16));
             StartCoroutine(textDelayTimer(3.0f));
         }
-        if (currentTextFileID == 14)
+        else if (currentTextFileID == 14)
         {
             voice.setValue(17);
             voiceEvent.start();
         }
-        if (currentTextFileID == 15)
+        else if (currentTextFileID == 15)
         {
             
             progress.setValue(5);
@@ -285,7 +290,7 @@ public class IntroScript : MonoBehaviour {
             StartCoroutine(voiceDelay(3.0f, currentTextFileID, 18));
             StartCoroutine(textDelayTimer(3.0f));
         }
-        if (currentTextFileID == 16)
+        else if (currentTextFileID == 16)
         {
             Camera.main.GetComponent<movement>().speed = 0.1f;
             Camera.main.GetComponent<movement>().cameraMovement();
@@ -293,7 +298,7 @@ public class IntroScript : MonoBehaviour {
             voiceEvent.start();
             finalImage(3.0f);
         }
-        if (currentTextFileID == 17)
+        else if (currentTextFileID == 17)
         {
             progress.setValue(6);
             voice.setValue(20);

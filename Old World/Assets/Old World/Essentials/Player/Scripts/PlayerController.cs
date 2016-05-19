@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     CharacterController m_CharCtrl;
     Animator m_Animator;
+    private float idleSpecial = 0;
     public bool m_IsGrounded;
     const float k_Half = 0.5f;
     float m_TurnAmount;
@@ -138,6 +139,22 @@ public class PlayerController : MonoBehaviour
         // update the animator parameters
         m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
         m_Animator.SetBool("OnGround", m_IsGrounded);
+        idleSpecial += Time.deltaTime * Random.Range(0f, 0.5f);
+
+        if (idleSpecial > 1.0f)
+        {
+            idleSpecial = 0;
+            m_Animator.SetBool("IdleSpecial", true);
+            Debug.Log("do anim");
+        }
+    
+
+        else
+        {
+            Debug.Log("don't do anim");
+            m_Animator.SetBool("IdleSpecial", false);
+        }
+
         if (!m_IsGrounded)
         {
             m_Animator.SetFloat("Jump", m_CharCtrl.velocity.y);

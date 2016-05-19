@@ -28,7 +28,7 @@ public class IntroScript : MonoBehaviour {
     private float alpha = 1;
     private Color screenColor;
     public GUISkin introGUI;
-    private bool textBoxShown = true;
+    public bool textBoxShown = true;
 
 
     [FMODUnity.EventRef]

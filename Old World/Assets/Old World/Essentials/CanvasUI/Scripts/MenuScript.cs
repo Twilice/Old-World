@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 
 public class MenuScript : MonoBehaviour 
 {
@@ -15,6 +16,8 @@ public class MenuScript : MonoBehaviour
     // hardcoded script to disable in menu
     private CameraOrbit cameraOrbit; 
     private FirstPersonViewToggle cameraViewToggle;
+    private BlurOptimized blur;
+    private DepthOfField dofBlur;
     //private CameraLookAt mouseToggle;
 
     private bool pause;
@@ -43,6 +46,9 @@ public class MenuScript : MonoBehaviour
     {
         GameObject camera = GameObject.Find("MainCamera");
         cameraOrbit = camera.GetComponent<CameraOrbit>();
+        blur = camera.GetComponent<BlurOptimized>();
+        dofBlur = camera.GetComponent<DepthOfField>();
+
         cameraViewToggle = camera.GetComponent<FirstPersonViewToggle>();
 
         menuBackground.enabled = false;
@@ -84,10 +90,12 @@ public class MenuScript : MonoBehaviour
 
     public void ResumeGame()
     {
+        dofBlur.enabled = false;
+        blur.enabled = false;
 
         //DisableJournal();
         //journal.SetActive(false);
-        menuBackground.enabled = false;
+        //menuBackground.enabled = false;
         StateController.menuOpen = false;
         buttons.SetActive(false);
         StateController.cursorLocked = true;
@@ -97,10 +105,13 @@ public class MenuScript : MonoBehaviour
 
     public void PauseGame()
     {
+        dofBlur.enabled = true;
+        blur.enabled = true;
+
         StateController.menuOpen = true;
         //EnableJournal();
         //journal.SetActive(true);
-        menuBackground.enabled = true;
+        //menuBackground.enabled = true;
         buttons.SetActive(true);
         StateController.cursorLocked = false;
         cameraOrbit.enabled = false;

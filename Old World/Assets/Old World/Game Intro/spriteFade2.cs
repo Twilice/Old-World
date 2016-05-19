@@ -49,7 +49,7 @@ public class spriteFade2 : MonoBehaviour
 
 
         }
-        if (sceneChanger == true && t >= 0.95f)
+        if (sceneChanger == true && IntroScript.instance.textBoxShown == false)
         {
             IntroScript.musicEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             SceneManager.LoadScene("Corridor");

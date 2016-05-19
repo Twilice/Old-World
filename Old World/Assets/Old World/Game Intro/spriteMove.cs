@@ -4,13 +4,13 @@ using System.Collections;
 public class spriteMove : MonoBehaviour {
 
     public Vector3 newPos;
-    private Vector3 oriPos;
+ //   private Vector3 oriPos;
     public int moveAtIndex;
     public float speed;
 
 	// Use this for initialization
 	void Start () {
-        oriPos = transform.position;
+    //    oriPos = transform.position;
 	}
 	
 	// Update is called once per frame

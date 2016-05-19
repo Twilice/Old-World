@@ -10,11 +10,11 @@ public class spriteFade2 : MonoBehaviour
     public float duration = 5.0f;
 
     public SpriteRenderer sprite;
-    private float a = 1.0f;
+  //  private float a = 1.0f;
     private float c;
     private float t;
 
-    private bool once = false;
+  //  private bool once = false;
     public bool sceneChanger;
 
     // Use this for initialization

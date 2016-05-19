@@ -7,10 +7,10 @@ public class spriteFade : MonoBehaviour {
 
     public SpriteRenderer sprite;
     public int fileToFadeAt;
-    private float a = 1.0f;
+    //private float a = 1.0f;
     private float c;
 
-    private bool once = false;
+  //  private bool once = false;
 
     // Use this for initialization
     void Start () {

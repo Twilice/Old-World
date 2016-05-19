@@ -17,7 +17,7 @@ public class IntroScript : MonoBehaviour {
 
     private bool textDelay = false;
 
-    private int picIndex;
+    //private int picIndex;
     public int currentTextFileID;
     public int finalImageSteps = 0;
 
@@ -27,7 +27,7 @@ public class IntroScript : MonoBehaviour {
     private float textSpeed = 0.03f;
     private bool textDone = false;
 
-    private float alpha = 1;
+    //private float alpha = 1;
     private Color screenColor;
     public GUISkin introGUI;
     public bool textBoxShown = true;
@@ -72,7 +72,7 @@ public class IntroScript : MonoBehaviour {
         currentTextFileID = 0;
         InvokeRepeating("printer", 0, textSpeed);
         currentTextFileID = 0;
-        picIndex = 0;
+       // picIndex = 0;
 
         text = inspectText[currentTextFileID].text;
 

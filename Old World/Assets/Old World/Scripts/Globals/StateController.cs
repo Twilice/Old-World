@@ -31,7 +31,7 @@ public class StateController
     public static ZoomStatus currentZoom = ZoomStatus.zoomingOut;
     public static bool cursorLocked = true;
     public static bool menuOpen = false;
-    public static Rooms currentRoom = Rooms.Hub;
+    public static Rooms currentRoom = Rooms.NoRoom;
 
     [FMODUnity.EventRef]
     public static FMOD.Studio.EventInstance musicEvent;
@@ -64,8 +64,15 @@ public class StateController
 
         musicParameter.setValue(musicParamValue);
 
+        //musicEvent.start();
+    }
+    public static void LoadGame(Rooms newScene)
+    {
+        currentRoom = newScene;
+        SceneManager.LoadScene(RoomToString(newScene));
         musicEvent.start();
     }
+
     public static bool loading = false;
     public static IEnumerator LoadScene(Rooms newScene)
     {
@@ -220,12 +227,12 @@ public class StateController
         else if (currentRoom == Rooms.Room1_5)
             activeTagsRoom1_5.Add(tag);
 
-        Debug.Log(currentRoom);
+   //     Debug.Log(currentRoom);
     }
 
     public static bool SegmentActive(string tag)
     {
-        Debug.Log(currentRoom);
+       // Debug.Log(currentRoom);
         if (currentRoom == Rooms.Hub)
             return activeTagsHub.Contains(tag);
 
@@ -234,11 +241,11 @@ public class StateController
 
         else if (currentRoom == Rooms.Room1_2)
         {
-            foreach(string s in activeTagsRoom1_2)
+            /*foreach(string s in activeTagsRoom1_2)
             {
                 Debug.Log(s);
             }
-            Debug.Log("list contains " + tag +" " + activeTagsRoom1_2.Contains(tag));
+            Debug.Log("list contains " + tag +" " + activeTagsRoom1_2.Contains(tag));*/
             return activeTagsRoom1_2.Contains(tag);
         }
         else if (currentRoom == Rooms.Room1_3)
@@ -255,6 +262,7 @@ public class StateController
 }
 public enum Rooms
 {
+    NoRoom,
     Hub,
     Room1_1,
     Room1_2,

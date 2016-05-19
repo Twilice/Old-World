@@ -10,12 +10,12 @@ public class ButtonScript : MonoBehaviour
 	public bool chargerTarget;
 	public bool Active = false;
 
-	private Vector3 StartPos;
+//	private Vector3 StartPos;
 	private Vector3 EndPos;
 
 	void Awake ()
 	{
-		StartPos = transform.localPosition;
+	//	StartPos = transform.localPosition;
 		EndPos = new Vector3(0, -0.1f, 0);
 	}
 	

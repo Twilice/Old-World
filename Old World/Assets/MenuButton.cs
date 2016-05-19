@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MenuButton : MonoBehaviour {
 
@@ -16,12 +17,15 @@ public class MenuButton : MonoBehaviour {
 		switch (i)
 		{
 			case (0):
-				Debug.Log("StartGame");
-				Sfx.Play(1);
+                SceneManager.LoadScene("Introduction");
+                Sfx.Play(1);
 				break;
 			case (1):
-				Debug.Log("Quit");
-				Sfx.Play(1);
+                Application.Quit();
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                Sfx.Play(1);
 				break;
 			case (2):
 				Debug.Log("Options");

@@ -1,1 +1,3 @@
-The UA9 project revolves around uniquely designed silicon crystals with the ability to redirect particle beams within the LHC at CERN. UA10 is our new project with focus on greater angular redirections and collimation.
+TITEL: UA10 project introduction
+On our latest project we’ve produced silicon crystals with greater angular redirecting and collimation. Our most recent crystal design allows the crystal to redirect light at an astonishing 88o angle, with 0% absorption.
+//efter 88 ska det vara en symbol för grader, om det går. Annars vå det stå 'degree'

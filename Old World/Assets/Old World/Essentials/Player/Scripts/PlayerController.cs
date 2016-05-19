@@ -145,13 +145,11 @@ public class PlayerController : MonoBehaviour
         {
             idleSpecial = 0;
             m_Animator.SetBool("IdleSpecial", true);
-            Debug.Log("do anim");
         }
     
 
         else
         {
-            Debug.Log("don't do anim");
             m_Animator.SetBool("IdleSpecial", false);
         }
 

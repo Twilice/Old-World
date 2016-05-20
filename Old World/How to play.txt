@@ -1,7 +1,9 @@
 --------CONTROLS---------
-Right mouse button - aim lens
-Press Q while aiming - drop lens
-Aiming while lens is dropped - control the lens' horizontally
-E - interact with objects and go to next textbox
-WASD - movement
-Space - jump
+
+WASD 	- Movement
+Space 	- Jump
+E 	- Interact
+
+Right mouse button (RMB) 	- Toggle aim
+Pressing Q while aiming 	- Drop lens
+RMB while lens is dropped 	- Control the lens horizontally

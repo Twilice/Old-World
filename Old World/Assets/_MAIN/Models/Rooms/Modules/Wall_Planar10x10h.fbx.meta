@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 044245b069bfb244284505a37448e747
-timeCreated: 1463576758
+guid: e193c373b3aefe54eb448ea7a8ee44a9
+timeCreated: 1463746923
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Wall_Planar20x10h
-    4300002: Wall_Planar20x10h1
+    4300000: Wall_Planar10x10h
     9500000: //RootNode
   materials:
     importMaterials: 1

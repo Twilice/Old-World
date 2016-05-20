@@ -13,7 +13,7 @@ public class SceneSwitch : MonoBehaviour {
             if (StateController.currentRoom.Equals(newScene) == false && StateController.loading == false)
             {
                 LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
-                fade.FadeToBlack();
+                //fade.FadeToBlack();
                 StartCoroutine(StateController.LoadScene(newScene));
             }
         }

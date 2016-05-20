@@ -16,6 +16,7 @@ public class IntroScript : MonoBehaviour {
     //public Texture dark;
 
     private bool textDelay = false;
+    private bool skipBox = false;
 
     //private int picIndex;
     public int currentTextFileID;
@@ -103,17 +104,26 @@ public class IntroScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //GUITEXTURE.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
-        if (Input.GetButtonDown("Action")) 
+        if (Input.GetButtonDown("Jump")) 
         {
             if (textDelay == false)
             {
                 writer();
             }
         }
-        if (Input.GetButton("Jump"))
+        if (Input.GetButtonDown("Action") || Input.GetButtonDown("IntroSkip"))
         {
-            textBoxShown = false;
-            return;
+
+            if (skipBox == true)
+            {
+                textBoxShown = false;
+                return;
+            } else
+            {
+                skipBox = true;
+                StartCoroutine(skipDelay(3.0f));
+                return;
+            }
         }
     }
     void writer()
@@ -355,6 +365,19 @@ public class IntroScript : MonoBehaviour {
 
             GUILayout.EndArea();
         }
+        if (skipBox == true)
+        {
+            GUILayout.BeginArea(new Rect(Screen.width - Screen.width/4, Screen.height - Screen.height/10, Screen.width / 4, Screen.height / 10));
+            //GUILayout.BeginArea(new Rect(100, 100, 50, 1000 ));
+
+            GUILayout.BeginVertical("", GUI.skin.GetStyle(""));
+
+            GUILayout.Label("(Press again to Skip Intro)");
+
+            GUILayout.EndVertical();
+
+            GUILayout.EndArea();
+        }
 
     }
     IEnumerator voiceDelay(float time, int currentFile, int voiceValue)
@@ -371,5 +394,10 @@ public class IntroScript : MonoBehaviour {
         textDelay = true;
         yield return new WaitForSeconds(time);
         textDelay = false;
+    }
+    IEnumerator skipDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        skipBox = false;
     }
 }

@@ -5,7 +5,3 @@ Aiming while lens is dropped - control the lens' horizontally
 E - interact with objects and go to next textbox
 WASD - movement
 Space - jump
-
---------MECHANICS---------
-Aiming lens at solar panels
-Generators and segments

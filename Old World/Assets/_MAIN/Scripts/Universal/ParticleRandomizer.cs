@@ -133,6 +133,10 @@ public class ParticleRandomizer : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            particle.Stop(true);
+        }
     }
 }
 

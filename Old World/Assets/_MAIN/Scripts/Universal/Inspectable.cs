@@ -19,8 +19,22 @@ public class Inspectable : MonoBehaviour
     private bool canBeInspected = false;
 
     private int charIndex = -1;
+    private int oldCharIndex = -1;
     private float charIndexFloat = 0;
     private int stringLength = 0;
+
+
+    public static FMOD.Studio.EventInstance soundNeedsPower;
+    public static FMOD.Studio.EventInstance soundHasPower;
+    public static FMOD.Studio.EventInstance soundCharacterPrint;
+
+    void Awake()
+    {
+        soundNeedsPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Error");
+        soundHasPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Success");
+        soundCharacterPrint = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerText_OneShot");
+     
+    }
 
     void Start()
     {
@@ -54,8 +68,12 @@ public class Inspectable : MonoBehaviour
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))
                 {
+
+                    soundHasPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                    soundHasPower.start();
                     currentTextID = 0;
                     charIndex = 0;
+                    oldCharIndex = 0;
                     charIndexFloat = 0;
                     inspectString = inspectText[currentTextID].text;
                     //charArr = inspectString.ToCharArray();
@@ -71,6 +89,7 @@ public class Inspectable : MonoBehaviour
                     if (charIndex < stringLength)
                     {
                         charIndex = stringLength;
+                        oldCharIndex = stringLength;
                         boxText.text = inspectString.Substring(0, charIndex);
                     }
                     //new page
@@ -81,6 +100,7 @@ public class Inspectable : MonoBehaviour
                         if (currentTextID < inspectText.Count)
                         {
                             charIndex = 0;
+                            oldCharIndex = 0;
                             charIndexFloat = 0;
                             inspectString = inspectText[currentTextID].text;
                             //charArr = inspectString.ToCharArray();
@@ -102,8 +122,11 @@ public class Inspectable : MonoBehaviour
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))
                 {
+                    soundNeedsPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                    soundNeedsPower.start();
                     currentTextID = 0;
                     charIndex = 0;
+                    oldCharIndex = 0;
                     charIndexFloat = 0;
                     inspectString = powerOffText;
                     //charArr = inspectString.ToCharArray();
@@ -119,6 +142,7 @@ public class Inspectable : MonoBehaviour
                     if (charIndex < stringLength)
                     {
                         charIndex = stringLength;
+                        oldCharIndex = stringLength;
                         boxText.text = inspectString.Substring(0, charIndex);
                     }
                     //new page
@@ -135,9 +159,16 @@ public class Inspectable : MonoBehaviour
         if(charIndex != -1 && charIndex < stringLength)
         {
             charIndexFloat += Time.deltaTime * characterPerSeconds;
+            oldCharIndex = charIndex;
             charIndex = (int)charIndexFloat;
             if (stringLength < charIndex)
                 charIndex = stringLength;
+
+            if(charIndex != oldCharIndex)
+            {
+                soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                soundCharacterPrint.start();
+            }
 
        /*     if(inspectString.)
             // kolla efter style <*>

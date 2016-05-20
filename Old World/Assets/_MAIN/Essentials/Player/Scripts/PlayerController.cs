@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     float m_turningRadius = 2.5f;
     [SerializeField]
     float m_SlideAngle = 45f;
+    
+    public static FMOD.Studio.EventInstance soundJump;
 
     CharacterController m_CharCtrl;
     Animator m_Animator;
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private float ySpeed = -5f;
     void Awake()
     {
+        soundJump = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Boots_Jump");
+       
         if (StateController.savedPosition)
         {
             transform.rotation = StateController.playerRot;
@@ -98,13 +102,19 @@ public class PlayerController : MonoBehaviour
                 //slide more if higher angle
                 move = Vector3.Lerp(transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier, Vector3.ProjectOnPlane(m_GroundNormal, transform.up) * 2, (groundAngle - m_SlideAngle) / m_SlideAngle);
                 if (jump)
+                {
+                    soundJump.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                    soundJump.start();
                     ySpeed = m_JumpPower;
+                }
             }
             //ordinary move
             else
             {
                 if (jump)
                 {
+                    soundJump.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                    soundJump.start();
                     ySpeed = m_JumpPower;
                 }
                 move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;

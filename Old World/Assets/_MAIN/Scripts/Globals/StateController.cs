@@ -31,9 +31,8 @@ public class StateController
     public static ZoomStatus currentZoom = ZoomStatus.zoomingOut;
     public static bool cursorLocked = true;
     public static bool menuOpen = false;
-    public static Rooms currentRoom = Rooms.NoRoom;
+    public static Rooms currentRoom = Rooms.Room1_1;
 
-    [FMODUnity.EventRef]
     public static FMOD.Studio.EventInstance musicEvent;
     public static FMOD.Studio.ParameterInstance musicParameter;
 
@@ -80,7 +79,6 @@ public class StateController
         TurnOnMusic();
         ambientRoom.start();
         SceneManager.LoadScene(RoomToString(newScene));
-        Debug.Log("ladda spelet");
       
     }
 
@@ -89,7 +87,6 @@ public class StateController
         if (isInCorridor == false)
         {
             isInCorridor = true;
-            Debug.Log("in korridor");
             ambientRoom.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             ambientCorridor.start();
             TurnOffMusic();
@@ -101,7 +98,6 @@ public class StateController
         if (isInCorridor == true)
         {
             isInCorridor = false;
-            Debug.Log("ut ur korridor");
             ambientCorridor.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             ambientRoom.start();
             TurnOnMusic();

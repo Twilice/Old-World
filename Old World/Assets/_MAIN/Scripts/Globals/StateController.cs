@@ -36,7 +36,11 @@ public class StateController
     [FMODUnity.EventRef]
     public static FMOD.Studio.EventInstance musicEvent;
     public static FMOD.Studio.ParameterInstance musicParameter;
-    public static float parameterIncrement = 0.25f;
+
+    public static FMOD.Studio.EventInstance ambientRoom;
+    public static FMOD.Studio.EventInstance ambientCorridor;
+
+    //public static float parameterIncrement = 0.25f;
     public static float musicParamValue = 0;
     public static MoveLensTarget lensScript;
 
@@ -49,6 +53,7 @@ public class StateController
 
     private static float hubParamenter = 1f;
     private static float r1_1Paramenter = 2f;
+    private static bool isInCorridor = false;
    // private float r1-2Paramenter = Xf;
 
     static StateController()
@@ -61,6 +66,9 @@ public class StateController
         activeTagsRoom1_5 = new List<string>();
 
         musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/RoomMusic");
+        ambientCorridor = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Digital");
+        ambientRoom = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Organic");
+
         musicEvent.getParameter("ChangeMusic", out musicParameter);
         musicParameter.setValue(0);
         musicEvent.start();
@@ -70,10 +78,35 @@ public class StateController
         TurnOffMusic();
         currentRoom = newScene;
         TurnOnMusic();
+        ambientRoom.start();
         SceneManager.LoadScene(RoomToString(newScene));
+        Debug.Log("ladda spelet");
       
     }
 
+    public static void EnterCorridor()
+    {
+        if (isInCorridor == false)
+        {
+            isInCorridor = true;
+            Debug.Log("in korridor");
+            ambientRoom.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            ambientCorridor.start();
+            TurnOffMusic();
+        }
+    }
+
+    public static void LeaveCorridor()
+    {
+        if (isInCorridor == true)
+        {
+            isInCorridor = false;
+            Debug.Log("ut ur korridor");
+            ambientCorridor.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            ambientRoom.start();
+            TurnOnMusic();
+        }
+    }
     public static void TurnOffMusic()
     {
         musicParameter.setValue(0);
@@ -88,7 +121,8 @@ public class StateController
     }
     public static void TurnOnMusic()
     {
-        if (currentRoom == Rooms.Hub)
+        if (isInCorridor) musicParameter.setValue(0);
+        else if (currentRoom == Rooms.Hub)
         {
             musicParameter.setValue(hubParamenter);
         }
@@ -236,7 +270,10 @@ public class StateController
                 activeRoom1_1 = value;
                 if (activeRoom1_1)
                     r1_1Paramenter = 3f;
-                musicParameter.setValue(r1_1Paramenter);
+                if(isInCorridor  == false)
+                    musicParameter.setValue(r1_1Paramenter);
+                else
+                    musicParameter.setValue(0);
             }
             else if (currentRoom == Rooms.Room1_2)
                 activeRoom1_2 = value;

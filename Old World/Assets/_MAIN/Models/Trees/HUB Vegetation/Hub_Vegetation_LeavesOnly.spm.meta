@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7e7a7eee79bcc874aabf5f06653a0cfa
-timeCreated: 1463408444
+guid: be174b7bc6518c949b52d89031bbaac5
+timeCreated: 1463750513
 licenseType: Pro
 SpeedTreeImporter:
   serializedVersion: 4
@@ -19,7 +19,7 @@ SpeedTreeImporter:
     reflectionProbeUsage: 1
     enableBump: 1
     enableHue: 1
-    windQuality: 0
+    windQuality: 3
   enableSmoothLODTransition: 1
   animateCrossFading: 1
   billboardTransitionCrossFadeWidth: 0.25

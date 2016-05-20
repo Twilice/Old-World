@@ -9,7 +9,7 @@ SpeedTreeImporter:
   hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
   shininess: 0.125
   alphaTestRef: 0.33
-  bestWindQuality: 0
+  bestWindQuality: 3
   hasBillboard: 0
   lODSettings:
   - height: 0.01

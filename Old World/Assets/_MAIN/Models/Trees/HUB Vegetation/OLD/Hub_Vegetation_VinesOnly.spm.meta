@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7e7a7eee79bcc874aabf5f06653a0cfa
-timeCreated: 1463408444
+guid: e4953d7f224f30e4cb7724dd5d74e4d8
+timeCreated: 1463750513
 licenseType: Pro
 SpeedTreeImporter:
   serializedVersion: 4
@@ -9,7 +9,7 @@ SpeedTreeImporter:
   hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
   shininess: 0.125
   alphaTestRef: 0.33
-  bestWindQuality: 3
+  bestWindQuality: 0
   hasBillboard: 0
   lODSettings:
   - height: 0.01

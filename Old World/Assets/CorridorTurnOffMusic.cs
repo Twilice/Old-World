@@ -6,12 +6,12 @@ public class CorridorTurnOffMusic : MonoBehaviour {
     void OnTriggerEnter(Collider coll)
     {
         if(coll.tag.Equals("Player"))
-            StateController.TurnOffMusic();
+            StateController.EnterCorridor();
     }
 
     void OnTriggerExit(Collider coll)
     {
         if (coll.tag.Equals("Player"))
-            StateController.TurnOnMusic();
+            StateController.LeaveCorridor();
     }
 }

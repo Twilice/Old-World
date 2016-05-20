@@ -34,9 +34,8 @@ public class StateController
     public static Rooms currentRoom = Rooms.NoRoom;
 
     [FMODUnity.EventRef]
-    public static FMOD.Studio.EventInstance hubEvent;
-    public static FMOD.Studio.EventInstance R1_1Event;
-    public static string parameterName = "progress";
+    public static FMOD.Studio.EventInstance musicEvent;
+    public static FMOD.Studio.ParameterInstance musicParameter;
     public static float parameterIncrement = 0.25f;
     public static float musicParamValue = 0;
     public static MoveLensTarget lensScript;
@@ -48,6 +47,9 @@ public class StateController
     private static List<string> activeTagsRoom1_4;
     private static List<string> activeTagsRoom1_5;
 
+    private static float hubParamenter = 1f;
+    private static float r1_1Paramenter = 2f;
+   // private float r1-2Paramenter = Xf;
 
     static StateController()
     {
@@ -58,10 +60,10 @@ public class StateController
         activeTagsRoom1_4 = new List<string>();
         activeTagsRoom1_5 = new List<string>();
 
-        hubEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Hub Music");
-        R1_1Event = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Wing 1.1 FINAL");
-
-        //musicEvent.start();
+        musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/RoomMusic");
+        musicEvent.getParameter("ChangeMusic", out musicParameter);
+        musicParameter.setValue(0);
+        musicEvent.start();
     }
     public static void LoadGame(Rooms newScene)
     {
@@ -74,24 +76,25 @@ public class StateController
 
     public static void TurnOffMusic()
     {
-        if(currentRoom == Rooms.Hub  )
-        {
-            hubEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-        else if (currentRoom == Rooms.Room1_1)
-        {
-            R1_1Event.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
+        musicParameter.setValue(0);
+        /*   if(currentRoom == Rooms.Hub  )
+           {
+               musicEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+           }
+           else if (currentRoom == Rooms.Room1_1)
+           {
+               R1_1Event.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+           }*/
     }
     public static void TurnOnMusic()
     {
         if (currentRoom == Rooms.Hub)
         {
-            hubEvent.start();
+            musicParameter.setValue(hubParamenter);
         }
         else if (currentRoom == Rooms.Room1_1)
         {
-            R1_1Event.start();
+            musicParameter.setValue(r1_1Paramenter);
         }
         /*    if (currentRoom == Rooms.Hub)
             {
@@ -216,21 +219,25 @@ public class StateController
         }
         set
         {
-            Debug.Log("SET");
+        /*    Debug.Log("SET");
             Debug.Log("currentRoom" + currentRoom);
             Debug.Log("activehub" + activeHub);
             Debug.Log("activeRoom1_1" + activeRoom1_1);
             Debug.Log("activeRoom1_2" + activeRoom1_2);
             Debug.Log("activeRoom1_3" + activeRoom1_3);
             Debug.Log("activeRoom1_4" + activeRoom1_4);
-            Debug.Log("activeRoom1_5" + activeRoom1_5);
+            Debug.Log("activeRoom1_5" + activeRoom1_5);*/
             if (loading) return;
             if (currentRoom == Rooms.Hub)
                 activeHub = value;
 
             else if (currentRoom == Rooms.Room1_1)
+            {
                 activeRoom1_1 = value;
-
+                if (activeRoom1_1)
+                    r1_1Paramenter = 3f;
+                musicParameter.setValue(r1_1Paramenter);
+            }
             else if (currentRoom == Rooms.Room1_2)
                 activeRoom1_2 = value;
 
@@ -242,12 +249,12 @@ public class StateController
 
             else if (currentRoom == Rooms.Room1_5)
                 activeRoom1_5 = value;
-            Debug.Log("activehub" + activeHub);
+        /*    Debug.Log("activehub" + activeHub);
             Debug.Log("activeRoom1_1" + activeRoom1_1);
             Debug.Log("activeRoom1_2" + activeRoom1_2);
             Debug.Log("activeRoom1_3" + activeRoom1_3);
             Debug.Log("activeRoom1_4" + activeRoom1_4);
-            Debug.Log("activeRoom1_5" + activeRoom1_5);
+            Debug.Log("activeRoom1_5" + activeRoom1_5);*/
         }
     }
 

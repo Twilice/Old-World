@@ -117,14 +117,14 @@ public class StateController
                     yield return null;
 
                 }
-                while (true)
+               /* while (true)
                 {
                     if(fade.FadedToBlack)
                     {
                         break;
                     }
                     yield return null;
-                }
+                }*/
                 loading = false;
                 async.allowSceneActivation = true;
             }
@@ -159,6 +159,14 @@ public class StateController
     {
         get
         {
+         /*   Debug.Log("GET");
+            Debug.Log("activehub" + activeHub);
+            Debug.Log("activeRoom1_1" + activeRoom1_1);
+            Debug.Log("activeRoom1_2" + activeRoom1_2);
+            Debug.Log("activeRoom1_3" + activeRoom1_3);
+            Debug.Log("activeRoom1_4" + activeRoom1_4);
+            Debug.Log("activeRoom1_5" + activeRoom1_5);
+            */
             if (currentRoom == Rooms.Hub)
                 return activeHub;
 
@@ -180,6 +188,15 @@ public class StateController
         }
         set
         {
+            Debug.Log("SET");
+            Debug.Log("currentRoom" + currentRoom);
+            Debug.Log("activehub" + activeHub);
+            Debug.Log("activeRoom1_1" + activeRoom1_1);
+            Debug.Log("activeRoom1_2" + activeRoom1_2);
+            Debug.Log("activeRoom1_3" + activeRoom1_3);
+            Debug.Log("activeRoom1_4" + activeRoom1_4);
+            Debug.Log("activeRoom1_5" + activeRoom1_5);
+            if (loading) return;
             if (currentRoom == Rooms.Hub)
                 activeHub = value;
 
@@ -197,6 +214,12 @@ public class StateController
 
             else if (currentRoom == Rooms.Room1_5)
                 activeRoom1_5 = value;
+            Debug.Log("activehub" + activeHub);
+            Debug.Log("activeRoom1_1" + activeRoom1_1);
+            Debug.Log("activeRoom1_2" + activeRoom1_2);
+            Debug.Log("activeRoom1_3" + activeRoom1_3);
+            Debug.Log("activeRoom1_4" + activeRoom1_4);
+            Debug.Log("activeRoom1_5" + activeRoom1_5);
         }
     }
 

@@ -28,10 +28,11 @@ public class LoadFade : MonoBehaviour
 
     void Update()
     {
-        if (sceneStarting)
-            FadeToClear_inner();
-        if (sceneEnding)
-            FadeToBlack_inner();
+        texture.color = Color.clear;
+        /* if (sceneStarting)
+             FadeToClear_inner();
+         if (sceneEnding)
+             FadeToBlack_inner();*/
     }
 
     public void FadeToBlack()

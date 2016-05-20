@@ -54,7 +54,7 @@ public class IntroScript : MonoBehaviour {
         instance = this;
         musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Intro/IntroMusic");
         musicEvent.getParameter("FirstFade", out firstFade);
-        musicEvent.getParameter("Skip", out skip);
+
         musicEvent.getParameter("Progress", out progress);
 
         voiceEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Intro/Intro");
@@ -63,7 +63,6 @@ public class IntroScript : MonoBehaviour {
         voice.setValue(1);
         voiceEvent.start();
         firstFade.setValue(0);
-        skip.setValue(0);
         progress.setValue(0);
         musicEvent.start();
     }

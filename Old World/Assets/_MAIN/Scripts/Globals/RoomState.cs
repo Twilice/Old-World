@@ -32,16 +32,16 @@ public class RoomState : MonoBehaviour {
 
         //Set roomFullyPowered to correct value
         bool isPowerered = true;
-        StateController.musicParamValue = 0f;
+     //   StateController.musicParamValue = 0f;
         for (int i = 0; i < generators.Length; i++)
         {
             if (generators[i].Active == false)
             {
                 isPowerered = false;
             }
-            else StateController.musicParamValue += StateController.parameterIncrement;
+          //  else StateController.musicParamValue += StateController.parameterIncrement;
         }
-        StateController.musicParameter.setValue(StateController.musicParamValue);
+       // StateController.musicParameter.setValue(StateController.musicParamValue);
         StateController.roomFullyPowered = isPowerered;
     }
 }

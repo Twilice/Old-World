@@ -34,9 +34,8 @@ public class StateController
     public static Rooms currentRoom = Rooms.NoRoom;
 
     [FMODUnity.EventRef]
-    public static FMOD.Studio.EventInstance musicEvent;
-    public static FMOD.Studio.ParameterInstance musicParameter;
-    public static string eventName = "event:/Music/Wing 1.1 (Test 2)";
+    public static FMOD.Studio.EventInstance hubEvent;
+    public static FMOD.Studio.EventInstance R1_1Event;
     public static string parameterName = "progress";
     public static float parameterIncrement = 0.25f;
     public static float musicParamValue = 0;
@@ -59,20 +58,47 @@ public class StateController
         activeTagsRoom1_4 = new List<string>();
         activeTagsRoom1_5 = new List<string>();
 
-        musicEvent = FMODUnity.RuntimeManager.CreateInstance(eventName);
-        musicEvent.getParameter(parameterName, out musicParameter);
-
-        musicParameter.setValue(musicParamValue);
+        hubEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Hub Music");
+        R1_1Event = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Wing 1.1 FINAL");
 
         //musicEvent.start();
     }
     public static void LoadGame(Rooms newScene)
     {
+        TurnOffMusic();
         currentRoom = newScene;
+        TurnOnMusic();
         SceneManager.LoadScene(RoomToString(newScene));
-        musicEvent.start();
+      
     }
 
+    public static void TurnOffMusic()
+    {
+        if(currentRoom == Rooms.Hub  )
+        {
+            hubEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        else if (currentRoom == Rooms.Room1_1)
+        {
+            R1_1Event.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+    public static void TurnOnMusic()
+    {
+        if (currentRoom == Rooms.Hub)
+        {
+            hubEvent.start();
+        }
+        else if (currentRoom == Rooms.Room1_1)
+        {
+            R1_1Event.start();
+        }
+        /*    if (currentRoom == Rooms.Hub)
+            {
+                R1_1Event.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }*/
+
+    }
     public static bool loading = false;
     public static IEnumerator LoadScene(Rooms newScene)
     {
@@ -83,7 +109,9 @@ public class StateController
             {
                 LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
                 loading = true;
+               // TurnOffMusic();
                 currentRoom = newScene;
+                //TurnOnMusic();
 
                 AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
                 async.allowSceneActivation = false;

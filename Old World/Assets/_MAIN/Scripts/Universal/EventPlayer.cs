@@ -82,6 +82,12 @@ public class EventPlayer : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        StopEvent(true);
+    }
+
+
     //Denna funktion sätter valfri parameter i eventet till ett valfritt värde.
     //För att köra funktionen från ett annat script skriv:
     //exampleName.ChangeParameter("NamnetPåDinParameter", 1.0f);

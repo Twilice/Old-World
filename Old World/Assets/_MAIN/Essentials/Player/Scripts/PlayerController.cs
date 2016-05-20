@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     float m_JumpPower = 6.1f;
     [Range(1f, 20f)]
     [SerializeField]
-    float m_Gravity = 10f;
+    float m_Gravity = 20f;
     // [SerializeField]
     // float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
     [SerializeField]
@@ -30,9 +30,6 @@ public class PlayerController : MonoBehaviour
     const float k_Half = 0.5f;
     float m_TurnAmount;
     float m_ForwardAmount;
-    float velocity;
-    public float air_accelerate = 3;
-    public float max_speed = 0.1f;
     Vector3 m_GroundNormal;
     Vector3 m_CollisionNormal;
     int layerMask;
@@ -119,9 +116,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;
-            if (ySpeed > -10)
+            if (ySpeed > -20)
                 ySpeed -= m_Gravity * Time.deltaTime;
-            else ySpeed = -10;
+            else ySpeed = -20;
         }
 
 

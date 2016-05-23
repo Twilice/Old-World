@@ -36,6 +36,8 @@ public class StateController
     public static FMOD.Studio.EventInstance musicEvent;
     public static FMOD.Studio.ParameterInstance musicParameter;
 
+    public static FMOD.Studio.EventInstance ambientEvent;
+    public static FMOD.Studio.ParameterInstance ambientParameter;
     public static FMOD.Studio.EventInstance ambientRoom;
     public static FMOD.Studio.EventInstance ambientCorridor;
 
@@ -65,19 +67,26 @@ public class StateController
         activeTagsRoom1_5 = new List<string>();
 
         musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/RoomMusic");
-        ambientCorridor = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Digital");
-        ambientRoom = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Organic");
+        ambientEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Ambient"); 
+      //  ambientCorridor = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Digital");
+      //  ambientRoom = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Organic");
 
         musicEvent.getParameter("ChangeMusic", out musicParameter);
         musicParameter.setValue(0);
+
+        ambientEvent.getParameter("Parameter 1", out ambientParameter);
+        ambientParameter.setValue(1f);
+
         musicEvent.start();
+        ambientEvent.start();
     }
     public static void LoadGame(Rooms newScene)
     {
         TurnOffMusic();
         currentRoom = newScene;
         TurnOnMusic();
-        ambientRoom.start();
+     //   ambientRoom.start();
+
         SceneManager.LoadScene(RoomToString(newScene));
       
     }
@@ -87,8 +96,9 @@ public class StateController
         if (isInCorridor == false)
         {
             isInCorridor = true;
-            ambientRoom.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            ambientCorridor.start();
+            ambientParameter.setValue(2f);
+            //ambientRoom.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            // ambientCorridor.start();
             TurnOffMusic();
         }
     }
@@ -98,8 +108,9 @@ public class StateController
         if (isInCorridor == true)
         {
             isInCorridor = false;
-            ambientCorridor.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            ambientRoom.start();
+            ambientParameter.setValue(1f);
+            // ambientCorridor.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            // ambientRoom.start();
             TurnOnMusic();
         }
     }

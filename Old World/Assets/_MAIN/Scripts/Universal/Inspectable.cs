@@ -32,7 +32,7 @@ public class Inspectable : MonoBehaviour
     {
         soundNeedsPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Error");
         soundHasPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Success");
-        soundCharacterPrint = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerText_OneShot");
+        soundCharacterPrint = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerText_Loop");
      
     }
 
@@ -71,6 +71,8 @@ public class Inspectable : MonoBehaviour
 
                     soundHasPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
                     soundHasPower.start();
+                    soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                    soundCharacterPrint.start();
                     currentTextID = 0;
                     charIndex = 0;
                     oldCharIndex = 0;
@@ -99,6 +101,8 @@ public class Inspectable : MonoBehaviour
                         // pages left
                         if (currentTextID < inspectText.Count)
                         {
+                            soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                            soundCharacterPrint.start();
                             charIndex = 0;
                             oldCharIndex = 0;
                             charIndexFloat = 0;
@@ -124,6 +128,8 @@ public class Inspectable : MonoBehaviour
                 {
                     soundNeedsPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
                     soundNeedsPower.start();
+                    soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                    soundCharacterPrint.start();
                     currentTextID = 0;
                     charIndex = 0;
                     oldCharIndex = 0;
@@ -145,9 +151,11 @@ public class Inspectable : MonoBehaviour
                         oldCharIndex = stringLength;
                         boxText.text = inspectString.Substring(0, charIndex);
                     }
-                    //new page
+                    //no pages left
                     else
                     {
+                       // soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
+                      //  soundCharacterPrint.start();
                         inspectViewToggle.ExitInspectView();
                         inspectBox.SetActive(false);
                     }
@@ -164,11 +172,11 @@ public class Inspectable : MonoBehaviour
             if (stringLength < charIndex)
                 charIndex = stringLength;
 
-            if(charIndex != oldCharIndex)
+         /*   if(charIndex != oldCharIndex)
             {
                 soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
                 soundCharacterPrint.start();
-            }
+            }*/
 
        /*     if(inspectString.)
             // kolla efter style <*>

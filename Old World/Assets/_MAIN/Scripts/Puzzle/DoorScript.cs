@@ -9,14 +9,20 @@ public class DoorScript : MonoBehaviour
     private MovingPlatformScript[] mps;
     [Header("If active without power")]
     public bool active = false;
+    public static FMOD.Studio.EventInstance doorOpen;
+    public static FMOD.Studio.EventInstance doorClose;
 
     void Awake()
     {
         mps = GetComponentsInChildren<MovingPlatformScript>();
+        doorOpen = FMODUnity.RuntimeManager.CreateInstance("event:/Door/Door_Open");
+        doorClose = FMODUnity.RuntimeManager.CreateInstance("event:/Door/Door_Close");
     }
 
     void Update()
     {
+        doorOpen.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        doorClose.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         if (StateController.roomFullyPowered)
         {
             active = true;
@@ -30,6 +36,14 @@ public class DoorScript : MonoBehaviour
 			movingScript.Activate();
 		}
 	}
+
+    void OnTriggerEnter()
+    {
+        if(active)
+        {
+            doorOpen.start();
+        }
+    }
 
     void OnTriggerStay()
     {
@@ -46,6 +60,7 @@ public class DoorScript : MonoBehaviour
         if(active)
             foreach (MovingPlatformScript movingScript in mps)
             {
+                doorClose.start();
                 movingScript.returning = true;
             }
     }

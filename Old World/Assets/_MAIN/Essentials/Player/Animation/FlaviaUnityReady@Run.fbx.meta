@@ -260,7 +260,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.15508716
+        functionName: Footstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3ac6d3b72e0e8444083a9a3095e08fd8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.67315507
+        functionName: Footstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3ac6d3b72e0e8444083a9a3095e08fd8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

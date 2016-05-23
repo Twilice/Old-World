@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     float m_SlideAngle = 45f;
     
     public static FMOD.Studio.EventInstance soundJump;
+    public static FMOD.Studio.EventInstance soundland;
+    public static FMOD.Studio.ParameterInstance soundLandParam;
 
     CharacterController m_CharCtrl;
     Animator m_Animator;
@@ -39,7 +41,10 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         soundJump = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Boots_Jump");
-       
+        soundland = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Jump");
+        soundland.getParameter("Parameter 1", out soundLandParam);
+        soundLandParam.setValue(0.21f);
+
         if (StateController.savedPosition)
         {
             transform.rotation = StateController.playerRot;
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour
         return m_IsGrounded;
     }
 
-
+    private bool wasGrounded = false;
     public void Move(Vector3 move, bool jump)
     {
         // convert the world relative moveInput vector into a local-relative
@@ -83,8 +88,14 @@ public class PlayerController : MonoBehaviour
 
         ApplyExtraTurnRotation();
 
+        wasGrounded = m_IsGrounded;
         m_IsGrounded = m_CharCtrl.isGrounded;
 
+        if (wasGrounded == false && m_IsGrounded) //landed
+        {
+            soundland.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            soundland.start();
+        }
         if (m_IsGrounded)
         {
             ySpeed = -5;

@@ -1,1 +1,0 @@
-The upgraded design also generates a more collimated ray, reducing the beam divergence significantly even at great distances. Simply put, when light hits the crystal it travels across the surface and the complex crystal design directs the light without any loss of energy.

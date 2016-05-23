@@ -75,7 +75,7 @@ public class StateController
         musicParameter.setValue(0);
 
         ambientEvent.getParameter("Parameter 1", out ambientParameter);
-        ambientParameter.setValue(1f);
+        ambientParameter.setValue(0);
 
         musicEvent.start();
         ambientEvent.start();
@@ -128,7 +128,12 @@ public class StateController
     }
     public static void TurnOnMusic()
     {
-        if (isInCorridor) musicParameter.setValue(0);
+        ambientParameter.setValue(1f);
+        if (isInCorridor)
+        {
+            ambientParameter.setValue(2f);
+            musicParameter.setValue(0);
+        }
         else if (currentRoom == Rooms.Hub)
         {
             musicParameter.setValue(hubParamenter);

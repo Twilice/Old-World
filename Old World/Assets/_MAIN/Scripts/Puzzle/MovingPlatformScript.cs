@@ -6,10 +6,12 @@ public class MovingPlatformScript : MonoBehaviour
 {
     private Vector3 StartTransform;
     private bool MoveToTarget;
+	private Animator anim;
 
     public Vector3 TargetTransform;
     public int Speed;
     public bool Elevator;
+	public bool Obstacle;
 	public bool ReturnToOriginalPosition;
     [HideInInspector]
     public bool returning = false;
@@ -18,8 +20,9 @@ public class MovingPlatformScript : MonoBehaviour
     
     void Start ()
     {
-        //Activated = false;
-        MoveToTarget = true;
+		//Activated = false;
+		anim = GetComponent<Animator>();
+		MoveToTarget = true;
         StartTransform = gameObject.transform.localPosition;
         if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
         {
@@ -38,11 +41,8 @@ public class MovingPlatformScript : MonoBehaviour
 
 	public void Activate ()
     {
-		//Debug.Log("Going places");
-		//Activated = true;
-
 		//Moves the gameobject
-		if (MoveToTarget == true)
+		if (MoveToTarget == true && Obstacle != true)
 		{
 			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, TargetTransform, Speed * Time.deltaTime);
 
@@ -54,7 +54,7 @@ public class MovingPlatformScript : MonoBehaviour
 
 
 		//Moves the gameobject back to its starting location
-		if (MoveToTarget == false && Elevator == true)
+		if (MoveToTarget == false && Elevator == true && Obstacle != true)
 		{
 			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
 
@@ -63,19 +63,40 @@ public class MovingPlatformScript : MonoBehaviour
 				MoveToTarget = true;
 			}
 		}
+
+		else if (Obstacle)
+		{
+			anim.SetTrigger("turnOn");
+			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take 001"))
+			{
+				anim.SetTrigger("beIdle");
+			}
+		}
 	}
 
 	public void MovingBack()
 	{
-		//Debug.Log("Going back");
-		if (gameObject.transform.localPosition != StartTransform)
+		if (Obstacle != true)
 		{
-			gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
+			//Debug.Log("Going back");
+			if (gameObject.transform.localPosition != StartTransform)
+			{
+				gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
+			}
+			else
+			{
+				MoveToTarget = true;
+				returning = false;
+			}
 		}
-        else
-        {
-			MoveToTarget = true;
-            returning = false;
-        }
+
+		else if (Obstacle)
+		{
+			anim.SetTrigger("turnOff");
+			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take 001 0"))
+			{
+				anim.SetTrigger("beIdle");
+			}
+		}
 	}
 }

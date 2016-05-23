@@ -48,7 +48,7 @@ public class MoveLensTarget : MonoBehaviour
     {
         if (StateController.menuOpen == false)
         {
-            if (LensDropped || FirstPersonViewToggle.FirstPerson)
+            if (LensDropped || (FirstPersonViewToggle.FirstPerson && StateController.currentView.Equals(CameraStatus.InspectView) == false))
             {
                 //Show the lens
                 LensActivated = true;
@@ -67,8 +67,8 @@ public class MoveLensTarget : MonoBehaviour
                     {
                         target.position = transform.position + transform.TransformDirection(Vector3.forward) * 10;
                     }
-                    lensLight.LookAt(target);
                     lens.LookAt(target);
+                    lensLight.LookAt(target);
                 }
                 //Check if lens is dropped
                 if (Input.GetButtonDown("LensDrop") && !LensDropped)

@@ -73,7 +73,7 @@ public class FirstPersonViewToggle : MonoBehaviour
     void Update()
     { 
         //todo make controllerbutton
-        if (Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 1f && StateController.currentView != CameraStatus.InspectView)
+        if ((Input.GetButton("FirstPerson") || Input.GetAxis("FirstPerson") == 1f) && StateController.currentView.Equals(CameraStatus.InspectView) == false)
         {
             //Rotate the player towards the cameras viewpoint
             player.transform.forward = camera.transform.forward;

@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class Inspectable : MonoBehaviour
 {
+
+    bool hasBarked = false;
+    public string barkName = "event:/Character/Plopp";
+    FMOD.Studio.EventInstance barkToPlay;
+
+    bool hasBarkedNoPower = false;
+    public string barkNameNoPower = "event:/Character/Plopp";
+    FMOD.Studio.EventInstance barkToPlayNoPower;
+
     public bool needsPower = false;
     private string powerOffText = "It doesn't seem to be powered.";
     private static GameObject inspectBox;
@@ -33,7 +42,9 @@ public class Inspectable : MonoBehaviour
         soundNeedsPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Error");
         soundHasPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Success");
         soundCharacterPrint = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerText_Loop");
-     
+
+        barkToPlay = FMODUnity.RuntimeManager.CreateInstance(barkName);
+        barkToPlayNoPower = FMODUnity.RuntimeManager.CreateInstance(barkNameNoPower);
     }
 
     void Start()
@@ -115,6 +126,12 @@ public class Inspectable : MonoBehaviour
                         {
                             inspectViewToggle.ExitInspectView();
                             inspectBox.SetActive(false);
+                            if (hasBarked == false && barkToPlay != null)
+                            {
+                                hasBarked = true;
+                                barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                                barkToPlay.start();
+                            }
                         }
                     }
                 }
@@ -158,6 +175,12 @@ public class Inspectable : MonoBehaviour
                       //  soundCharacterPrint.start();
                         inspectViewToggle.ExitInspectView();
                         inspectBox.SetActive(false);
+                        if (hasBarkedNoPower == false && barkToPlayNoPower != null)
+                        {
+                            hasBarkedNoPower = true;
+                            barkToPlayNoPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                            barkToPlayNoPower.start();
+                        }
                     }
                 }
             }

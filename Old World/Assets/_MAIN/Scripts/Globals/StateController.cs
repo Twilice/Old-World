@@ -27,6 +27,9 @@ public class StateController
     public static Quaternion cameraRot;
     public static float cameraDist;
 
+    public static bool hasBarkedR1_1 = false;
+    public static FMOD.Studio.EventInstance barkR1_1;
+
     public static CameraStatus currentView = CameraStatus.ThirdPersonView;
     public static ZoomStatus currentZoom = ZoomStatus.zoomingOut;
     public static bool cursorLocked = true;
@@ -66,6 +69,7 @@ public class StateController
         activeTagsRoom1_4 = new List<string>();
         activeTagsRoom1_5 = new List<string>();
 
+        barkR1_1 = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Plopp");
         musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/RoomMusic");
         ambientEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Ambient"); 
       //  ambientCorridor = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Digital");
@@ -279,6 +283,13 @@ public class StateController
 
             else if (currentRoom == Rooms.Room1_1)
             {
+                if(hasBarkedR1_1 == false && value == true)
+                {
+                    hasBarkedR1_1 = true;
+                    //todo do delay
+                    barkR1_1.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameObject.Find("Player")));
+                    barkR1_1.start();
+                }
                 activeRoom1_1 = value;
                 if (activeRoom1_1)
                     r1_1Paramenter = 3f;
@@ -305,6 +316,11 @@ public class StateController
             Debug.Log("activeRoom1_4" + activeRoom1_4);
             Debug.Log("activeRoom1_5" + activeRoom1_5);*/
         }
+    }
+
+    private static void playBarkR1_1()
+    {
+
     }
 
     private static bool activeHub = false;

@@ -5,14 +5,26 @@ public class lensBeamSound : MonoBehaviour {
 
     FMOD.Studio.EventInstance soundLensBeam;
     FMOD.Studio.ParameterInstance paramInstance;
+
+    bool hasBarked = false;
+    FMOD.Studio.EventInstance barkToPlay;
+
     void Awake()
     {
         soundLensBeam = FMODUnity.RuntimeManager.CreateInstance("event:/Test/Beam");
         soundLensBeam.getParameter("Beam", out paramInstance);
+        barkToPlay = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Plopp");
     }
 
     void OnEnable()
     {
+        if(hasBarked)
+        {
+            hasBarked = true;
+            barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            barkToPlay.start();
+        }
+
         paramInstance.setValue(0);
         soundLensBeam.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         soundLensBeam.start();

@@ -28,6 +28,7 @@ public class MoveLensTarget : MonoBehaviour
     private int layerMask;
     void Awake()
     {
+        barkToPlay = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Plopp");
         StateController.lensScript = this;
         layerMask = 1 << LayerMask.NameToLayer("LightShaft");
         layerMask += 1 << LayerMask.NameToLayer("Player");
@@ -126,8 +127,17 @@ public class MoveLensTarget : MonoBehaviour
 
     }
 
+    FMOD.Studio.EventInstance barkToPlay;
+    bool hasBarked = false;
+
     public void PickupLens()
     {
+        if(hasBarked == false)
+        {
+            hasBarked = true;
+            barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            barkToPlay.start();
+        }
         //Not dropped anymore
         LensDropped = false;
 

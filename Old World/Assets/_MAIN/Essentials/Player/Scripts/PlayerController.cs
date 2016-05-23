@@ -211,5 +211,10 @@ public class PlayerController : MonoBehaviour
             m_GroundNormal = Vector3.up;
         }
     }
+
+    public void playBark(float delay)
+    {
+
+    }
 }
 

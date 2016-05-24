@@ -69,7 +69,7 @@ public class StateController
         activeTagsRoom1_4 = new List<string>();
         activeTagsRoom1_5 = new List<string>();
 
-        barkR1_1 = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Plopp");
+        barkR1_1 = FMODUnity.RuntimeManager.CreateInstance("event:/Barks/Lights_in_room");
         musicEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Music/RoomMusic");
         ambientEvent = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Ambient"); 
       //  ambientCorridor = FMODUnity.RuntimeManager.CreateInstance("event:/Ambient/2D/Digital");

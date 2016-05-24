@@ -6,11 +6,11 @@ public class Inspectable : MonoBehaviour
 {
 
     bool hasBarked = false;
-    public string barkName = "event:/Character/Plopp";
+    public string barkName = "event:/Barks/Using_computer";
     FMOD.Studio.EventInstance barkToPlay;
 
     bool hasBarkedNoPower = false;
-    public string barkNameNoPower = "event:/Character/Plopp";
+    public string barkNameNoPower = "event:/Barks/First_shut_down_PC";
     FMOD.Studio.EventInstance barkToPlayNoPower;
 
     public bool needsPower = false;

@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public static FMOD.Studio.EventInstance soundland;
     public static FMOD.Studio.ParameterInstance soundLandParam;
 
+    private particletest[] jumpParticles;
     CharacterController m_CharCtrl;
     Animator m_Animator;
     private float idleSpecial = 0;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private float ySpeed = -5f;
     void Awake()
     {
+        jumpParticles = GetComponentsInChildren<particletest>();
         soundJump = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Boots_Jump");
         soundland = FMODUnity.RuntimeManager.CreateInstance("event:/Character/Jump");
         soundland.getParameter("Parameter 1", out soundLandParam);
@@ -114,9 +116,7 @@ public class PlayerController : MonoBehaviour
                 move = Vector3.Lerp(transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier, Vector3.ProjectOnPlane(m_GroundNormal, transform.up) * 2, (groundAngle - m_SlideAngle) / m_SlideAngle);
                 if (jump)
                 {
-                    soundJump.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-                    soundJump.start();
-                    ySpeed = m_JumpPower;
+                    Jump();
                 }
             }
             //ordinary move
@@ -124,9 +124,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (jump)
                 {
-                    soundJump.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-                    soundJump.start();
-                    ySpeed = m_JumpPower;
+                    Jump();
                 }
                 move = transform.forward * m_ForwardAmount * m_MoveSpeedMultiplier;
             }
@@ -151,6 +149,17 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
     }
 
+    void Jump()
+    {
+        for(int i = 0; i < jumpParticles.Length; i++)
+        {
+            jumpParticles[i].PlayParticles();
+        }
+        
+        soundJump.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        soundJump.start();
+        ySpeed = m_JumpPower;
+    }
 
     void UpdateAnimator()
     {

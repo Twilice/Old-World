@@ -4,43 +4,45 @@ using System.Collections;
 [DisallowMultipleComponent]
 public class MovingPlatformScript : MonoBehaviour
 {
-    private Vector3 StartTransform;
-    private bool MoveToTarget;
+	private Vector3 StartTransform;
+	private bool MoveToTarget;
 	private Animator anim;
+	private bool openOnce = true;
+	private bool closeOnce = true;
 
-    public Vector3 TargetTransform;
-    public int Speed;
-    public bool Elevator;
+	public Vector3 TargetTransform;
+	public int Speed;
+	public bool Elevator;
 	public bool Obstacle;
 	public bool ReturnToOriginalPosition;
-    [HideInInspector]
-    public bool returning = false;
+	[HideInInspector]
+	public bool returning = false;
 
 	//private bool Activated;
-    
-    void Start ()
-    {
+
+	void Start()
+	{
 		//Activated = false;
 		anim = GetComponent<Animator>();
 		MoveToTarget = true;
-        StartTransform = gameObject.transform.localPosition;
-        if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
-        {
-            returning = false;
-            gameObject.transform.localPosition = TargetTransform;
-        }
-    }
-	
-    void Update()
-    {
-        if(returning)
-        {
-            MovingBack();
-        }
-    }
+		StartTransform = gameObject.transform.localPosition;
+		if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
+		{
+			returning = false;
+			gameObject.transform.localPosition = TargetTransform;
+		}
+	}
 
-	public void Activate ()
-    {
+	void Update()
+	{
+		if (returning)
+		{
+			MovingBack();
+		}
+	}
+
+	public void Activate()
+	{
 		//Moves the gameobject
 		if (MoveToTarget == true && Obstacle != true)
 		{
@@ -66,10 +68,11 @@ public class MovingPlatformScript : MonoBehaviour
 
 		else if (Obstacle)
 		{
-			anim.SetTrigger("turnOn");
-			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take 001"))
+			if (openOnce)
 			{
-				anim.SetTrigger("beIdle");
+				anim.SetTrigger("turnOn");
+				openOnce = false;
+				closeOnce = true;
 			}
 		}
 	}
@@ -92,10 +95,12 @@ public class MovingPlatformScript : MonoBehaviour
 
 		else if (Obstacle)
 		{
-			anim.SetTrigger("turnOff");
-			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take 001 0"))
+			if (closeOnce)
 			{
-				anim.SetTrigger("beIdle");
+				anim.SetTrigger("turnOff");
+				closeOnce = false;
+				openOnce = true;
+				returning = false; 
 			}
 		}
 	}

@@ -22,15 +22,25 @@ public class DebuggerScript : MonoBehaviour
 		//Debugger
 		if (Input.GetKey(KeyCode.G))
 		{
-			Debug.Log("Activeting debugger");
+			Debug.Log("Activating");
 			for (int i = 0; i < NumberOfTargets; i++)
 			{
-				Targets[i].Speed = 10;
+				//Targets[i].Speed = 10;
 				//Targets[i].Elevator = true;
 				Targets[i].Activate();
             }
 		}
 
+		if (Input.GetKey(KeyCode.T))
+		{
+			Debug.Log("Deactivating");
+			for (int i = 0; i < NumberOfTargets; i++)
+			{
+				//Targets[i].Speed = 10;
+				//Targets[i].Elevator = true;
+				Targets[i].MovingBack();
+			}
+		}
 
 
 		if (Input.GetKey(KeyCode.Space))

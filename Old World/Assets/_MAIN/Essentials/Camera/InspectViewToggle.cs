@@ -21,6 +21,7 @@ public class InspectViewToggle : MonoBehaviour
     private bool resetOnceTP;
     private float startTime;
     private Vector3 inspectPos;
+    private Transform cameraParent;
 
     private bool isInspecting = false;
     void Awake()
@@ -124,8 +125,10 @@ public class InspectViewToggle : MonoBehaviour
                     //TODO: Is this needed?
                     transform.eulerAngles = inspectTarget.transform.eulerAngles;
 
+                    cameraParent = transform.parent;
                     //Make the camera a child to the parent
                     transform.parent = player.transform;
+
                     //transform.localPosition = player.transform.Find("FirstPersonTarget").transform.localPosition;
                     transform.localPosition = inspectTarget.transform.localPosition;
 
@@ -170,7 +173,7 @@ public class InspectViewToggle : MonoBehaviour
                 FirstPerson = false;
 
                 //Remove the parent
-                transform.parent = null;
+                transform.parent = cameraParent;
 
                 //Locking the camera movement to prevent unwanted camera snapping
                 thirdContr.setAllowCamera(false);

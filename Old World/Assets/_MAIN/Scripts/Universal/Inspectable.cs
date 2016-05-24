@@ -43,8 +43,10 @@ public class Inspectable : MonoBehaviour
         soundHasPower = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerStart_Success");
         soundCharacterPrint = FMODUnity.RuntimeManager.CreateInstance("event:/Computer/ComputerText_Loop");
 
-        barkToPlay = FMODUnity.RuntimeManager.CreateInstance(barkName);
-        barkToPlayNoPower = FMODUnity.RuntimeManager.CreateInstance(barkNameNoPower);
+        if(barkName.Equals("") == false)
+            barkToPlay = FMODUnity.RuntimeManager.CreateInstance(barkName);
+        if (barkNameNoPower.Equals("") == false)
+            barkToPlayNoPower = FMODUnity.RuntimeManager.CreateInstance(barkNameNoPower);
     }
 
     void Start()

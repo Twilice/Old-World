@@ -132,32 +132,35 @@ public class MoveLensTarget : MonoBehaviour
 
     public void PickupLens()
     {
-        if(hasBarked == false)
+        if (LensDropped == true)
         {
-            hasBarked = true;
-            barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-            barkToPlay.start();
+            if (hasBarked == false)
+            {
+                hasBarked = true;
+                barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                barkToPlay.start();
+            }
+            //Not dropped anymore
+            LensDropped = false;
+
+            //Hide the lens
+            lensMesh.enabled = false;
+            collision.enabled = false;
+            LensActivated = false;
+            lensScript.inLight = false;
+
+            lensScript.UpdateLens();
+            //Give back the light's parent, the lens
+            //lensLight.transform.parent = lens;
+            lens.parent = player;
+
+            //Move back the light to the lens
+            lensLight.transform.localPosition = originalLocalLightPos;
+            lensLight.transform.localRotation = originalLocalLightRos;
+
+            //Move the lens back to the player
+            lens.transform.localPosition = originalLocalLensPos;
+            lens.transform.localRotation = originalLocalLensRot;
         }
-        //Not dropped anymore
-        LensDropped = false;
-
-        //Hide the lens
-        lensMesh.enabled = false;
-        collision.enabled = false;
-        LensActivated = false;
-        lensScript.inLight = false;
-
-        lensScript.UpdateLens();
-        //Give back the light's parent, the lens
-        //lensLight.transform.parent = lens;
-        lens.parent = player;
-
-        //Move back the light to the lens
-        lensLight.transform.localPosition = originalLocalLightPos;
-        lensLight.transform.localRotation = originalLocalLightRos;
-
-        //Move the lens back to the player
-        lens.transform.localPosition = originalLocalLensPos;
-        lens.transform.localRotation = originalLocalLensRot;
     }
 }

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 72d527041724ad54cae90ee138473c76
-timeCreated: 1463670692
-licenseType: Free
+guid: e41973da03ef8b04e8d3c9319e737bda
+timeCreated: 1464095577
+licenseType: Pro
 SpeedTreeImporter:
   serializedVersion: 4
   mainColor: {r: 1, g: 1, b: 1, a: 1}
@@ -9,7 +9,7 @@ SpeedTreeImporter:
   hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
   shininess: 0.125
   alphaTestRef: 0.33
-  bestWindQuality: 3
+  bestWindQuality: 4
   hasBillboard: 0
   lODSettings:
   - height: 0.01
@@ -19,7 +19,7 @@ SpeedTreeImporter:
     reflectionProbeUsage: 1
     enableBump: 1
     enableHue: 1
-    windQuality: 3
+    windQuality: 4
   enableSmoothLODTransition: 1
   animateCrossFading: 1
   billboardTransitionCrossFadeWidth: 0.25

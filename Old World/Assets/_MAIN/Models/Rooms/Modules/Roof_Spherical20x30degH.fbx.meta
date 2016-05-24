@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5ddd739db822d1549b2d52cc507d4148
-timeCreated: 1463575839
+guid: 26cb699add1973a448dfde8366033f8e
+timeCreated: 1464089180
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Roof_Sphere20x30degH
+    4300000: Roof_Sphere20x30degH_wHole
     9500000: //RootNode
   materials:
     importMaterials: 1

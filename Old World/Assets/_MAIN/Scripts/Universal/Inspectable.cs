@@ -20,6 +20,7 @@ public class Inspectable : MonoBehaviour
     private static Text boxText;
     private static float characterPerSeconds = 50f;
     public string inspectHeadline = "";
+    public string inspectHeadlineOffline = "Offline"; 
     public List<TextAsset> inspectText = new List<TextAsset>();
     private string inspectString = "";
     //private char[] charArr;
@@ -158,7 +159,7 @@ public class Inspectable : MonoBehaviour
                     stringLength = inspectString.Length;
                     inspectBox.SetActive(true);
                     inspectViewToggle.StartInspectView(transform.position);
-                    boxHeadline.text = inspectHeadline;
+                    boxHeadline.text = inspectHeadlineOffline;
                     //boxText.text = inspectText[currentTextID].text;
                 }
                 else if (Input.GetButtonDown("InspectSkip"))

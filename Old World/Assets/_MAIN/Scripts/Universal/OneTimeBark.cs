@@ -23,9 +23,14 @@ public class OneTimeBark : MonoBehaviour {
         }
     }
 
-    void PlayBark()
+    void Update()
     {
         barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+    }
+
+    void PlayBark()
+    {
+      
         barkToPlay.start();
     }
     

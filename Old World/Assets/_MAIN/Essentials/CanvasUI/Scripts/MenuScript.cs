@@ -20,6 +20,8 @@ public class MenuScript : MonoBehaviour
     private DepthOfField dofBlur;
     //private CameraLookAt mouseToggle;
 
+    private HowToPlayScript howToPlay;
+
     private bool pause;
     private bool oldPause;
     private bool restart;
@@ -32,6 +34,7 @@ public class MenuScript : MonoBehaviour
    // private ItemParent currentCompareItem;
     void Awake()
     {
+        howToPlay = GetComponentInChildren<HowToPlayScript>();
         wasActive = new bool[objects.Length];
         journal = gameObject.FindChildObject("Journal");
         if (journal == null) Debug.LogError("The journal is missing!");
@@ -101,6 +104,7 @@ public class MenuScript : MonoBehaviour
         StateController.cursorLocked = true;
         cameraOrbit.enabled = true;
         Time.timeScale = 1.0f;
+        howToPlay.Deactivate();
     }
 
     public void PauseGame()

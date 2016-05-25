@@ -15,24 +15,22 @@ public class HowToPlayScript : MonoBehaviour
 			HTP_Objects[i].SetActive(false);
 		}
 	}
-	
-	public void Activate()
-	{
-		if (active == false)
-		{
-			for (int i = 0; i < HTP_Objects.Count; i++)
-			{
-				HTP_Objects[i].SetActive(true);
-			}
-			active = true;
-		}
-		else
-		{
-			for (int i = 0; i < HTP_Objects.Count; i++)
-			{
-				HTP_Objects[i].SetActive(false);
-			}
-			active = false;
-		}
-	}
+
+    public void Activate()
+    {
+        for (int i = 0; i < HTP_Objects.Count; i++)
+        {
+            HTP_Objects[i].SetActive(true);
+        }
+        active = true;
+    }
+
+    public void Deactivate()
+    {
+        for (int i = 0; i < HTP_Objects.Count; i++)
+        {
+            HTP_Objects[i].SetActive(false);
+        }
+        active = false;
+    }
 }

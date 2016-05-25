@@ -34,7 +34,7 @@ public class StateController
     public static ZoomStatus currentZoom = ZoomStatus.zoomingOut;
     public static bool cursorLocked = true;
     public static bool menuOpen = false;
-    public static Rooms currentRoom = Rooms.Room1_1;
+    public static Rooms currentRoom = Rooms.NoRoom;
 
     public static FMOD.Studio.EventInstance musicEvent;
     public static FMOD.Studio.ParameterInstance musicParameter;

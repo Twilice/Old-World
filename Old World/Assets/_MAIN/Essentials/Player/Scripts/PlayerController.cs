@@ -70,6 +70,9 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded = false;
     public void Move(Vector3 move, bool jump)
     {
+        if (StateController.currentRoom.Equals(Rooms.NoRoom))
+            return;
+
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired
         // direction.

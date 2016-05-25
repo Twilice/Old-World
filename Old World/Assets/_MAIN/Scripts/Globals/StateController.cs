@@ -355,6 +355,9 @@ public class StateController
 
     public static bool SegmentActive(string tag)
     {
+        if (tag.Equals("Untagged"))
+            return false;
+
        // Debug.Log(currentRoom);
         if (currentRoom == Rooms.Hub)
             return activeTagsHub.Contains(tag);
@@ -379,7 +382,7 @@ public class StateController
 
         else if (currentRoom == Rooms.Room1_5)
             return activeTagsRoom1_5.Contains(tag);
-        
+
         return false;
     }
 }

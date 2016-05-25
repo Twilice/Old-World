@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class UIOrb : MonoBehaviour {
 
-    public Image orb;
+    private Image orb;
     public Sprite orbInactive;
     public Sprite orbActive;
-
+    void Start()
+    {
+        orb = GameObject.Find("Crystal").GetComponent<Image>();
+    }
     public void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.CompareTag("LightShaft"))

@@ -8,9 +8,10 @@ public class OneTimeBark : MonoBehaviour {
     public string barkName = "event:/Character/Plopp";
     public float delay = 0;
     FMOD.Studio.EventInstance barkToPlay;
-
+    private GameObject player;
     void Awake()
     {
+        player = GameObject.Find("Player");
         barkToPlay = FMODUnity.RuntimeManager.CreateInstance(barkName);
     }
 
@@ -25,7 +26,7 @@ public class OneTimeBark : MonoBehaviour {
 
     void Update()
     {
-        barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        barkToPlay.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(player));
     }
 
     void PlayBark()

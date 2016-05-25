@@ -81,13 +81,20 @@ public class MoveLensTarget : MonoBehaviour
                 else if (Input.GetButtonDown("LensDrop") && LensDropped)
                 {
                     targetLens.LookAt(lens);
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500, layerMask, QueryTriggerInteraction.Collide))
+                    if (Vector3.Distance(player.position, lens.position) < 5)
                     {
-                        if (hit.collider.transform.CompareTag("Prism"))
+                        PickupLens();
+                    }
+                    else
+                    {
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(targetLens.transform.position, targetLens.transform.forward, out hit, 500, layerMask, QueryTriggerInteraction.Collide))
                         {
-                            PickupLens();
+                            if (hit.collider.transform.CompareTag("Prism"))
+                            {
+                                PickupLens();
+                            }
                         }
                     }
                 }

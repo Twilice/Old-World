@@ -31,16 +31,16 @@ public class MovingPlatformScript : MonoBehaviour
             {
                 MovingToTarget = false;
                 returning = true;
-                gameObject.transform.localPosition = TargetTransform;
+                if(Animating == false)gameObject.transform.localPosition = TargetTransform;
                 Activated = true;
-                if (Animating)
-                    anim.SetBool("Active", true);
+              //fulfix kommenterar ut  if (Animating)
+              //      anim.SetBool("Active", true);
             }
             else
             {
                 Activated = true;
-                if (Animating)
-                    anim.SetBool("Active", true);
+              //  if (Animating)
+              //      anim.SetBool("Active", true);
             }
         }
 	}

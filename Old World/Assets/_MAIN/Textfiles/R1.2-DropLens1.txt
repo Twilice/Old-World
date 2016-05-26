@@ -1,1 +1,1 @@
-...this Powerglove feature is called ‘stabilize and attract’. The technique allows the user to stabilize the crystal’s casing, temporarily placing it in a stable hover. While the stabilizing hover persists the user may leave the crystal’s location and later attract it using magnetic relocation, causing the crystal to instantly relocate into the palm of the glove.
+The new Powerglove feature is called ‘stabilize and attract’. This feature allows the user to stabilize the crystal’s casing, temporarily placing it in a stable hover. 

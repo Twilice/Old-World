@@ -78,11 +78,18 @@ public class Inspectable : MonoBehaviour
             Debug.LogError("No InspectViewToggle found in MainCamera.");
     }
 
+    [Range(0,1)]
+    public float red = 1;
+    [Range(0, 1)]
+    public float green = 1;
+    [Range(0, 1)]
+    public float blue = 1;
+
     void Update()
     {
         if (needsPower == false || needsPower && StateController.roomFullyPowered)
         {
-            rend.material.SetColor("_EmissionColor", Color.white);
+            rend.material.SetColor("_EmissionColor", new Color(red,green,blue,1));
             if (canBeInspected)
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class LIGHTESTMOVE : MonoBehaviour {
-
+    //github är så dåligt och bra på samma gång
 	// Use this for initialization
 	void Start () {
 	

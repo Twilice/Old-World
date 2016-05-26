@@ -103,14 +103,14 @@ public class IntroScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //GUITEXTURE.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
-        if (Input.GetButtonDown("Jump")) 
+        if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Action")) 
         {
             if (textDelay == false)
             {
                 writer();
             }
         }
-        if (Input.GetButtonDown("Action") || Input.GetButtonDown("IntroSkip"))
+        if (Input.GetButtonDown("IntroSkip"))
         {
 
             if (skipBox == true)

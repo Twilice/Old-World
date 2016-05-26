@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded = false;
     public void Move(Vector3 move, bool jump)
     {
-        if (StateController.currentRoom.Equals(Rooms.NoRoom))
+        if (StateController.currentRoom.Equals(Rooms.NoRoom) || StateController.loading == true)
             return;
 
         // convert the world relative moveInput vector into a local-relative

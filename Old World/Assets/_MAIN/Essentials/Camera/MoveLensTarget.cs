@@ -108,10 +108,10 @@ public class MoveLensTarget : MonoBehaviour
                 lensScript.inLight = false;
                 lensScript.UpdateLens();
             }
-            if (LensDropped && FirstPersonViewToggle.FirstPerson)
+          /*  if (LensDropped && FirstPersonViewToggle.FirstPerson)
             {
                 lens.transform.Rotate(playerHandler.rotatedAmmount);
-            }
+            }*/
         }
     }
 

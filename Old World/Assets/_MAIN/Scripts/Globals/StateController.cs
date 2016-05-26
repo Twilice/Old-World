@@ -88,10 +88,9 @@ public class StateController
     public static void LoadGame(Rooms newScene)
     {
         TurnOffMusic();
-        currentRoom = newScene;
-        TurnOnMusic();
-     //   ambientRoom.start();
-
+     //   currentRoom = newScene;
+      //  TurnOnMusic();
+   
         SceneManager.LoadScene(RoomToString(newScene));
       
     }

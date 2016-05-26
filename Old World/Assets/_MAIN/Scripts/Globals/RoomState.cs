@@ -22,6 +22,8 @@ public class RoomState : MonoBehaviour {
     //Initiate generator array
     void Start()
     {
+        StateController.currentRoom = room;
+        StateController.TurnOnMusic();
         generators = FindObjectsOfType<GeneratorScript>();
     }
 

@@ -20,6 +20,15 @@ public class OpenAtRoomPower : MonoBehaviour {
         doorClose.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         if (StateController.roomFullyPowered)
         {
+            Activate();
+        }
+    }
+    private bool activated = false;
+    public void Activate()
+    {
+        if (activated == false)
+        {
+            activated = true;
             doorOpen.start();
             foreach (MovingPlatformScript movingScript in mps)
             {
@@ -28,21 +37,16 @@ public class OpenAtRoomPower : MonoBehaviour {
         }
     }
 
-    public void Activate()
-    {
-        doorOpen.start();
-        foreach (MovingPlatformScript movingScript in mps)
-        {
-            movingScript.Activate();
-        }
-    }
-
     public void Deactivate()
     {
-        doorClose.start();
-        foreach (MovingPlatformScript movingScript in mps)
+        if (activated == true)
         {
-            movingScript.Deactivate();
+            activated = false;
+            doorClose.start();
+            foreach (MovingPlatformScript movingScript in mps)
+            {
+                movingScript.Deactivate();
+            }
         }
     }
 }

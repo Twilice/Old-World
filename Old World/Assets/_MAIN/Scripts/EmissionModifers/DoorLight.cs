@@ -4,7 +4,7 @@ using System.Collections;
 public class DoorLight : MonoBehaviour
 {
     Renderer rend;
-
+    public Rooms linkedTo;
     void Awake()
     {
         rend = GetComponent<Renderer>();

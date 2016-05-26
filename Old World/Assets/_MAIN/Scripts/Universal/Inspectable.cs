@@ -49,9 +49,13 @@ public class Inspectable : MonoBehaviour
         if (barkNameNoPower.Equals("") == false)
             barkToPlayNoPower = FMODUnity.RuntimeManager.CreateInstance(barkNameNoPower);
     }
+    private Renderer rend;
 
     void Start()
     {
+        rend = GetComponent<Renderer>();
+        rend.material.SetColor("_EmissionColor", Color.black);
+
         if (inspectHeadline.Equals(""))
             Debug.LogWarning("Here is where I would put my headline, IF I HAD ANY!");
         if (inspectText.Count < 1)
@@ -78,6 +82,7 @@ public class Inspectable : MonoBehaviour
     {
         if (needsPower == false || needsPower && StateController.roomFullyPowered)
         {
+            rend.material.SetColor("_EmissionColor", Color.white);
             if (canBeInspected)
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))

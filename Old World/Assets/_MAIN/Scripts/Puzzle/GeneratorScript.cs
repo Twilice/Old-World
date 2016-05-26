@@ -28,7 +28,7 @@ public class GeneratorScript : MonoBehaviour
         //The doorLight with the same tag
         for (int i = 0; i < allDoorLights.Length; i++)
         {
-            if (allDoorLights[i].transform.CompareTag(transform.tag))
+            if (allDoorLights[i].transform.CompareTag(transform.tag) && StateController.currentRoom.Equals(allDoorLights[i].linkedTo))
             {
                 doorLight.Add(allDoorLights[i]);
             }
@@ -88,6 +88,7 @@ public class GeneratorScript : MonoBehaviour
     */
     public void Activate()
     {
+        Debug.Log("Activated " + name + " in room " + StateController.currentRoom);
         StateController.ActivateSegment(tag);
 
         if (PlatformTarget)

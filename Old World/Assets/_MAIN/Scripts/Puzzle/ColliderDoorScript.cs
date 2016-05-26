@@ -25,7 +25,6 @@ public class ColliderDoorScript : MonoBehaviour
         doorClose.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         if (StateController.roomFullyPowered || StateController.SegmentActive(tag))
         {
-            Debug.Log("HJAKSDALKJSLKJSADSALKJDSA");
             active = true;
             //todo door won't open if you are standing in trigger when it turns online, check if isintrigger
         }
@@ -41,7 +40,6 @@ public class ColliderDoorScript : MonoBehaviour
 
     void OnTriggerEnter()
     {
-        Debug.Log("triggered");
         if (active)
             if(mps.Length > 0)
             {

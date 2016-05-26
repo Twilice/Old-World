@@ -88,7 +88,6 @@ public class GeneratorScript : MonoBehaviour
     */
     public void Activate()
     {
-        Debug.Log("Activated " + name + " in room " + StateController.currentRoom);
         StateController.ActivateSegment(tag);
 
         if (PlatformTarget)

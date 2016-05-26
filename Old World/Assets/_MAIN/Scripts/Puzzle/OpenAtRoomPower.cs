@@ -30,7 +30,6 @@ public class OpenAtRoomPower : MonoBehaviour {
 
     public void Activate()
     {
-        Debug.Log("hej");
         doorOpen.start();
         foreach (MovingPlatformScript movingScript in mps)
         {
@@ -40,7 +39,6 @@ public class OpenAtRoomPower : MonoBehaviour {
 
     public void Deactivate()
     {
-        Debug.Log("då");
         doorClose.start();
         foreach (MovingPlatformScript movingScript in mps)
         {

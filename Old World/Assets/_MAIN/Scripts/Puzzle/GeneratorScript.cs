@@ -11,15 +11,16 @@ public class GeneratorScript : MonoBehaviour
     public bool ChargerTarget;
     public bool Active = false;
 
-    private DoorLight doorLight;
+    private List<DoorLight> doorLight;
     private DoorLight[] allDoorLights;
     private MovingPlatformScript[] mps;
     private List<MovingPlatformScript> targetPlatforms = new List<MovingPlatformScript>();
     private ChargerScript[] cs;
     private List<ChargerScript> targetChargers = new List<ChargerScript>();
 
-    void Awake()
+    void Start()
     {
+        doorLight = new List<DoorLight>();
         allDoorLights = FindObjectsOfType<DoorLight>();
         mps = FindObjectsOfType<MovingPlatformScript>();
         cs = FindObjectsOfType<ChargerScript>();
@@ -29,7 +30,7 @@ public class GeneratorScript : MonoBehaviour
         {
             if (allDoorLights[i].transform.CompareTag(transform.tag))
             {
-                doorLight = allDoorLights[i];
+                doorLight.Add(allDoorLights[i]);
             }
         }
 
@@ -50,19 +51,17 @@ public class GeneratorScript : MonoBehaviour
                 targetChargers.Add(cs[i]);
             }
         }
-    }
-
-    void Start()
-    {
-        if(StateController.SegmentActive(tag))
+        if (StateController.SegmentActive(tag))
         {
             Active = true;
-            if (doorLight != null)
-                doorLight.Activate();
+            foreach(DoorLight dl in doorLight)
+                dl.Activate();
         }
     }
 
-    void Update()
+
+    //REMOVE ALL OF THIS
+   /* void Update()
     {
         if (Active)
         {
@@ -86,16 +85,33 @@ public class GeneratorScript : MonoBehaviour
             }
         }
     }
-
+    */
     public void Activate()
     {
         StateController.ActivateSegment(tag);
 
+        if (PlatformTarget)
+        {
+            //Activate the platforms
+            for (int i = 0; i < targetPlatforms.Count; i++)
+            {
+                targetPlatforms[i].Activate();
+            }
+        }
+
+        if (ChargerTarget)
+        {
+            //Activate the chargers
+            for (int i = 0; i < targetChargers.Count; i++)
+            {
+                targetChargers[i].Activate();
+            }
+        }
         //Change bool to true
         Active = true;
 
         //Change the light
-        if(doorLight != null)
-            doorLight.Activate();
+        foreach (DoorLight dl in doorLight)
+            dl.Activate();
     }
 }

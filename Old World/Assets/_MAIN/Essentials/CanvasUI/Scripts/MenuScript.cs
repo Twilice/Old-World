@@ -102,11 +102,11 @@ public class MenuScript : MonoBehaviour
         StateController.menuOpen = false;
         buttons.SetActive(false);
         StateController.cursorLocked = true;
-        cameraOrbit.enabled = true;
+        cameraOrbit.enabled = oldCameraOrbit;
         Time.timeScale = 1.0f;
         howToPlay.Deactivate();
     }
-
+    private bool oldCameraOrbit = false;
     public void PauseGame()
     {
         dofBlur.enabled = true;
@@ -118,6 +118,7 @@ public class MenuScript : MonoBehaviour
         //menuBackground.enabled = true;
         buttons.SetActive(true);
         StateController.cursorLocked = false;
+        oldCameraOrbit = cameraOrbit.enabled;
         cameraOrbit.enabled = false;
         Time.timeScale = 0.0f;
     }

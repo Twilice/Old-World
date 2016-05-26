@@ -6,6 +6,7 @@ public class RoomState : MonoBehaviour {
     
     public static float drainAmount = 0.1f;
     public static float gainAmount = 0.3f;
+    public Rooms room;
     private GeneratorScript[] generators;
     /* hårdkådat i statecontroller för stunden, funkar om det skulle bara vara ett musikspår
 
@@ -19,29 +20,34 @@ public class RoomState : MonoBehaviour {
     private float musicParamValue = 0; */
 
     //Initiate generator array
-    void Awake()
+    void Start()
     {
         generators = FindObjectsOfType<GeneratorScript>();
-       InvokeRepeating("UpdateGenerators", 0, 0.1f);
-       
-    
+    }
+
+    void Update()
+    {
+        UpdateGenerators();
     }
 
 	// Update is called once per frame
 	void UpdateGenerators() {
-
-        //Set roomFullyPowered to correct value
-        bool isPowerered = true;
-     //   StateController.musicParamValue = 0f;
-        for (int i = 0; i < generators.Length; i++)
+        if (StateController.loading == false && room.Equals(StateController.currentRoom) == true)
         {
-            if (generators[i].Active == false)
+            //Set roomFullyPowered to correct value
+            bool isPowerered = StateController.currentRoom != Rooms.Hub;
+            //   StateController.musicParamValue = 0f;
+            for (int i = 0; i < generators.Length; i++)
             {
-                isPowerered = false;
+                if (generators[i].Active == false)
+                {
+                    isPowerered = false;
+                }
+                //  else StateController.musicParamValue += StateController.parameterIncrement;
             }
-          //  else StateController.musicParamValue += StateController.parameterIncrement;
+            // StateController.musicParameter.setValue(StateController.musicParamValue);
+            if (StateController.loading == false || room.Equals(StateController.currentRoom) == false) //fuck it I'm tired
+            { StateController.roomFullyPowered = isPowerered; }
         }
-       // StateController.musicParameter.setValue(StateController.musicParamValue);
-        StateController.roomFullyPowered = isPowerered;
     }
 }

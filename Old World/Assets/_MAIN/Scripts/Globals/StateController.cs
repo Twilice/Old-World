@@ -161,8 +161,8 @@ public class StateController
             if (loading == false)
             {
                 LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
-                loading = true;
-               // TurnOffMusic();
+               loading = true;
+                // TurnOffMusic();
                 currentRoom = newScene;
                 //TurnOnMusic();
 
@@ -180,7 +180,7 @@ public class StateController
                     if (async.progress == 0.9f)
                     //if(async.isDone)
                     {           //save old stuff
-                        Transform player = GameObject.Find("Player").transform;
+                    /*    Transform player = GameObject.Find("Player").transform;
                         Transform camera = GameObject.Find("MainCamera").transform;
                         playerPos = player.position;
                         playerRot = player.rotation;
@@ -188,10 +188,9 @@ public class StateController
                         cameraRot = camera.rotation;
                         cameraDist = camera.GetComponent<CameraOrbit>().distance;
                         savedPosition = true;
-
+                        */
                         lensScript.PickupLens();
 
-                  
                         break;
                     }
 
@@ -269,8 +268,8 @@ public class StateController
         }
         set
         {
-        /*    Debug.Log("SET");
-            Debug.Log("currentRoom" + currentRoom);
+          /*  Debug.Log("SET");
+            Debug.Log("currentRoom" + currentRoom +" "+value);
             Debug.Log("activehub" + activeHub);
             Debug.Log("activeRoom1_1" + activeRoom1_1);
             Debug.Log("activeRoom1_2" + activeRoom1_2);
@@ -309,7 +308,7 @@ public class StateController
 
             else if (currentRoom == Rooms.Room1_5)
                 activeRoom1_5 = value;
-        /*    Debug.Log("activehub" + activeHub);
+           /*Debug.Log("activehub" + activeHub);
             Debug.Log("activeRoom1_1" + activeRoom1_1);
             Debug.Log("activeRoom1_2" + activeRoom1_2);
             Debug.Log("activeRoom1_3" + activeRoom1_3);

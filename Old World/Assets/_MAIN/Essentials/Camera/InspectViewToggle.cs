@@ -6,7 +6,7 @@ public class InspectViewToggle : MonoBehaviour
 {
     public float transitionDuration = 0.5f;
 
-    private CameraOrbit mouseOrbit;
+    private CameraOrbit cameraOrbit;
     private PlayerController thirdChar;
     private PlayerInputHandler thirdContr;
     private GameObject player;
@@ -46,8 +46,8 @@ public class InspectViewToggle : MonoBehaviour
 
         camera = GetComponent<Camera>();
 
-        mouseOrbit = camera.GetComponent<CameraOrbit>();
-        mouseOrbit.enabled = true;
+        cameraOrbit = camera.GetComponent<CameraOrbit>();
+        cameraOrbit.enabled = true;
 
         thirdChar = player.GetComponent<PlayerController>();
         thirdChar.enabled = true;
@@ -101,7 +101,7 @@ public class InspectViewToggle : MonoBehaviour
                 //Prevents the camera from rotating during camera transisions. This will remove unwanted camera snapping.
                 thirdContr.setAllowCamera(false);
 
-                mouseOrbit.enabled = false;
+                cameraOrbit.enabled = false;
             }
 
             //TODO1: If the right mouse button is spammed, the transision might act really wierd.
@@ -202,10 +202,10 @@ public class InspectViewToggle : MonoBehaviour
                     transform.eulerAngles = player.transform.eulerAngles;
 
                     //Resets the Orbit camera location so that it is positioned where it should be when switching back to third person view.
-                    mouseOrbit.resetPosition();
+                    cameraOrbit.resetPosition();
 
                     //Keep this line at the end of the if-statement to prevent unwanted camera movement
-                    mouseOrbit.enabled = true;
+                    cameraOrbit.enabled = true;
                 }
             }
         }

@@ -38,7 +38,7 @@ public class DebuggerScript : MonoBehaviour
 			{
 				//Targets[i].Speed = 10;
 				//Targets[i].Elevator = true;
-				Targets[i].MovingBack();
+				///Targets[i].MovingBack();
 			}
 		}
 

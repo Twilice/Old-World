@@ -113,16 +113,13 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightExit()
     {
-        if (platformTarget == true)
+        if (platformTarget == true && StateController.roomFullyPowered == false && StateController.SegmentActive(tag) == false)
         {
             for (int i = 0; i < Targets.Count; i++)
             {
                 foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
                 {
-                    if (movingScript.ReturnToOriginalPosition == true)
-                    {
-                        movingScript.returning = true;
-                    }
+                   movingScript.Deactivate();
                 }
             }
         }
@@ -182,22 +179,32 @@ public class SolarPanel : TriggeredByLight
     {
         //Play sound once
         //Activate all targets
+        GeneratorScript generator;
+        ChargerScript charge;
+        ParticleBridge bridge;
         for (int i = 0; i < Targets.Count; i++)
         {
-            if (platformTarget == true)
-            {
+           // if (platformTarget == true)
+           // {
                 foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
                 {
                     movingScript.Activate();
                 }
-            }
-            if (generatorTarget == true)
+            // }
+            generator = Targets[i].GetComponent<GeneratorScript>();
+            if (generator != null)
             {
-                Targets[i].GetComponent<GeneratorScript>().Activate();
+                generator.Activate();
             }
-            if (chargerTarget == true)
+            charge = Targets[i].GetComponent<ChargerScript>();
+            if (charge != null)
             {
-                Targets[i].GetComponent<ChargerScript>().Activate();
+                charge.Activate();
+            }
+            bridge = Targets[i].GetComponent<ParticleBridge>();
+            if(bridge != null)
+            {
+                bridge.Activate();
             }
         }
 

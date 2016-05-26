@@ -5,35 +5,105 @@ using System.Collections;
 public class MovingPlatformScript : MonoBehaviour
 {
 	private Vector3 StartTransform;
-	private bool MoveToTarget;
+	private bool MovingToTarget = true;
 	private Animator anim;
 	private bool openOnce = true;
 	private bool closeOnce = true;
 
 	public Vector3 TargetTransform;
-	public int Speed;
-	public bool Elevator;
-	public bool Obstacle;
-	public bool ReturnToOriginalPosition;
+	public int Speed = 3;
+	public bool Elevator = false;
+	public bool Animating = false;
+	public bool ReturnToOriginalPosition = true;
 	[HideInInspector]
 	public bool returning = false;
 
-	//private bool Activated;
+	private bool Activated;
 
-	void Start()
+    void Start()
 	{
 		//Activated = false;
 		anim = GetComponent<Animator>();
-		MoveToTarget = true;
 		StartTransform = gameObject.transform.localPosition;
-		if (Elevator == false && (StateController.roomFullyPowered || StateController.SegmentActive(tag)))
-		{
-			returning = false;
-			gameObject.transform.localPosition = TargetTransform;
-		}
+        if ((StateController.roomFullyPowered || StateController.SegmentActive(tag)))
+        {
+            if (Elevator == false)
+            {
+                MovingToTarget = false;
+                returning = true;
+                gameObject.transform.localPosition = TargetTransform;
+                Activated = true;
+                if (Animating)
+                    anim.SetBool("Active", true);
+            }
+            else
+            {
+                Activated = true;
+                if (Animating)
+                    anim.SetBool("Active", true);
+            }
+        }
 	}
+  
+    void Update()
+    {
+        if(Activated)
+        {
+            if(MovingToTarget == true)
+            {
+                MoveToTarget();
+            }
+            else if (Elevator && MovingToTarget == false)
+            {
+                MoveToOriginal();
+            }
+        }
+        else //not powered
+        {
+            if(ReturnToOriginalPosition)
+                Return();
+        }
+    }
 
-	void Update()
+    private void MoveToTarget()
+    {
+        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, TargetTransform, Speed * Time.deltaTime);
+
+        if (gameObject.transform.localPosition == TargetTransform)
+        {
+            MovingToTarget = false;
+        }
+    }
+    private void MoveToOriginal()
+    {
+        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
+
+        if (gameObject.transform.localPosition == StartTransform)
+        {
+            MovingToTarget = true;
+        }
+    }
+    private void Return()
+    {
+        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, StartTransform, Speed * Time.deltaTime);
+        MovingToTarget = true;
+    }
+
+    public void Activate()
+    {
+        Activated = true;
+        if (Animating)
+            anim.SetBool("Active", true);
+    }
+
+    public void Deactivate()
+    {
+        Activated = false;
+        if (Animating)
+            anim.SetBool("Active", false);
+    }
+
+/*	void Update()
 	{
 		if (returning)
 		{
@@ -104,4 +174,5 @@ public class MovingPlatformScript : MonoBehaviour
 			}
 		}
 	}
+    */
 }

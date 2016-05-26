@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [DisallowMultipleComponent]
-public class ColliderDoorScript : MonoBehaviour
+public class DoorScript : MonoBehaviour
 {
     //private float t = 0.0f;
     private MovingPlatformScript[] mps;
@@ -23,7 +23,7 @@ public class ColliderDoorScript : MonoBehaviour
     {
         doorOpen.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         doorClose.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        if (StateController.roomFullyPowered)
+        if (StateController.roomFullyPowered || StateController.SegmentActive(tag))
         {
             active = true;
             //todo door won't open if you are standing in trigger when it turns online, check if isintrigger
@@ -40,6 +40,7 @@ public class ColliderDoorScript : MonoBehaviour
 
     void OnTriggerEnter()
     {
+        Debug.Log("triggered");
         if (active)
             if(mps.Length > 0)
             {

@@ -28,35 +28,43 @@ public class PressureScript : MonoBehaviour
 		}
 	}
 
-	void OnTriggerStay(Collider coll)
-	{
-		StandingOn = true;
-		if (transform.localPosition != EndPos)
-		{
-			transform.localPosition = Vector3.MoveTowards(transform.localPosition, EndPos, Time.deltaTime);
-		}
+    void OnTriggerEnter(Collider coll)
+    {
+        StandingOn = true;
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Lens"))
+        {
+            GeneratorScript generator;
+            for (int i = 0; i < Targets.Count; i++)
+            {
+               // if (PlatformTarget == true)
+               // {
+                    foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+                    {
+                        movingScript.Activate();
+                    }
+                // }
+                generator = Targets[i].GetComponent<GeneratorScript>();
+                if (generator != null)
+                {
+                    generator.Activate();
+                }
+                //if (ChargerTarget == true)
+                //{
+                //	Targets[i].GetComponent<ChargerScript>().Activate();
+                //}
+            }
+        }
+    }
 
-		if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Lens"))
-		{
-			for (int i = 0; i < Targets.Count; i++)
-			{
-				if (PlatformTarget == true)
-				{
-					foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
-					{
-						movingScript.Activate();
-					}
-				}
-				if (GeneratorTarget == true)
-				{
-					Targets[i].GetComponent<GeneratorScript>().Activate();
-				}
-				//if (ChargerTarget == true)
-				//{
-				//	Targets[i].GetComponent<ChargerScript>().Activate();
-				//}
-			}
-		}
+	void OnTriggerStay(Collider coll)
+    {
+        if (coll.gameObject.CompareTag("Player") || coll.gameObject.CompareTag("Lens"))
+        {
+            if (transform.localPosition != EndPos)
+            {
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, EndPos, Time.deltaTime);
+            }
+        }
 	}
 
 	void OnTriggerExit(Collider coll)
@@ -68,10 +76,7 @@ public class PressureScript : MonoBehaviour
 			{
 				foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
 				{
-					if (movingScript.ReturnToOriginalPosition == true)
-					{
-						movingScript.returning = true;
-					}
+                    movingScript.Deactivate();
 				}
 				//if (ChargerTarget == true)
 				//{

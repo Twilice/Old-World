@@ -113,14 +113,21 @@ public class SolarPanel : TriggeredByLight
 
     protected override void HitByLightExit()
     {
+        OpenAtRoomPower specialDoor;
         if (platformTarget == true && StateController.roomFullyPowered == false && StateController.SegmentActive(tag) == false)
         {
             for (int i = 0; i < Targets.Count; i++)
             {
-                foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+                specialDoor = Targets[i].GetComponent<OpenAtRoomPower>();
+                if (specialDoor != null)
                 {
-                   movingScript.Deactivate();
+                    specialDoor.Deactivate();
                 }
+                else
+                    foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
+                    {
+                       movingScript.Deactivate();
+                    }
             }
         }
 
@@ -182,10 +189,17 @@ public class SolarPanel : TriggeredByLight
         GeneratorScript generator;
         ChargerScript charge;
         ParticleBridge bridge;
+        OpenAtRoomPower specialDoor;
         for (int i = 0; i < Targets.Count; i++)
         {
-           // if (platformTarget == true)
-           // {
+            // if (platformTarget == true)
+            // {
+            specialDoor = Targets[i].GetComponent<OpenAtRoomPower>();
+            if(specialDoor != null)
+            {
+                specialDoor.Activate();
+            }
+            else
                 foreach (MovingPlatformScript movingScript in Targets[i].GetComponentsInChildren<MovingPlatformScript>())
                 {
                     movingScript.Activate();

@@ -238,11 +238,27 @@ public class Inspectable : MonoBehaviour
 
     void OnTriggerStay()
     {
+        if(StateController.hasGottenInspectedPrompt == false)
+        {
+            activateInspectPrompt();
+            StateController.hasGottenInspectedPrompt = true;
+        }
         canBeInspected = true;
     }
 
     void OnTriggerExit()
     {
+        disableInspectPrompt();
         canBeInspected = false;
+    }
+
+    private void activateInspectPrompt()
+    {
+        //todo show the cool text
+    }
+
+    private void disableInspectPrompt()
+    {
+        //todo do not show the cool text
     }
 }

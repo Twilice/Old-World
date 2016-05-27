@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-public class Inspectable : MonoBehaviour
+public class ComputerInspect : MonoBehaviour
 {
 
     bool hasBarked = false;
@@ -50,9 +50,11 @@ public class Inspectable : MonoBehaviour
             barkToPlayNoPower = FMODUnity.RuntimeManager.CreateInstance(barkNameNoPower);
     }
     private Renderer rend;
-
+    private Text inspectPrompt;
     void Start()
     {
+        inspectPrompt = GameObject.Find("InspectPrompt").GetComponent<Text>();
+        inspectPrompt.enabled = false;
         rend = GetComponent<Renderer>();
         rend.material.SetColor("_EmissionColor", Color.black);
 
@@ -94,7 +96,7 @@ public class Inspectable : MonoBehaviour
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))
                 {
-
+                    disableInspectPrompt();
                     soundHasPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
                     soundHasPower.start();
                     soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
@@ -158,6 +160,7 @@ public class Inspectable : MonoBehaviour
             {
                 if (Input.GetButtonDown("Action") && !StateController.currentView.Equals(CameraStatus.InspectView))
                 {
+                    disableInspectPrompt();
                     soundNeedsPower.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
                     soundNeedsPower.start();
                     soundCharacterPrint.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, GetComponent<Rigidbody>()));
@@ -254,11 +257,11 @@ public class Inspectable : MonoBehaviour
 
     private void activateInspectPrompt()
     {
-        //todo show the cool text
+        inspectPrompt.enabled = true;
     }
 
     private void disableInspectPrompt()
     {
-        //todo do not show the cool text
+        inspectPrompt.CrossFadeAlpha(0, 2, true);
     }
 }

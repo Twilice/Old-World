@@ -155,16 +155,13 @@ public class StateController
     public static bool loading = false;
     public static IEnumerator LoadScene(Rooms newScene)
     {
-        //todo uncomment soon
         if (newScene.Equals(currentRoom) == false)
         {
             if (loading == false)
             {
                 LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
-               loading = true;
-                // TurnOffMusic();
+                loading = true;
                 currentRoom = newScene;
-                //TurnOnMusic();
 
                 AsyncOperation async = SceneManager.LoadSceneAsync(RoomToString(newScene));
                 async.allowSceneActivation = false;
@@ -178,17 +175,7 @@ public class StateController
 
                     // Loading completed
                     if (async.progress == 0.9f)
-                    //if(async.isDone)
-                    {           //save old stuff
-                    /*    Transform player = GameObject.Find("Player").transform;
-                        Transform camera = GameObject.Find("MainCamera").transform;
-                        playerPos = player.position;
-                        playerRot = player.rotation;
-                        cameraPos = camera.position;
-                        cameraRot = camera.rotation;
-                        cameraDist = camera.GetComponent<CameraOrbit>().distance;
-                        savedPosition = true;
-                        */
+                    {         
                         lensScript.PickupLens();
 
                         break;
@@ -197,14 +184,7 @@ public class StateController
                     yield return null;
 
                 }
-               /* while (true)
-                {
-                    if(fade.FadedToBlack)
-                    {
-                        break;
-                    }
-                    yield return null;
-                }*/
+              
                 loading = false;
                 async.allowSceneActivation = true;
             }
@@ -232,21 +212,11 @@ public class StateController
         }
         
     }
-
-    //TODO MEGA IMPORTANT
-    // returnerar true ifall rum 1.1 blir aktiverat och byter till 1.2, kolla vilka variabler som settas och gettas
+    
     public static bool roomFullyPowered
     {
         get
         {
-         /*   Debug.Log("GET");
-            Debug.Log("activehub" + activeHub);
-            Debug.Log("activeRoom1_1" + activeRoom1_1);
-            Debug.Log("activeRoom1_2" + activeRoom1_2);
-            Debug.Log("activeRoom1_3" + activeRoom1_3);
-            Debug.Log("activeRoom1_4" + activeRoom1_4);
-            Debug.Log("activeRoom1_5" + activeRoom1_5);
-            */
             if (currentRoom == Rooms.Hub)
                 return activeHub;
 
@@ -268,14 +238,6 @@ public class StateController
         }
         set
         {
-          /*  Debug.Log("SET");
-            Debug.Log("currentRoom" + currentRoom +" "+value);
-            Debug.Log("activehub" + activeHub);
-            Debug.Log("activeRoom1_1" + activeRoom1_1);
-            Debug.Log("activeRoom1_2" + activeRoom1_2);
-            Debug.Log("activeRoom1_3" + activeRoom1_3);
-            Debug.Log("activeRoom1_4" + activeRoom1_4);
-            Debug.Log("activeRoom1_5" + activeRoom1_5);*/
             if (loading) return;
             if (currentRoom == Rooms.Hub)
                 activeHub = value;

@@ -16,6 +16,11 @@ public class HowToPlayScript : MonoBehaviour
 		}
 	}
 
+    void Start()
+    {
+        Activate();
+    }
+
     public void Activate()
     {
         for (int i = 0; i < HTP_Objects.Count; i++)

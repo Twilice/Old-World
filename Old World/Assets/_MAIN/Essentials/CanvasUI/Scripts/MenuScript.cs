@@ -57,7 +57,9 @@ public class MenuScript : MonoBehaviour
         menuBackground.enabled = false;
         journal.SetActive(false);
         buttons.SetActive(false);
-	}
+
+        PauseGame();
+    }
 
     public void Update()
     {

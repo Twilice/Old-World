@@ -59,6 +59,7 @@ public class StateController
 
     private static float hubParamenter = 1f;
     private static float r1_1Paramenter = 2f;
+	private static float r1_2Paramenter = 4f;
     private static bool isInCorridor = false;
    // private float r1-2Paramenter = Xf;
 
@@ -241,29 +242,30 @@ public class StateController
         set
         {
             if (loading) return;
-            if (currentRoom == Rooms.Hub)
-                activeHub = value;
-
-            else if (currentRoom == Rooms.Room1_1)
-            {
-                if(hasBarkedR1_1 == false && value == true)
-                {
-                    hasBarkedR1_1 = true;
-                    //todo do delay
-                    barkR1_1.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameObject.Find("Player")));
-                    barkR1_1.start();
-                }
-                activeRoom1_1 = value;
-                if (activeRoom1_1)
-                    r1_1Paramenter = 3f;
-                if(isInCorridor  == false)
-                    musicParameter.setValue(r1_1Paramenter);
-                else
-                    musicParameter.setValue(0);
-            }
-            else if (currentRoom == Rooms.Room1_2)
-                activeRoom1_2 = value;
-
+			if (currentRoom == Rooms.Hub)
+				activeHub = value;
+			else if (currentRoom == Rooms.Room1_1) {
+				if (hasBarkedR1_1 == false && value == true) {
+					hasBarkedR1_1 = true;
+					//todo do delay
+					barkR1_1.set3DAttributes (FMODUnity.RuntimeUtils.To3DAttributes (GameObject.Find ("Player")));
+					barkR1_1.start ();
+				}
+				activeRoom1_1 = value;
+				if (activeRoom1_1)
+					r1_1Paramenter = 3f;
+				if (isInCorridor == false)
+					musicParameter.setValue (r1_1Paramenter);
+				else
+					musicParameter.setValue (0);
+			} else if (currentRoom == Rooms.Room1_2) 
+			{
+				activeRoom1_2 = value;
+				if (isInCorridor == false)
+					musicParameter.setValue (r1_2Paramenter);
+				else
+					musicParameter.setValue (0);
+			}
             else if (currentRoom == Rooms.Room1_3)
                 activeRoom1_3 = value;
 

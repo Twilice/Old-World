@@ -31,10 +31,16 @@ public class MenuScript : MonoBehaviour
     private bool openPlayerInfo;
     private bool oldOpenPlayerInfo;
 
+	FMOD.Studio.EventInstance snapshotPause;
+	FMOD.Studio.EventInstance snapshotUnpause;
+
+
    // private ItemParent currentCompareItem;
     void Awake()
     {
-        howToPlay = GetComponentInChildren<HowToPlayScript>();
+		snapshotPause = FMODUnity.RuntimeManager.CreateInstance ("snapshot:/Paus");
+
+		howToPlay = GetComponentInChildren<HowToPlayScript>();
         wasActive = new bool[objects.Length];
         journal = gameObject.FindChildObject("Journal");
         if (journal == null) Debug.LogError("The journal is missing!");
@@ -95,6 +101,7 @@ public class MenuScript : MonoBehaviour
 
     public void ResumeGame()
     {
+		snapshotPause.stop (FMOD.Studio.STOP_MODE.IMMEDIATE);
         dofBlur.enabled = false;
         blur.enabled = false;
 
@@ -111,6 +118,7 @@ public class MenuScript : MonoBehaviour
     private bool oldCameraOrbit = false;
     public void PauseGame()
     {
+		snapshotPause.start ();
         dofBlur.enabled = true;
         blur.enabled = true;
 

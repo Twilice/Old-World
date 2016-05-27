@@ -17,15 +17,15 @@ public class MenuButton : MonoBehaviour {
 		switch (i)
 		{
 			case (0):
-                SceneManager.LoadScene("Introduction");
                 Sfx.Play(1);
+                SceneManager.LoadScene("Introduction");
 				break;
 			case (1):
+                Sfx.Play(1);
                 Application.Quit();
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                Sfx.Play(1);
+#endif      
 				break;
 			case (2):
 				Debug.Log("Options");

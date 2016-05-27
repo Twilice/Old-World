@@ -86,6 +86,7 @@ public class StateController
         musicEvent.start();
         ambientEvent.start();
     }
+    public static bool GameOn = false;
     public static void LoadGame(Rooms newScene)
     {
         TurnOffMusic();

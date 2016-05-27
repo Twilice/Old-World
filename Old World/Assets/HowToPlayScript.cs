@@ -18,7 +18,8 @@ public class HowToPlayScript : MonoBehaviour
 
     void Start()
     {
-        Activate();
+        if(StateController.GameOn == true)
+            Activate();
     }
 
     public void Activate()

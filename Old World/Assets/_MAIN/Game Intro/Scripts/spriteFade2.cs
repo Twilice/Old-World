@@ -54,6 +54,8 @@ public class spriteFade2 : MonoBehaviour
             IntroScript.musicEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
             IntroScript.voiceEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+            StateController.GameOn = true;
             SceneManager.LoadScene("Corridor");
         }
     }

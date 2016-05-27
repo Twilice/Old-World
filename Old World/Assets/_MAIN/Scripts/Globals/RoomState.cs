@@ -20,10 +20,14 @@ public class RoomState : MonoBehaviour {
     private float musicParamValue = 0; */
 
     //Initiate generator array
-    void Start()
+    void Awake()
     {
+        StateController.GameOn = true;
         StateController.currentRoom = room;
         StateController.TurnOnMusic();
+    }
+    void Start()
+    {
         generators = FindObjectsOfType<GeneratorScript>();
     }
 

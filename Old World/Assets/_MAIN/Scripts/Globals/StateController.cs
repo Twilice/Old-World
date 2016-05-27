@@ -45,6 +45,7 @@ public class StateController
     public static FMOD.Studio.EventInstance ambientCorridor;
 
     public static bool hasGottenInspectedPrompt = false;
+    public static bool hasGottenInspectedPromptPaper = false; 
     //public static float parameterIncrement = 0.25f;
     public static float musicParamValue = 0;
     public static MoveLensTarget lensScript;

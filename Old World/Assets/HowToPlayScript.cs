@@ -33,6 +33,12 @@ public class HowToPlayScript : MonoBehaviour
 
     public void Deactivate()
     {
+        if(StateController.GameOn && StateController.howToPlayPrompt)
+        {
+            StateController.howToPlayPrompt = false;
+            GameObject.Find("Menu").GetComponent<MenuScript>().ResumeGame();
+        }
+
         for (int i = 0; i < HTP_Objects.Count; i++)
         {
             HTP_Objects[i].SetActive(false);

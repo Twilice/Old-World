@@ -87,9 +87,11 @@ public class ComputerInspect : MonoBehaviour
     [Range(0, 1)]
     public float blue = 1;
 
+    [HideInInspector]
+    public bool gotExternalPower = false;
     void Update()
     {
-        if (needsPower == false || needsPower && StateController.roomFullyPowered)
+        if (needsPower == false || needsPower && StateController.roomFullyPowered || gotExternalPower)
         {
             rend.material.SetColor("_EmissionColor", new Color(red,green,blue,1));
             if (canBeInspected)

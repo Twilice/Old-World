@@ -1,1 +1,1 @@
-The upgraded crystal also generates a more collimated ray, reducing the beam divergence significantly. Simply put, the complex crystal design directs light without any loss of energy.
+Our most recent design allows the crystal to redirect light at an 88 degree angle, with 0 percent absorption.

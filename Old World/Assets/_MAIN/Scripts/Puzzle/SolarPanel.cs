@@ -194,6 +194,11 @@ public class SolarPanel : TriggeredByLight
         {
             // if (platformTarget == true)
             // {
+            if(Targets[i].GetComponent<ComputerInspect>())
+            {
+                Targets[i].GetComponent<ComputerInspect>().gotExternalPower = true;
+            }
+
             specialDoor = Targets[i].GetComponent<OpenAtRoomPower>();
             if(specialDoor != null)
             {

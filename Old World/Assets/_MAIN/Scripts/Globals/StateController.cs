@@ -88,6 +88,7 @@ public class StateController
         ambientEvent.start();
     }
     public static bool GameOn = false;
+    public static bool howToPlayPrompt = true;
     public static void LoadGame(Rooms newScene)
     {
         TurnOffMusic();
@@ -162,7 +163,7 @@ public class StateController
         {
             if (loading == false)
             {
-                LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
+                //LoadFade fade = GameObject.Find("_Camera").GetComponent<LoadFade>();
                 loading = true;
                 currentRoom = newScene;
 

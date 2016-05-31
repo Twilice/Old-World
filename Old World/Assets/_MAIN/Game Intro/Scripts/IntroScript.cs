@@ -32,6 +32,7 @@ public class IntroScript : MonoBehaviour {
     private Color screenColor;
     public GUISkin introGUI;
     public bool textBoxShown = true;
+    public bool continueBoxShown = false;
 
 
     [FMODUnity.EventRef]
@@ -69,6 +70,7 @@ public class IntroScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         currentTextFileID = 0;
         InvokeRepeating("printer", 0, textSpeed);
         currentTextFileID = 0;
@@ -80,6 +82,8 @@ public class IntroScript : MonoBehaviour {
 
         Camera.main.GetComponent<movement>().cameraMovement();
         Camera.main.GetComponent<movement>().speed = 0.05f;
+
+        StartCoroutine(continueDelay(3.0f));
 
     }
 
@@ -127,7 +131,9 @@ public class IntroScript : MonoBehaviour {
     }
     void writer()
     {
-       
+        skipBox = false;
+        continueBoxShown = false;
+        
         if (currentTextFileID == 17 && textDone == true)
         {
 
@@ -164,12 +170,14 @@ public class IntroScript : MonoBehaviour {
         }
         else if (currentTextFileID == 1)
         {
+            StartCoroutine(continueDelay(7.0f));
             //Line 2
             voice.setValue(2);
             voiceEvent.start();
         }
         else if (currentTextFileID == 2)
         {
+            StartCoroutine(continueDelay(6.0f));
             //Line 3
             firstFade.setValue(1);
             Camera.main.GetComponent<movement>().cameraMovement();
@@ -179,8 +187,8 @@ public class IntroScript : MonoBehaviour {
         }
         else if (currentTextFileID == 3)
         {
+            StartCoroutine(continueDelay(5.0f));
 
-            
             Camera.main.GetComponent<movement>().cameraMovement();
             Camera.main.transform.position = Camera.main.GetComponent<movement>().positions[Camera.main.GetComponent<movement>().posIndex];
             voice.setValue(5);
@@ -378,6 +386,19 @@ public class IntroScript : MonoBehaviour {
 
             GUILayout.EndArea();
         }
+        if (continueBoxShown == true)
+        {
+            GUILayout.BeginArea(new Rect(Screen.width * 0.07f, Screen.height - Screen.height / 10, Screen.width / 2, Screen.height / 10));
+            //GUILayout.BeginArea(new Rect(100, 100, 50, 1000 ));
+
+            GUILayout.BeginVertical("", GUI.skin.GetStyle(""));
+
+            GUILayout.Label("(Press E or SPACE to continue...)");
+
+            GUILayout.EndVertical();
+
+            GUILayout.EndArea();
+        }
 
     }
     IEnumerator voiceDelay(float time, int currentFile, int voiceValue)
@@ -399,5 +420,10 @@ public class IntroScript : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         skipBox = false;
+    }
+    IEnumerator continueDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        continueBoxShown = true;
     }
 }

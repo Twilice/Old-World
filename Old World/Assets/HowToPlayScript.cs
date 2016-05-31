@@ -18,8 +18,12 @@ public class HowToPlayScript : MonoBehaviour
 
     void Start()
     {
-        if(StateController.GameOn == true)
+        if(StateController.GameOn == true && StateController.howToPlayPrompt)
             Activate();
+        else if(StateController.GameOn)
+        {
+            GameObject.Find("Menu").GetComponent<MenuScript>().ResumeGame();
+        }
     }
 
     public void Activate()
@@ -33,10 +37,10 @@ public class HowToPlayScript : MonoBehaviour
 
     public void Deactivate()
     {
-        if(StateController.GameOn && StateController.howToPlayPrompt)
+        if(StateController.howToPlayPrompt)
         {
             StateController.howToPlayPrompt = false;
-            GameObject.Find("Menu").GetComponent<MenuScript>().ResumeGame();
+            if (StateController.GameOn) GameObject.Find("Menu").GetComponent<MenuScript>().ResumeGame();
         }
 
         for (int i = 0; i < HTP_Objects.Count; i++)

@@ -50,9 +50,7 @@ public class MenuScript : MonoBehaviour
         menuBackground = GetComponent<Image>();
         journal.SetActive(true); //minns inte exakt varför jag sätter dem till active här, tror det var någon initieringsbug
         menuBackground.enabled = true;
-    }
-	void Start() 
-    {
+
         GameObject camera = GameObject.Find("MainCamera");
         cameraOrbit = camera.GetComponent<CameraOrbit>();
         blur = camera.GetComponent<BlurOptimized>();

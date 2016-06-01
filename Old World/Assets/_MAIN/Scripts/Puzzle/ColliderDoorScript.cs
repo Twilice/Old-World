@@ -9,6 +9,7 @@ public class ColliderDoorScript : MonoBehaviour
     private MovingPlatformScript[] mps;
     [Header("If active without power")]
     public bool active = false;
+    private bool gotPower = false;
     public static FMOD.Studio.EventInstance doorOpen;
     public static FMOD.Studio.EventInstance doorClose;
 
@@ -17,17 +18,23 @@ public class ColliderDoorScript : MonoBehaviour
         mps = GetComponentsInChildren<MovingPlatformScript>();
         doorOpen = FMODUnity.RuntimeManager.CreateInstance("event:/Door/Door_Open");
         doorClose = FMODUnity.RuntimeManager.CreateInstance("event:/Door/Door_Close");
+        if (active)
+            gotPower = true;
     }
 
     void Update()
     {
         doorOpen.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         doorClose.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        if (StateController.roomFullyPowered || StateController.SegmentActive(tag))
+        if (StateController.roomFullyPowered || StateController.SegmentActive(tag) || active)
         {
-            active = true;
+            gotPower = true;
             //todo door won't open if you are standing in trigger when it turns online, check if isintrigger
         }
+        else
+            gotPower = false;
+
+
     }
 
     void Activate()
@@ -40,7 +47,7 @@ public class ColliderDoorScript : MonoBehaviour
 
     void OnTriggerEnter()
     {
-        if (active)
+        if (gotPower)
             if(mps.Length > 0)
             {
                 doorOpen.start();
@@ -63,7 +70,7 @@ public class ColliderDoorScript : MonoBehaviour
 
     void OnTriggerExit()
     {
-        if (active)
+        if (gotPower)
             if (mps.Length > 0)
             {
                 doorClose.start();

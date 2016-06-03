@@ -115,7 +115,7 @@ public class ComputerInspect : MonoBehaviour
                     boxHeadline.text = inspectHeadline;
                     //boxText.text = inspectText[currentTextID].text;
                 }
-                else if (Input.GetButtonDown("InspectSkip"))
+                else if (Input.GetButtonDown("InspectSkip") || Input.GetButtonDown("Jump"))
                 {
                     //characters left
                     if (charIndex < stringLength)
@@ -179,7 +179,7 @@ public class ComputerInspect : MonoBehaviour
                     boxHeadline.text = inspectHeadlineOffline;
                     //boxText.text = inspectText[currentTextID].text;
                 }
-                else if (Input.GetButtonDown("InspectSkip"))
+                else if (Input.GetButtonDown("InspectSkip") || Input.GetButtonDown("Jump"))
                 {
                     //characters left
                     if (charIndex < stringLength)

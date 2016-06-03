@@ -84,7 +84,7 @@ public class Inspect : MonoBehaviour
                 boxHeadline.text = inspectHeadline;
                 //boxText.text = inspectText[currentTextID].text;
             }
-            else if (Input.GetButtonDown("InspectSkip"))
+            else if (Input.GetButtonDown("InspectSkip") || Input.GetButtonDown("Jump"))
             {
                 //characters left
                 if (charIndex < stringLength)

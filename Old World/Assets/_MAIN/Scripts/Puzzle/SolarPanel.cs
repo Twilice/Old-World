@@ -243,6 +243,8 @@ public class SolarPanel : TriggeredByLight
                 {
                     eg[i].LerpEnergy(energy);
                 }
+                else
+                    eg[i].LerpEnergy(1);
             }
         }
     }

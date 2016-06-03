@@ -35,6 +35,14 @@ public class HowToPlayScript : MonoBehaviour
         active = true;
     }
 
+    void Update()
+    {
+        if (StateController.GameOn == false && Input.GetButtonDown("IntroSkip"))
+        {
+            Deactivate();
+        }
+    }
+
     public void Deactivate()
     {
         if(StateController.howToPlayPrompt)
